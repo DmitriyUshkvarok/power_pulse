@@ -1,0 +1,10 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.header_logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $white-color;
+  font-weight: bold;
+}

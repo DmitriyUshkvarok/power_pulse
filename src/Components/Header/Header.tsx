@@ -1,4 +1,4 @@
-import { Container } from '../Container/Container';
+import Container from '../Container/Container';
 import styles from './_header.module.scss';
 import Navigation from './Navigation/Navigation';
 

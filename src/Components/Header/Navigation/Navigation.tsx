@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 const Navigation = () => {
   return (
-    <div>
+    <div className={styles.nav_wrapper}>
       <Link href="/" className={styles.header_logo}>
         <Image
           src={'/logo-icon.svg'}
@@ -19,8 +19,8 @@ const Navigation = () => {
         <Link href="/products">Products</Link>
         <Link href="/exercises">Exercises</Link>
         <Link href="/profile">Profile</Link>
-        <div>Logout</div>
       </nav>
+      <div>Logout</div>
     </div>
   );
 };

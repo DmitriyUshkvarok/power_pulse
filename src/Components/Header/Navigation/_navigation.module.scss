@@ -1,6 +1,11 @@
 @import '../../../sass/utils/variables.module';
 @import '../../../sass/utils/mixins.module';
 
+.nav_wrapper {
+  display: flex;
+  align-items: center;
+}
+
 .header_logo {
   display: flex;
   align-items: center;

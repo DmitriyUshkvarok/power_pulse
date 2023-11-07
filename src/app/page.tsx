@@ -1,5 +1,5 @@
 import styles from './page.module.scss';
-import { Container } from '../Components/Container/Container';
+import Container from '../Components/Container/Container';
 import Link from 'next/link';
 
 export default function Home() {

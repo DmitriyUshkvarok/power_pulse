@@ -1,0 +1,50 @@
+@import '../../sass/utils/variables.module';
+@import '../../sass/utils/mixins.module';
+
+.sign_up_section {
+  padding-top: 90px;
+  padding-bottom: 30px;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black-color;
+  background-image: url('/auth-form-background-mobile.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: contain;
+
+  @include mediaQuery(768px) {
+    padding-top: 140px;
+    padding-bottom: 50px;
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('/auth-form-background-tablet.jpg');
+    }
+  }
+
+  @include mediaQuery(1440px) {
+    padding-top: 150px;
+    padding-bottom: 115px;
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url('/auth-form-background-desctop.jpg');
+    }
+  }
+}
+
+.sign_up_content_wrapper {
+  @include mediaQuery(1440px) {
+    display: flex;
+    // justify-content: space-between;
+  }
+}
+
+.sign_up_decor_wrapper {
+  @include mediaQuery(1440px) {
+    margin-top: 15%;
+    margin-left: 20%;
+  }
+}

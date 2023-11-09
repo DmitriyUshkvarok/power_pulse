@@ -14,7 +14,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ handleClosedMobileMenu }) => {
     <div className={styles.mobile_menu_section}>
       <div className={styles.btn_close_menu} onClick={handleClosedMobileMenu}>
         <Image
-          src="/icon-closed.svg"
+          src={'/icon-closed.svg' || 'X'}
           alt="icon button close"
           width={24}
           height={24}

@@ -35,14 +35,14 @@ const Navigation = () => {
           <p>PowerPulse</p>
         </Link>
         <div className={styles.mobile_nav_list}>
-          <div className={styles.profile_mobile_settings}>
+          <Link href="/profile" className={styles.profile_mobile_settings}>
             <Image
               src="/settings-profile.svg"
               alt="user settings icon"
               width={24}
               height={24}
             />
-          </div>
+          </Link>
           <div className={styles.profile_photo}>
             <Image
               src="/icon_user.svg"

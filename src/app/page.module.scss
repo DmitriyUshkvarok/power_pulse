@@ -2,6 +2,7 @@
 @import '../sass/utils/mixins.module';
 
 .home_section {
+  position: relative;
   padding-top: 90px;
   padding-bottom: 50px;
   width: 100vw;
@@ -10,7 +11,16 @@
   background-image: url('/background-home-mobile.jpg');
   background-repeat: no-repeat;
   background-position: right;
-  background-size: contain;
+  background-size: cover;
+}
+
+.header_logo_home {
+  position: absolute;
+  top: 35px;
+  color: $white-color;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 @media (min-width: 768px) {
@@ -18,9 +28,10 @@
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
     .home_section {
-      padding-top: 140px;
+      padding-top: 100px;
       padding-bottom: 60px;
       background-image: url('/background-home-tablet.jpg');
+      background-size: contain;
     }
   }
 }

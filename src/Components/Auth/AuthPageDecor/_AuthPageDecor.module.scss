@@ -4,6 +4,10 @@
 .decor_box {
   @include mediaQuery(1440px) {
     display: flex;
+
+    @include mediaQuery(1440px) {
+      padding-top: 150px;
+    }
   }
 }
 
@@ -30,6 +34,10 @@
     margin-bottom: 56px;
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-right: 100px;
   }
 }
 
@@ -96,6 +104,10 @@
   @include mediaQuery(768px) {
     padding-top: 18px;
     width: 180px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-top: 300px;
   }
 }
 

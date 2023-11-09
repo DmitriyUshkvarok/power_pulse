@@ -38,6 +38,10 @@
 
 .regisrt_form_group {
   width: 100%;
+
+  @include mediaQuery(768px) {
+    max-width: 364px;
+  }
 }
 
 .show_password_wrapper {
@@ -146,8 +150,6 @@
 
 .registr_form_button_google {
   margin-bottom: 35px;
-  margin-left: auto;
-  margin-right: auto;
   @include flexCenter();
   flex-direction: column;
   gap: 5px;

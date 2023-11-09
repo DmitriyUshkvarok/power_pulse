@@ -1,0 +1,86 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.mobile_menu_section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: $orange-color;
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  @include mediaQuery(768px) {
+    display: none;
+  }
+}
+
+.btn_close_menu {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.mobile_nav_list {
+  @include flexCenter();
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 202px;
+}
+
+.mobile_nav_list_item {
+  padding: 10px 27px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  border: 1px solid $borde-color;
+  color: $white-color;
+  cursor: pointer;
+  @include fontSizeAuto(14px, 18px);
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+}
+
+.mobile_nav_list_item:hover {
+  background-color: $white-color;
+  color: $black-color;
+}
+
+.activeLink {
+  padding: 10px 27px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  border: 1px solid $white-color;
+  color: $white-color;
+  cursor: pointer;
+}
+
+.mobile_nav_logout {
+  @include flexCenter();
+  gap: 8px;
+  margin-top: auto;
+  color: $white-color;
+  fill: $white-color;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.mobile_nav_logout_icon {
+  fill: $black-color;
+}

@@ -4,6 +4,7 @@
 .nav_wrapper {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .header_logo {
@@ -12,4 +13,97 @@
   gap: 8px;
   color: $white-color;
   font-weight: bold;
+}
+
+.mobile_nav_list {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: 14px;
+
+  @include mediaQuery(768px) {
+    display: none;
+  }
+}
+
+.profile_mobile_settings,
+.profile_mobile_burger {
+  cursor: pointer;
+}
+
+.nav_list {
+  display: none;
+
+  @include mediaQuery(768px) {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.nav_link {
+  color: $white-color;
+  @include fontSizeAuto(16px, 24px);
+  padding: 10px 27px;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  transition: $transition;
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+}
+
+.nav_link:hover {
+  background-color: $orange-color;
+  color: $black-color;
+}
+
+.activeLink {
+  background-color: $orange-color;
+  color: $black-color;
+  @include fontSizeAuto(16px, 24px);
+  padding: 10px 27px;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+}
+
+.activeLinkProfilePath {
+  @include flexCenter();
+  width: 40px;
+  height: 40px;
+  background-color: $orange-color;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.profile_photo {
+  @include flexCenter();
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid $orange-color;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 8px;
+  cursor: pointer;
 }

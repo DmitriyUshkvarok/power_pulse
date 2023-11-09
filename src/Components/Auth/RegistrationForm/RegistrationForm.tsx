@@ -134,7 +134,7 @@ function FormRegistration() {
               {isLoading ? <p>Loading...</p> : <span>Sign Up</span>}
             </button>
           </div>
-          <Link className={styles.link_registr} href="/sign In">
+          <Link className={styles.link_registr} href="/signin">
             Already have account?
             <span className={styles.link_registr_span}> Sign In</span>
           </Link>

@@ -5,11 +5,31 @@ import Link from 'next/link';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import Notiflix from 'notiflix';
+import { useSession } from 'next-auth/react';
 
 const Navigation = () => {
   const pathname = usePathname();
-
+  const { data: session } = useSession();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const handleClickLogOut = () => {
+    Notiflix.Confirm.show(
+      'Confirmation',
+      'Are you sure you want to log out?',
+      'Yes',
+      'No',
+      async () => {
+        try {
+          signOut({ callbackUrl: '/' });
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      () => {}
+    );
+  };
 
   const handleOpenMobileMenu = () => {
     setShowMobileMenu(true);
@@ -45,10 +65,11 @@ const Navigation = () => {
           </Link>
           <div className={styles.profile_photo}>
             <Image
-              src="/icon_user.svg"
+              src={session?.user?.image || '/icon_user.svg'}
               alt="user settings icon"
               width={24}
               height={24}
+              className={styles.profile_image}
             />
           </div>
           <div
@@ -97,7 +118,7 @@ const Navigation = () => {
             }
           >
             <Image
-              src="settings-profile.svg"
+              src="/settings-profile.svg"
               alt="user settings icon"
               width={28}
               height={28}
@@ -105,13 +126,19 @@ const Navigation = () => {
           </Link>
           <div className={styles.profile_photo}>
             <Image
-              src="/icon_user.svg"
+              src={session?.user?.image || '/icon_user.svg'}
               alt="user settings icon"
               width={24}
               height={24}
+              className={styles.profile_image}
             />
           </div>
-          <div className={styles.logout}>
+          <div
+            className={styles.logout}
+            onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+              handleClickLogOut()
+            }
+          >
             <Image
               src="/log-out.svg"
               alt="log out icon"

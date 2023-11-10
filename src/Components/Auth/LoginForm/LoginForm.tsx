@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
+import { signIn } from 'next-auth/react';
 
 interface FormValues {
   email: string;
@@ -49,7 +50,7 @@ function FormLogin() {
     setIsLoading(true);
     console.log(values);
     try {
-      //   values.callbackUrl = '/';
+      // values.callbackUrl = '/';
     } catch (error) {
       console.log(error);
     } finally {
@@ -127,7 +128,7 @@ function FormLogin() {
       <button
         className={styles.registr_form_button_google}
         type="submit"
-        // onClick={() => signIn('google', { callbackUrl: '/' })}
+        onClick={() => signIn('google', { callbackUrl: '/' })}
       >
         <FcGoogle size={20} />
         <span> to continue with google</span>

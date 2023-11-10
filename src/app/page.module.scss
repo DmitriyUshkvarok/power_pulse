@@ -14,15 +14,6 @@
   background-size: cover;
 }
 
-.header_logo_home {
-  position: absolute;
-  top: 35px;
-  color: $white-color;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 @media (min-width: 768px) {
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),

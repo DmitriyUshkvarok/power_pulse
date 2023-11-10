@@ -100,6 +100,16 @@
   border: 1px solid $orange-color;
 }
 
+.profile_image {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
 .logout {
   display: flex;
   align-items: center;

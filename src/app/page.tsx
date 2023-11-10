@@ -7,15 +7,6 @@ export default function Home() {
   return (
     <section className={styles.home_section}>
       <Container>
-        <Link href="/" className={styles.header_logo_home}>
-          <Image
-            src={'/logo-icon.svg'}
-            alt="header logo"
-            width={44}
-            height={17}
-          />
-          <p>PowerPulse</p>
-        </Link>
         <h1 className={styles.home_title}>
           Transforming your body shape with Power Pulse
         </h1>

@@ -49,6 +49,22 @@ button {
   cursor: pointer;
 }
 
+.logo_container {
+  position: absolute;
+  z-index: 10;
+  background-color: transparent;
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.header_logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $white-color;
+  font-weight: bold;
+}
+
 .not_found_wrapper {
   display: flex;
   min-width: 100vw;

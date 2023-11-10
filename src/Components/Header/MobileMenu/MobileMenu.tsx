@@ -3,6 +3,8 @@ import styles from './_MobileMenu.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { signOut } from 'next-auth/react';
+import Notiflix from 'notiflix';
 
 interface MobileMenuProps {
   handleClosedMobileMenu: () => void;
@@ -10,6 +12,23 @@ interface MobileMenuProps {
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ handleClosedMobileMenu }) => {
   const pathname = usePathname();
+
+  const handleClickLogOut = () => {
+    Notiflix.Confirm.show(
+      'Confirmation',
+      'Are you sure you want to log out?',
+      'Yes',
+      'No',
+      async () => {
+        try {
+          signOut({ callbackUrl: '/' });
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      () => {}
+    );
+  };
   return (
     <div className={styles.mobile_menu_section}>
       <div className={styles.btn_close_menu} onClick={handleClosedMobileMenu}>
@@ -52,7 +71,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ handleClosedMobileMenu }) => {
           <Link href="/exercises">Exercises</Link>
         </li>
       </ul>
-      <div className={styles.mobile_nav_logout}>
+      <div className={styles.mobile_nav_logout} onClick={handleClickLogOut}>
         <span>Logout</span>
         <Image
           className={styles.mobile_nav_logout_icon}

@@ -50,7 +50,6 @@ function FormLogin() {
     setIsLoading(true);
     console.log(values);
     try {
-      // values.callbackUrl = '/';
     } catch (error) {
       console.log(error);
     } finally {

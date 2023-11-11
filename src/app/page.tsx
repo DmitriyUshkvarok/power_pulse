@@ -1,7 +1,6 @@
 import styles from './page.module.scss';
 import Container from '../Components/Container/Container';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Home() {
   return (

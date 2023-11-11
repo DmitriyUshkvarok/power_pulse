@@ -1,0 +1,64 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.step_one_section {
+  background-image: url('/data-mobile-page-1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black-color;
+  padding-top: 90px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .step_one_section {
+      background-image: url('/data-tablet-page-1.jpg');
+      background-size: contain;
+      background-position: right;
+      padding-top: 142px;
+      padding-bottom: 32px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .step_one_section {
+      background-image: url('/data-desktop-page-1.jpg');
+      padding-top: 151px;
+      padding-bottom: 32px;
+    }
+  }
+}
+
+.step_one_title {
+  color: $white-color;
+  @include fontSizeAuto(24px, 28px);
+  font-weight: 700;
+  margin-bottom: 14px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(32px, 44px);
+    margin-bottom: 16px;
+  }
+}
+
+.step_one_description {
+  width: 335px;
+  color: $borde-color;
+  @include fontSizeAuto(14px, 18px);
+  margin-bottom: 28px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+    margin-bottom: 32px;
+  }
+}

@@ -53,7 +53,7 @@ function FormRegistration() {
     setIsLoading(true);
     console.log(values);
     try {
-      //   values.callbackUrl = '/';
+      // values.callbackUrl = '/';
     } catch (error) {
       console.log(error);
     } finally {

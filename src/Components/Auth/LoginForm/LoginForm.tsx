@@ -127,7 +127,7 @@ function FormLogin() {
       <button
         className={styles.registr_form_button_google}
         type="submit"
-        onClick={() => signIn('google', { callbackUrl: '/' })}
+        onClick={() => signIn('google', { callbackUrl: '/profile' })}
       >
         <FcGoogle size={20} />
         <span> to continue with google</span>

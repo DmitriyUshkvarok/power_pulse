@@ -7,7 +7,7 @@
   background-size: cover;
   background-position: bottom;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $black-color;
   padding-top: 90px;
   padding-bottom: 20px;
@@ -61,4 +61,302 @@
     @include fontSizeAuto(16px, 24px);
     margin-bottom: 32px;
   }
+}
+
+.form_step_one {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 530px;
+}
+
+.step_one_form_group {
+  position: relative;
+  max-width: 155px;
+}
+
+.form_step_one_input {
+  width: 100%;
+  padding: 14px;
+  background-color: transparent;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  border: 1px solid $borde-color;
+}
+
+.form_step_one_input:focus {
+  outline: 1px solid $orange-color;
+}
+
+.step_one_form_placeholder {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translate(0, -50%);
+  color: rgba(239, 237, 232, 0.6);
+  -webkit-transform: translate(0, -50%);
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -o-transform: translate(0, -50%);
+  @include fontSizeAuto(14px, 18px);
+  pointer-events: none;
+}
+
+.step_one_form_group:focus-within .step_one_form_placeholder {
+  transform: translate(0, -45px);
+  -webkit-transform: translate(0, -45px);
+  -moz-transform: translate(0, -45px);
+  -ms-transform: translate(0, -45px);
+  -o-transform: translate(0, -45px);
+}
+
+.calendar_icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.validation_error {
+  position: absolute;
+  bottom: -14px;
+  left: 5px;
+  color: #ff0000;
+  font-size: 10px;
+}
+
+.link_next {
+  display: flex;
+  gap: 5px;
+  color: $white-color;
+  margin-top: 30px;
+  margin-bottom: 116px;
+  @include fontSizeAuto(14px, 18px);
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+    margin-bottom: 167px;
+  }
+}
+
+.video_tutorial_banner {
+  @include flexCenter();
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  margin-bottom: 70px;
+  width: 146px;
+  height: 66px;
+  background-color: #303030;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  -webkit-border-radius: 12p;
+
+  @include mediaQuery(768px) {
+    width: 206px;
+    height: 96px;
+    margin-bottom: 56px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-right: 100px;
+  }
+}
+
+.video_tutorial_text_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.video_tutorial_title {
+  color: $white-color;
+  @include fontSizeAuto(16px, 18px);
+  font-weight: 700;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(24px, 24px);
+  }
+}
+
+.video_description {
+  color: rgba(239, 237, 232, 0.65);
+  @include fontSizeAuto(12px, 16px);
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
+}
+
+.video_tutorial_banner_icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: $orange-color;
+  @include flexCenter();
+  margin-right: 10px;
+
+  @include mediaQuery(768px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.cal_banner {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-bottom: 16px;
+  gap: 5px;
+  width: 119px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  background-color: $light-orange-color;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-left: 18px;
+  padding-right: 18px;
+
+  @include mediaQuery(768px) {
+    padding-top: 18px;
+    width: 180px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-top: 300px;
+  }
+}
+
+.cal_banner_icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: $beige-color;
+  @include flexCenter();
+  margin-bottom: 8px;
+
+  @include mediaQuery(768px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.cal_banner_text_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cal_banner_title {
+  color: $white-color;
+  font-size: 24px;
+  @include fontSizeAuto(24px, 24px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(48px, 50px);
+  }
+}
+
+.cal_banner_description {
+  color: rgba(239, 237, 232, 0.65);
+  @include fontSizeAuto(12px, 16px);
+  font-weight: 700;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(22px, 24px);
+  }
+}
+
+.nav_pagination {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+
+  @include mediaQuery(1440px) {
+    margin-top: 135px;
+  }
+}
+
+.nav_pagination_link {
+  display: flex;
+  width: 50px;
+  height: 7px;
+  border-radius: 2px;
+  background-color: #303030;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+    width: 80px;
+  }
+}
+
+.nav_pagination_link:first-child {
+  border-radius: 2px;
+  background: #ef8964;
+  box-shadow: 0px 1px 10px 0px rgba(230, 83, 60, 0.8);
+}
+
+// calendar
+.calendarContainer {
+  position: relative;
+}
+
+.customCalendar {
+  position: absolute;
+  top: -40px;
+  left: 170px;
+  max-width: 315px;
+  padding: 14px;
+  border-radius: 4px;
+  border-radius: 8px;
+  background-color: #ef8964;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.customCalendar button {
+  color: $white-color;
+  @include fontSizeAuto(16px, 16px);
+  font-weight: 500;
+  letter-spacing: -0.32px;
+}
+
+.customCalendar button:enabled:hover {
+  background-color: #303030;
+}
+
+.customCalendar abbr[title] {
+  text-decoration: none;
+  color: rgba(239, 237, 232, 0.5);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.28px;
+  text-transform: none;
 }

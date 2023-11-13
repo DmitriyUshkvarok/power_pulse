@@ -8,6 +8,7 @@ import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../Components/Container/Container';
+import ReduxProvider from '../providers/reduxProvider';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],
@@ -28,26 +29,28 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className} suppressHydrationWarning={true}>
-        <NextAuthProvider>
-          {session ? (
-            <Header />
-          ) : (
-            <Container>
-              <div className="logo_container">
-                <Link href="/" className="header_logo">
-                  <Image
-                    src={'/logo-icon.svg'}
-                    alt="header logo"
-                    width={44}
-                    height={17}
-                  />
-                  <p>PowerPulse</p>
-                </Link>
-              </div>
-            </Container>
-          )}
-          <main>{children}</main>
-        </NextAuthProvider>
+        <ReduxProvider>
+          <NextAuthProvider>
+            {session ? (
+              <Header />
+            ) : (
+              <Container>
+                <div className="logo_container">
+                  <Link href="/" className="header_logo">
+                    <Image
+                      src={'/logo-icon.svg'}
+                      alt="header logo"
+                      width={44}
+                      height={17}
+                    />
+                    <p>PowerPulse</p>
+                  </Link>
+                </div>
+              </Container>
+            )}
+            <main>{children}</main>
+          </NextAuthProvider>
+        </ReduxProvider>
       </body>
     </html>
   );

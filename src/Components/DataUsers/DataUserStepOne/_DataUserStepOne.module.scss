@@ -64,6 +64,7 @@
 }
 
 .form_step_one {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -86,6 +87,7 @@
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   border: 1px solid $borde-color;
+  color: $white-color;
 }
 
 .form_step_one_input:focus {
@@ -131,11 +133,14 @@
 }
 
 .link_next {
+  position: absolute;
+  top: 130%;
+  left: 0;
   display: flex;
   gap: 5px;
   color: $white-color;
-  margin-top: 30px;
-  margin-bottom: 116px;
+  background-color: transparent;
+  border: none;
   @include fontSizeAuto(14px, 18px);
 
   @include mediaQuery(768px) {
@@ -148,6 +153,7 @@
   @include flexCenter();
   margin-left: auto;
   margin-right: auto;
+  margin-top: 116px;
   padding-top: 14px;
   padding-bottom: 14px;
   margin-bottom: 70px;

@@ -23,7 +23,7 @@ const schema = yup.object().shape({
   height: yup.string().required('Height is required'),
   currentWeight: yup.string().required('Current Weight is required'),
   desiredWeight: yup.string().required('Desired Weight is required'),
-  birthday: yup.string(),
+  birthday: yup.string().required('Birthday is required'),
 });
 
 const DataUserStepOne = () => {
@@ -36,10 +36,15 @@ const DataUserStepOne = () => {
     setCalendarOpen(!isCalendarOpen);
   };
 
+  const clickBackdrop = (e) => {
+    if (e.currentTarget === e.target) {
+      setCalendarOpen(false);
+    }
+  };
+
   const handleSaveValuesToGlobalState = (values) => {
     const isoDateString = date.toISOString();
     const updatedValues = { ...values, birthday: isoDateString };
-    console.log(updatedValues);
     dispatch(addUserData(updatedValues));
     router.push('/user-data/step-two');
   };
@@ -58,7 +63,7 @@ const DataUserStepOne = () => {
           validationSchema={schema}
           onSubmit={handleSaveValuesToGlobalState}
         >
-          {({ isValid }) => (
+          {({ isValid, setFieldValue }) => (
             <Form className={styles.form_step_one}>
               <div className={styles.step_one_form_group}>
                 <Field
@@ -112,9 +117,11 @@ const DataUserStepOne = () => {
                   type="text"
                   name="birthday"
                   aria-label="birthday"
-                  value={date.toLocaleDateString('en-GB')}
-                  readOnly
                 />
+                <span className={styles.step_one_form_placeholder}>
+                  Birthday
+                  {/* {date.toLocaleDateString('en-GB')} */}
+                </span>
                 <Image
                   src="/calendar.svg"
                   alt="calendar icon"
@@ -124,12 +131,28 @@ const DataUserStepOne = () => {
                   onClick={handleCalendarToggle}
                 />
                 {isCalendarOpen && (
-                  <div className={styles.calendarContainer}>
-                    <Calendar
-                      className={styles.customCalendar}
-                      onChange={setDate}
-                      value={date}
-                    />
+                  <div
+                    className={styles.calendar_backdrop}
+                    onClick={clickBackdrop}
+                  >
+                    <div className={styles.calendarContainer}>
+                      <Calendar
+                        className={styles.customCalendar}
+                        // onChange={setDate}
+                        onChange={(selectedDate) => {
+                          setFieldValue(
+                            'birthday',
+                            selectedDate.toLocaleDateString('en-GB', {
+                              day: 'numeric',
+                              month: 'numeric',
+                              year: 'numeric',
+                            })
+                          );
+                          setDate(selectedDate);
+                        }}
+                        value={date}
+                      />
+                    </div>
                   </div>
                 )}
                 <ErrorMessage name="birthday">
@@ -141,10 +164,15 @@ const DataUserStepOne = () => {
               <button
                 className={styles.link_next}
                 type="submit"
-                style={{ pointerEvents: isValid ? 'auto' : 'none' }}
+                disabled={!isValid}
               >
                 <span>Next </span>
                 <Image src="/next.svg" alt="" width={20} height={20} />
+                {!isValid && (
+                  <p className={styles.errorText}>
+                    Please fill in all the required fields.
+                  </p>
+                )}
               </button>
             </Form>
           )}

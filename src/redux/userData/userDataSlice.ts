@@ -7,6 +7,9 @@ interface UserData {
   currentWeight: string;
   desiredWeight: string;
   birthday: string;
+  bloodGroup: string;
+  sex: string;
+  levelActivity: string;
 }
 
 const userDataPersistConfig = {

@@ -132,6 +132,10 @@
   font-size: 10px;
 }
 
+.errorText {
+  color: #ff0000;
+}
+
 .link_next {
   position: absolute;
   top: 130%;
@@ -328,14 +332,20 @@
 }
 
 // calendar
-.calendarContainer {
-  position: relative;
+.calendar_backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
 }
 
 .customCalendar {
   position: absolute;
-  top: -40px;
-  left: 170px;
+  top: 45%;
+  right: 10%;
+  z-index: 30;
   max-width: 315px;
   padding: 14px;
   border-radius: 4px;
@@ -345,6 +355,20 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+
+  @include mediaQuery(524px) {
+    top: 35%;
+    right: 17%;
+  }
+
+  @include mediaQuery(768px) {
+    top: 50%;
+    right: 30%;
+  }
+
+  @include mediaQuery(1000px) {
+    right: 55%;
+  }
 }
 
 .customCalendar button {

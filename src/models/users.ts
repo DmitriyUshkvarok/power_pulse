@@ -23,6 +23,10 @@ const userSchema = new Schema(
       type: String,
       default: 'credentials',
     },
+    userData: {
+      type: Schema.Types.ObjectId,
+      ref: 'UserData',
+    },
   },
   { timestamps: true }
 );

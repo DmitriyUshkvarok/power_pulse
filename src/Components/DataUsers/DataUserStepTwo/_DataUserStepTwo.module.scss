@@ -47,7 +47,7 @@
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(32px, 44px);
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
 }
 
@@ -59,6 +59,10 @@
 
 .bottom_group_wrapper {
   margin-bottom: 28px;
+
+  @include mediaQuery(768px) {
+    margin-bottom: 32px;
+  }
 }
 
 .form_group {
@@ -77,12 +81,20 @@
 .radio_text {
   color: $white-color;
   @include fontSizeAuto(14px, 18px);
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
 }
 
 .label_radio {
   color: $white-color;
   @include fontSizeAuto(14px, 18px);
   margin-bottom: 16px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
 }
 
 .errorText {
@@ -136,6 +148,11 @@
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+
+  @include mediaQuery(768px) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .radio_btn:checked {

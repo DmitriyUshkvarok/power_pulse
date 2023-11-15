@@ -1,5 +1,11 @@
+import DataUserStepThree from '@/src/Components/DataUsers/DataUserStepThree/DataUserStepThree';
+
 const StepThreePage = () => {
-  return <div>rere</div>;
+  return (
+    <>
+      <DataUserStepThree />
+    </>
+  );
 };
 
 export default StepThreePage;

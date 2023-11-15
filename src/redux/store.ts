@@ -1,4 +1,6 @@
-import persistUserDataReducer from './userData/userDataSlice';
+import persistUserDataReducer, {
+  UserDataState,
+} from './userData/userDataSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -9,6 +11,10 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+
+export interface RootState {
+  userData: UserDataState;
+}
 
 const store = configureStore({
   reducer: {

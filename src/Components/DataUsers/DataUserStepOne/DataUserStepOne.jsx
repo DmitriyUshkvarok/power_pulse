@@ -2,7 +2,7 @@
 import styles from './_DataUserStepOne.module.scss';
 import Container from '../../Container/Container';
 import * as yup from 'yup';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -31,6 +31,7 @@ const DataUserStepOne = () => {
   const [date, setDate] = useState(new Date());
   const dispatch = useDispatch();
   const router = useRouter();
+  const formikRef = useRef(null);
 
   const handleCalendarToggle = () => {
     setCalendarOpen(!isCalendarOpen);
@@ -62,6 +63,7 @@ const DataUserStepOne = () => {
           initialValues={initialValues}
           validationSchema={schema}
           onSubmit={handleSaveValuesToGlobalState}
+          innerRef={formikRef}
         >
           {({ isValid, setFieldValue }) => (
             <Form className={styles.form_step_one}>
@@ -206,14 +208,32 @@ const DataUserStepOne = () => {
           </div>
         </div>
         <div className={styles.nav_pagination}>
-          <Link href="/user-data" className={styles.nav_pagination_link}></Link>
+          <Link
+            href="/user-data"
+            className={styles.nav_pagination_link}
+            onClick={(e) => {
+              if (!formikRef.current.isValid) {
+                e.preventDefault();
+              }
+            }}
+          ></Link>
           <Link
             href="/user-data/step-two"
             className={styles.nav_pagination_link}
+            onClick={(e) => {
+              if (!formikRef.current.isValid) {
+                e.preventDefault();
+              }
+            }}
           ></Link>
           <Link
             href="/user-data/step-three"
             className={styles.nav_pagination_link}
+            onClick={(e) => {
+              if (!formikRef.current.isValid) {
+                e.preventDefault();
+              }
+            }}
           ></Link>
         </div>
       </Container>

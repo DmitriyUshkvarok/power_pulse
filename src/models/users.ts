@@ -1,6 +1,15 @@
 import mongoose from 'mongoose';
 
-const { Schema, models, model } = mongoose;
+const { Document, Schema, models, model } = mongoose;
+
+export interface UserDocument extends Document {
+  name: string;
+  email: string;
+  password: string;
+  image: string;
+  role: string;
+  provider: string;
+}
 
 const userSchema = new Schema(
   {

@@ -6,7 +6,7 @@ export interface UserDataState {
   items: UserData[];
 }
 
-interface UserData {
+export interface UserData {
   height: string;
   currentWeight: string;
   desiredWeight: string;

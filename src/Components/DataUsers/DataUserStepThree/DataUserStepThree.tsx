@@ -5,17 +5,43 @@ import Image from 'next/image';
 import Container from '../../Container/Container';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/src/redux/store';
+import { createDataUser } from '@/src/app/actions/userDataActions';
+import { useSession } from 'next-auth/react';
+
+interface UserSession {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  image: string;
+  role: string;
+  provider: string;
+}
 
 const DataUserStepThree = () => {
+  const { data: session } = useSession();
+
   const userData = useSelector((state: RootState) => state.userData.items);
 
   const data1 = userData[0];
   const data2 = userData[1];
 
-  const combinedData = { ...data1, ...data2 };
+  const combinedData: any = { ...data1, ...data2 };
 
-  const handleGoButtonClick = () => {
-    console.log(combinedData);
+  const userId = (session?.user as UserSession)?._id;
+
+  const handleGoButtonClick = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    try {
+      if (session?.user) {
+        const res = await createDataUser(combinedData, userId);
+        alert('success create user date');
+      } else {
+        alert('User not authenticated');
+      }
+    } catch (error) {}
   };
 
   return (
@@ -31,7 +57,7 @@ const DataUserStepThree = () => {
         <div className={styles.btn_panel}>
           <button
             className={styles.btn_go}
-            // type="submit"
+            type="submit"
             onClick={handleGoButtonClick}
           >
             Go

@@ -1,33 +1,40 @@
 import mongoose from 'mongoose';
 
-const { Schema, model, models } = mongoose;
+const { Document, Schema, model, models } = mongoose;
 
-const userDataSchema = new Schema(
-  {
-    height: {
-      type: String,
-    },
-    currentWeight: {
-      type: String,
-    },
-    desiredWeight: {
-      type: String,
-    },
-    birthday: {
-      type: String,
-    },
-    bloodGroup: {
-      type: String,
-    },
-    sex: {
-      type: String,
-    },
-    levelActivity: {
-      type: String,
-    },
+export interface UserDataDocument extends Document {
+  height: string;
+  currentWeight: string;
+  desiredWeight: string;
+  birthday: string;
+  bloodGroup: string;
+  sex: string;
+  levelActivity: string;
+}
+
+const userDataSchema = new Schema({
+  height: {
+    type: String,
   },
-  { _id: false }
-);
+  currentWeight: {
+    type: String,
+  },
+  desiredWeight: {
+    type: String,
+  },
+  birthday: {
+    type: String,
+  },
+  bloodGroup: {
+    type: String,
+  },
+  sex: {
+    type: String,
+  },
+  levelActivity: {
+    type: String,
+  },
+});
 
 const UserData = models.userData || model('userData', userDataSchema);
 

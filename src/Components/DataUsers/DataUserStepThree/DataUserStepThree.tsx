@@ -3,10 +3,13 @@ import styles from './_DataUserStepThree.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../../Container/Container';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/src/redux/store';
 import { createDataUser } from '@/src/app/actions/userDataActions';
 import { useSession } from 'next-auth/react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { removeUserData } from '@/src/redux/userData/userDataSlice';
 
 interface UserSession {
   _id: string;
@@ -20,6 +23,9 @@ interface UserSession {
 
 const DataUserStepThree = () => {
   const { data: session } = useSession();
+  const [isLoading, setIsloading] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const userData = useSelector((state: RootState) => state.userData.items);
 
@@ -36,12 +42,18 @@ const DataUserStepThree = () => {
     e.preventDefault();
     try {
       if (session?.user) {
+        setIsloading(true);
         const res = await createDataUser(combinedData, userId);
         alert('success create user date');
+        dispatch(removeUserData());
+        router.push('/profile');
+        setIsloading(false);
       } else {
         alert('User not authenticated');
       }
-    } catch (error) {}
+    } catch (error) {
+      setIsloading(false);
+    }
   };
 
   return (
@@ -59,8 +71,9 @@ const DataUserStepThree = () => {
             className={styles.btn_go}
             type="submit"
             onClick={handleGoButtonClick}
+            disabled={isLoading}
           >
-            Go
+            {isLoading ? 'Loading...' : 'Go'}
           </button>
           <Link href="/user-data/step-two" className={styles.nav_btn_back}>
             <Image

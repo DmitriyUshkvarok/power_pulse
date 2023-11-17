@@ -1,0 +1,8 @@
+@import '../../sass/utils/variables.module';
+@import '../../sass/utils/mixins.module';
+
+.profile_section {
+  background-color: $black-color;
+  width: 100vw;
+  min-height: 100vh;
+}

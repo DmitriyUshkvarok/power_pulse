@@ -18,7 +18,6 @@ export const createDataUser = async (
     }
 
     await User.findByIdAndUpdate(userId, { userData: newUserData._id });
-    console.log('User updated with UserData ID:', newUserData._id);
 
     return { ...newUserData._doc, _id: newUserData._id.toString() };
   } catch (error) {

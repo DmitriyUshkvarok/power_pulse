@@ -24,7 +24,7 @@ const Navigation = () => {
         try {
           signOut({ callbackUrl: '/' });
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       },
       () => {}
@@ -45,7 +45,7 @@ const Navigation = () => {
         <MobileMenu handleClosedMobileMenu={handleClosedMobileMenu} />
       )}
       <div className={styles.nav_wrapper}>
-        <Link href="/" className={styles.header_logo}>
+        <Link href={session ? '/diary' : '/'} className={styles.header_logo}>
           <Image
             src={'/logo-icon.svg'}
             alt="header logo"

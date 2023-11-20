@@ -1,0 +1,198 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.profile_container {
+  @include mediaQuery(768px) {
+    max-width: 435px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.user_photo_block {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid $orange-color;
+  background-color: rgba(48, 48, 48, 0.3);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+
+  @include mediaQuery(768px) {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 18px;
+  }
+}
+
+.user_img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+
+  @include mediaQuery(768px) {
+    width: 102px;
+    height: 102px;
+  }
+}
+
+.add_photo_block {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0px);
+  -webkit-transform: translate(-50%, 0px);
+  -moz-transform: translate(-50%, 0px);
+  -ms-transform: translate(-50%, 0px);
+  -o-transform: translate(-50%, 0px);
+}
+
+.user_name {
+  color: $white-color;
+  text-align: center;
+  @include fontSizeAuto(18px, 20px);
+  margin-bottom: 5px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(24px, 28px);
+    margin-bottom: 8px;
+  }
+}
+
+.user_role {
+  text-align: center;
+  color: rgba(239, 237, 232, 0.5);
+  @include fontSizeAuto(14px, 18px);
+  margin-bottom: 40px;
+
+  @include mediaQuery(768px) {
+    margin-bottom: 32px;
+  }
+}
+
+.daily_block {
+  max-width: 439px;
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 54px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include mediaQuery(768px) {
+    gap: 16px;
+  }
+}
+
+.daily_colories,
+.daily_sport {
+  padding: 14px;
+  background-color: $orange-color;
+  border: 1px solid rgba(239, 237, 232, 0.2);
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+
+  @include mediaQuery(768px) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+.daily_colories_top_block,
+.daily_sport_top_block {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+
+  @include mediaQuery(768px) {
+    margin-bottom: 32px;
+  }
+}
+
+.daily_sport_top_text,
+.daily_colories_top_text {
+  color: rgba(239, 237, 232, 0.8);
+  @include fontSizeAuto(12px, 16px);
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(12px, 18px);
+  }
+}
+
+.daily_colories_counter,
+.daily_sport_counter {
+  color: $white-color;
+  @include fontSizeAuto(18px, 20px);
+  font-weight: 700;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(24px, 32px);
+  }
+}
+
+.warning_block {
+  display: flex;
+  align-items: self-start;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 41px;
+
+  @include mediaQuery(768px) {
+    margin-bottom: 32px;
+  }
+}
+
+.warning_icon_block {
+  @include flexCenter();
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: $beige-color;
+}
+
+.warning_text {
+  max-width: 303px;
+  color: rgba(239, 237, 232, 0.3);
+  @include fontSizeAuto(14px, 18px);
+
+  @include mediaQuery(768px) {
+    max-width: 407px;
+    @include fontSizeAuto(16px, 24px);
+  }
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  align-self: flex-end;
+  gap: 8px;
+  cursor: pointer;
+  color: #efede8;
+  @include fontSizeAuto(14px, 18px);
+  margin-bottom: 19px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
+}

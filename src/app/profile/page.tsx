@@ -8,11 +8,12 @@ const ProfilePage = () => {
     <section className={styles.profile_section}>
       <Container>
         <div>
-          <div>
-            <ProfileForm />
-          </div>
+          <h1 className={styles.profile_title}>Profile Settings</h1>
           <div>
             <ProfileCard />
+          </div>
+          <div>
+            <ProfileForm />
           </div>
         </div>
       </Container>

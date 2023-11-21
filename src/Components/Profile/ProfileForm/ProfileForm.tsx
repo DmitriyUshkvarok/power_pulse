@@ -6,6 +6,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/src/redux/store';
+import { useSession } from 'next-auth/react';
 
 interface ProfileFormValues {
   name: string;
@@ -18,18 +21,6 @@ interface ProfileFormValues {
   sex: string;
   levelActivity: string;
 }
-
-const initialValues = {
-  name: '',
-  email: '',
-  height: '',
-  currentWeight: '',
-  desiredWeight: '',
-  birthday: '',
-  bloodGroup: '',
-  sex: '',
-  levelActivity: '',
-};
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -58,6 +49,36 @@ const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const formikRef = useRef(null);
+  const userData = useSelector((state: RootState) => state.userData.items);
+  const { data: session } = useSession();
+
+  const initialValues = {
+    name: session?.user?.name ?? '',
+    email: session?.user?.email ?? '',
+    height: '',
+    currentWeight: '',
+    desiredWeight: '',
+    birthday: '',
+    bloodGroup: '',
+    sex: '',
+    levelActivity: '',
+  };
+
+  if (userData.length > 0) {
+    const user = userData[0];
+    initialValues.name = session?.user?.name || initialValues.name;
+    initialValues.email = session?.user?.email || initialValues.email;
+    initialValues.height = user.height || initialValues.height;
+    initialValues.currentWeight =
+      user.currentWeight || initialValues.currentWeight;
+    initialValues.desiredWeight =
+      user.desiredWeight || initialValues.desiredWeight;
+    initialValues.birthday = user.birthday || initialValues.birthday;
+    initialValues.bloodGroup = user.bloodGroup || initialValues.bloodGroup;
+    initialValues.sex = user.sex || initialValues.sex;
+    initialValues.levelActivity =
+      user.levelActivity || initialValues.levelActivity;
+  }
 
   const handleCalendarToggle = () => {
     setCalendarOpen(!isCalendarOpen);

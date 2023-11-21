@@ -7,9 +7,9 @@ const ProfilePage = () => {
   return (
     <section className={styles.profile_section}>
       <Container>
-        <div>
-          <h1 className={styles.profile_title}>Profile Settings</h1>
-          <div>
+        <h1 className={styles.profile_title}>Profile Settings</h1>
+        <div className={styles.profile_basic_block}>
+          <div className={styles.profile_basic_block_cart}>
             <ProfileCard />
           </div>
           <div>

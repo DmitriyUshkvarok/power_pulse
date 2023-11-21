@@ -115,6 +115,18 @@
   }
 }
 
+.daily_sport {
+  @include mediaQuery(768px) {
+    width: 214px;
+  }
+}
+
+.daily_colories {
+  @include mediaQuery(768px) {
+    width: 209px;
+  }
+}
+
 .daily_colories_top_block,
 .daily_sport_top_block {
   display: flex;

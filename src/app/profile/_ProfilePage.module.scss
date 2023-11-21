@@ -29,7 +29,22 @@
     margin-bottom: 64px;
   }
 
-  @include mediaQuery(768px) {
-    margin-bottom: 32px;
+  @include mediaQuery(1440px) {
+    margin-bottom: 58px;
+  }
+}
+
+.profile_basic_block {
+  @include mediaQuery(1440px) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+}
+
+.profile_basic_block_cart {
+  @include mediaQuery(1440px) {
+    padding-left: 50px;
+    border-left: 1px solid rgba(239, 237, 232, 0.2);
   }
 }

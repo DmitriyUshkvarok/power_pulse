@@ -9,8 +9,11 @@ import { createDataUser } from '@/src/app/actions/userDataActions';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { removeUserData } from '@/src/redux/userData/userDataSlice';
-
+import {
+  removeUserData,
+  createDataAsync,
+} from '@/src/redux/userData/userDataSlice';
+import { AppDispatch } from '@/src/redux/store';
 interface UserSession {
   _id: string;
   name: string;
@@ -25,7 +28,7 @@ const DataUserStepThree = () => {
   const { data: session } = useSession();
   const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const userData = useSelector((state: RootState) => state.userData.items);
 
@@ -43,9 +46,9 @@ const DataUserStepThree = () => {
     try {
       if (session?.user) {
         setIsloading(true);
-        const res = await createDataUser(combinedData, userId);
+        // const res = await createDataUser(combinedData, userId);
+        await dispatch(createDataAsync({ id: userId, data: combinedData }));
         alert('success create user date');
-        dispatch(removeUserData());
         router.push('/profile');
         setIsloading(false);
       } else {

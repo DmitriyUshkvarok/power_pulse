@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import { createDataUser } from '@/src/app/actions/userDataActions';
+import { getServerSession } from 'next-auth';
 
 export interface UserDataState {
   items: UserData[];
@@ -16,6 +18,14 @@ export interface UserData {
   levelActivity: string;
 }
 
+export const createDataAsync = createAsyncThunk(
+  'userData/create',
+  async ({ id, data }: { id: string; data: any }) => {
+    const response = await createDataUser(data, id);
+    return response;
+  }
+);
+
 const userDataPersistConfig = {
   key: 'userData',
   storage,
@@ -26,6 +36,7 @@ const userDataSlice = createSlice({
   name: 'userData',
   initialState: {
     items: [] as UserData[],
+    status: 'idle',
   },
   reducers: {
     addUserData: (state, action) => {
@@ -34,6 +45,16 @@ const userDataSlice = createSlice({
     removeUserData: (state) => {
       state.items = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createDataAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createDataAsync.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.items.push(action.payload);
+      });
   },
 });
 

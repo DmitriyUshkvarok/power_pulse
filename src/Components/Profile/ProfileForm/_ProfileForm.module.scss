@@ -14,6 +14,10 @@
   gap: 20px;
   margin-bottom: 20px;
   width: 100%;
+
+  @include mediaQuery(1440px) {
+    margin-bottom: 40px;
+  }
 }
 
 .form_block_two {
@@ -27,6 +31,10 @@
 
   @include mediaQuery(768px) {
     justify-content: space-between;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-bottom: 42px;
   }
 }
 
@@ -49,6 +57,10 @@
 
   @include mediaQuery(768px) {
     margin-bottom: 38px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-bottom: 48px;
   }
 }
 
@@ -152,6 +164,9 @@
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);
+  }
+  @include mediaQuery(768px) {
+    max-width: 100%;
   }
 }
 

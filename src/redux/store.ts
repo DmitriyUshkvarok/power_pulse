@@ -1,7 +1,7 @@
 import persistUserDataReducer, {
   UserDataState,
 } from './userData/userDataSlice';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import {
   persistStore,
   FLUSH,
@@ -29,5 +29,7 @@ const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
 
 export default store;

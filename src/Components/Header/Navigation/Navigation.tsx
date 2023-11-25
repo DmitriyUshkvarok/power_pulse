@@ -8,9 +8,12 @@ import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import Notiflix from 'notiflix';
 import { useSession } from 'next-auth/react';
+import { resetUserData } from '@/src/redux/userData/userDataSlice';
+import { useDispatch } from 'react-redux';
 
 const Navigation = () => {
   const pathname = usePathname();
+  const dispatch = useDispatch();
   const { data: session } = useSession();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -22,6 +25,7 @@ const Navigation = () => {
       'No',
       async () => {
         try {
+          dispatch(resetUserData());
           signOut({ callbackUrl: '/' });
         } catch (error) {
           console.error(error);

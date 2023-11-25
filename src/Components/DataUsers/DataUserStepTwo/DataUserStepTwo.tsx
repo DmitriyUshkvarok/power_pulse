@@ -6,8 +6,11 @@ import Image from 'next/image';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import {
+  /*
   addUserData,
-  removeUserData,
+  removeUserData,*/
+  updateUserData,
+  resetUserData,
 } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useRouter } from 'next/navigation';
@@ -35,12 +38,14 @@ const DataUserStepTwo = () => {
   const router = useRouter();
 
   const handleSaveValuesToGlobalState = (values: UserData) => {
-    dispatch(addUserData(values));
+    // dispatch(addUserData(values));
+    dispatch(updateUserData(values));
     router.push('/user-data/step-three');
   };
 
   const handleRemoveState = () => {
-    dispatch(removeUserData());
+    // dispatch(removeUserData());
+    dispatch(resetUserData());
   };
   return (
     <section className={styles.step_two_section}>
@@ -61,7 +66,7 @@ const DataUserStepTwo = () => {
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
-                      value="A"
+                      value="1"
                     />
                     <span className={styles.radio_text}>1</span>
                   </div>
@@ -70,7 +75,7 @@ const DataUserStepTwo = () => {
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
-                      value="B"
+                      value="2"
                     />
                     <span className={styles.radio_text}>2</span>
                   </div>
@@ -79,7 +84,7 @@ const DataUserStepTwo = () => {
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
-                      value="AB"
+                      value="3"
                     />
                     <span className={styles.radio_text}>3</span>
                   </div>
@@ -88,7 +93,7 @@ const DataUserStepTwo = () => {
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
-                      value="O"
+                      value="4"
                     />
                     <span className={styles.radio_text}>4</span>
                   </div>

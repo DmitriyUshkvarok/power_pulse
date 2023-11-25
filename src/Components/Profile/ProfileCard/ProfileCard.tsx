@@ -3,7 +3,7 @@ import styles from './_ProfileCard.module.scss';
 import Image from 'next/image';
 import { signOut } from 'next-auth/react';
 import Notiflix from 'notiflix';
-import { removeUserData } from '@/src/redux/userData/userDataSlice';
+import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
 
 const ProfileCard = () => {
@@ -17,7 +17,7 @@ const ProfileCard = () => {
       'No',
       async () => {
         try {
-          dispatch(removeUserData());
+          dispatch(resetUserData());
           signOut({ callbackUrl: '/' });
         } catch (error) {
           console.error(error);

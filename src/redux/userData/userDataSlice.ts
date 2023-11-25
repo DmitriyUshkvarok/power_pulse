@@ -2,10 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { createDataUser } from '@/src/app/actions/userDataActions';
-import { getServerSession } from 'next-auth';
 
 export interface UserDataState {
-  items: UserData[];
+  data: UserData;
+  status: string;
+  error: string | null;
 }
 
 export interface UserData {
@@ -29,21 +30,40 @@ export const createDataAsync = createAsyncThunk(
 const userDataPersistConfig = {
   key: 'userData',
   storage,
-  whitelist: ['items'],
+  whitelist: ['data'],
 };
 
 const userDataSlice = createSlice({
   name: 'userData',
   initialState: {
-    items: [] as UserData[],
+    data: {
+      height: '',
+      currentWeight: '',
+      desiredWeight: '',
+      birthday: '',
+      bloodGroup: '',
+      sex: '',
+      levelActivity: '',
+    },
     status: 'idle',
+    error: null,
   },
   reducers: {
-    addUserData: (state, action) => {
-      state.items.push(action.payload);
+    updateUserData: (state, action) => {
+      state.data = { ...state.data, ...action.payload };
     },
-    removeUserData: (state) => {
-      state.items = [];
+    resetUserData: (state) => {
+      state.data = {
+        height: '',
+        currentWeight: '',
+        desiredWeight: '',
+        birthday: '',
+        bloodGroup: '',
+        sex: '',
+        levelActivity: '',
+      };
+      state.status = 'idle';
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -52,13 +72,13 @@ const userDataSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(createDataAsync.fulfilled, (state, action) => {
+        state.data = { ...state.data, ...action.payload };
         state.status = 'succeeded';
-        state.items.push(action.payload);
       });
   },
 });
 
-export const { addUserData, removeUserData } = userDataSlice.actions;
+export const { updateUserData, resetUserData } = userDataSlice.actions;
 
 const persistUserDataReducer = persistReducer(
   userDataPersistConfig,

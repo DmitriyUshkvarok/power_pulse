@@ -4,7 +4,9 @@ import Container from '../../Container/Container';
 import * as yup from 'yup';
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUserData } from '@/src/redux/userData/userDataSlice';
+import {
+  /*addUserData*/ updateUserData,
+} from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -46,7 +48,8 @@ const DataUserStepOne = () => {
   const handleSaveValuesToGlobalState = (values) => {
     const isoDateString = date.toISOString();
     const updatedValues = { ...values, birthday: isoDateString };
-    dispatch(addUserData(updatedValues));
+    // dispatch(addUserData(updatedValues));
+    dispatch(updateUserData(updatedValues));
     router.push('/user-data/step-two');
   };
 

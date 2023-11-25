@@ -1,14 +1,15 @@
 'use client';
 import styles from './_ProfileForm.module.scss';
 import * as yup from 'yup';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/src/redux/store';
 import { useSession } from 'next-auth/react';
+import { getUserDataById } from '@/src/app/actions/userDataActions';
 
 interface ProfileFormValues {
   name: string;
@@ -20,6 +21,30 @@ interface ProfileFormValues {
   bloodGroup: string;
   sex: string;
   levelActivity: string;
+}
+
+interface UserSession {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  image: string;
+  role: string;
+  provider: string;
+  userData: string;
+}
+interface UserDataId {
+  userData: {
+    birthday: string;
+    bloodGroup: string;
+    currentWeight: string;
+    desiredWeight: string;
+    height: string;
+    levelActivity: string;
+    sex: string;
+    __v: number;
+    _id: string;
+  };
 }
 
 const schema = yup.object().shape({
@@ -49,8 +74,24 @@ const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const formikRef = useRef(null);
-  const userData = useSelector((state: RootState) => state.userData.items);
+  const userData = useSelector((state: RootState) => state.userData.data);
   const { data: session } = useSession();
+  const userDataId = (session?.user as UserSession)?.userData;
+  const [data, setData] = useState<UserDataId | null>(null);
+
+  useEffect(() => {
+    const getUserDataByIdClient = async () => {
+      try {
+        const userDataAsync = await getUserDataById(userDataId);
+        if (userDataAsync) {
+          setData(userDataAsync);
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    getUserDataByIdClient();
+  }, [userDataId]);
 
   const initialValues = {
     name: session?.user?.name ?? '',
@@ -64,8 +105,8 @@ const ProfileForm = () => {
     levelActivity: '',
   };
 
-  if (userData.length > 0) {
-    const user = userData[0];
+  if (userData && Object.keys(userData).length > 0) {
+    const user = userData;
     initialValues.name = session?.user?.name || initialValues.name;
     initialValues.email = session?.user?.email || initialValues.email;
     initialValues.height = user.height || initialValues.height;

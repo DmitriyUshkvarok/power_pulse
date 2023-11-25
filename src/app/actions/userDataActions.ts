@@ -2,7 +2,7 @@
 import connectToDatabase from '@/src/utils/db';
 import UserData, { UserDataDocument } from '@/src/models/userDataModel';
 import User from '@/src/models/users';
-
+import { redirect } from 'next/navigation';
 connectToDatabase();
 
 export const createDataUser = async (
@@ -23,5 +23,20 @@ export const createDataUser = async (
   } catch (error) {
     console.error('An error occurred while creating data:', error);
     return { error: 'Internal Server Error', statusCode: 500 };
+  }
+};
+
+export const getUserDataById = async (userDataId: string) => {
+  try {
+    const userData = await UserData.findOne({ _id: userDataId });
+
+    const newUserData = {
+      ...userData._doc,
+      _id: userData._doc._id.toString(),
+    };
+
+    return { userData: newUserData };
+  } catch (error) {
+    // redirect(`/errors?error=${error.message}`);
   }
 };

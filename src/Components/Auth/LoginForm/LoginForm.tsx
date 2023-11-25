@@ -7,7 +7,6 @@ import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
-
 interface FormValues {
   email: string;
   password: string;

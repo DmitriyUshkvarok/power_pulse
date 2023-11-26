@@ -5,9 +5,11 @@ import { signOut } from 'next-auth/react';
 import Notiflix from 'notiflix';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
+import { useSession } from 'next-auth/react';
 
 const ProfileCard = () => {
   const dispatch = useDispatch();
+  const { data: session } = useSession();
 
   const handleClickLogOut = () => {
     Notiflix.Confirm.show(
@@ -32,21 +34,21 @@ const ProfileCard = () => {
       <div className={styles.user_photo_block}>
         <Image
           className={styles.user_img}
-          src="/icon_user.svg"
+          src={session?.user?.image || '/icon_user.svg'}
           alt="user icon(photo)"
           width={61}
           height={61}
         />
         <div className={styles.add_photo_block}>
           <Image
-            src="/add_photo.svg"
+            src={'/add_photo.svg'}
             alt="add photo icon"
             width={24}
             height={24}
           />
         </div>
       </div>
-      <h2 className={styles.user_name}>Anna Rybachok</h2>
+      <h2 className={styles.user_name}>{session?.user?.name}</h2>
       <div className={styles.user_role}>User</div>
       <div className={styles.daily_block}>
         <div className={styles.daily_colories}>

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Container from '../../Container/Container';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/src/redux/store';
-import { createDataUser } from '@/src/app/actions/userDataActions';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';

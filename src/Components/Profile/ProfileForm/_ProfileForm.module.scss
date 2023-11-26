@@ -123,6 +123,7 @@
 
 .calendar_icon {
   position: absolute;
+  cursor: pointer;
   right: 14px;
   top: 50%;
   transform: translate(0, -50%);
@@ -148,6 +149,10 @@
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);
   }
+}
+
+.form_placeholder_hidden {
+  display: none;
 }
 
 .label_radio {

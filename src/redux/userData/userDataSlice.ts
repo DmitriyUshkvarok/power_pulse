@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
-import { createDataUser } from '@/src/app/actions/userDataActions';
+import {
+  createDataUser,
+  getUserDataById,
+} from '@/src/app/actions/userDataActions';
 
 export interface UserDataState {
   data: UserData;
@@ -27,6 +30,14 @@ export const createDataAsync = createAsyncThunk(
   }
 );
 
+export const fetchUserData = createAsyncThunk(
+  'userData/fetch',
+  async (userDataId: string) => {
+    const response = await getUserDataById(userDataId);
+    return response?.userData;
+  }
+);
+
 const userDataPersistConfig = {
   key: 'userData',
   storage,
@@ -45,7 +56,7 @@ const userDataSlice = createSlice({
       sex: '',
       levelActivity: '',
     },
-    status: 'idle',
+    status: 'loading',
     error: null,
   },
   reducers: {
@@ -73,6 +84,13 @@ const userDataSlice = createSlice({
       })
       .addCase(createDataAsync.fulfilled, (state, action) => {
         state.data = { ...state.data, ...action.payload };
+        state.status = 'succeeded';
+      })
+      .addCase(fetchUserData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchUserData.fulfilled, (state, action) => {
+        state.data = action.payload;
         state.status = 'succeeded';
       });
   },

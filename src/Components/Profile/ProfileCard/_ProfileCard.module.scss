@@ -40,10 +40,17 @@
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 80px;
+  height: 80px;
 
   @include mediaQuery(768px) {
-    width: 102px;
-    height: 102px;
+    width: 140px;
+    height: 140px;
   }
 }
 

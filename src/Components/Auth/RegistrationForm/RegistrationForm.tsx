@@ -1,46 +1,20 @@
 'use client';
 import styles from './RegistrationForm.module.scss';
-import * as yup from 'yup';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
-
-interface FormValues {
-  name: string;
-  email: string;
-  password: string;
-}
+import { FormValues } from './index';
+import { registrationSchema } from '@/src/formSchemas/registrationSchema';
+import { signUpWithCredential } from '@/src/app/actions/authActions';
 
 const initialValues: FormValues = {
   name: '',
   email: '',
   password: '',
 };
-
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  email: yup
-    .string()
-    .email('Invalid email')
-    .test(
-      'email-format',
-      'Invalid email format',
-      (value: string | undefined) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(value || '');
-      }
-    )
-    .required(),
-  password: yup
-    .string()
-    .min(8)
-    .max(64)
-    .matches(/^[^\s]+$/, 'Password should not contain spaces')
-    .required(),
-});
 
 function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
@@ -50,10 +24,11 @@ function FormRegistration() {
     values: FormValues,
     { resetForm }: FormikHelpers<FormValues>
   ) => {
-    setIsLoading(true);
-    console.log(values);
     try {
-      // values.callbackUrl = '/';
+      setIsLoading(true);
+      const res = await signUpWithCredential(values);
+      await signIn('credentials', { ...values, callbackUrl: '/user-data' });
+      alert('Registration Seccesfully!');
     } catch (error) {
       console.log(error);
     } finally {
@@ -75,7 +50,7 @@ function FormRegistration() {
       </p>
       <Formik
         initialValues={initialValues}
-        validationSchema={schema}
+        validationSchema={registrationSchema}
         onSubmit={handleSubmit}
       >
         <Form className={styles.form_registration}>
@@ -119,10 +94,13 @@ function FormRegistration() {
                 {showPassword ? (
                   <BsEyeSlash
                     color="#ffffff4d"
-                    style={{ width: 18, height: 18 }}
+                    style={{ width: 18, height: 18, cursor: 'pointer' }}
                   />
                 ) : (
-                  <BsEye color="#ffffff4d" style={{ width: 18, height: 18 }} />
+                  <BsEye
+                    color="#ffffff4d"
+                    style={{ width: 18, height: 18, cursor: 'pointer' }}
+                  />
                 )}
               </div>
             </div>

@@ -8,8 +8,12 @@ import { RootState } from '@/src/redux/store';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { createDataAsync } from '@/src/redux/userData/userDataSlice';
+import {
+  createDataAsync,
+  fetchUserData,
+} from '@/src/redux/userData/userDataSlice';
 import { AppDispatch } from '@/src/redux/store';
+
 interface UserSession {
   _id: string;
   name: string;
@@ -18,6 +22,7 @@ interface UserSession {
   image: string;
   role: string;
   provider: string;
+  userData: string;
 }
 
 const DataUserStepThree = () => {
@@ -29,6 +34,7 @@ const DataUserStepThree = () => {
   const userData = useSelector((state: RootState) => state.userData.data);
 
   const userId = (session?.user as UserSession)?._id;
+  const userDataId = (session?.user as UserSession)?.userData;
 
   const handleGoButtonClick = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -38,8 +44,9 @@ const DataUserStepThree = () => {
       if (session?.user) {
         setIsloading(true);
         await dispatch(createDataAsync({ id: userId, data: userData }));
+        await dispatch(fetchUserData(userDataId));
         alert('success create user date');
-        router.push('/profile');
+        router.push('/diary');
         setIsloading(false);
       } else {
         alert('User not authenticated');

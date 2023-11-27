@@ -1,12 +1,12 @@
 'use client';
 import styles from './_LoginForm.module.scss';
-import * as yup from 'yup';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
+import { loginSchema } from '@/src/formSchemas/loginSchema';
 interface FormValues {
   email: string;
   password: string;
@@ -17,27 +17,6 @@ const initialValues: FormValues = {
   password: '',
 };
 
-const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Invalid email')
-    .test(
-      'email-format',
-      'Invalid email format',
-      (value: string | undefined) => {
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return emailRegex.test(value || '');
-      }
-    )
-    .required(),
-  password: yup
-    .string()
-    .min(8)
-    .max(64)
-    .matches(/^[^\s]+$/, 'Password should not contain spaces')
-    .required(),
-});
-
 function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,8 +26,8 @@ function FormLogin() {
     { resetForm }: FormikHelpers<FormValues>
   ) => {
     setIsLoading(true);
-    console.log(values);
     try {
+      await signIn('credentials', { ...values, callbackUrl: '/profile' });
     } catch (error) {
       console.log(error);
     } finally {
@@ -69,7 +48,7 @@ function FormLogin() {
       </p>
       <Formik
         initialValues={initialValues}
-        validationSchema={schema}
+        validationSchema={loginSchema}
         onSubmit={handleSubmit}
       >
         <Form className={styles.form_registration}>

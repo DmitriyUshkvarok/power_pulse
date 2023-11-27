@@ -3,6 +3,7 @@ import connectToDatabase from '@/src/utils/db';
 import UserData, { UserDataDocument } from '@/src/models/userDataModel';
 import User from '@/src/models/users';
 import { redirect } from 'next/navigation';
+
 connectToDatabase();
 
 export const createDataUser = async (
@@ -37,6 +38,8 @@ export const getUserDataById = async (userDataId: string) => {
 
     return { userData: newUserData };
   } catch (error) {
-    // redirect(`/errors?error=${error.message}`);
+    // if (error instanceof Error) {
+    //   redirect(`/errors?error=${error.message}`);
+    // } else throw new Error('Something went wrong');
   }
 };

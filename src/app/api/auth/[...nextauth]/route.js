@@ -14,6 +14,22 @@ export const authOption = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: {
+          label: 'email',
+          type: 'email',
+          required: true,
+        },
+        password: { label: 'Password', type: 'password', required: true },
+      },
+      async authorize(credentials, req) {
+        const { email, password } = credentials;
+        const user = await signInWithCredentials({ email, password });
+        return user;
+      },
+    }),
   ],
   pages: {
     signIn: '/signin',
@@ -71,5 +87,14 @@ async function getUserByEmail({ email }) {
 
   if (!user) throw new Error('Email does not exist!');
 
+  return { ...user._doc, _id: user._id.toString() };
+}
+
+export async function signInWithCredentials({ email, password }) {
+  const user = await User.findOne({ email });
+  if (!user) throw new Error('Email does not exist!');
+
+  const compare = await bcrypt.compare(password, user.password);
+  if (!compare) throw new Error('password does not match!');
   return { ...user._doc, _id: user._id.toString() };
 }

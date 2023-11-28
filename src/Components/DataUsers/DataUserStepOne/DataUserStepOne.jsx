@@ -1,18 +1,16 @@
 'use client';
 import styles from './_DataUserStepOne.module.scss';
 import Container from '../../Container/Container';
-import * as yup from 'yup';
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  /*addUserData*/ updateUserData,
-} from '@/src/redux/userData/userDataSlice';
+import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Link from 'next/link';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useRouter } from 'next/navigation';
+import { dataStepOneSchema } from '@/src/formSchemas/dataStepOneSchema';
 
 const initialValues = {
   height: '',
@@ -20,13 +18,6 @@ const initialValues = {
   desiredWeight: '',
   birthday: '',
 };
-
-const schema = yup.object().shape({
-  height: yup.string().required('Height is required'),
-  currentWeight: yup.string().required('Current Weight is required'),
-  desiredWeight: yup.string().required('Desired Weight is required'),
-  birthday: yup.string().required('Birthday is required'),
-});
 
 const DataUserStepOne = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -48,7 +39,6 @@ const DataUserStepOne = () => {
   const handleSaveValuesToGlobalState = (values) => {
     const isoDateString = date.toISOString();
     const updatedValues = { ...values, birthday: isoDateString };
-    // dispatch(addUserData(updatedValues));
     dispatch(updateUserData(updatedValues));
     router.push('/user-data/step-two');
   };
@@ -64,11 +54,11 @@ const DataUserStepOne = () => {
         </p>
         <Formik
           initialValues={initialValues}
-          validationSchema={schema}
+          validationSchema={dataStepOneSchema}
           onSubmit={handleSaveValuesToGlobalState}
           innerRef={formikRef}
         >
-          {({ isValid, setFieldValue }) => (
+          {({ isValid, touched, errors, setFieldValue }) => (
             <Form className={styles.form_step_one}>
               <div className={styles.step_one_form_group}>
                 <Field
@@ -78,9 +68,32 @@ const DataUserStepOne = () => {
                   aria-label="height"
                 />
                 <span className={styles.step_one_form_placeholder}>Height</span>
+                {touched.height && !errors.height && (
+                  <div className={styles.success_text}>
+                    <div>
+                      <Image
+                        src="/success.svg"
+                        alt="success icon"
+                        width={16}
+                        height={16}
+                      />
+                    </div>
+                    <span>success height</span>
+                  </div>
+                )}
                 <ErrorMessage name="height">
                   {(msg) => (
-                    <div className={styles.validation_error}>{msg}</div>
+                    <>
+                      <div className={styles.validation_error}>
+                        <Image
+                          src="/error.svg"
+                          alt="error icon"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{msg}</span>
+                      </div>
+                    </>
                   )}
                 </ErrorMessage>
               </div>
@@ -94,9 +107,32 @@ const DataUserStepOne = () => {
                 <span className={styles.step_one_form_placeholder}>
                   Current Weight
                 </span>
+                {touched.currentWeight && !errors.currentWeight && (
+                  <div className={styles.success_text}>
+                    <div>
+                      <Image
+                        src="/success.svg"
+                        alt="success icon"
+                        width={16}
+                        height={16}
+                      />
+                    </div>
+                    <span>success current weight</span>
+                  </div>
+                )}
                 <ErrorMessage name="currentWeight">
                   {(msg) => (
-                    <div className={styles.validation_error}>{msg}</div>
+                    <>
+                      <div className={styles.validation_error}>
+                        <Image
+                          src="/error.svg"
+                          alt="error icon"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{msg}</span>
+                      </div>
+                    </>
                   )}
                 </ErrorMessage>
               </div>
@@ -110,9 +146,32 @@ const DataUserStepOne = () => {
                 <span className={styles.step_one_form_placeholder}>
                   Desired Weight
                 </span>
+                {touched.desiredWeight && !errors.desiredWeight && (
+                  <div className={styles.success_text}>
+                    <div>
+                      <Image
+                        src="/success.svg"
+                        alt="success icon"
+                        width={16}
+                        height={16}
+                      />
+                    </div>
+                    <span>success desired weight</span>
+                  </div>
+                )}
                 <ErrorMessage name="desiredWeight">
                   {(msg) => (
-                    <div className={styles.validation_error}>{msg}</div>
+                    <>
+                      <div className={styles.validation_error}>
+                        <Image
+                          src="/error.svg"
+                          alt="error icon"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{msg}</span>
+                      </div>
+                    </>
                   )}
                 </ErrorMessage>
               </div>
@@ -125,7 +184,6 @@ const DataUserStepOne = () => {
                 />
                 <span className={styles.step_one_form_placeholder}>
                   Birthday
-                  {/* {date.toLocaleDateString('en-GB')} */}
                 </span>
                 <Image
                   src="/calendar.svg"
@@ -143,7 +201,6 @@ const DataUserStepOne = () => {
                     <div className={styles.calendarContainer}>
                       <Calendar
                         className={styles.customCalendar}
-                        // onChange={setDate}
                         onChange={(selectedDate) => {
                           setFieldValue(
                             'birthday',
@@ -160,9 +217,32 @@ const DataUserStepOne = () => {
                     </div>
                   </div>
                 )}
+                {touched.birthday && !errors.birthday && (
+                  <div className={styles.success_text}>
+                    <div>
+                      <Image
+                        src="/success.svg"
+                        alt="success icon"
+                        width={16}
+                        height={16}
+                      />
+                    </div>
+                    <span>success birthday</span>
+                  </div>
+                )}
                 <ErrorMessage name="birthday">
                   {(msg) => (
-                    <div className={styles.validation_error}>{msg}</div>
+                    <>
+                      <div className={styles.validation_error}>
+                        <Image
+                          src="/error.svg"
+                          alt="error icon"
+                          width={16}
+                          height={16}
+                        />
+                        <span>{msg}</span>
+                      </div>
+                    </>
                   )}
                 </ErrorMessage>
               </div>

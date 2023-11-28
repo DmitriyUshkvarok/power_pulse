@@ -3,23 +3,15 @@ import styles from './_DataUserStepTwo.module.scss';
 import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import {
-  /*
-  addUserData,
-  removeUserData,*/
   updateUserData,
   resetUserData,
 } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useRouter } from 'next/navigation';
-
-interface UserData {
-  bloodGroup: string;
-  sex: string;
-  levelActivity: string;
-}
+import { UserData } from './index';
+import { dataStepTwoSchema } from '@/src/formSchemas/dataStepTwoSchema';
 
 const initialValues = {
   bloodGroup: '',
@@ -27,24 +19,16 @@ const initialValues = {
   levelActivity: '',
 };
 
-const schema = yup.object().shape({
-  bloodGroup: yup.string().required('Blood Group is required'),
-  sex: yup.string().required('Sex is required'),
-  levelActivity: yup.string().required('Level of Activity is required'),
-});
-
 const DataUserStepTwo = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleSaveValuesToGlobalState = (values: UserData) => {
-    // dispatch(addUserData(values));
     dispatch(updateUserData(values));
     router.push('/user-data/step-three');
   };
 
   const handleRemoveState = () => {
-    // dispatch(removeUserData());
     dispatch(resetUserData());
   };
   return (
@@ -53,10 +37,10 @@ const DataUserStepTwo = () => {
         <h1 className={styles.step_two_title}>Get closer to your goals!</h1>
         <Formik
           initialValues={initialValues}
-          validationSchema={schema}
+          validationSchema={dataStepTwoSchema}
           onSubmit={handleSaveValuesToGlobalState}
         >
-          {({ isValid, setFieldValue }) => (
+          {({ isValid }) => (
             <Form className={styles.form_step_two}>
               <div className={styles.top_group_wrapper}>
                 <div className={styles.form_group}>

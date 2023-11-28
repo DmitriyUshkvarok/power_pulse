@@ -13,17 +13,7 @@ import {
   fetchUserData,
 } from '@/src/redux/userData/userDataSlice';
 import { AppDispatch } from '@/src/redux/store';
-
-interface UserSession {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  image: string;
-  role: string;
-  provider: string;
-  userData: string;
-}
+import { UserSession } from './index';
 
 const DataUserStepThree = () => {
   const { data: session } = useSession();

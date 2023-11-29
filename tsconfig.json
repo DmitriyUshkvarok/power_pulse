@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/nextAuthProvider.js", "src/app/api/auth/[...nextauth]/route.js", "src/Components/DataUsers/DataUserStepOne/DataUserStepOne.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/nextAuthProvider.jsx", "src/app/api/auth/[...nextauth]/route.js", "src/Components/DataUsers/DataUserStepOne/DataUserStepOne.jsx"],
   "exclude": ["node_modules"]
 }

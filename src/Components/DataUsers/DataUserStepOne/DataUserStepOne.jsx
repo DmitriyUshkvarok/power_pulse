@@ -291,32 +291,14 @@ const DataUserStepOne = () => {
           </div>
         </div>
         <div className={styles.nav_pagination}>
-          <Link
-            href="/user-data"
-            className={styles.nav_pagination_link}
-            onClick={(e) => {
-              if (!formikRef.current.isValid) {
-                e.preventDefault();
-              }
-            }}
-          ></Link>
+          <Link href="/user-data" className={styles.nav_pagination_link}></Link>
           <Link
             href="/user-data/step-two"
             className={styles.nav_pagination_link}
-            onClick={(e) => {
-              if (!formikRef.current.isValid) {
-                e.preventDefault();
-              }
-            }}
           ></Link>
           <Link
             href="/user-data/step-three"
             className={styles.nav_pagination_link}
-            onClick={(e) => {
-              if (!formikRef.current.isValid) {
-                e.preventDefault();
-              }
-            }}
           ></Link>
         </div>
       </Container>

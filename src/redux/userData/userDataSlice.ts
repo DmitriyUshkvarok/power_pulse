@@ -90,7 +90,7 @@ const userDataSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.data = { ...state.data, ...action.payload };
         state.status = 'succeeded';
       });
   },

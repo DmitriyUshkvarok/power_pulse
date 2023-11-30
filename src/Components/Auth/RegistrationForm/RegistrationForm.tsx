@@ -28,10 +28,13 @@ function FormRegistration() {
     try {
       setIsLoading(true);
       const res = await signUpWithCredential(values);
-      await signIn('credentials', { ...values, callbackUrl: '/user-data' });
 
       if (res && res.msg === 'Registration Seccesfully!') {
         alert('Registration Successfully!');
+        await signIn('credentials', {
+          ...values,
+          callbackUrl: '/user-data',
+        });
       } else {
         console.log('Error during registration:', res);
       }

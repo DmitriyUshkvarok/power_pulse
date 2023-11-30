@@ -1,6 +1,7 @@
 'use server';
 import connectToDatabase from '@/src/utils/db';
 import User from '@/src/models/users';
+import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import { generateToken, veryfyToken } from '@/src/utils/token';
 import { FormValues } from '@/src/Components/Auth/RegistrationForm';
@@ -24,8 +25,8 @@ export const signUpWithCredential = async (data: FormValues) => {
     return { msg: 'Registration Seccesfully!' };
   } catch (error) {
     if (error instanceof Error) {
-      return { error: error.message };
-    } else return { error: 'Something went wrong' };
+      redirect(`/errors?error=${error.message}`);
+    } else throw new Error('Something went wrong');
   }
 };
 
@@ -39,7 +40,7 @@ export async function verifyWithCredentials(token: string) {
     await newUser.save();
   } catch (error) {
     if (error instanceof Error) {
-      return { error: error.message };
-    } else return { error: 'Something went wrong' };
+      redirect(`/errors?error=${error.message}`);
+    } else throw new Error('Something went wrong');
   }
 }

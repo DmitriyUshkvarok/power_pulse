@@ -4,7 +4,6 @@ import connectToDatabase from '@/src/utils/db';
 import User from '@/src/models/users';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
-import { redirect } from 'next/navigation';
 
 connectToDatabase();
 

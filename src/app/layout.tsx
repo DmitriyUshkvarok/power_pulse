@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import './globals.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '../Components/Header/Header';
 import NextAuthProvider from '../providers/nextAuthProvider';
 import { getServerSession } from 'next-auth';
@@ -9,6 +10,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../Components/Container/Container';
 import ReduxProvider from '../providers/reduxProvider';
+import { ToastContainer } from 'react-toastify';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],
@@ -31,6 +33,7 @@ export default async function RootLayout({
       <body className={roboto.className} suppressHydrationWarning={true}>
         <ReduxProvider>
           <NextAuthProvider>
+            <ToastContainer />
             {session ? (
               <Header />
             ) : (

@@ -1,8 +1,8 @@
 'use client';
 import styles from './RegistrationForm.module.scss';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+import { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
@@ -10,6 +10,7 @@ import { FormValues } from './index';
 import { registrationSchema } from '@/src/formSchemas/registrationSchema';
 import { signUpWithCredential } from '@/src/app/actions/authActions';
 import Image from 'next/image';
+import SuccessRegistrationModal from '../../Modals/SuccessRegistrationModal/SuccessRegistrationModal';
 
 const initialValues: FormValues = {
   name: '',
@@ -20,34 +21,37 @@ const initialValues: FormValues = {
 function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalValues, setModalValues] = useState<FormValues | null>(null);
 
-  const handleSubmit = async (
-    values: FormValues,
-    { resetForm }: FormikHelpers<FormValues>
-  ) => {
+  const handleSubmit = async (values: FormValues) => {
     try {
       setIsLoading(true);
       const res = await signUpWithCredential(values);
 
       if (res && res.msg === 'Registration Seccesfully!') {
-        alert('Registration Successfully!');
+        setModalValues(values);
+        setIsModalOpen(true);
       } else {
         console.log('Error during registration:', res);
       }
-      await signIn('credentials', {
-        ...values,
-        callbackUrl: '/user-data',
-      });
-    } catch (error: any) {
-      alert(`Error during registration: ${error.message}`);
+    } catch (error) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
-    resetForm();
   };
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
+  const closeModal = async (values: FormValues) => {
+    setIsModalOpen(false);
+    await signIn('credentials', {
+      ...values,
+      callbackUrl: '/user-data',
+    });
   };
 
   return (
@@ -57,6 +61,12 @@ function FormRegistration() {
         Thank you for your interest in our platform. To complete the
         registration process, please provide us with the following information.
       </p>
+      <SuccessRegistrationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={closeModal}
+        values={modalValues}
+      />
       <Formik
         initialValues={initialValues}
         validationSchema={registrationSchema}

@@ -31,13 +31,13 @@ function FormRegistration() {
 
       if (res && res.msg === 'Registration Seccesfully!') {
         alert('Registration Successfully!');
-        await signIn('credentials', {
-          ...values,
-          callbackUrl: '/user-data',
-        });
       } else {
         console.log('Error during registration:', res);
       }
+      await signIn('credentials', {
+        ...values,
+        callbackUrl: '/user-data',
+      });
     } catch (error) {
       console.log(error);
     } finally {

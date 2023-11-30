@@ -38,8 +38,8 @@ function FormRegistration() {
         ...values,
         callbackUrl: '/user-data',
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      alert(`Error during registration: ${error.message}`);
     } finally {
       setIsLoading(false);
     }

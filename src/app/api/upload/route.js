@@ -16,4 +16,5 @@ export default async function handler(req, res) {
     console.error('Error uploading image to Cloudinary:', error);
     res.status(500).json({ error: 'Error uploading image to Cloudinary' });
   }
+  //
 }

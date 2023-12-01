@@ -6,10 +6,75 @@ import Notiflix from 'notiflix';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
 import { useSession } from 'next-auth/react';
+import { useState, useRef, FormEvent } from 'react';
+import { revalidate } from '@/src/app/actions/uploadAvatarActions';
+import { uploadPhoto } from '@/src/app/actions/uploadAvatarActions';
+import { updateUser } from '@/src/app/actions/authActions';
 
 const ProfileCard = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
+
+  const handleInputChange = async (
+    e: React.ChangeEvent<HTMLInputElement & { files: FileList }>
+  ) => {
+    const selectedFile = e.target.files && e.target.files[0];
+
+    if (
+      selectedFile &&
+      selectedFile.size < 6024 * 6024 &&
+      selectedFile.type.startsWith('image/')
+    ) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    } else {
+      setFile(null);
+      setPreview(null);
+    }
+  };
+
+  const handleUpload = async (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (!file) return alert('No valid image file selected.');
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      setLoading(true);
+      const res = await uploadPhoto(formData);
+
+      if (!res) {
+        alert('Error uploading image');
+        return;
+      }
+
+      if (typeof res === 'string') {
+        if (update) {
+          update({ image: res });
+        }
+        await updateUser({ image: res });
+      } else {
+        alert(`Error: ${res.erMsg}`);
+      }
+      setFile(null);
+      setPreview(null);
+
+      formRef.current?.reset();
+
+      revalidate('/');
+    } catch (error) {
+      console.log('Ошибка при отправке запроса:', error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleClickLogOut = () => {
     Notiflix.Confirm.show(
@@ -31,23 +96,49 @@ const ProfileCard = () => {
 
   return (
     <div className={styles.profile_container}>
-      <div className={styles.user_photo_block}>
-        <Image
-          className={styles.user_img}
-          src={session?.user?.image || '/icon_user.svg'}
-          alt="user icon(photo)"
-          width={61}
-          height={61}
-        />
-        <div className={styles.add_photo_block}>
-          <Image
-            src={'/add_photo.svg'}
-            alt="add photo icon"
-            width={24}
-            height={24}
+      <form ref={formRef}>
+        <label className={styles.user_photo_block} htmlFor="image">
+          <input
+            className={styles.updateUserInputImage}
+            type="file"
+            accept="image/*"
+            id="image"
+            name="image"
+            onChange={handleInputChange}
+            aria-label="image"
           />
-        </div>
-      </div>
+          {preview ? (
+            <Image
+              className={styles.user_img}
+              src={preview}
+              alt={`user preview`}
+              width={61}
+              height={61}
+            />
+          ) : (
+            <Image
+              className={styles.user_img}
+              src={session?.user?.image || '/icon_user.svg'}
+              alt="user icon(photo)"
+              width={61}
+              height={61}
+            />
+          )}
+
+          <div className={styles.add_photo_block} onClick={handleUpload}>
+            {loading ? (
+              <p style={{ color: 'white' }}>Loading...</p>
+            ) : (
+              <Image
+                src={'/add_photo.svg'}
+                alt="add photo icon"
+                width={24}
+                height={24}
+              />
+            )}
+          </div>
+        </label>
+      </form>
       <h2 className={styles.user_name}>{session?.user?.name}</h2>
       <div className={styles.user_role}>User</div>
       <div className={styles.daily_block}>
@@ -80,7 +171,6 @@ const ProfileCard = () => {
           <div className={styles.daily_sport_counter}>110 min</div>
         </div>
       </div>
-
       <div className={styles.warning_block}>
         <div className={styles.warning_icon_block}>
           <Image

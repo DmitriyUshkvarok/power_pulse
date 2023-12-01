@@ -5,8 +5,32 @@ import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import { generateToken, veryfyToken } from '@/src/utils/token';
 import { FormValues } from '@/src/Components/Auth/RegistrationForm';
+import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth/next';
 
 connectToDatabase();
+
+export const updateUser = async (data: { image: string }) => {
+  try {
+    const session = await getServerSession(authOption);
+    if (!session) throw new Error('Unauthorization');
+    const user = await User.findByIdAndUpdate(
+      session?.user?._id,
+      { image: data.image },
+      {
+        new: true,
+      }
+    ).select('-password');
+    if (!user) throw new Error('Email does not exist!');
+    return { msg: 'Update Profile Seccesfully!' };
+  } catch (error) {
+    if (error instanceof Error) {
+      redirect(`/errors?error=${error.message}`);
+    } else {
+      redirect(`/errors?error=Unknown error`);
+    }
+  }
+};
 
 export const signUpWithCredential = async (data: FormValues) => {
   try {

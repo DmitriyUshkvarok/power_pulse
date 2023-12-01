@@ -1,7 +1,7 @@
 import cloudinary from 'cloudinary';
 import { NextResponse } from 'next/server';
 
-export default async function handler(req, res) {
+export async function handler(req, res) {
   if (req.method !== 'POST') {
     return new NextResponse('Method Not Allowed', { status: 405 });
   }

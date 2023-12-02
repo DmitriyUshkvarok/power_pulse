@@ -25,9 +25,9 @@ export const updateUser = async (data: { image: string }) => {
     return { msg: 'Update Profile Seccesfully!' };
   } catch (error) {
     if (error instanceof Error) {
-      alert(`${error.message}`);
+      redirect(`/errors?error=${error.message}`);
     } else {
-      alert(`/errors?error=Unknown error`);
+      redirect(`/errors?error=Unknown error`);
     }
   }
 };
@@ -42,14 +42,14 @@ export const signUpWithCredential = async (data: FormValues) => {
       data.password = await bcrypt.hash(data.password, 12);
     }
 
-    const token = generateToken({ user: data });
+    const token = await generateToken({ user: data });
 
     await verifyWithCredentials(token);
 
     return { msg: 'Registration Seccesfully!' };
   } catch (error) {
     if (error instanceof Error) {
-      alert(`${error.message}`);
+      redirect(`/errors?error=${error.message}`);
     } else throw new Error('Something went wrong');
   }
 };
@@ -64,7 +64,7 @@ export async function verifyWithCredentials(token: string) {
     await newUser.save();
   } catch (error) {
     if (error instanceof Error) {
-      alert(`${error.message}`);
+      redirect(`/errors?error=${error.message}`);
     } else throw new Error('Something went wrong');
   }
 }

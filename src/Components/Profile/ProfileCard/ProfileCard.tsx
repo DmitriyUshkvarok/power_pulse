@@ -55,13 +55,13 @@ const ProfileCard = () => {
       }
 
       if (typeof res === 'string') {
-        // if (update) {
-        // update({ image: res });
-        await updateUser({ image: res });
+        if (update) {
+          await updateUser({ image: res });
+          await update({ image: res });
+        }
+      } else {
+        alert(`Error: ${res.erMsg}`);
       }
-      // } else {
-      //   alert(`Error: ${res.erMsg}`);
-      // }
       setFile(null);
       setPreview(null);
 

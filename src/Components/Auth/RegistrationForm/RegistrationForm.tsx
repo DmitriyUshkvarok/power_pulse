@@ -22,6 +22,7 @@ const initialValues: FormValues = {
 function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalValues, setModalValues] = useState<FormValues | null>(null);
 
@@ -34,10 +35,12 @@ function FormRegistration() {
         setModalValues({ ...values, token: res.token });
         setIsModalOpen(true);
       } else {
-        console.log('Ошибка во время регистрации:', res);
+        setError('Error during registration');
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      } else throw new Error('Something went wrong');
     } finally {
       setIsLoading(false);
     }
@@ -50,7 +53,6 @@ function FormRegistration() {
   const closeModal = async (values: FormValues, token: string) => {
     setIsModalOpen(false);
     await verifyWithCredentials(token);
-    console.log({ values, token });
     await signIn('credentials', {
       ...values,
       callbackUrl: '/user-data',
@@ -64,6 +66,11 @@ function FormRegistration() {
         Thank you for your interest in our platform. To complete the
         registration process, please provide us with the following information.
       </p>
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+        </div>
+      )}
       <SuccessRegistrationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

@@ -54,14 +54,14 @@ const ProfileCard = () => {
         return;
       }
 
-      // if (typeof res === 'string') {
-      //   if (update) {
-      await updateUser({ image: res });
-      update({ image: res });
-      //   }
-      // } else {
-      //   alert(`Error: ${res.erMsg}`);
-      // }
+      if (typeof res === 'string') {
+        //   if (update) {
+        await updateUser({ image: res });
+        update({ image: res });
+        //   }
+        // } else {
+        //   alert(`Error: ${res.erMsg}`);
+      }
       setFile(null);
       setPreview(null);
 

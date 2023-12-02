@@ -30,7 +30,7 @@ function FormRegistration() {
       const res = await signUpWithCredential({ ...values });
       console.log(res);
 
-      if (res && res.msg === 'Registration Seccesfully!') {
+      if (res) {
         setModalValues(values);
         setIsModalOpen(true);
       } else {

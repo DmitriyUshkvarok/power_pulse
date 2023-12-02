@@ -47,7 +47,8 @@ export const signUpWithCredential = async (data: FormValues) => {
 
     verifyWithCredentials(token);
 
-    return { msg: 'Registration Seccesfully!' };
+    return token;
+    // return { msg: 'Registration Seccesfully!' };
   } catch (error) {
     if (error instanceof Error) {
       console.error('Ошибка во время регистрации:', error);

@@ -57,15 +57,15 @@ const ProfileCard = () => {
       if (typeof res === 'string') {
         if (update) {
           await updateUser({ image: res });
-          await update({ image: res });
+          update({ image: res });
         }
       } else {
         alert(`Error: ${res.erMsg}`);
       }
-      setFile(null);
-      setPreview(null);
+      // setFile(null);
+      // setPreview(null);
 
-      formRef.current?.reset();
+      // formRef.current?.reset();
 
       revalidate('/');
     } catch (error) {

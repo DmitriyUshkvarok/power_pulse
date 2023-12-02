@@ -28,7 +28,7 @@ async function uploadPhotoToCloudinary(file) {
   const photo = await cloudinary.v2.uploader.upload(newFiles, {
     folder: 'my_site',
   });
-  return photo;
+  if (photo?.secure_url) return photo;
 }
 
 export async function uploadPhoto(formData) {
@@ -51,12 +51,15 @@ export async function uploadPhoto(formData) {
 
     const userId = session.user._id;
     const user = await User.findById(userId);
-    user.image = newPhoto.secure_url;
-    await user.save();
 
-    revalidatePath('/');
-
-    return photo.secure_url;
+    if (user) {
+      user.image = newPhoto.secure_url;
+      await user.save();
+      revalidatePath('/');
+      return photo.secure_url;
+    } else {
+      throw new Error('User not found');
+    }
   } catch (error) {
     console.error('Error uploading to Cloudinary:', error);
     return { erMsg: error.message };

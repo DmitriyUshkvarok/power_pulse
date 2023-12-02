@@ -27,7 +27,7 @@ function FormRegistration() {
   const handleSubmit = async (values: FormValues) => {
     try {
       setIsLoading(true);
-      const res = await signUpWithCredential(values);
+      const res = await signUpWithCredential({ ...values });
 
       if (res && res.msg === 'Registration Seccesfully!') {
         setModalValues(values);

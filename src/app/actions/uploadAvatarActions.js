@@ -1,8 +1,4 @@
 'use server';
-import path from 'path';
-import fs from 'fs/promises';
-import { v4 as uuidv4 } from 'uuid';
-import os from 'os';
 import cloudinary from 'cloudinary';
 import { revalidatePath } from 'next/cache';
 import Photo from '@/src/models/userAvatarModel';
@@ -21,24 +17,17 @@ cloudinary.config({
 
 async function savePhotoToLocal(file) {
   const data = await file.arrayBuffer();
-  const buffer = Buffer.from(data);
+  const base64Str = Buffer.from(data).toString('base64');
 
-  const name = uuidv4();
-  const ext = file.type.split('/')[1];
-
-  const tempdir = os.tmpdir();
-  const uploadDir = path.join(tempdir, `/${name}.${ext}`);
-  await fs.writeFile(uploadDir, buffer);
-
-  return { filePath: uploadDir, fileName: file.name };
+  return `data:${file.type};base64,${base64Str}`;
 }
 
 async function uploadPhotoToCloudinary(file) {
-  const { filePath } = await savePhotoToLocal(file);
-  const photo = await cloudinary.v2.uploader.upload(filePath, {
+  const newFiles = await savePhotoToLocal(file);
+
+  const photo = await cloudinary.v2.uploader.upload(newFiles, {
     folder: 'my_site',
   });
-  await fs.unlink(filePath);
 
   return photo;
 }

@@ -11,6 +11,7 @@ import { registrationSchema } from '@/src/formSchemas/registrationSchema';
 import { signUpWithCredential } from '@/src/app/actions/authActions';
 import Image from 'next/image';
 import SuccessRegistrationModal from '../../Modals/SuccessRegistrationModal/SuccessRegistrationModal';
+import { verifyWithCredentials } from '@/src/app/actions/authActions';
 
 const initialValues: FormValues = {
   name: '',
@@ -28,13 +29,12 @@ function FormRegistration() {
     try {
       setIsLoading(true);
       const res = await signUpWithCredential({ ...values });
-      console.log(res);
 
-      if (res) {
-        setModalValues(values);
+      if (res && res.token) {
+        setModalValues({ ...values, token: res.token });
         setIsModalOpen(true);
       } else {
-        console.log('Error during registration:', res);
+        console.log('Ошибка во время регистрации:', res);
       }
     } catch (error) {
       console.log(error);
@@ -47,8 +47,10 @@ function FormRegistration() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const closeModal = async (values: FormValues) => {
+  const closeModal = async (values: FormValues, token: string) => {
     setIsModalOpen(false);
+    await verifyWithCredentials(token);
+    console.log({ values, token });
     await signIn('credentials', {
       ...values,
       callbackUrl: '/user-data',
@@ -65,7 +67,7 @@ function FormRegistration() {
       <SuccessRegistrationModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onConfirm={closeModal}
+        onConfirm={(values) => closeModal(values, values.token)}
         values={modalValues}
       />
       <Formik

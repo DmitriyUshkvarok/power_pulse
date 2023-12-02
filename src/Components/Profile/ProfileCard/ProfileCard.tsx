@@ -55,12 +55,12 @@ const ProfileCard = () => {
       }
 
       if (typeof res === 'string') {
-        //   if (update) {
         await updateUser({ image: res });
         update({ image: res });
-        //   }
-        // } else {
-        //   alert(`Error: ${res.erMsg}`);
+      } else if (res && res.erMsg) {
+        alert(`Error: ${res.erMsg}`);
+      } else {
+        alert('Unexpected response format');
       }
       setFile(null);
       setPreview(null);

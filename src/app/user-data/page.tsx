@@ -3,7 +3,7 @@ import DataUserStepOne from '@/src/Components/DataUsers/DataUserStepOne/DataUser
 // import { authOption } from '../api/auth/[...nextauth]/route';
 // import { redirect } from 'next/navigation';
 
-const UserDataPage = async () => {
+const UserDataPage = /*async*/ () => {
   // const session = await getServerSession(authOption);
 
   return (

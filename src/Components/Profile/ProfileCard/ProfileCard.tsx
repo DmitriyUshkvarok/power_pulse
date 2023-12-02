@@ -54,18 +54,18 @@ const ProfileCard = () => {
         return;
       }
 
-      if (typeof res === 'string') {
-        if (update) {
-          await updateUser({ image: res });
-          update({ image: res });
-        }
-      } else {
-        alert(`Error: ${res.erMsg}`);
-      }
-      // setFile(null);
-      // setPreview(null);
+      // if (typeof res === 'string') {
+      //   if (update) {
+      await updateUser({ image: res });
+      update({ image: res });
+      //   }
+      // } else {
+      //   alert(`Error: ${res.erMsg}`);
+      // }
+      setFile(null);
+      setPreview(null);
 
-      // formRef.current?.reset();
+      formRef.current?.reset();
 
       revalidate('/');
     } catch (error) {

@@ -14,8 +14,10 @@ export const updateUser = async (data: { image: string }) => {
   try {
     const session = await getServerSession(authOption);
     if (!session) throw new Error('Unauthorization');
+    const userId = session?.user?._id;
+
     const user = await User.findByIdAndUpdate(
-      session?.user?._id,
+      userId,
       { image: data.image },
       {
         new: true,
@@ -26,9 +28,7 @@ export const updateUser = async (data: { image: string }) => {
   } catch (error) {
     if (error instanceof Error) {
       return { error: error.message };
-    } else {
-      redirect(`/errors?error=Unknown error`);
-    }
+    } else throw new Error('Something went wrong');
   }
 };
 

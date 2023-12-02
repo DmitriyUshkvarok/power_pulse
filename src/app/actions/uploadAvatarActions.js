@@ -49,14 +49,16 @@ export async function uploadPhoto(formData) {
 
     await newPhoto.save();
     const session = await getServerSession(authOption);
-    const userId = session?.user?._id;
-    console.log(userId);
+    if (session && session.user) {
+      const userId = session.user._id;
+      const user = await User.findById(userId);
+      user.image = newPhoto.secure_url;
+      await user.save();
 
-    const user = await User.findById(userId);
-    user.image = newPhoto.secure_url;
-    await user.save();
-
-    revalidatePath('/');
+      revalidatePath('/');
+    } else {
+      console.error('Invalid session or no user information found.');
+    }
 
     return photo.secure_url;
   } catch (error) {

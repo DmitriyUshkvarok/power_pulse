@@ -30,12 +30,12 @@ function FormRegistration() {
       const res = await signUpWithCredential({ ...values });
       console.log(res);
 
-      // if (res && res.msg === 'Registration Seccesfully!') {
-      setModalValues(values);
-      setIsModalOpen(true);
-      // } else {
-      //   console.log('Error during registration:', res);
-      // }
+      if (res && res.msg === 'Registration Seccesfully!') {
+        setModalValues(values);
+        setIsModalOpen(true);
+      } else {
+        console.log('Error during registration:', res);
+      }
     } catch (error) {
       console.log(error);
     } finally {

@@ -50,6 +50,7 @@ export async function uploadPhoto(formData) {
     await newPhoto.save();
     const session = await getServerSession(authOption);
     const userId = session?.user?._id;
+    console.log(userId);
 
     const user = await User.findById(userId);
     user.image = newPhoto.secure_url;

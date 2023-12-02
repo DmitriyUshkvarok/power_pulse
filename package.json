@@ -15,7 +15,7 @@
     "formik": "^2.4.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.0",
-    "next": "14.0.1",
+    "next": "14.0.3",
     "next-auth": "^4.24.4",
     "nodemailer": "^6.9.7",
     "notiflix": "^3.2.6",

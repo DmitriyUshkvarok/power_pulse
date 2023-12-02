@@ -1,7 +1,6 @@
 'use server';
 import connectToDatabase from '@/src/utils/db';
 import User from '@/src/models/users';
-import { redirect } from 'next/navigation';
 import bcrypt from 'bcrypt';
 import { generateToken, veryfyToken } from '@/src/utils/token';
 import { FormValues } from '@/src/Components/Auth/RegistrationForm';

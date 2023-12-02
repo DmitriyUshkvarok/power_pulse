@@ -54,6 +54,7 @@ export async function uploadPhoto(formData) {
 
     if (user) {
       user.image = newPhoto.secure_url;
+      
       await user.save();
       revalidatePath('/');
       return photo.secure_url;

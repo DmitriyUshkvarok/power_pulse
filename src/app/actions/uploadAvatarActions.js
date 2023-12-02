@@ -28,7 +28,6 @@ async function uploadPhotoToCloudinary(file) {
   const photo = await cloudinary.v2.uploader.upload(newFiles, {
     folder: 'my_site',
   });
-
   return photo;
 }
 
@@ -49,16 +48,13 @@ export async function uploadPhoto(formData) {
 
     await newPhoto.save();
     const session = await getServerSession(authOption);
-    if (session && session.user) {
-      const userId = session.user._id;
-      const user = await User.findById(userId);
-      user.image = newPhoto.secure_url;
-      await user.save();
 
-      revalidatePath('/');
-    } else {
-      console.error('Invalid session or no user information found.');
-    }
+    const userId = session.user._id;
+    const user = await User.findById(userId);
+    user.image = newPhoto.secure_url;
+    await user.save();
+
+    revalidatePath('/');
 
     return photo.secure_url;
   } catch (error) {

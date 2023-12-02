@@ -45,7 +45,7 @@ export const signUpWithCredential = async (data: FormValues) => {
 
     const token = generateToken({ user: data });
 
-    await verifyWithCredentials(token);
+    verifyWithCredentials(token);
 
     return { msg: 'Registration Seccesfully!' };
   } catch (error) {

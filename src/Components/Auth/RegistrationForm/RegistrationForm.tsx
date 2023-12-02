@@ -29,12 +29,12 @@ function FormRegistration() {
       setIsLoading(true);
       const res = await signUpWithCredential({ ...values });
 
-      if (res && res.msg === 'Registration Seccesfully!') {
-        setModalValues(values);
-        setIsModalOpen(true);
-      } else {
-        console.log('Error during registration:', res);
-      }
+      // if (res && res.msg === 'Registration Seccesfully!') {
+      //   setModalValues(values);
+      //   setIsModalOpen(true);
+      // } else {
+      //   console.log('Error during registration:', res);
+      // }
     } catch (error) {
       console.log(error);
     } finally {
@@ -218,7 +218,7 @@ function FormRegistration() {
       <button
         className={styles.registr_form_button_google}
         type="submit"
-        onClick={() => signIn('google', { callbackUrl: '/' })}
+        onClick={() => signIn('google', { callbackUrl: '/user-data' })}
       >
         <FcGoogle size={20} />
         <span> to continue with google</span>

@@ -2,7 +2,7 @@
 import connectToDatabase from '@/src/utils/db';
 import UserData, { UserDataDocument } from '@/src/models/userDataModel';
 import User from '@/src/models/users';
-import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 connectToDatabase();
 
@@ -38,8 +38,24 @@ export const getUserDataById = async (userDataId: string) => {
 
     return { userData: newUserData };
   } catch (error) {
-    // if (error instanceof Error) {
-    //   redirect(`/errors?error=${error.message}`);
-    // } else throw new Error('Something went wrong');
+    if (error instanceof Error) {
+      console.log(`/errors?error=${error.message}`);
+    } else throw new Error('Something went wrong');
   }
 };
+
+export async function updateUserData(id: string, data: {}) {
+  try {
+    const userData = await UserData.findByIdAndUpdate(id, data, {
+      new: true,
+    });
+
+    revalidatePath('/');
+
+    return { ...userData._doc, _id: userData._id.toString() };
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(`/errors?error=${error.message}`);
+    } else throw new Error('Something went wrong');
+  }
+}

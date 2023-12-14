@@ -31,6 +31,34 @@ export const updateUser = async (data: { image: string }) => {
   }
 };
 
+export const updateUserNameAndEmail = async (data: {
+  name: string;
+  email: string;
+}) => {
+  try {
+    const session = await getServerSession(authOption);
+    if (!session) throw new Error('Unauthorization');
+    const userId = session?.user?._id;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        name: data.name,
+        email: data.email,
+      },
+      {
+        new: true,
+      }
+    ).select('-password');
+    if (!user) throw new Error('Email does not exist!');
+    return { msg: 'Update Profile Seccesfully!' };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { error: error.message };
+    } else throw new Error('Something went wrong');
+  }
+};
+
 export const signUpWithCredential = async (data: FormValues) => {
   try {
     const user = await User.findOne({ email: data.email });

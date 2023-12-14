@@ -12,12 +12,17 @@ import { ProfileFormValues, UserSession, UserDataId } from './index';
 import { profilesShema } from '@/src/formSchemas/profileFormSchema';
 import { fetchUserData } from '@/src/redux/userData/userDataSlice';
 import { AppDispatch } from '@/src/redux/store';
+import { updateUserNameAndEmail } from '@/src/app/actions/authActions';
+import { updateUserData } from '@/src/app/actions/userDataActions';
+import { useRouter } from 'next/navigation';
 
 const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [date, setDate] = useState<Date | null>(new Date());
   const formikRef = useRef(null);
   const userData = useSelector((state: RootState) => state.userData.data);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const { data: session } = useSession();
   const userDataId = (session?.user as UserSession)?.userData;
@@ -57,10 +62,25 @@ const ProfileForm = () => {
     }
   };
 
-  const handleSave = (values: ProfileFormValues) => {
+  const handleSave = async (values: ProfileFormValues) => {
     if (date instanceof Date) {
       const isoDateString = date.toISOString();
       const updatedValues = { ...values, birthday: isoDateString };
+
+      try {
+        setLoading(true);
+        const { name, email } = updatedValues;
+        await updateUserNameAndEmail({ name, email });
+        await updateUserData(userDataId, updatedValues);
+        if (email !== session?.user?.email) {
+          router.push('/signin');
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -371,7 +391,7 @@ const ProfileForm = () => {
               type="submit"
               disabled={!isValid}
             >
-              <span>Save </span>
+              <span>{loading ? 'Loading...' : 'Save'} </span>
             </button>
             {!isValid && (
               <p className={styles.errorText}>

@@ -1,5 +1,5 @@
 const DiaryPage = () => {
-  return <div> DiaryPage</div>;
+  return <div style={{ color: 'white' }}> DiaryPage</div>;
 };
 
 export default DiaryPage;

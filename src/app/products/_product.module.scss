@@ -1,0 +1,21 @@
+@import '../../sass/utils/variables.module';
+@import '../../sass/utils/mixins.module';
+
+.product_page_section {
+  width: 100vw;
+  height: 100vh;
+}
+
+@media (min-width: 1200px) {
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .product_page_section {
+      background-image: url('/product-page-background.jpg');
+      background-repeat: no-repeat;
+      background-position: right;
+      padding-top: 68px;
+      padding-bottom: 81px;
+    }
+  }
+}

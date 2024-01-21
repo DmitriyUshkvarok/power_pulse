@@ -22,10 +22,6 @@ const productSchema = new Schema<ProductDocument>(
       type: String,
       required: true,
     },
-    recommended: {
-      type: Boolean,
-      default: false,
-    },
     addedBy: {
       type: Schema.Types.ObjectId,
       ref: 'User',

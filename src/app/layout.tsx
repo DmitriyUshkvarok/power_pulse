@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  auth: React.ReactNode;
+  add_diray: React.ReactNode;
 }) {
   const session = await getServerSession(authOption);
   return (
@@ -52,7 +52,7 @@ export default async function RootLayout(props: {
             )}
             <main>
               {props.children}
-              {props.auth}
+              {props.add_diray}
             </main>
           </NextAuthProvider>
         </ReduxProvider>

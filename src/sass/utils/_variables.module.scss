@@ -8,6 +8,7 @@ $transition: 0.4s;
 
 $border-radius-btn: 12px;
 $borde-color: rgba(239, 237, 232, 0.3);
+$item-block-color: rgba(239, 237, 232, 0.05);
 
 :export {
   blackColor: $black-color;
@@ -15,4 +16,5 @@ $borde-color: rgba(239, 237, 232, 0.3);
   lightOrangeColor: $light-orange-color;
   beigeColorr: $beige-color;
   whiteColor: $white-color;
+  borderColor: $borde-color;
 }

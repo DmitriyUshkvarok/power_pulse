@@ -15,6 +15,7 @@ import { AppDispatch } from '@/src/redux/store';
 import { updateUserNameAndEmail } from '@/src/app/actions/authActions';
 import { updateUserData } from '@/src/app/actions/userDataActions';
 import { useRouter } from 'next/navigation';
+import { createDataAsync } from '@/src/redux/userData/userDataSlice';
 
 const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -26,6 +27,7 @@ const ProfileForm = () => {
 
   const { data: session } = useSession();
   const userDataId = (session?.user as UserSession)?.userData;
+  const userId = (session?.user as UserSession)?._id;
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -72,6 +74,7 @@ const ProfileForm = () => {
         const { name, email } = updatedValues;
         await updateUserNameAndEmail({ name, email });
         await updateUserData(userDataId, updatedValues);
+        await dispatch(createDataAsync({ id: userId, data: values }));
         if (email !== session?.user?.email) {
           router.push('/signin');
           return;

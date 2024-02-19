@@ -8,7 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/src/redux/store';
 import { useSession } from 'next-auth/react';
-import { ProfileFormValues, UserSession, UserDataId } from './index';
+import { ProfileFormValues, UserSession } from './index';
 import { profilesShema } from '@/src/formSchemas/profileFormSchema';
 import { fetchUserData } from '@/src/redux/userData/userDataSlice';
 import { AppDispatch } from '@/src/redux/store';

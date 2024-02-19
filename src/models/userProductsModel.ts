@@ -1,11 +1,12 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose from 'mongoose';
+
+const { Schema, model, models } = mongoose;
 
 export interface ProductDocument extends Document {
   name: string;
   calories: number;
   category: string;
-  recommended: boolean;
-  addedBy: mongoose.Types.ObjectId;
+  quantity: number;
 }
 
 const productSchema = new Schema<ProductDocument>(
@@ -22,17 +23,14 @@ const productSchema = new Schema<ProductDocument>(
       type: String,
       required: true,
     },
-    addedBy: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+    quantity: {
+      type: Number,
       required: true,
     },
   },
   { timestamps: true }
 );
 
-const Product =
-  mongoose.models.Product ||
-  mongoose.model<ProductDocument>('Product', productSchema);
+const Product = models.product || model('product', productSchema);
 
 export default Product;

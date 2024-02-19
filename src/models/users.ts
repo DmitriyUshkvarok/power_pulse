@@ -1,6 +1,4 @@
-import mongoose from 'mongoose';
-
-const { Document, Schema, models, model } = mongoose;
+import mongoose, { Schema, models, model } from 'mongoose';
 
 export interface UserDocument extends Document {
   name: string;
@@ -9,6 +7,7 @@ export interface UserDocument extends Document {
   image: string;
   role: string;
   provider: string;
+  products: Array<Schema.Types.ObjectId>;
 }
 
 const userSchema = new Schema(
@@ -36,6 +35,12 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'UserData',
     },
+    products: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'product',
+      },
+    ],
   },
   { timestamps: true }
 );

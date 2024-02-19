@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const { Document, Schema, model, models } = mongoose;
+const { Schema, model, models } = mongoose;
 
 export interface UserDataDocument extends Document {
   height: string;

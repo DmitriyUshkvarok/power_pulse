@@ -31,8 +31,8 @@
     gap: 16px;
     flex-wrap: wrap;
 
-    scrollbar-width: thin;
-    scrollbar-color: $light-orange-color;
+    -webkit-scrollbar-width: thin;
+    -webkit-scrollbar-color: $light-orange-color;
 
     &::-webkit-scrollbar {
       width: 8px;

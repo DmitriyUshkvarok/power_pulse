@@ -1,11 +1,17 @@
 import ProductFilter from '../ProductFilter/ProductFilter';
 import ProductList from '../ProductList/ProductList';
+import ProductForm from '../ProductForm/ProductForm';
 
-const ProductPageComponent = () => {
+interface ProductPageComponentProps {
+  productData: any;
+}
+
+const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
   return (
     <div>
+      <ProductForm />
       <ProductFilter />
-      <ProductList />
+      <ProductList productData={productData} />
     </div>
   );
 };

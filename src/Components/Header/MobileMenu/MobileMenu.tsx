@@ -2,9 +2,9 @@
 import styles from './_MobileMenu.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import Notiflix from 'notiflix';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import Notiflix from 'notiflix';
 
 interface MobileMenuProps {
   handleClosedMobileMenu: () => void;

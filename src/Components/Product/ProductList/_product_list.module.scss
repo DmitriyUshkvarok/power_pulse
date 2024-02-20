@@ -16,6 +16,22 @@
   }
 }
 
+.not_found_product {
+  max-width: 580px;
+  @include fontSizeAuto(16px, 24px);
+  color: $borde-color;
+}
+
+.not_found_span_top {
+  color: $orange-color;
+}
+
+.not_found_span_bottom {
+  display: inline-flex;
+  margin-top: 16px;
+  color: $orange-color;
+}
+
 .product_list {
   position: relative;
   display: flex;
@@ -25,7 +41,7 @@
 
   @media (min-width: 768px) {
     max-width: 700px;
-    height: 660px;
+    max-height: 660px;
     overflow-y: auto;
     flex-direction: row;
     gap: 16px;
@@ -55,7 +71,7 @@
 
   @media (min-width: 1200px) {
     min-width: 850px;
-    height: 487px;
+    max-height: 487px;
   }
 }
 
@@ -70,6 +86,7 @@
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   border: 1px solid $borde-color;
+  height: 141px;
 
   @media (min-width: 768px) {
     width: 335px;

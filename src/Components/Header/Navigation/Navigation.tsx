@@ -2,11 +2,11 @@
 import styles from './_navigation.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import Notiflix from 'notiflix';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
-import Notiflix from 'notiflix';
 import { useSession } from 'next-auth/react';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';

@@ -1,14 +1,14 @@
 'use client';
+import 'react-calendar/dist/Calendar.css';
 import styles from './_DataUserStepOne.module.scss';
 import Container from '../../Container/Container';
+import Link from 'next/link';
+import Image from 'next/image';
+import Calendar from 'react-calendar';
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Link from 'next/link';
-import Image from 'next/image';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import { useRouter } from 'next/navigation';
 import { dataStepOneSchema } from '@/src/formSchemas/dataStepOneSchema';
 

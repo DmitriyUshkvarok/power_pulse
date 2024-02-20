@@ -1,16 +1,16 @@
 'use client';
 import styles from './RegistrationForm.module.scss';
+import Link from 'next/link';
+import Image from 'next/image';
+import SuccessRegistrationModal from '../../Modals/SuccessRegistrationModal/SuccessRegistrationModal';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { FormValues } from './index';
 import { registrationSchema } from '@/src/formSchemas/registrationSchema';
 import { signUpWithCredential } from '@/src/app/actions/authActions';
-import Image from 'next/image';
-import SuccessRegistrationModal from '../../Modals/SuccessRegistrationModal/SuccessRegistrationModal';
 import { verifyWithCredentials } from '@/src/app/actions/authActions';
 
 const initialValues: FormValues = {

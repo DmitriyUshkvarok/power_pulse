@@ -4,14 +4,14 @@ import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import {
-  updateUserData,
-  resetUserData,
-} from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useRouter } from 'next/navigation';
 import { UserData } from './index';
 import { dataStepTwoSchema } from '@/src/formSchemas/dataStepTwoSchema';
+import {
+  updateUserData,
+  resetUserData,
+} from '@/src/redux/userData/userDataSlice';
 
 const initialValues = {
   bloodGroup: '',

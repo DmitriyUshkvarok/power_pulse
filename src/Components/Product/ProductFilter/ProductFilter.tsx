@@ -1,10 +1,28 @@
 'use client';
 import styles from './_product_filter.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
-const ProductFilter = () => {
+interface ProductFilterProps {
+  categories: string[];
+  handleCategoryChange: (selectedCategory: string) => void;
+  handleSearchSubmit: (searchText: string) => void;
+}
+
+const ProductFilter = ({
+  categories,
+  handleCategoryChange,
+  handleSearchSubmit,
+}: ProductFilterProps) => {
   const [searchText, setSearchText] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const category = event.target.value;
+    setSelectedCategory(category);
+    handleCategoryChange(category);
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -13,12 +31,33 @@ const ProductFilter = () => {
   const clearInput = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
     setSearchText('');
+    handleSearchSubmit('');
+  };
+
+  const handleSubmit = (event: React.MouseEvent<HTMLImageElement>) => {
+    event.preventDefault();
+    handleSearchSubmit(searchText);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearchSubmit(searchText);
+    }
   };
 
   return (
     <div className={styles.product_page_filter_container}>
       <h1 className={styles.product_page_title}>Products</h1>
       <div className={styles.product_page_filter_wrapper}>
+        <div className={styles.product_page_filter_group}>
+          <Link
+            className={styles.product_page_filter_create_link}
+            href="/create-product"
+          >
+            Add a product card
+          </Link>
+        </div>
         <div className={styles.product_page_filter_group}>
           <input
             className={styles.product_page_filter_search_input}
@@ -27,8 +66,10 @@ const ProductFilter = () => {
             name="search"
             value={searchText}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
           />
           <Image
+            onClick={handleSubmit}
             className={styles.icons_search}
             src="/search.svg"
             width={18}
@@ -48,10 +89,17 @@ const ProductFilter = () => {
         </div>
         <div className={styles.product_page_select_group}>
           <div className={styles.product_page_filter_group}>
-            <select className={styles.product_page_filter_categories_select}>
-              <option value="categories">Categories</option>
-              <option value="alcoholic drinks">Alcoholic drinks</option>
-              <option value="berries">Berries</option>
+            <select
+              className={styles.product_page_filter_categories_select}
+              value={selectedCategory}
+              onChange={handleChange}
+            >
+              <option value="">All Categories</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
             </select>
             <Image
               className={styles.icons_down}

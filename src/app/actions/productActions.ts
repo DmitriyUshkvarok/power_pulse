@@ -1,14 +1,27 @@
 'use server';
 import connectToDatabase from '@/src/utils/db';
-import Product, { ProductDocument } from '@/src/models/userProductsModel';
+import Product from '@/src/models/userProductsModel';
 import User from '@/src/models/users';
 import { revalidatePath } from 'next/cache';
 
 export interface ProductFormData {
   name: string;
-  calories: number;
+  calories: string;
   category: string;
-  quantity: number;
+  quantity: string;
+}
+
+export interface CreateProductSuccessResponse {
+  _id: string;
+  name: string;
+  calories: string;
+  category: string;
+  quantity: string;
+}
+
+export interface ServerError {
+  error: string;
+  statusCode: number;
 }
 
 connectToDatabase();
@@ -16,7 +29,7 @@ connectToDatabase();
 export const createProduct = async (
   productData: ProductFormData,
   userId: string
-) => {
+): Promise<CreateProductSuccessResponse | ServerError> => {
   try {
     const newProduct = new Product({ ...productData, createdBy: userId });
     const savedProduct = await newProduct.save();
@@ -40,7 +53,9 @@ export const createProduct = async (
   }
 };
 
-export const getProductsByUserId = async (userId: string): Promise<any> => {
+export const getProductsByUserId = async (
+  userId: string
+): Promise<CreateProductSuccessResponse[] | ServerError> => {
   try {
     const user = await User.findById(userId);
 

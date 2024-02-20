@@ -1,17 +1,53 @@
+'use client';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import ProductList from '../ProductList/ProductList';
-import ProductForm from '../ProductForm/ProductForm';
+import { useState } from 'react';
+import {
+  CreateProductSuccessResponse,
+  ServerError,
+} from '@/src/app/actions/productActions';
 
 interface ProductPageComponentProps {
-  productData: any;
+  productData: CreateProductSuccessResponse[] | ServerError;
 }
 
 const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
+  const [filteredProductData, setFilteredProductData] = useState(productData);
+
+  if (!Array.isArray(productData)) {
+    return null;
+  }
+
+  const categories = productData
+    .map((product) => product.category)
+    .filter((category, index, self) => self.indexOf(category) === index);
+
+  const handleCategoryChange = (selectedCategory: string) => {
+    if (selectedCategory === '') {
+      setFilteredProductData(productData);
+    } else {
+      const filteredData = productData.filter(
+        (product) => product.category === selectedCategory
+      );
+      setFilteredProductData(filteredData);
+    }
+  };
+
+  const handleSearchSubmit = (searchText: string) => {
+    const searchResults = productData.filter((product) =>
+      product.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredProductData(searchResults);
+  };
+
   return (
     <div>
-      <ProductForm />
-      <ProductFilter />
-      <ProductList productData={productData} />
+      <ProductFilter
+        categories={categories}
+        handleCategoryChange={handleCategoryChange}
+        handleSearchSubmit={handleSearchSubmit}
+      />
+      <ProductList productData={filteredProductData} />
     </div>
   );
 };

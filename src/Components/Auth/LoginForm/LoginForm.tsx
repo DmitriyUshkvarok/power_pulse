@@ -1,13 +1,14 @@
 'use client';
 import styles from './_LoginForm.module.scss';
+import Link from 'next/link';
+import Image from 'next/image';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
-import Link from 'next/link';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { loginSchema } from '@/src/formSchemas/loginSchema';
-import Image from 'next/image';
+
 interface FormValues {
   email: string;
   password: string;

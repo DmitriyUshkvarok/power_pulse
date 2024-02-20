@@ -4,9 +4,9 @@ import ProductForm from '@/src/Components/Product/ProductForm/ProductForm';
 const CreateProductPage = () => {
   return (
     <>
-      <Modal>
+      {/* <Modal>
         <ProductForm />
-      </Modal>
+      </Modal> */}
     </>
   );
 };

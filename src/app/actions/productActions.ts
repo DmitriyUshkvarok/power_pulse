@@ -24,12 +24,11 @@ export interface ServerError {
   statusCode: number;
 }
 
-connectToDatabase();
-
 export const createProduct = async (
   productData: ProductFormData,
   userId: string
 ): Promise<CreateProductSuccessResponse | ServerError> => {
+  connectToDatabase();
   try {
     const newProduct = new Product({ ...productData, createdBy: userId });
     const savedProduct = await newProduct.save();
@@ -56,6 +55,7 @@ export const createProduct = async (
 export const getProductsByUserId = async (
   userId: string
 ): Promise<CreateProductSuccessResponse[] | ServerError> => {
+  connectToDatabase();
   try {
     const user = await User.findById(userId);
 

@@ -39,7 +39,7 @@ const ProductForm = () => {
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {
-      () => setIsLoading(false);
+      setIsLoading(false);
     }
   };
 

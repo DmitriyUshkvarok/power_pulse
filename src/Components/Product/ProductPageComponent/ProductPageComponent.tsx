@@ -1,7 +1,7 @@
 'use client';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import ProductList from '../ProductList/ProductList';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   CreateProductSuccessResponse,
   ServerError,
@@ -13,6 +13,10 @@ interface ProductPageComponentProps {
 
 const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
   const [filteredProductData, setFilteredProductData] = useState(productData);
+
+  useEffect(() => {
+    setFilteredProductData(productData);
+  }, [productData]);
 
   if (!Array.isArray(productData)) {
     return null;

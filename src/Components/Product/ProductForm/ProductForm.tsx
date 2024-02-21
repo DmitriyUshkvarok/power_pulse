@@ -33,9 +33,9 @@ const ProductForm = () => {
     try {
       setIsLoading(true);
       const response = await createProduct(values, userId);
-      // if (response) {
-      //   router.back();
-      // }
+      if (response) {
+        router.back();
+      }
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

@@ -59,9 +59,9 @@ export const getProductsByUserId = async (
   try {
     const user = await User.findById(userId);
 
-    if (!user) {
-      return { error: 'User not found', statusCode: 404 };
-    }
+    // if (!user) {
+    //   return { error: 'User not found', statusCode: 404 };
+    // }
 
     const productIds = user.products;
 
@@ -72,7 +72,7 @@ export const getProductsByUserId = async (
       _id: product._id.toString(),
     }));
 
-    return productData;
+    return productData || [];
   } catch (error) {
     console.error('An error occurred while fetching products:', error);
     return { error: 'Internal Server Error', statusCode: 500 };

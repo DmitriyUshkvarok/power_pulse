@@ -59,9 +59,9 @@ export const getProductsByUserId = async (
   try {
     const user = await User.findById(userId);
 
-    // if (!user) {
-    //   return { error: 'User not found', statusCode: 404 };
-    // }
+    if (!user) {
+      return { error: 'User not found', statusCode: 404 };
+    }
 
     const productIds = user.products;
 

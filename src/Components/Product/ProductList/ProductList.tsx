@@ -16,6 +16,7 @@ export interface ProductType {
   category: string;
   quantity: string;
   _id: string;
+  recommended: boolean;
 }
 
 const ProductList = ({ productData }: ProductPageComponentProps) => {
@@ -48,7 +49,15 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
           <li key={product._id} className={styles.product_list_item}>
             <div className={styles.product_list_item_header}>
               <div className={styles.product_list_pin}>Diet</div>
-              <div className={styles.product_list_tracker}>Recommended</div>
+              <div
+                className={`${styles.product_list_tracker} ${
+                  product.recommended
+                    ? styles.product_list_tracker
+                    : styles.product_list_tracker_not_recommended
+                }`}
+              >
+                {product.recommended ? 'Recommended' : 'Not Recommended'}
+              </div>
               <Link href="/add-diray">
                 <div className={styles.product_list_add_btn}>Add</div>
               </Link>

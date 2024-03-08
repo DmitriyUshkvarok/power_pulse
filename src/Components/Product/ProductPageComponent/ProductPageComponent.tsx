@@ -44,12 +44,25 @@ const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
     setFilteredProductData(searchResults);
   };
 
+  const handleRecommendationChange = (recommendation: string) => {
+    if (recommendation === 'all') {
+      setFilteredProductData(productData);
+    } else {
+      const isRecommended = recommendation === 'recommended';
+      const filteredData = productData.filter(
+        (product) => product.recommended === isRecommended
+      );
+      setFilteredProductData(filteredData);
+    }
+  };
+
   return (
     <div>
       <ProductFilter
         categories={categories}
         handleCategoryChange={handleCategoryChange}
         handleSearchSubmit={handleSearchSubmit}
+        handleRecommendationChange={handleRecommendationChange}
       />
       <ProductList productData={filteredProductData} />
     </div>

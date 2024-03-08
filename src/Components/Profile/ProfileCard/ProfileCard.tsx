@@ -1,8 +1,8 @@
 'use client';
 import styles from './_ProfileCard.module.scss';
 import Image from 'next/image';
-import { signOut } from 'next-auth/react';
 import Notiflix from 'notiflix';
+import { signOut } from 'next-auth/react';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
 import { useSession } from 'next-auth/react';

@@ -3,7 +3,11 @@ import { Provider } from 'react-redux';
 import store, { persistor } from '../redux/store';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
-const ReduxProvider = ({ children }) => {
+export interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+const ReduxProvider = ({ children }: RootLayoutProps) => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>

@@ -140,6 +140,29 @@
   }
 }
 
+.product_list_tracker_not_recommended {
+  margin-left: auto;
+  margin-right: 16px;
+  color: $white-color;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    transform: translate(-12px, -50%);
+    display: block;
+    background-image: url('/no-recommended.svg');
+    width: 14px;
+    height: 14px;
+    -webkit-transform: translate(-12px, -50%);
+    -moz-transform: translate(-12px, -50%);
+    -ms-transform: translate(-12px, -50%);
+    -o-transform: translate(-12px, -50%);
+  }
+}
+
 .product_list_add_btn {
   position: relative;
   cursor: pointer;

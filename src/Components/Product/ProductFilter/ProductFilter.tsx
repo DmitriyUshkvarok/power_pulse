@@ -8,15 +8,18 @@ interface ProductFilterProps {
   categories: string[];
   handleCategoryChange: (selectedCategory: string) => void;
   handleSearchSubmit: (searchText: string) => void;
+  handleRecommendationChange: (recommendation: string) => void;
 }
 
 const ProductFilter = ({
   categories,
   handleCategoryChange,
   handleSearchSubmit,
+  handleRecommendationChange,
 }: ProductFilterProps) => {
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [recommendation, setRecommendation] = useState('all');
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
@@ -44,6 +47,14 @@ const ProductFilter = ({
       event.preventDefault();
       handleSearchSubmit(searchText);
     }
+  };
+
+  const handleRecommendationChangeInternal = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const recommendation = event.target.value;
+    setRecommendation(recommendation);
+    handleRecommendationChange(recommendation);
   };
 
   return (
@@ -110,7 +121,11 @@ const ProductFilter = ({
             />
           </div>
           <div className={styles.product_page_filter_group}>
-            <select className={styles.product_page_filter_recommended_select}>
+            <select
+              className={styles.product_page_filter_recommended_select}
+              value={recommendation}
+              onChange={handleRecommendationChangeInternal}
+            >
               <option value="all">All</option>
               <option value="recommended">Recommended</option>
               <option value="not recommended">Not recommended</option>

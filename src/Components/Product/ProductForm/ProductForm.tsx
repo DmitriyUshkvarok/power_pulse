@@ -8,6 +8,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addProductSchema } from '@/src/formSchemas/addProductSchema';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/src/redux/store';
 
 interface FormValues {
   name: string;
@@ -28,11 +30,12 @@ const ProductForm = () => {
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
   const router = useRouter();
+  const userData = useSelector((state: RootState) => state.userData.data);
 
   const handleSubmit = async (values: FormValues) => {
     try {
       setIsLoading(true);
-      const response = await createProduct(values, userId);
+      const response = await createProduct(values, userId, userData);
       if (response) {
         router.back();
       }

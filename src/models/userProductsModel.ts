@@ -2,11 +2,12 @@ import mongoose from 'mongoose';
 
 const { Schema, model, models } = mongoose;
 
-export interface ProductDocument extends Document {
+export interface ProductDocument {
   name: string;
   calories: number;
   category: string;
   quantity: number;
+  recommended: boolean;
 }
 
 const productSchema = new Schema<ProductDocument>(
@@ -26,6 +27,10 @@ const productSchema = new Schema<ProductDocument>(
     quantity: {
       type: Number,
       required: true,
+    },
+    recommended: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

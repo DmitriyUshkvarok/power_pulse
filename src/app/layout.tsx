@@ -33,8 +33,8 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOption);
   return (
-    <html lang="en">
-      <body className={roboto.className} suppressHydrationWarning={true}>
+    <html lang="en" className={roboto.className}>
+      <body suppressHydrationWarning={true}>
         <ReduxProvider>
           <NextAuthProvider>
             <ToastContainer />

@@ -12,10 +12,10 @@ export const addProductSchema = yup.object().shape({
     .string()
     .min(3, 'Category must be at least 3 characters')
     .required(),
-  quantity: yup
+  weight: yup
     .number()
-    .positive('Quantity must be a positive number')
-    .integer('Quantity must be an integer')
-    .max(1000, 'Quantity must not exceed 1,000')
+    .positive('weight must be a positive number')
+    .integer('weight must be an integer')
+    .max(1000, 'weight must not exceed 1,000')
     .required(),
 });

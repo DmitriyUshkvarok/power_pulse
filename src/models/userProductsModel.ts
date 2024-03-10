@@ -6,7 +6,7 @@ export interface ProductDocument {
   name: string;
   calories: number;
   category: string;
-  quantity: number;
+  weight: number;
   recommended: boolean;
 }
 
@@ -24,7 +24,7 @@ const productSchema = new Schema<ProductDocument>(
       type: String,
       required: true,
     },
-    quantity: {
+    weight: {
       type: Number,
       required: true,
     },

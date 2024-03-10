@@ -15,14 +15,14 @@ interface FormValues {
   name: string;
   calories: string;
   category: string;
-  quantity: string;
+  weight: string;
 }
 
 const initialValues = {
   name: '',
   calories: '',
   category: '',
-  quantity: '',
+  weight: '',
 };
 
 const ProductForm = () => {
@@ -104,10 +104,10 @@ const ProductForm = () => {
               <Field
                 className={styles.form_input}
                 type="text"
-                name="quantity"
-                placeholder="quantity"
+                name="weight"
+                placeholder="weight"
               />
-              <ErrorMessage name="quantity">
+              <ErrorMessage name="weight">
                 {(msg) => (
                   <div className={styles.validation_error}>
                     <span>{msg}</span>

@@ -1,0 +1,161 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.form_container {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  padding: 48px 32px;
+  background-color: $fon-modal;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+}
+
+.closed_icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.form_add_diary_product {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (min-width: 768px) {
+    gap: 0;
+  }
+}
+
+.inputs_group {
+  @media (min-width: 768px) {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.form_group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form_input {
+  width: 100%;
+  padding: 8px 14px 8px 14px;
+  height: 34px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  border: 1px solid $borde-color;
+  background-color: transparent;
+  color: $white-color;
+
+  &:focus {
+    outline: 1px solid $orange-color;
+  }
+}
+
+.form_group:nth-child(1) .form_input {
+  @media (min-width: 768px) {
+    width: 244px;
+    height: 40px;
+  }
+}
+
+.form_group:nth-child(2) .form_input {
+  @media (min-width: 768px) {
+    max-width: 155px;
+    height: 40px;
+  }
+}
+
+.validation_error {
+  @include flexCenter();
+  gap: 10px;
+  color: red;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3px;
+  text-align: center;
+}
+
+.calories_count_wrapper {
+  display: flex;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    margin-bottom: 64px;
+  }
+}
+
+.calories_count {
+  display: flex;
+  @include fontSizeAuto(12px, 18px);
+  color: $white-color;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.calories_count_span {
+  color: $borde-color;
+  @include fontSizeAuto(12px, 18px);
+  margin-right: 5px;
+}
+
+.btn_group {
+  margin-top: 24px;
+  display: flex;
+  gap: 14px;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
+}
+
+.add_diary_product_btn {
+  min-width: 150px;
+  @include flexCenter();
+  @include fontSizeAuto(16px, 24px);
+  background-color: $orange-color;
+  border: none;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  color: $white-color;
+  padding: 12px 32px;
+
+  &:hover {
+    background-color: $beige-color;
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+  }
+}
+
+.cancel_diary_product_btn {
+  @include flexCenter();
+  @include fontSizeAuto(16px, 24px);
+  background-color: $black-color;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  color: $white-color;
+  padding: 12px 36px;
+}

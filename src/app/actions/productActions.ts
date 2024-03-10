@@ -10,7 +10,7 @@ export interface ProductFormData {
   name: string;
   calories: string;
   category: string;
-  quantity: string;
+  weight: string;
 }
 
 export interface CreateProductSuccessResponse {
@@ -18,7 +18,7 @@ export interface CreateProductSuccessResponse {
   name: string;
   calories: string;
   category: string;
-  quantity: string;
+  weight: string;
   recommended: boolean;
 }
 

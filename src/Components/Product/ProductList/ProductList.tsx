@@ -5,6 +5,8 @@ import {
   CreateProductSuccessResponse,
   ServerError,
 } from '@/src/app/actions/productActions';
+import { useAppDispatch } from '@/src/hooks/redux-hook';
+import { setSelectedProduct } from '@/src/redux/addDiaryProductSlice/addDiaryProductSlice';
 
 interface ProductPageComponentProps {
   productData: CreateProductSuccessResponse[] | ServerError;
@@ -14,12 +16,18 @@ export interface ProductType {
   name: string;
   calories: string;
   category: string;
-  quantity: string;
+  weight: string;
   _id: string;
   recommended: boolean;
 }
 
 const ProductList = ({ productData }: ProductPageComponentProps) => {
+  const dispatch = useAppDispatch();
+
+  const addProductToStore = (product: ProductType) => {
+    dispatch(setSelectedProduct(product));
+  };
+
   if (!Array.isArray(productData)) {
     return null;
   }
@@ -58,7 +66,10 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
               >
                 {product.recommended ? 'Recommended' : 'Not Recommended'}
               </div>
-              <Link href="/add-diray">
+              <Link
+                href="/add-diray"
+                onClick={() => addProductToStore(product)}
+              >
                 <div className={styles.product_list_add_btn}>Add</div>
               </Link>
             </div>
@@ -81,7 +92,7 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
               <div className={styles.product_list_item_weight}>
                 Weight:
                 <span className={styles.product_list_item_span}>
-                  {product.quantity}
+                  {product.weight}
                 </span>
               </div>
             </div>

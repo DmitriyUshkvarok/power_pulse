@@ -1,6 +1,5 @@
-import persistUserDataReducer, {
-  UserDataState,
-} from './userData/userDataSlice';
+import persistUserDataReducer from './userData/userDataSlice';
+import persistedProductReducer from './addDiaryProductSlice/addDiaryProductSlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -12,13 +11,10 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-export interface RootState {
-  userData: UserDataState;
-}
-
 const store = configureStore({
   reducer: {
     userData: persistUserDataReducer,
+    products: persistedProductReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -31,5 +27,6 @@ const store = configureStore({
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk = ThunkAction<void, RootState, null, Action<string>>;
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

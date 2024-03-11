@@ -1,5 +1,6 @@
 import persistUserDataReducer from './userData/userDataSlice';
 import persistedProductReducer from './addDiaryProductSlice/addDiaryProductSlice';
+import persistedGlobalLocalSessionStoreReducer from './globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -15,6 +16,7 @@ const store = configureStore({
   reducer: {
     userData: persistUserDataReducer,
     products: persistedProductReducer,
+    globalLocalSession: persistedGlobalLocalSessionStoreReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

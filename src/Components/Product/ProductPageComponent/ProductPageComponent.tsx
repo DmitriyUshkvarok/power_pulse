@@ -1,7 +1,9 @@
 'use client';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import ProductList from '../ProductList/ProductList';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { useState, useEffect } from 'react';
+import { useAppSelector } from '@/src/hooks/redux-hook';
 import {
   CreateProductSuccessResponse,
   ServerError,
@@ -13,6 +15,9 @@ interface ProductPageComponentProps {
 
 const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
   const [filteredProductData, setFilteredProductData] = useState(productData);
+
+  const selectedCategory = useAppSelector(sessionSelectors.getSelectedCategory);
+  const recommendation = useAppSelector(sessionSelectors.getRecommendation);
 
   useEffect(() => {
     setFilteredProductData(productData);
@@ -27,14 +32,16 @@ const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
     .filter((category, index, self) => self.indexOf(category) === index);
 
   const handleCategoryChange = (selectedCategory: string) => {
-    if (selectedCategory === '') {
-      setFilteredProductData(productData);
-    } else {
-      const filteredData = productData.filter(
-        (product) => product.category === selectedCategory
-      );
-      setFilteredProductData(filteredData);
-    }
+    const isRecommended = recommendation === 'recommended';
+    const filteredData = productData.filter((product) => {
+      const categoryMatch =
+        selectedCategory === '' || product.category === selectedCategory;
+      const recommendationMatch =
+        recommendation === 'all' || product.recommended === isRecommended;
+      return categoryMatch && recommendationMatch;
+    });
+
+    setFilteredProductData(filteredData);
   };
 
   const handleSearchSubmit = (searchText: string) => {
@@ -45,15 +52,18 @@ const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
   };
 
   const handleRecommendationChange = (recommendation: string) => {
-    if (recommendation === 'all') {
-      setFilteredProductData(productData);
-    } else {
-      const isRecommended = recommendation === 'recommended';
-      const filteredData = productData.filter(
-        (product) => product.recommended === isRecommended
-      );
-      setFilteredProductData(filteredData);
-    }
+    const isAll = recommendation === 'all';
+    const isRecommended = recommendation === 'recommended';
+
+    const filteredData = productData.filter((product) => {
+      const categoryMatch =
+        selectedCategory === '' || product.category === selectedCategory;
+      const recommendationMatch =
+        isAll || product.recommended === isRecommended;
+      return categoryMatch && recommendationMatch;
+    });
+
+    setFilteredProductData(filteredData);
   };
 
   return (

@@ -3,6 +3,12 @@ import styles from './_product_filter.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
+import {
+  setSelectedCategory,
+  setRecommendation,
+} from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 
 interface ProductFilterProps {
   categories: string[];
@@ -18,12 +24,13 @@ const ProductFilter = ({
   handleRecommendationChange,
 }: ProductFilterProps) => {
   const [searchText, setSearchText] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [recommendation, setRecommendation] = useState('all');
+  const dispatch = useAppDispatch();
+  const selectedCategory = useAppSelector(sessionSelectors.getSelectedCategory);
+  const recommendation = useAppSelector(sessionSelectors.getRecommendation);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
-    setSelectedCategory(category);
+    dispatch(setSelectedCategory(category));
     handleCategoryChange(category);
   };
 
@@ -53,7 +60,7 @@ const ProductFilter = ({
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const recommendation = event.target.value;
-    setRecommendation(recommendation);
+    dispatch(setRecommendation(recommendation));
     handleRecommendationChange(recommendation);
   };
 

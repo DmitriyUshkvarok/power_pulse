@@ -81,8 +81,12 @@ export const getProductsByUserId = async (
     const products = await Product.find({ _id: { $in: productIds } });
 
     const productData = products.map((product) => ({
-      ...product._doc,
       _id: product._id.toString(),
+      name: product.name,
+      calories: product.calories,
+      category: product.category,
+      weight: product.weight,
+      recommended: product.recommended,
     }));
 
     return productData || [];

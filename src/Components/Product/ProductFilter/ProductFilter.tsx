@@ -2,57 +2,50 @@
 import styles from './_product_filter.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import {
   setSelectedCategory,
   setRecommendation,
+  setSearchText,
+  searchFilterProductData,
 } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 
 interface ProductFilterProps {
   categories: string[];
-  handleCategoryChange: (selectedCategory: string) => void;
-  handleSearchSubmit: (searchText: string) => void;
-  handleRecommendationChange: (recommendation: string) => void;
 }
 
-const ProductFilter = ({
-  categories,
-  handleCategoryChange,
-  handleSearchSubmit,
-  handleRecommendationChange,
-}: ProductFilterProps) => {
-  const [searchText, setSearchText] = useState('');
+const ProductFilter = ({ categories }: ProductFilterProps) => {
   const dispatch = useAppDispatch();
   const selectedCategory = useAppSelector(sessionSelectors.getSelectedCategory);
   const recommendation = useAppSelector(sessionSelectors.getRecommendation);
+  const searchText = useAppSelector(sessionSelectors.getSearchText);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const category = event.target.value;
     dispatch(setSelectedCategory(category));
-    handleCategoryChange(category);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
+    const searchText = event.target.value;
+    dispatch(setSearchText(searchText));
   };
 
   const clearInput = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
-    setSearchText('');
-    handleSearchSubmit('');
+    dispatch(setSearchText(''));
+    dispatch(searchFilterProductData());
   };
 
   const handleSubmit = (event: React.MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
-    handleSearchSubmit(searchText);
+    dispatch(searchFilterProductData());
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      handleSearchSubmit(searchText);
+      dispatch(searchFilterProductData());
     }
   };
 
@@ -61,7 +54,6 @@ const ProductFilter = ({
   ) => {
     const recommendation = event.target.value;
     dispatch(setRecommendation(recommendation));
-    handleRecommendationChange(recommendation);
   };
 
   return (

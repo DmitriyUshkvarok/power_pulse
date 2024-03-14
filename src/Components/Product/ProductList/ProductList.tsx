@@ -5,8 +5,11 @@ import {
   CreateProductSuccessResponse,
   ServerError,
 } from '@/src/app/actions/productActions';
-import { useAppDispatch } from '@/src/hooks/redux-hook';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { setSelectedProduct } from '@/src/redux/addDiaryProductSlice/addDiaryProductSlice';
+import { useEffect } from 'react';
+import { setFilteredProductData } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 
 interface ProductPageComponentProps {
   productData: CreateProductSuccessResponse[] | ServerError;
@@ -24,15 +27,21 @@ export interface ProductType {
 const ProductList = ({ productData }: ProductPageComponentProps) => {
   const dispatch = useAppDispatch();
 
+  const filteredProductData = useAppSelector(sessionSelectors.getProductData);
+
+  useEffect(() => {
+    dispatch(setFilteredProductData(productData));
+  }, [dispatch, productData]);
+
   const addProductToStore = (product: ProductType) => {
     dispatch(setSelectedProduct(product));
   };
 
-  if (!Array.isArray(productData)) {
+  if (!Array.isArray(filteredProductData)) {
     return null;
   }
 
-  if (productData.length === 0) {
+  if (filteredProductData.length === 0) {
     return (
       <section className={styles.product_section}>
         <p className={styles.not_found_product}>
@@ -53,7 +62,7 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
   return (
     <section className={styles.product_section}>
       <ul className={styles.product_list}>
-        {productData?.map((product: ProductType) => (
+        {filteredProductData?.map((product: ProductType) => (
           <li key={product._id} className={styles.product_list_item}>
             <div className={styles.product_list_item_header}>
               <div className={styles.product_list_pin}>Diet</div>

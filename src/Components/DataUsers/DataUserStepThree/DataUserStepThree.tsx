@@ -3,8 +3,6 @@ import styles from './_DataUserStepThree.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../../Container/Container';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/src/redux/store';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -12,16 +10,16 @@ import {
   createDataAsync,
   fetchUserData,
 } from '@/src/redux/userData/userDataSlice';
-import { AppDispatch } from '@/src/redux/store';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { UserSession } from './index';
 
 const DataUserStepThree = () => {
   const { data: session } = useSession();
   const [isLoading, setIsloading] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
-  const userData = useSelector((state: RootState) => state.userData.data);
+  const userData = useAppSelector((state) => state.userData.data);
 
   const userId = (session?.user as UserSession)?._id;
   const userDataId = (session?.user as UserSession)?.userData;

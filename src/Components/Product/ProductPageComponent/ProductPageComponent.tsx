@@ -5,7 +5,6 @@ import {
   CreateProductSuccessResponse,
   ServerError,
 } from '@/src/app/actions/productActions';
-import { setFilteredProductData } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 
 interface ProductPageComponentProps {
   productData: CreateProductSuccessResponse[] | ServerError;

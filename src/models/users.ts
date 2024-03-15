@@ -8,6 +8,7 @@ export interface UserDocument extends Document {
   role: string;
   provider: string;
   products: Array<Schema.Types.ObjectId>;
+  diarys: Array<Schema.Types.ObjectId>;
 }
 
 const userSchema = new Schema(
@@ -39,6 +40,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'product',
+      },
+    ],
+    diarys: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'diary',
       },
     ],
   },

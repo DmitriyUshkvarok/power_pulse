@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import styles from './_AuthPageDecor.module.scss';
+
 const AuthPageDecor = () => {
   return (
     <div className={styles.decor_box}>

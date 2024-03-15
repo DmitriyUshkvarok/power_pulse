@@ -5,9 +5,12 @@ import Image from 'next/image';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addDiaryProductSchema } from '@/src/formSchemas/addDiaryProductSchema';
 import { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAppSelector } from '@/src/hooks/redux-hook';
-
+import { createDiary } from '@/src/app/actions/diaryActions';
+import { UserSession } from '../../Profile/ProfileForm';
+import { useSession } from 'next-auth/react';
+import { formatDate } from '@/src/utils/formatDate';
 interface FormValues {
   productName: string;
   weight: string;
@@ -17,7 +20,10 @@ interface FormValues {
 const AddDiaryModal = () => {
   const [loading, setIsLoading] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const formRef = useRef<any>(null);
+  const { data: session } = useSession();
+  const userId = (session?.user as UserSession)?._id;
 
   const selectSelectedProduct = useAppSelector(
     (state) => state.products.selectedProduct
@@ -34,9 +40,23 @@ const AddDiaryModal = () => {
   };
 
   const handleSubmit = async (values: FormValues) => {
+    const currentDate = new Date();
+    const formattedDate = formatDate(currentDate);
     try {
-      console.log(values);
       setIsLoading(true);
+      const diaryData = {
+        title: values.productName,
+        weight: values.weight,
+        calories: values.calories,
+        date: formattedDate,
+        category: selectSelectedProduct?.category || '',
+        recommended: selectSelectedProduct?.recommended,
+      };
+      const response = await createDiary(diaryData, userId);
+
+      if (response) {
+        router.back();
+      }
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

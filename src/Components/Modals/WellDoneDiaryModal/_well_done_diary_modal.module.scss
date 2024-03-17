@@ -1,0 +1,101 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.well_done_modal_container {
+  position: relative;
+  padding: 48px 89px;
+  max-width: 480px;
+  width: 100%;
+  background-color: $fon-modal;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+}
+
+.closed_icon {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.icon_wrapper {
+  max-width: 123px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+}
+
+.well_done_diary_title {
+  @include fontSizeAuto(24px, 32px);
+  font-weight: bold;
+  color: $white-color;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.well_done_calories {
+  @include fontSizeAuto(14px, 18px);
+  text-align: center;
+  color: $borde-color;
+  margin-bottom: 24px;
+}
+
+.well_done_calories_span {
+  margin-left: 8px;
+  @include fontSizeAuto(14px, 18px);
+  color: $orange-color;
+}
+
+.next_product_btn {
+  min-width: 150px;
+  @include flexCenter();
+  @include fontSizeAuto(16px, 24px);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 16px;
+  background-color: $orange-color;
+  border: none;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  color: $white-color;
+  padding: 12px 32px;
+
+  &:hover {
+    background-color: $beige-color;
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -ms-transition: $transition;
+    -o-transition: $transition;
+  }
+}
+
+.diary_link {
+  position: relative;
+  cursor: pointer;
+  @include flexCenter();
+  color: $borde-color;
+  max-width: 97px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url('/next_gray.svg');
+    background-repeat: no-repeat;
+  }
+}

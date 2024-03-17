@@ -12,6 +12,8 @@ interface LocalSessionState {
   searchText: string;
   productData: CreateProductSuccessResponse[] | ServerError;
   filteredProductData: CreateProductSuccessResponse[] | ServerError;
+  dynamicCalories: string;
+  isWellDoneDiaryModalOpen: boolean;
 }
 
 const initialState: LocalSessionState = {
@@ -20,6 +22,8 @@ const initialState: LocalSessionState = {
   searchText: '',
   productData: [],
   filteredProductData: [],
+  dynamicCalories: '',
+  isWellDoneDiaryModalOpen: false,
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -82,6 +86,15 @@ const globalLocalSessionStoreSlice = createSlice({
         });
       }
     },
+    setDynamicCalories: (state, action: PayloadAction<string>) => {
+      state.dynamicCalories = action.payload;
+    },
+    openWellDoneDiaryModal: (state) => {
+      state.isWellDoneDiaryModalOpen = true;
+    },
+    closeWellDoneDiaryModal: (state) => {
+      state.isWellDoneDiaryModalOpen = false;
+    },
   },
 });
 
@@ -91,6 +104,9 @@ export const {
   setFilteredProductData,
   setSearchText,
   searchFilterProductData,
+  setDynamicCalories,
+  openWellDoneDiaryModal,
+  closeWellDoneDiaryModal,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

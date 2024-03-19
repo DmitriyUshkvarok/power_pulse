@@ -1,31 +1,45 @@
 'use client';
 import styles from './_modal.module.scss';
-import { useRouter } from 'next/navigation';
+import useAuthRedirect from '@/src/hooks/useRedirect';
 import { useEscapeKey } from '@/src/hooks/useEscapeKey';
-
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
+import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 const Modal = ({ children }: RootLayoutProps) => {
-  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { handleRedirect } = useAuthRedirect();
+
+  const isModalOpen = useAppSelector(modalsSelectors.getIsModalOpen);
 
   const handleCloseModal = () => {
-    router.back();
+    handleRedirect();
+    dispatch(closeModal());
   };
 
   useEscapeKey(handleCloseModal);
 
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
-      router.back();
+      handleCloseModal();
     }
   };
 
   return (
-    <div className={styles.modal_backdrop} onClick={handleBackdropClick}>
-      <div className={styles.modal}>{children}</div>
-    </div>
+    <>
+      {isModalOpen && (
+        <>
+          <div
+            className={styles.modal_backdrop}
+            onClick={handleBackdropClick}
+          ></div>
+          <div className={styles.modal}>{children}</div>
+        </>
+      )}
+    </>
   );
 };
 

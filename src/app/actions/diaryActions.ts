@@ -2,7 +2,6 @@
 import connectToDatabase from '@/src/utils/db';
 import Diary from '@/src/models/diaryModel';
 import User from '@/src/models/users';
-import { revalidatePath } from 'next/cache';
 
 export interface CreateDiarySuccessResponse {
   title: string;
@@ -32,8 +31,6 @@ export const createDiary = async (
         new: true,
       }
     );
-
-    revalidatePath('/');
 
     return { ...saveDiary._doc, _id: saveDiary._id.toString() };
   } catch (error) {

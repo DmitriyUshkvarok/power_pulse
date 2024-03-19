@@ -11,9 +11,13 @@ const getProductData = (state: RootState) =>
 
 const getSearchText = (state: RootState) => state.globalLocalSession.searchText;
 
+const getdynamicCalories = (state: RootState) =>
+  state.globalLocalSession.dynamicCalories;
+
 export const sessionSelectors = {
   getSelectedCategory,
   getRecommendation,
   getProductData,
   getSearchText,
+  getdynamicCalories,
 };

@@ -13,7 +13,8 @@ interface LocalSessionState {
   productData: CreateProductSuccessResponse[] | ServerError;
   filteredProductData: CreateProductSuccessResponse[] | ServerError;
   dynamicCalories: string;
-  isWellDoneDiaryModalOpen: boolean;
+  previousRouteForRedirect: string | null;
+  routingRelatedAuthCompleted: boolean;
 }
 
 const initialState: LocalSessionState = {
@@ -23,7 +24,8 @@ const initialState: LocalSessionState = {
   productData: [],
   filteredProductData: [],
   dynamicCalories: '',
-  isWellDoneDiaryModalOpen: false,
+  previousRouteForRedirect: null,
+  routingRelatedAuthCompleted: false,
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -89,11 +91,13 @@ const globalLocalSessionStoreSlice = createSlice({
     setDynamicCalories: (state, action: PayloadAction<string>) => {
       state.dynamicCalories = action.payload;
     },
-    openWellDoneDiaryModal: (state) => {
-      state.isWellDoneDiaryModalOpen = true;
+    addPreviousRouteForRedirect: (state, action: PayloadAction<string>) => {
+      if (!state.routingRelatedAuthCompleted) {
+        state.previousRouteForRedirect = action.payload;
+      }
     },
-    closeWellDoneDiaryModal: (state) => {
-      state.isWellDoneDiaryModalOpen = false;
+    setRoutingRelatedAuthCompleted: (state, action: PayloadAction<boolean>) => {
+      state.routingRelatedAuthCompleted = action.payload;
     },
   },
 });
@@ -105,8 +109,8 @@ export const {
   setSearchText,
   searchFilterProductData,
   setDynamicCalories,
-  openWellDoneDiaryModal,
-  closeWellDoneDiaryModal,
+  addPreviousRouteForRedirect,
+  setRoutingRelatedAuthCompleted,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

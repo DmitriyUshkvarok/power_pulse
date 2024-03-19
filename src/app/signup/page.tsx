@@ -2,7 +2,7 @@ import FormRegistration from '@/src/Components/Auth/RegistrationForm/Registratio
 import styles from './_sign_up.module.scss';
 import Container from '@/src/Components/Container/Container';
 import AuthPageDecor from '@/src/Components/Auth/AuthPageDecor/AuthPageDecor';
-import RestrictRoute from '../../providers/restrictRoute';
+import RestrictRoute from '../../Context/RestrictRoute';
 
 const SignUpPagepage = () => {
   return (

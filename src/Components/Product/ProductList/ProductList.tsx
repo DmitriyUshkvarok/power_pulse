@@ -10,7 +10,10 @@ import { setSelectedProduct } from '@/src/redux/addDiaryProductSlice/addDiaryPro
 import { useEffect } from 'react';
 import { setFilteredProductData } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
-
+import {
+  openModal,
+  openAddDiaryModal,
+} from '@/src/redux/modalSlice/modalSlice';
 interface ProductPageComponentProps {
   productData: CreateProductSuccessResponse[] | ServerError;
 }
@@ -35,6 +38,8 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
 
   const addProductToStore = (product: ProductType) => {
     dispatch(setSelectedProduct(product));
+    dispatch(openModal());
+    dispatch(openAddDiaryModal());
   };
 
   if (!Array.isArray(filteredProductData)) {
@@ -76,7 +81,7 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
                 {product.recommended ? 'Recommended' : 'Not Recommended'}
               </div>
               <Link
-                href="/add-diray"
+                href="/add-diary"
                 onClick={() => addProductToStore(product)}
               >
                 <div className={styles.product_list_add_btn}>Add</div>

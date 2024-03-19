@@ -3,13 +3,14 @@ import styles from './_product_filter.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
+import { openModal, openCreatedModal } from '@/src/redux/modalSlice/modalSlice';
 import {
   setSelectedCategory,
   setRecommendation,
   setSearchText,
   searchFilterProductData,
 } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
-import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 
 interface ProductFilterProps {
   categories: string[];
@@ -56,12 +57,18 @@ const ProductFilter = ({ categories }: ProductFilterProps) => {
     dispatch(setRecommendation(recommendation));
   };
 
+  const openModalCreate = () => {
+    dispatch(openModal());
+    dispatch(openCreatedModal());
+  };
+
   return (
     <div className={styles.product_page_filter_container}>
       <h1 className={styles.product_page_title}>Products</h1>
       <div className={styles.product_page_filter_wrapper}>
         <div className={styles.product_page_filter_group}>
           <Link
+            onClick={openModalCreate}
             className={styles.product_page_filter_create_link}
             href="/create-product"
           >

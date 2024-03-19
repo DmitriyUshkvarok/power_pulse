@@ -2,25 +2,27 @@
 import styles from './_well_done_diary_modal.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import useAuthRedirect from '@/src/hooks/useRedirect';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { useRouter } from 'next/navigation';
-import { closeWellDoneDiaryModal } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
+import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 
 const WellDoneDiaryModal = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const dynamicCalories = useAppSelector(
-    (state) => state.globalLocalSession.dynamicCalories
-  );
+  const { handleRedirect } = useAuthRedirect();
+
+  const dynamicCalories = useAppSelector(sessionSelectors.getdynamicCalories);
 
   const handleCloseModal = () => {
-    router.back();
-    dispatch(closeWellDoneDiaryModal());
+    dispatch(closeModal());
+    handleRedirect();
   };
 
-  const handleRedirect = () => {
-    dispatch(closeWellDoneDiaryModal());
-    // router.push('/diary');
+  const handleRedirectOnDiary = () => {
+    dispatch(closeModal());
+    router.push('/diary');
   };
 
   return (
@@ -56,7 +58,7 @@ const WellDoneDiaryModal = () => {
         Next product
       </button>
       <Link
-        onClick={handleRedirect}
+        onClick={handleRedirectOnDiary}
         className={styles.diary_link}
         href="/diary"
       >

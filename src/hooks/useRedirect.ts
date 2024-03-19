@@ -15,7 +15,6 @@ const useAuthRedirect = (): RedirectHook => {
   const handleRedirect = () => {
     if (previousRouteForRedirect) {
       router.push(previousRouteForRedirect);
-      //   resetOpenModal();
     } else {
       router.push('/');
     }

@@ -7,11 +7,11 @@ import { getServerSession } from 'next-auth';
 import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
 import Header from '../Components/Header/Header';
 import NextAuthProvider from '../providers/NextAuthProvider';
+import ReduxProvider from '../providers/ReduxProvider';
+import GlobalRouteTracker from '../Context/GlobalRouteTracker';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../Components/Container/Container';
-import ReduxProvider from '../providers/ReduxProvider';
-import GlobalRouteTracker from '../Context/GlobalRouteTracker';
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],

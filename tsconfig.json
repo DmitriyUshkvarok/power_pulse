@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/Providers/NextAuthProvider.tsx", "src/app/api/auth/[...nextauth]/route.js", "src/Components/DataUsers/DataUserStepOne/DataUserStepOne.jsx", "src/app/actions/uploadAvatarActions.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/providers/nextAuthProvider.tsx", "src/app/api/auth/[...nextauth]/route.js", "src/Components/DataUsers/DataUserStepOne/DataUserStepOne.jsx", "src/app/actions/uploadAvatarActions.js"],
   "exclude": ["node_modules"]
 }

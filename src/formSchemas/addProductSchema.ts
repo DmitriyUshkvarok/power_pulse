@@ -18,4 +18,5 @@ export const addProductSchema = yup.object().shape({
     .integer('weight must be an integer')
     .max(1000, 'weight must not exceed 1,000')
     .required(),
+  recommended: yup.boolean().required(),
 });

@@ -76,6 +76,7 @@
 }
 
 .product_list_item {
+  position: relative;
   padding: 16px;
   background-color: $item-block-color;
   display: flex;
@@ -228,4 +229,18 @@
   margin-left: 4px;
   color: $white-color;
   @include fontSizeAuto(12px, 18px);
+}
+
+.deleted_product_icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.deleted_product_loader {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: $white-color;
 }

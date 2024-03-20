@@ -1,13 +1,15 @@
 'use client';
 import styles from './_product_list.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   CreateProductSuccessResponse,
+  deletedProduct,
   ServerError,
 } from '@/src/app/actions/productActions';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { setSelectedProduct } from '@/src/redux/addDiaryProductSlice/addDiaryProductSlice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setFilteredProductData } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import {
@@ -28,6 +30,7 @@ export interface ProductType {
 }
 
 const ProductList = ({ productData }: ProductPageComponentProps) => {
+  const [loadingProductId, setLoadingProductId] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
   const filteredProductData = useAppSelector(sessionSelectors.getProductData);
@@ -40,6 +43,17 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
     dispatch(setSelectedProduct(product));
     dispatch(openModal());
     dispatch(openAddDiaryModal());
+  };
+
+  const handleDeletedProduct = async (productId: string) => {
+    try {
+      setLoadingProductId(productId);
+      await deletedProduct(productId);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingProductId(null);
+    }
   };
 
   if (!Array.isArray(filteredProductData)) {
@@ -110,6 +124,18 @@ const ProductList = ({ productData }: ProductPageComponentProps) => {
                 </span>
               </div>
             </div>
+            {loadingProductId === product._id ? (
+              <p className={styles.deleted_product_loader}>Loading...</p>
+            ) : (
+              <Image
+                onClick={() => handleDeletedProduct(product._id)}
+                className={styles.deleted_product_icon}
+                src="/deleted_product.svg"
+                alt="deleted product icon"
+                width={20}
+                height={20}
+              />
+            )}
           </li>
         ))}
       </ul>

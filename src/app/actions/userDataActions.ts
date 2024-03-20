@@ -4,12 +4,11 @@ import UserData, { UserDataDocument } from '@/src/models/userDataModel';
 import User from '@/src/models/users';
 import { revalidatePath } from 'next/cache';
 
-connectToDatabase();
-
 export const createDataUser = async (
   data: UserDataDocument,
   userId: string
 ) => {
+  connectToDatabase();
   try {
     const newUserData = new UserData(data);
     await newUserData.save();
@@ -28,23 +27,25 @@ export const createDataUser = async (
 };
 
 export const getUserDataById = async (userDataId: string) => {
+  connectToDatabase();
   try {
     const userData = await UserData.findOne({ _id: userDataId });
 
     const newUserData = {
-      ...userData._doc,
-      _id: userData._doc._id.toString(),
+      ...userData?._doc,
+      _id: userData?._doc._id.toString(),
     };
 
     return { userData: newUserData };
   } catch (error) {
     if (error instanceof Error) {
-      console.log(`/errors?error=${error.message}`);
+      console.error(`Error updating user data: ${error}`);
     } else throw new Error('Something went wrong');
   }
 };
 
 export async function updateUserData(id: string, data: {}) {
+  connectToDatabase();
   try {
     const userData = await UserData.findByIdAndUpdate(id, data, {
       new: true,
@@ -55,7 +56,7 @@ export async function updateUserData(id: string, data: {}) {
     return { ...userData._doc, _id: userData._id.toString() };
   } catch (error) {
     if (error instanceof Error) {
-      console.log(`/errors?error=${error.message}`);
+      console.error(`Error updating user data: ${error}`);
     } else throw new Error('Something went wrong');
   }
 }

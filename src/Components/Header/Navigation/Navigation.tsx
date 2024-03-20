@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Notiflix from 'notiflix';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
@@ -16,6 +16,18 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  useEffect(() => {
+    if (showMobileMenu) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflowY = 'auto';
+    };
+  }, [showMobileMenu]);
 
   const handleClickLogOut = () => {
     Notiflix.Confirm.show(

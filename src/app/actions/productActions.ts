@@ -3,9 +3,6 @@ import connectToDatabase from '@/src/utils/db';
 import Product from '@/src/models/userProductsModel';
 import User from '@/src/models/users';
 import { revalidatePath } from 'next/cache';
-import { calculateDailyRecommendation } from '@/src/utils/calculateDailyRecommendation';
-import { UserData } from '@/src/redux/userData/userDataSlice';
-
 export interface ProductFormData {
   name: string;
   calories: string;
@@ -29,20 +26,11 @@ export interface ServerError {
 
 export const createProduct = async (
   productData: ProductFormData,
-  userId: string,
-  userData: UserData
+  userId: string
 ): Promise<CreateProductSuccessResponse | ServerError> => {
   connectToDatabase();
   try {
     const newProduct = new Product({ ...productData, createdBy: userId });
-
-    const { recommendedCalories } = calculateDailyRecommendation(userData);
-
-    // Проверяем калорийность продукта
-    const productCalories = parseInt(productData.calories);
-    if (productCalories <= recommendedCalories) {
-      newProduct.recommended = true;
-    }
 
     const savedProduct = await newProduct.save();
 
@@ -95,3 +83,19 @@ export const getProductsByUserId = async (
     return { error: 'Internal Server Error', statusCode: 500 };
   }
 };
+
+export async function deletedProduct(productId: string) {
+  connectToDatabase();
+  try {
+    const product = await Product.findByIdAndDelete(productId, {
+      new: true,
+    });
+
+    revalidatePath('/');
+
+    return { ...product._doc, _id: product._id.toString() };
+  } catch (error) {
+    console.error('An error occurred while fetching products:', error);
+    return { error: 'Internal Server Error', statusCode: 500 };
+  }
+}

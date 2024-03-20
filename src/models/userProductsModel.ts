@@ -30,7 +30,7 @@ const productSchema = new Schema<ProductDocument>(
     },
     recommended: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   { timestamps: true }

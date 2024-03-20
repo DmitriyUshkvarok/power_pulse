@@ -10,7 +10,7 @@ interface MobileMenuProps {
   handleClosedMobileMenu: () => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ handleClosedMobileMenu }) => {
+const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
   const pathname = usePathname();
 
   const handleClickLogOut = () => {
@@ -33,8 +33,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ handleClosedMobileMenu }) => {
     <div className={styles.mobile_menu_section}>
       <div className={styles.btn_close_menu} onClick={handleClosedMobileMenu}>
         <Image
-          src={'/icon-closed.svg' || 'X'}
-          alt="icon button close"
+          src="/Icon-closed.svg"
+          alt="icon closed modal"
           width={24}
           height={24}
         />

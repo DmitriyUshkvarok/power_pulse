@@ -1,0 +1,168 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.products_diary_box {
+  height: 824px;
+  padding: 16px;
+  background-color: $item-block-color;
+  border: 1px solid $borde-color;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: $light-orange-color transparent;
+
+  -webkit-scrollbar-width: thin;
+  -webkit-scrollbar-color: $light-orange-color;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: rgba(239, 237, 232, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $light-orange-color;
+    border-radius: 12px;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    -ms-border-radius: 12px;
+    -o-border-radius: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $item-block-color;
+  }
+}
+
+.products_diary_box_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.products_diary_box_title {
+  @include fontSizeAuto(14px, 18px);
+  color: $borde-color;
+}
+
+.products_diary_box_link {
+  @include fontSizeAuto(14px, 18px);
+  position: relative;
+  font-weight: 500;
+  color: $orange-color;
+  margin-right: 16px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 40%;
+    right: -10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url('/next.svg');
+    transform: translate(10px, -55%);
+    -webkit-transform: translate(10px, -55%);
+    -moz-transform: translate(10px, -55%);
+    -ms-transform: translate(10px, -55%);
+    -o-transform: translate(10px, -55%);
+  }
+}
+
+.product_diary_list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.field_group {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sub_field_group {
+  display: flex;
+  gap: 16px;
+}
+
+.sub_field_group_box {
+  min-width: 80px;
+}
+
+.field_title {
+  @include fontSizeAuto(12px, 18px);
+  color: $light-orange-color;
+  margin-bottom: 8px;
+}
+
+.field_values {
+  position: relative;
+  @include fontSizeAuto(14px, 18px);
+  color: $white-color;
+  border: 1px solid $borde-color;
+  padding: 10px 14px 10px 14px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+}
+
+.field_values_span_true {
+  display: block;
+  margin-left: 22px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-image: url('/recommended.svg');
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+}
+
+.field_values_span_false {
+  display: block;
+  margin-left: 22px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    display: block;
+    width: 14px;
+    height: 14px;
+    background-image: url('/no-recommended.svg');
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
+}
+
+.deleted_diary_product_icon {
+  display: block;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-top: auto;
+  margin-bottom: 10px;
+}

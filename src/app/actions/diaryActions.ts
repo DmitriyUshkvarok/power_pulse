@@ -37,3 +37,23 @@ export const createDiary = async (
     console.error('An error occurred while creating product:', error);
   }
 };
+
+export const getDiaryProducts = async (userId: string) => {
+  connectToDatabase();
+  try {
+    const user = await User.findById(userId);
+
+    const productDiaryIds = user.diarys;
+
+    const diaryProducts = await Diary.find({ _id: { $in: productDiaryIds } });
+
+    const newDiaryProducts = diaryProducts.map((item) => ({
+      ...item._doc,
+      _id: item._doc._id.toString(),
+    }));
+
+    return newDiaryProducts || [];
+  } catch (error) {
+    console.error('An error occurred while creating product:', error);
+  }
+};

@@ -10,7 +10,6 @@ const Products = async () => {
 
   const userId = session?.user?._id;
   const productData = await getProductsByUserId(userId);
-
   return (
     <section className={styles.product_page_section}>
       <Container>

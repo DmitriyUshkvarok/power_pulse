@@ -1,3 +1,6 @@
+@import '../../sass/utils/variables.module';
+@import '../../sass/utils/mixins.module';
+
 .container {
   position: relative;
   max-width: 1440px;
@@ -5,4 +8,9 @@
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
+
+  @include mediaQuery(768px) {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
 }

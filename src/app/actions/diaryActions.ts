@@ -2,6 +2,7 @@
 import connectToDatabase from '@/src/utils/db';
 import Diary from '@/src/models/diaryModel';
 import User from '@/src/models/users';
+import { revalidatePath } from 'next/cache';
 
 export interface CreateDiarySuccessResponse {
   title: string;
@@ -55,5 +56,21 @@ export const getDiaryProducts = async (userId: string) => {
     return newDiaryProducts || [];
   } catch (error) {
     console.error('An error occurred while creating product:', error);
+  }
+};
+
+export const deletedDiaryProduct = async (productId: string) => {
+  connectToDatabase();
+  try {
+    const productDiary = await Diary.findByIdAndDelete(productId, {
+      new: true,
+    });
+
+    revalidatePath('/');
+
+    return { ...productDiary._doc, _id: productDiary._id.toString() };
+  } catch (error) {
+    console.error('An error occurred while fetching products:', error);
+    return { error: 'Internal Server Error', statusCode: 500 };
   }
 };

@@ -2,7 +2,7 @@
 @import '../../../sass/utils/mixins.module';
 
 .products_diary_box {
-  height: 824px;
+  height: 844px;
   padding: 16px;
   background-color: $item-block-color;
   border: 1px solid $borde-color;
@@ -12,17 +12,11 @@
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   overflow-y: auto;
-
   scrollbar-width: thin;
-  scrollbar-color: $light-orange-color transparent;
+  scrollbar-color: rgba(239, 237, 232, 0.1) transparent;
 
   -webkit-scrollbar-width: thin;
   -webkit-scrollbar-color: $light-orange-color;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    background: rgba(239, 237, 232, 0.1);
-  }
 
   &::-webkit-scrollbar-thumb {
     background-color: $light-orange-color;
@@ -35,6 +29,16 @@
 
   &::-webkit-scrollbar-track {
     background-color: $item-block-color;
+  }
+
+  @include mediaQuery(768px) {
+    width: 100%;
+    height: 264px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 826px;
+    padding: 19px;
   }
 }
 
@@ -74,10 +78,87 @@
   }
 }
 
+.title_list {
+  display: flex;
+  gap: 8px;
+}
+
+.title_item {
+  @include fontSizeAuto(12px, 18px);
+  color: $light-orange-color;
+}
+
+.title_item.title_one {
+  width: 204px;
+
+  @include mediaQuery(1200px) {
+    width: 212px;
+  }
+}
+
+.title_item.title_two {
+  width: 128px;
+
+  @include mediaQuery(1200px) {
+    width: 166px;
+  }
+}
+
+.title_item.title_three {
+  width: 90px;
+
+  @include mediaQuery(1200px) {
+    width: 105px;
+  }
+}
+
+.title_item.title_four {
+  width: 80px;
+
+  @include mediaQuery(1200px) {
+    width: 110px;
+  }
+}
+
 .product_diary_list {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  height: 774px;
+
+  @include mediaQuery(768px) {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(239, 237, 232, 0.1) transparent;
+
+    -webkit-scrollbar-width: thin;
+    -webkit-scrollbar-color: rgba(239, 237, 232, 0.1);
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $borde-color;
+      border-radius: 12px;
+      -webkit-border-radius: 12px;
+      -moz-border-radius: 12px;
+      -ms-border-radius: 12px;
+      -o-border-radius: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $item-block-color;
+    }
+  }
+
+  @include mediaQuery(768px) {
+    gap: 8px;
+    height: 180px;
+  }
+}
+
+.product_diary_item {
+  @include mediaQuery(768px) {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .field_group {
@@ -86,11 +167,19 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  @include mediaQuery(768px) {
+    margin-bottom: 0;
+  }
 }
 
 .sub_field_group {
   display: flex;
   gap: 16px;
+
+  @include mediaQuery(768px) {
+    gap: 8px;
+  }
 }
 
 .sub_field_group_box {
@@ -101,6 +190,10 @@
   @include fontSizeAuto(12px, 18px);
   color: $light-orange-color;
   margin-bottom: 8px;
+
+  @include mediaQuery(768px) {
+    display: none;
+  }
 }
 
 .field_values {
@@ -114,6 +207,50 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
+}
+
+.field_values.first_value {
+  @include mediaQuery(768px) {
+    width: 204px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 212px;
+  }
+}
+
+.field_values.second_value {
+  @include mediaQuery(768px) {
+    width: 128px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 166px;
+  }
+}
+
+.field_values.third_value {
+  @include mediaQuery(768px) {
+    width: 90px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 105px;
+  }
+}
+
+.field_values.fourth_value {
+  @include mediaQuery(768px) {
+    width: 80px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 110px;
+  }
 }
 
 .field_values_span_true {
@@ -165,4 +302,26 @@
   height: 20px;
   margin-top: auto;
   margin-bottom: 10px;
+
+  @include mediaQuery(768px) {
+    margin-left: 4px;
+  }
+
+  @include mediaQuery(1200px) {
+    margin-left: 12px;
+  }
+}
+
+.deleted_diary_product_loader {
+  color: $white-color;
+  margin-top: auto;
+  margin-bottom: 10px;
+
+  @include mediaQuery(768px) {
+    margin-left: 4px;
+  }
+
+  @include mediaQuery(1200px) {
+    margin-left: 12px;
+  }
 }

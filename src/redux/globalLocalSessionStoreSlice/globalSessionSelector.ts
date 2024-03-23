@@ -14,10 +14,13 @@ const getSearchText = (state: RootState) => state.globalLocalSession.searchText;
 const getdynamicCalories = (state: RootState) =>
   state.globalLocalSession.dynamicCalories;
 
+const getDate = (state: RootState) => state.globalLocalSession.date;
+
 export const sessionSelectors = {
   getSelectedCategory,
   getRecommendation,
   getProductData,
   getSearchText,
   getdynamicCalories,
+  getDate,
 };

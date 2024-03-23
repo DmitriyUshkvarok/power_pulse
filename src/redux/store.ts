@@ -2,6 +2,7 @@ import persistUserDataReducer from './userData/userDataSlice';
 import persistedProductReducer from './addDiaryProductSlice/addDiaryProductSlice';
 import persistedGlobalLocalSessionStoreReducer from './globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import persistedModalReducer from './modalSlice/modalSlice';
+import diarySlice from './diarySlice/diarySlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -18,6 +19,7 @@ const store = configureStore({
     userData: persistUserDataReducer,
     products: persistedProductReducer,
     modals: persistedModalReducer,
+    diary: diarySlice,
     globalLocalSession: persistedGlobalLocalSessionStoreReducer,
   },
   middleware: (getDefaultMiddleware) =>

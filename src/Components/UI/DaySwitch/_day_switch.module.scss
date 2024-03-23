@@ -1,0 +1,31 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.day_switch_wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.date_text {
+  @include fontSizeAuto(18px, 20px);
+  font-weight: 700;
+  color: $white-color;
+  margin-right: 8px;
+}
+
+.calendar_icon {
+  margin-right: 20px;
+}
+
+.prev_date,
+.next_date {
+  background-color: transparent;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: $white-color;
+}
+
+.prev_date {
+  margin-right: 10px;
+}

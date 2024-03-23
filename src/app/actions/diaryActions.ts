@@ -5,6 +5,7 @@ import User from '@/src/models/users';
 import { revalidatePath } from 'next/cache';
 
 export interface CreateDiarySuccessResponse {
+  _id: string;
   title: string;
   category: string;
   calories: string;

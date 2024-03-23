@@ -15,6 +15,7 @@ interface LocalSessionState {
   dynamicCalories: string;
   previousRouteForRedirect: string | null;
   routingRelatedAuthCompleted: boolean;
+  date: string;
 }
 
 const initialState: LocalSessionState = {
@@ -26,6 +27,7 @@ const initialState: LocalSessionState = {
   dynamicCalories: '',
   previousRouteForRedirect: null,
   routingRelatedAuthCompleted: false,
+  date: new Date().toISOString(),
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -99,6 +101,9 @@ const globalLocalSessionStoreSlice = createSlice({
     setRoutingRelatedAuthCompleted: (state, action: PayloadAction<boolean>) => {
       state.routingRelatedAuthCompleted = action.payload;
     },
+    setDate: (state, action: PayloadAction<string>) => {
+      state.date = action.payload;
+    },
   },
 });
 
@@ -111,6 +116,7 @@ export const {
   setDynamicCalories,
   addPreviousRouteForRedirect,
   setRoutingRelatedAuthCompleted,
+  setDate,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

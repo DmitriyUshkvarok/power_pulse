@@ -1,11 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  CreateDiarySuccessResponse,
-  getDiaryProducts,
-} from '@/src/app/actions/diaryActions';
+import { DiaryProduct, getDiaryProducts } from '@/src/app/actions/diaryActions';
 
 export interface DiaryState {
-  diaryProducts: CreateDiarySuccessResponse[];
+  diaryProducts: DiaryProduct[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -16,18 +13,18 @@ const initialState: DiaryState = {
   error: null,
 };
 
-export const fetchDiaryProducts = createAsyncThunk<
-  CreateDiarySuccessResponse[],
-  string
->('diary/fetchDiaryProducts', async (userId: string, thunkAPI) => {
-  try {
-    const diaryProducts = await getDiaryProducts(userId);
-    return diaryProducts || [];
-  } catch (error) {
-    console.log(error);
-    throw error;
+export const fetchDiaryProducts = createAsyncThunk<DiaryProduct[], string>(
+  'diary/fetchDiaryProducts',
+  async (userId: string, thunkAPI) => {
+    try {
+      const diaryProducts = await getDiaryProducts(userId);
+      return diaryProducts || [];
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
-});
+);
 
 export const diarySlice = createSlice({
   name: 'diary',

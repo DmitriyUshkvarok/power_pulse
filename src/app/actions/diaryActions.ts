@@ -5,7 +5,16 @@ import User from '@/src/models/users';
 import { revalidatePath } from 'next/cache';
 
 export interface CreateDiarySuccessResponse {
-  _id?: string;
+  title: string;
+  category: string;
+  calories: string;
+  weight: string;
+  recommended: boolean | undefined;
+  date: string;
+}
+
+export interface DiaryProduct {
+  _id: string;
   title: string;
   category: string;
   calories: string;
@@ -40,7 +49,9 @@ export const createDiary = async (
   }
 };
 
-export const getDiaryProducts = async (userId: string) => {
+export const getDiaryProducts = async (
+  userId: string
+): Promise<DiaryProduct[]> => {
   connectToDatabase();
   try {
     const user = await User.findById(userId);
@@ -54,9 +65,10 @@ export const getDiaryProducts = async (userId: string) => {
       _id: item._doc._id.toString(),
     }));
 
-    return newDiaryProducts || [];
+    return newDiaryProducts;
   } catch (error) {
     console.error('An error occurred while creating product:', error);
+    throw new Error('Internal Server Error');
   }
 };
 

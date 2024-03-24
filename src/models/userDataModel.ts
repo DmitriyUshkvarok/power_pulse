@@ -12,29 +12,32 @@ export interface UserDataDocument extends Document {
   levelActivity: string;
 }
 
-const userDataSchema = new Schema({
-  height: {
-    type: String,
+const userDataSchema = new Schema(
+  {
+    height: {
+      type: String,
+    },
+    currentWeight: {
+      type: String,
+    },
+    desiredWeight: {
+      type: String,
+    },
+    birthday: {
+      type: String,
+    },
+    bloodGroup: {
+      type: String,
+    },
+    sex: {
+      type: String,
+    },
+    levelActivity: {
+      type: String,
+    },
   },
-  currentWeight: {
-    type: String,
-  },
-  desiredWeight: {
-    type: String,
-  },
-  birthday: {
-    type: String,
-  },
-  bloodGroup: {
-    type: String,
-  },
-  sex: {
-    type: String,
-  },
-  levelActivity: {
-    type: String,
-  },
-});
+  { versionKey: false }
+);
 
 const UserData = models.userData || model('userData', userDataSchema);
 

@@ -49,7 +49,7 @@ const userSchema = new Schema(
       },
     ],
   },
-  { timestamps: true }
+  { versionKey: false, timestamps: true }
 );
 
 const User = models.user || model('user', userSchema);

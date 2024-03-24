@@ -1,0 +1,71 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.dashboard_list {
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.dashboard_item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.dashboard_item:nth-child(odd) .dashboard_sub_item:first-child,
+.dashboard_item:nth-child(even) .dashboard_sub_item:first-child {
+  background-color: $orange-color;
+}
+
+.dashboard_sub_item {
+  padding: 14px;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
+  border: 1px solid $borde-color;
+  background-color: $item-block-color;
+}
+
+.dashboard_header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.dashboard_icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.dashboard_info {
+  @include fontSizeAuto(12px, 16px);
+  color: $borde-color;
+}
+
+.dashboard_value {
+  font-weight: 700;
+  @include fontSizeAuto(18px, 20px);
+  color: $white-color;
+}
+
+.reminder_wrapper {
+  display: flex;
+}
+
+.icon_reminder {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.reminder {
+  @include fontSizeAuto(14px, 18px);
+  color: $borde-color;
+}

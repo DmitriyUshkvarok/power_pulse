@@ -1,0 +1,37 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.diary_page_section {
+  padding-top: 40px;
+  padding-bottom: 80px;
+
+  @include mediaQuery(768px) {
+    padding-top: 72px;
+    padding-bottom: 64px;
+  }
+
+  @include mediaQuery(1200px) {
+    padding-bottom: 68px;
+  }
+}
+
+.diary_page_title_switch_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.diary_page_title {
+  font-weight: 700;
+  @include fontSizeAuto(24px, 28px);
+  color: $white-color;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(32px, 44px);
+  }
+}
+
+.dashboard_box_wrapper {
+  margin-bottom: 40px;
+}

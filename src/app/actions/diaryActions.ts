@@ -2,7 +2,6 @@
 import connectToDatabase from '@/src/utils/db';
 import Diary from '@/src/models/diaryModel';
 import User from '@/src/models/users';
-import { revalidatePath } from 'next/cache';
 
 export interface CreateDiarySuccessResponse {
   title: string;
@@ -56,6 +55,10 @@ export const getDiaryProducts = async (
   try {
     const user = await User.findById(userId);
 
+    if (!user) {
+      return [];
+    }
+
     const productDiaryIds = user.diarys;
 
     const diaryProducts = await Diary.find({ _id: { $in: productDiaryIds } });
@@ -78,8 +81,6 @@ export const deletedDiaryProduct = async (productId: string) => {
     const productDiary = await Diary.findByIdAndDelete(productId, {
       new: true,
     });
-
-    revalidatePath('/');
 
     return { ...productDiary._doc, _id: productDiary._id.toString() };
   } catch (error) {

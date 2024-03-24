@@ -3,30 +3,31 @@ import styles from './_product_diary_list.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useMediaQuery } from 'react-responsive';
-import { deletedDiaryProduct } from '@/src/app/actions/diaryActions';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { fetchDiaryProducts } from '@/src/redux/diarySlice/diarySlice';
+import {
+  fetchDiaryProducts,
+  deleteDiaryProduct,
+} from '@/src/redux/diarySlice/diarySlice';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../DataUsers/DataUserStepThree';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { formatDateString } from '@/src/utils/formatDate';
 
 const ProductsDiaryList = () => {
-  const [loadingProductId, setLoadingProductId] = useState<string | null>(null);
   const isTabletDevice = useMediaQuery({ minWidth: '768px' });
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
+
+  const userId = (session?.user as UserSession)?._id;
 
   const productDiaryData = useAppSelector((state) => state.diary.diaryProducts);
 
   const selectedDate = useAppSelector(sessionSelectors.getDate);
 
-  const userId = (session?.user as UserSession)?._id;
-
   const formattedDate = formatDateString(selectedDate);
 
-  const filteredProducts = productDiaryData.filter((product) => {
+  const filteredProducts = productDiaryData?.filter((product) => {
     return product.date === formattedDate;
   });
 
@@ -36,12 +37,9 @@ const ProductsDiaryList = () => {
 
   const handleDeletedDiaryProduct = async (productId: string) => {
     try {
-      setLoadingProductId(productId);
-      await deletedDiaryProduct(productId);
+      dispatch(deleteDiaryProduct(productId));
     } catch (error) {
       console.log(error);
-    } finally {
-      setLoadingProductId(null);
     }
   };
 
@@ -54,7 +52,10 @@ const ProductsDiaryList = () => {
         </Link>
       </div>
       <ul className={styles.product_diary_list}>
-        {isTabletDevice && (
+        {!filteredProducts.length && (
+          <p className={styles.not_found_products}>Not found products</p>
+        )}
+        {isTabletDevice && filteredProducts.length > 0 && (
           <ul className={styles.title_list}>
             <li className={`${styles.title_item} ${styles.title_one}`}>
               Title
@@ -117,20 +118,14 @@ const ProductsDiaryList = () => {
                     )}
                   </div>
                 </div>
-                {loadingProductId === product._id ? (
-                  <p className={styles.deleted_diary_product_loader}>
-                    Loading...
-                  </p>
-                ) : (
-                  <Image
-                    onClick={() => handleDeletedDiaryProduct(product._id)}
-                    className={styles.deleted_diary_product_icon}
-                    src="/deleted_product.svg"
-                    alt="deleted product diart icon"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                <Image
+                  onClick={() => handleDeletedDiaryProduct(product._id)}
+                  className={styles.deleted_diary_product_icon}
+                  src="/deleted_product.svg"
+                  alt="deleted product diart icon"
+                  width={20}
+                  height={20}
+                />
               </div>
             </div>
           </li>

@@ -11,6 +11,10 @@
   font-weight: 700;
   color: $white-color;
   margin-right: 8px;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(24px, 32px);
+  }
 }
 
 .calendar_icon {
@@ -28,4 +32,8 @@
 
 .prev_date {
   margin-right: 10px;
+}
+
+.disabled {
+  fill: gray;
 }

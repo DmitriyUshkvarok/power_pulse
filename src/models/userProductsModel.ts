@@ -33,7 +33,7 @@ const productSchema = new Schema<ProductDocument>(
       default: true,
     },
   },
-  { timestamps: true }
+  { versionKey: false, timestamps: true }
 );
 
 const Product = models.product || model('product', productSchema);

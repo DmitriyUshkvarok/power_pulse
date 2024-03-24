@@ -7,4 +7,5 @@ export interface UserSession {
   role: string;
   provider: string;
   userData: string;
+  createdAt: Date;
 }

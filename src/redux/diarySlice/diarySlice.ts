@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { DiaryProduct, getDiaryProducts } from '@/src/app/actions/diaryActions';
+import {
+  DiaryProduct,
+  getDiaryProducts,
+  deletedDiaryProduct,
+} from '@/src/app/actions/diaryActions';
 
 export interface DiaryState {
   diaryProducts: DiaryProduct[];
@@ -26,6 +30,18 @@ export const fetchDiaryProducts = createAsyncThunk<DiaryProduct[], string>(
   }
 );
 
+export const deleteDiaryProduct = createAsyncThunk<void, string>(
+  'diary/deleteDiaryProduct',
+  async (productId: string, thunkAPI) => {
+    try {
+      await deletedDiaryProduct(productId);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+);
+
 export const diarySlice = createSlice({
   name: 'diary',
   initialState,
@@ -42,6 +58,14 @@ export const diarySlice = createSlice({
       .addCase(fetchDiaryProducts.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
+      })
+      .addCase(deleteDiaryProduct.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteDiaryProduct.fulfilled, (state, action) => {
+        state.diaryProducts = state.diaryProducts.filter(
+          (product) => product._id !== action.meta.arg
+        );
       });
   },
 });

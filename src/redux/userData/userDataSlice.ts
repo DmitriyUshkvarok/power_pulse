@@ -5,11 +5,16 @@ import {
   createDataUser,
   getUserDataById,
 } from '@/src/app/actions/userDataActions';
+import { calculateDailyRecommendation } from '@/src/utils/calculateDailyRecommendation';
 
 export interface UserDataState {
   data: UserData;
   status: string;
   error: string | null;
+  calculateDailyCalories: {
+    recommendedCalories: number;
+    recommendedSportTime: number;
+  };
 }
 
 export interface UserData {
@@ -21,6 +26,13 @@ export interface UserData {
   sex: string;
   levelActivity: string;
 }
+
+export const calculateDailyRecommendationAsync = createAsyncThunk(
+  'userData/calculateDailyRecommendation',
+  async (userData: UserData) => {
+    return calculateDailyRecommendation(userData);
+  }
+);
 
 export const createDataAsync = createAsyncThunk(
   'userData/create',
@@ -55,6 +67,10 @@ const userDataSlice = createSlice({
       bloodGroup: '',
       sex: '',
       levelActivity: '',
+    },
+    calculateDailyCalories: {
+      recommendedCalories: 0,
+      recommendedSportTime: 0,
     },
     status: 'loading',
     error: null,
@@ -91,6 +107,10 @@ const userDataSlice = createSlice({
       })
       .addCase(fetchUserData.fulfilled, (state, action) => {
         state.data = { ...state.data, ...action.payload };
+        state.status = 'succeeded';
+      })
+      .addCase(calculateDailyRecommendationAsync.fulfilled, (state, action) => {
+        state.calculateDailyCalories = action.payload;
         state.status = 'succeeded';
       });
   },

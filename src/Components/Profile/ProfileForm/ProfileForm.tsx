@@ -1,10 +1,10 @@
 'use client';
+import 'react-calendar/dist/Calendar.css';
 import styles from './_ProfileForm.module.scss';
-import { useState, useRef, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import { useState, useRef, useEffect } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/src/redux/store';
 import { useSession } from 'next-auth/react';
@@ -16,6 +16,7 @@ import { updateUserNameAndEmail } from '@/src/app/actions/authActions';
 import { updateUserData } from '@/src/app/actions/userDataActions';
 import { useRouter } from 'next/navigation';
 import { createDataAsync } from '@/src/redux/userData/userDataSlice';
+import { formatDate } from '@/src/utils/formatDate';
 
 const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -48,7 +49,7 @@ const ProfileForm = () => {
     height: userData?.height ?? '',
     currentWeight: userData?.currentWeight ?? '',
     desiredWeight: userData?.desiredWeight ?? '',
-    birthday: userData?.birthday.slice(0, 10) ?? '',
+    birthday: userData?.birthday ?? '',
     bloodGroup: userData?.bloodGroup ?? '',
     sex: userData?.sex ?? '',
     levelActivity: userData?.levelActivity ?? '',
@@ -66,8 +67,8 @@ const ProfileForm = () => {
 
   const handleSave = async (values: ProfileFormValues) => {
     if (date instanceof Date) {
-      const isoDateString = date.toISOString();
-      const updatedValues = { ...values, birthday: isoDateString };
+      const formatDateToString = formatDate(date);
+      const updatedValues = { ...values, birthday: formatDateToString };
 
       try {
         setLoading(true);

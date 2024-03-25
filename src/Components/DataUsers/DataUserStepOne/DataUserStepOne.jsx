@@ -11,6 +11,7 @@ import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useRouter } from 'next/navigation';
 import { dataStepOneSchema } from '@/src/formSchemas/dataStepOneSchema';
+import { formatDate } from '@/src/utils/formatDate';
 
 const initialValues = {
   height: '',
@@ -37,8 +38,8 @@ const DataUserStepOne = () => {
   };
 
   const handleSaveValuesToGlobalState = (values) => {
-    const isoDateString = date.toISOString();
-    const updatedValues = { ...values, birthday: isoDateString };
+    const formatDateToString = formatDate(date);
+    const updatedValues = { ...values, birthday: formatDateToString };
     dispatch(updateUserData(updatedValues));
     router.push('/user-data/step-two');
   };

@@ -1,7 +1,11 @@
+'use client';
 import styles from './_day_dashsboard.module.scss';
 import Image from 'next/image';
+import useCalculateDailyRecommendation from '@/src/hooks/useCalculateDailyCalories';
 
 const DayDashboard = () => {
+  const { calculateCalories } = useCalculateDailyRecommendation();
+
   return (
     <div>
       <ul className={styles.dashboard_list}>
@@ -17,7 +21,11 @@ const DayDashboard = () => {
               />
               <div className={styles.dashboard_info}>Daily calorie intake</div>
             </div>
-            <div className={styles.dashboard_value}>2200</div>
+            <div className={styles.dashboard_value}>
+              {calculateCalories.recommendedCalories
+                ? calculateCalories.recommendedCalories.toFixed()
+                : 0}
+            </div>
           </div>
           <div className={styles.dashboard_sub_item}>
             <div className={styles.dashboard_header}>
@@ -60,7 +68,9 @@ const DayDashboard = () => {
               />
               <div className={styles.dashboard_info}>Daily norm of sports</div>
             </div>
-            <div className={styles.dashboard_value}>110 min</div>
+            <div className={styles.dashboard_value}>
+              {calculateCalories.recommendedSportTime} min
+            </div>
           </div>
           <div className={styles.dashboard_sub_item}>
             <div className={styles.dashboard_header}>

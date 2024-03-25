@@ -8,20 +8,11 @@ export interface DailyRecommendation {
 export const calculateDailyRecommendation = (
   userData: UserData
 ): DailyRecommendation => {
-  const {
-    height,
-    currentWeight,
-    desiredWeight,
-    birthday,
-    bloodGroup,
-    sex,
-    levelActivity,
-  } = userData;
+  const { height, currentWeight, birthday, sex, levelActivity } = userData;
 
   // Перетворення рядків в числа, де необхідно
   const heightInCm = parseFloat(height);
   const currentWeightInKg = parseFloat(currentWeight);
-  const desiredWeightInKg = parseFloat(desiredWeight);
   const age = calculateAge(birthday);
 
   // Обчислення BMR
@@ -39,7 +30,6 @@ export const calculateDailyRecommendation = (
 
   // Обчислення рекомендованих калорій
   const recommendedCalories = calculateRecommendedCalories(
-    currentWeightInKg,
     bmr
   );
 
@@ -77,10 +67,7 @@ const activityCoefficients: { [key: string]: number } = {
 };
 
 // Функція для обчислення рекомендованих калорій
-const calculateRecommendedCalories = (
-  currentWeight: number,
-  bmr: number
-): number => {
+const calculateRecommendedCalories = (bmr: number): number => {
   const recommendedCalories = bmr;
   return recommendedCalories;
 };

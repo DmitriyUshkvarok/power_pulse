@@ -2,6 +2,7 @@
 import styles from './_ProfileCard.module.scss';
 import Image from 'next/image';
 import Notiflix from 'notiflix';
+import useCalculateDailyRecommendation from '@/src/hooks/useCalculateDailyCalories';
 import { signOut } from 'next-auth/react';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
@@ -18,6 +19,7 @@ const ProfileCard = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
   const { data: session, update } = useSession();
+  const { calculateCalories } = useCalculateDailyRecommendation();
 
   const handleInputChange = async (
     e: React.ChangeEvent<HTMLInputElement & { files: FileList }>
@@ -154,7 +156,11 @@ const ProfileCard = () => {
               Daily calorie intake
             </div>
           </div>
-          <div className={styles.daily_colories_counter}>2200</div>
+          <div className={styles.daily_colories_counter}>
+            {calculateCalories.recommendedCalories
+              ? calculateCalories.recommendedCalories.toFixed()
+              : 0}
+          </div>
         </div>
         <div className={styles.daily_sport}>
           <div className={styles.daily_sport_top_block}>
@@ -168,7 +174,9 @@ const ProfileCard = () => {
               Daily norm of sports
             </div>
           </div>
-          <div className={styles.daily_sport_counter}>110 min</div>
+          <div className={styles.daily_sport_counter}>
+            {calculateCalories.recommendedSportTime.toFixed()} min
+          </div>
         </div>
       </div>
       <div className={styles.warning_block}>

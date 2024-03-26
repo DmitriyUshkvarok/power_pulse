@@ -13,6 +13,13 @@ import { useRouter } from 'next/navigation';
 import { dataStepOneSchema } from '@/src/formSchemas/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
 
+interface FormData {
+  height: string;
+  currentWeight: string;
+  desiredWeight: string;
+  birthday: string;
+}
+
 const initialValues = {
   height: '',
   currentWeight: '',
@@ -31,13 +38,13 @@ const DataUserStepOne = () => {
     setCalendarOpen(!isCalendarOpen);
   };
 
-  const clickBackdrop = (e) => {
+  const clickBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) {
       setCalendarOpen(false);
     }
   };
 
-  const handleSaveValuesToGlobalState = (values) => {
+  const handleSaveValuesToGlobalState = (values: FormData) => {
     const formatDateToString = formatDate(date);
     const updatedValues = { ...values, birthday: formatDateToString };
     dispatch(updateUserData(updatedValues));
@@ -203,15 +210,17 @@ const DataUserStepOne = () => {
                       <Calendar
                         className={styles.customCalendar}
                         onChange={(selectedDate) => {
-                          setFieldValue(
-                            'birthday',
-                            selectedDate.toLocaleDateString('en-GB', {
-                              day: 'numeric',
-                              month: 'numeric',
-                              year: 'numeric',
-                            })
-                          );
-                          setDate(selectedDate);
+                          if (selectedDate instanceof Date) {
+                            setFieldValue(
+                              'birthday',
+                              selectedDate.toLocaleDateString('en-GB', {
+                                day: 'numeric',
+                                month: 'numeric',
+                                year: 'numeric',
+                              })
+                            );
+                            setDate(selectedDate);
+                          }
                         }}
                         value={date}
                       />

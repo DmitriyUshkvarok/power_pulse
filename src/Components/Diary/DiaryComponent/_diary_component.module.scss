@@ -10,8 +10,19 @@
     padding-bottom: 64px;
   }
 
-  @include mediaQuery(1200px) {
+  @include mediaQuery(1440px) {
     padding-bottom: 68px;
+  }
+}
+
+.diary_page_wrapper {
+  display: flex;
+  flex-direction: column;
+
+  @include mediaQuery(1440px) {
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 32px;
   }
 }
 
@@ -20,6 +31,10 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 40px;
+
+  @include mediaQuery(768px) {
+    margin-bottom: 32px;
+  }
 }
 
 .diary_page_title {
@@ -34,4 +49,23 @@
 
 .dashboard_box_wrapper {
   margin-bottom: 40px;
+
+  @include mediaQuery(768px) {
+    order: 1;
+    margin-top: 64px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-top: 0;
+  }
+}
+
+.product_box_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+
+  @include mediaQuery(768px) {
+    gap: 32px;
+  }
 }

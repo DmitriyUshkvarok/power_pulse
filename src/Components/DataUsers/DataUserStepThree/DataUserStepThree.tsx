@@ -33,13 +33,13 @@ const DataUserStepThree = () => {
         setIsloading(true);
         await dispatch(createDataAsync({ id: userId, data: userData }));
         await dispatch(fetchUserData(userDataId));
-        alert('success create user date');
         router.push('/diary');
-        setIsloading(false);
       } else {
         alert('User not authenticated');
       }
     } catch (error) {
+      setIsloading(false);
+    } finally {
       setIsloading(false);
     }
   };

@@ -2,6 +2,7 @@ import styles from './_diary_component.module.scss';
 import DaySwitch from '../../UI/DaySwitch/DaySwitch';
 import ProductComponent from '../ProductComponent/ProductComponent';
 import DayDashboard from '../DayDashboard/DayDashboard';
+import ExercisesDiaryList from '../ExercisesComponent/ExercisesDiaryList';
 
 export interface ProductDiary {
   _id: string;
@@ -24,10 +25,19 @@ const DiaryComponent = () => {
         <h1 className={styles.diary_page_title}>Diary</h1>
         <DaySwitch />
       </div>
-      <div className={styles.dashboard_box_wrapper}>
-        <DayDashboard />
+      <div className={styles.diary_page_wrapper}>
+        <div className={styles.dashboard_box_wrapper}>
+          <DayDashboard />
+        </div>
+        <div className={styles.product_box_wrapper}>
+          <div>
+            <ProductComponent />
+          </div>
+          <div>
+            <ExercisesDiaryList />
+          </div>
+        </div>
       </div>
-      <ProductComponent />
     </section>
   );
 };

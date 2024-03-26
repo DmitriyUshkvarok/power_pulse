@@ -5,14 +5,35 @@
   display: flex;
   justify-content: center;
   gap: 13px;
-  flex-wrap: wrap;
   margin-bottom: 20px;
+
+  @include mediaQuery(768px) {
+    flex-direction: column;
+    margin-bottom: 32px;
+  }
+
+  @include mediaQuery(1440px) {
+    margin-bottom: 48px;
+    flex-direction: row;
+  }
 }
 
 .dashboard_item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+
+  @include mediaQuery(768px) {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  @include mediaQuery(1440px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 }
 
 .dashboard_item:nth-child(odd) .dashboard_sub_item:first-child,
@@ -21,6 +42,11 @@
 }
 
 .dashboard_sub_item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 96px;
   padding: 14px;
   border-radius: $border-radius-btn;
   -webkit-border-radius: $border-radius-btn;
@@ -29,12 +55,16 @@
   -o-border-radius: $border-radius-btn;
   border: 1px solid $borde-color;
   background-color: $item-block-color;
+
+  @include mediaQuery(768px) {
+    height: 116px;
+    padding: 18px;
+  }
 }
 
 .dashboard_header {
   display: flex;
   align-items: center;
-  margin-bottom: 28px;
 }
 
 .dashboard_icon {
@@ -53,6 +83,10 @@
   font-weight: 700;
   @include fontSizeAuto(18px, 20px);
   color: $white-color;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(24px, 32px);
+  }
 }
 
 .reminder_wrapper {
@@ -68,4 +102,13 @@
 .reminder {
   @include fontSizeAuto(14px, 18px);
   color: $borde-color;
+
+  @include mediaQuery(768px) {
+    max-width: 561px;
+    @include fontSizeAuto(16px, 24px);
+  }
+
+  @include mediaQuery(1300px) {
+    max-width: 380px;
+  }
 }

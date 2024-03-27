@@ -12,7 +12,7 @@
     margin-bottom: 32px;
   }
 
-  @include mediaQuery(1440px) {
+  @include mediaQuery(1150px) {
     margin-bottom: 48px;
     flex-direction: row;
   }
@@ -29,7 +29,7 @@
     gap: 16px;
   }
 
-  @include mediaQuery(1440px) {
+  @include mediaQuery(1150px) {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 16px;
@@ -39,6 +39,14 @@
 .dashboard_item:nth-child(odd) .dashboard_sub_item:first-child,
 .dashboard_item:nth-child(even) .dashboard_sub_item:first-child {
   background-color: $orange-color;
+}
+
+.dashboard_item:nth-child(odd) .dashboard_sub_item.greenBorder {
+  border: 1px solid $success-color;
+}
+
+.dashboard_item:nth-child(odd) .dashboard_sub_item.redBorder {
+  border: 1px solid $error-color;
 }
 
 .dashboard_sub_item {

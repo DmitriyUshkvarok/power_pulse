@@ -135,7 +135,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 3px;
-  color: green;
+  color: $success-color;
   font-size: 10px;
 }
 
@@ -145,14 +145,14 @@
   align-items: center;
   gap: 10px;
   position: absolute;
-  bottom: -23px;
+  bottom: -20px;
   left: 5px;
-  color: #ff0000;
+  color: $error-color;
   font-size: 10px;
 }
 
 .errorText {
-  color: #ff0000;
+  color: $error-color;
 }
 
 .link_next {

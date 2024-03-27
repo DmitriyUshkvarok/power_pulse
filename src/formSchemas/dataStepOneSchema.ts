@@ -16,5 +16,11 @@ export const dataStepOneSchema = yup.object().shape({
     .typeError('Desired Weight must be a number')
     .min(35, 'Desired Weight should be at least 35 kg')
     .required('Desired Weight is required'),
-  birthday: yup.string().required('Birthday is required'),
+  birthday: yup
+    .string()
+    .matches(
+      /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
+      'Invalid date format, please use DD/MM/YYYY'
+    )
+    .required('Birthday is required'),
 });

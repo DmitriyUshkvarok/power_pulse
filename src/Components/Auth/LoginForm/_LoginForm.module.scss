@@ -71,6 +71,10 @@
   border: 1px solid $borde-color;
   color: $white-color;
 
+  &:focus {
+    outline: 1px solid $orange-color;
+  }
+
   ::placeholder {
     @include fontSizeAuto(14px, 18px);
     color: rgba(239, 237, 232, 0.6);
@@ -146,7 +150,7 @@
   align-items: center;
   gap: 10px;
   margin-top: 3px;
-  color: green;
+  color: $success-color;
 }
 
 .validation_error {
@@ -154,7 +158,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: red;
+  color: $error-color;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3px;

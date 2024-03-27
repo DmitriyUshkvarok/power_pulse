@@ -2,9 +2,15 @@
 import styles from './_day_dashsboard.module.scss';
 import Image from 'next/image';
 import useCalculateDailyRecommendation from '@/src/hooks/useCalculateDailyCalories';
+import useRemainingCalories from '@/src/hooks/useRemainingCalories';
 
 const DayDashboard = () => {
   const { calculateCalories } = useCalculateDailyRecommendation();
+
+  const { consumedCalories, remainingCalories } = useRemainingCalories();
+
+  const borderClass =
+    remainingCalories >= 0 ? styles.greenBorder : styles.redBorder;
 
   return (
     <div>
@@ -38,9 +44,11 @@ const DayDashboard = () => {
               />
               <div className={styles.dashboard_info}>Сalories consumed</div>
             </div>
-            <div className={styles.dashboard_value}>707</div>
+            <div className={styles.dashboard_value}>
+              {consumedCalories.toFixed()}
+            </div>
           </div>
-          <div className={styles.dashboard_sub_item}>
+          <div className={`${styles.dashboard_sub_item} ${borderClass}`}>
             <div className={styles.dashboard_header}>
               <Image
                 className={styles.dashboard_icon}
@@ -53,7 +61,9 @@ const DayDashboard = () => {
                 The rest of the calories
               </div>
             </div>
-            <div className={styles.dashboard_value}>1493</div>
+            <div className={styles.dashboard_value}>
+              {remainingCalories.toFixed()}
+            </div>
           </div>
         </li>
         <li className={styles.dashboard_item}>

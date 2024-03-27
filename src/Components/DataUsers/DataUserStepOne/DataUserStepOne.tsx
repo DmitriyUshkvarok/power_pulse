@@ -66,7 +66,7 @@ const DataUserStepOne = () => {
           onSubmit={handleSaveValuesToGlobalState}
           innerRef={formikRef}
         >
-          {({ isValid, touched, errors, setFieldValue }) => (
+          {({ isValid, touched, errors, setFieldValue, values }) => (
             <Form className={styles.form_step_one}>
               <div className={styles.step_one_form_group}>
                 <Field
@@ -75,7 +75,11 @@ const DataUserStepOne = () => {
                   name="height"
                   aria-label="height"
                 />
-                <span className={styles.step_one_form_placeholder}>Height</span>
+                {!values.height && (
+                  <span className={styles.step_one_form_placeholder}>
+                    Height
+                  </span>
+                )}
                 {touched.height && !errors.height && (
                   <div className={styles.success_text}>
                     <div>
@@ -112,9 +116,11 @@ const DataUserStepOne = () => {
                   name="currentWeight"
                   aria-label="Current Weight"
                 />
-                <span className={styles.step_one_form_placeholder}>
-                  Current Weight
-                </span>
+                {!values.currentWeight && (
+                  <span className={styles.step_one_form_placeholder}>
+                    Current Weight
+                  </span>
+                )}
                 {touched.currentWeight && !errors.currentWeight && (
                   <div className={styles.success_text}>
                     <div>
@@ -151,9 +157,11 @@ const DataUserStepOne = () => {
                   name="desiredWeight"
                   aria-label="Desired Weight"
                 />
-                <span className={styles.step_one_form_placeholder}>
-                  Desired Weight
-                </span>
+                {!values.desiredWeight && (
+                  <span className={styles.step_one_form_placeholder}>
+                    Desired Weight
+                  </span>
+                )}
                 {touched.desiredWeight && !errors.desiredWeight && (
                   <div className={styles.success_text}>
                     <div>
@@ -190,9 +198,11 @@ const DataUserStepOne = () => {
                   name="birthday"
                   aria-label="birthday"
                 />
-                <span className={styles.step_one_form_placeholder}>
-                  Birthday
-                </span>
+                {!values.birthday && (
+                  <span className={styles.step_one_form_placeholder}>
+                    Birthday
+                  </span>
+                )}
                 <Image
                   src="/calendar.svg"
                   alt="calendar icon"

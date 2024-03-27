@@ -48,7 +48,9 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
           }
           onClick={handleClosedMobileMenu}
         >
-          <Link href="/diary">Diary</Link>
+          <Link className={styles.mobile_link} href="/diary">
+            Diary
+          </Link>
         </li>
         <li
           className={
@@ -58,7 +60,9 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
           }
           onClick={handleClosedMobileMenu}
         >
-          <Link href="/products">Products</Link>
+          <Link className={styles.mobile_link} href="/products">
+            Products
+          </Link>
         </li>
         <li
           className={
@@ -68,7 +72,9 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
           }
           onClick={handleClosedMobileMenu}
         >
-          <Link href="/exercises">Exercises</Link>
+          <Link className={styles.mobile_link} href="/exercises">
+            Exercises
+          </Link>
         </li>
       </ul>
       <div className={styles.mobile_nav_logout} onClick={handleClickLogOut}>

@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
 
-  @include mediaQuery(1440px) {
+  @include mediaQuery(1150px) {
     justify-content: space-between;
     flex-direction: row;
     gap: 32px;
@@ -55,7 +55,7 @@
     margin-top: 64px;
   }
 
-  @include mediaQuery(1440px) {
+  @include mediaQuery(1150px) {
     margin-top: 0;
   }
 }

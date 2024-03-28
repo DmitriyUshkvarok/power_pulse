@@ -118,7 +118,7 @@ const Navigation = () => {
             Products
           </Link>
           <Link
-            href="/exercises"
+            href="/exercises/body-parts"
             className={
               pathname === '/exercises' ? styles.activeLink : styles.nav_link
             }

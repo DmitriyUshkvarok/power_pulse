@@ -1,5 +1,7 @@
+import ExercisesList from '@/src/Components/Exercises/ExercisesList/ExercisesList';
+
 const BodyPartsPage = () => {
-  return <div style={{ color: 'white' }}>BodyPartsPage</div>;
+  return <ExercisesList />;
 };
 
 export default BodyPartsPage;

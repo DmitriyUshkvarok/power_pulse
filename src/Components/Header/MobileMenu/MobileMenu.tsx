@@ -66,13 +66,13 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
         </li>
         <li
           className={
-            pathname === '/exercises'
+            pathname === '/exercises/body-parts'
               ? styles.activeLink
               : styles.mobile_nav_list_item
           }
           onClick={handleClosedMobileMenu}
         >
-          <Link className={styles.mobile_link} href="/exercises">
+          <Link className={styles.mobile_link} href="/exercises/body-parts">
             Exercises
           </Link>
         </li>

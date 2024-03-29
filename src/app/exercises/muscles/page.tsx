@@ -1,5 +1,7 @@
+import ExercisesList from '@/src/Components/Exercises/ExercisesList/ExercisesList';
+
 const MusclesPage = () => {
-  return <div style={{ color: 'white' }}>MusclesPage</div>;
+  return <ExercisesList />;
 };
 
 export default MusclesPage;

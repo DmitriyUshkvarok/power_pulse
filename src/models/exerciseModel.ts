@@ -18,6 +18,6 @@ const exerciseSchema = new Schema({
   },
 });
 
-const Exercise = models.exercise || model('Exercise', exerciseSchema);
+const Exercise = models.exercise || model('exercise', exerciseSchema);
 
 export default Exercise;

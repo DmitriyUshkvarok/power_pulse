@@ -1,5 +1,7 @@
+import ExercisesList from '@/src/Components/Exercises/ExercisesList/ExercisesList';
+
 const EquipmentPage = () => {
-  return <div style={{ color: 'white' }}>EquipmentPage </div>;
+  return <ExercisesList />;
 };
 
 export default EquipmentPage;

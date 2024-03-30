@@ -3,6 +3,7 @@ import styles from './_MobileMenu.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import Notiflix from 'notiflix';
+import useIsActive from '@/src/hooks/useIsActive';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 
@@ -12,6 +13,8 @@ interface MobileMenuProps {
 
 const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
   const pathname = usePathname();
+
+  const isActive = useIsActive();
 
   const handleClickLogOut = () => {
     Notiflix.Confirm.show(
@@ -66,7 +69,7 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
         </li>
         <li
           className={
-            pathname === '/exercises/body-parts'
+            isActive('/exercises/body-parts')
               ? styles.activeLink
               : styles.mobile_nav_list_item
           }

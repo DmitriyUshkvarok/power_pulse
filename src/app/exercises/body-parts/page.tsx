@@ -1,7 +1,6 @@
-import ExercisesList from '@/src/Components/Exercises/ExercisesList/ExercisesList';
-
+import ExercisesComponent from '@/src/Components/Exercises/ExercisesComponent/ExercisesComponent';
 const BodyPartsPage = () => {
-  return <ExercisesList />;
+  return <ExercisesComponent />;
 };
 
 export default BodyPartsPage;

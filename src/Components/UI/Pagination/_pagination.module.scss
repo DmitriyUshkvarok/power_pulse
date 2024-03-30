@@ -1,0 +1,48 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.pagination {
+  @include flexCenter();
+  gap: 8px;
+}
+
+.pagination_btn_count {
+  position: relative;
+  @include flexCenter();
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background-color: $pagination-color;
+  color: transparent;
+
+  &.active {
+    background-color: transparent;
+    border: 1px solid $orange-color;
+  }
+
+  &.active::before {
+    content: '';
+    background-color: $orange-color;
+    display: block;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+  }
+}

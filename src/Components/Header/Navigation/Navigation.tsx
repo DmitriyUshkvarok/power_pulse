@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Notiflix from 'notiflix';
 import MobileMenu from '../MobileMenu/MobileMenu';
+import useIsActive from '@/src/hooks/useIsActive';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
@@ -16,6 +17,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const isActive = useIsActive();
 
   useEffect(() => {
     if (showMobileMenu) {
@@ -120,7 +122,7 @@ const Navigation = () => {
           <Link
             href="/exercises/body-parts"
             className={
-              pathname === '/exercises/body-parts'
+              isActive('/exercises/body-parts')
                 ? styles.activeLink
                 : styles.nav_link
             }

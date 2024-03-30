@@ -1,19 +1,31 @@
 'use client';
-import { usePathname } from 'next/navigation';
 import styles from './_exercises_panel.module.scss';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useAppDispatch } from '@/src/hooks/redux-hook';
+import { resetCurrentPage } from '@/src/redux/paginationSlice/paginationSlice';
 
 const ExercisesPanel = () => {
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
+
+  const handleResetCurrentPageFromSessionStorage = () => {
+    setTimeout(() => {
+      dispatch(resetCurrentPage());
+    }, 100);
+  };
+
+  const isActive = (path: string) => new RegExp(`^${path}`).test(pathname);
 
   return (
     <div className={styles.exercises_sub_link_box}>
       <h1 className={styles.exercises_title}>Exercises</h1>
       <div className={styles.exercises_sub_link_wrapper}>
         <Link
+          onClick={handleResetCurrentPageFromSessionStorage}
           href="/exercises/body-parts"
           className={
-            pathname === '/exercises/body-parts'
+            isActive('/exercises/body-parts')
               ? styles.activeLink
               : styles.exercises_sub_link
           }
@@ -21,8 +33,9 @@ const ExercisesPanel = () => {
           Body-parts
         </Link>
         <Link
+          onClick={handleResetCurrentPageFromSessionStorage}
           className={
-            pathname === '/exercises/muscles'
+            isActive('/exercises/muscles')
               ? styles.activeLink
               : styles.exercises_sub_link
           }
@@ -31,8 +44,9 @@ const ExercisesPanel = () => {
           Muscles
         </Link>
         <Link
+          onClick={handleResetCurrentPageFromSessionStorage}
           className={
-            pathname === '/exercises/equipment'
+            isActive('/exercises/equipment')
               ? styles.activeLink
               : styles.exercises_sub_link
           }

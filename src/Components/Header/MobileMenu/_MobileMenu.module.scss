@@ -12,7 +12,7 @@
   width: 100vw;
   min-height: 100vh;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -65,7 +65,7 @@
 }
 
 .activeLink {
-  padding: 10px 27px;
+  padding: 10px 37px;
   border-radius: $border-radius-btn;
   -webkit-border-radius: $border-radius-btn;
   -moz-border-radius: $border-radius-btn;

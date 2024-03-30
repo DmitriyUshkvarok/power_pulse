@@ -9,10 +9,13 @@ const useFilteredExercises = () => {
   const filteredExercises = useAppSelector(
     (state) => state.exercises.exercises
   );
+  const exerciseStatus = useAppSelector((state) => state.exercises.status);
 
   useEffect(() => {
-    dispatch(fetchExercises());
-  }, [dispatch]);
+    if (exerciseStatus === 'idle') {
+      dispatch(fetchExercises());
+    }
+  }, [dispatch, exerciseStatus]);
 
   const filterExercisesByCategory = () => {
     switch (pathname) {

@@ -1,4 +1,5 @@
 import styles from './_body_parts_dynamic_page.module.scss';
+import DynamicExercisesPageComponent from '@/src/Components/Exercises/DynamicExercisesPageComponent/DynamicExercisesPageComponent';
 
 export interface ParamsId {
   params: {
@@ -11,7 +12,7 @@ const DynamicBodyPartsPage = ({ params }: ParamsId) => {
 
   return (
     <section className={styles.dynamic_page_section} style={{ color: 'white' }}>
-      dynamic page body parts
+      <DynamicExercisesPageComponent id={id} />
     </section>
   );
 };

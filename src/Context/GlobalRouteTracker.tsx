@@ -15,7 +15,10 @@ const GlobalRouteTracker = ({ children }: RootLayoutProps) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const isFirstRender = useRef(true);
-  const authPaths = useMemo(() => ['/add-diary', '/create-product'], []);
+  const authPaths = useMemo(
+    () => ['/add-diary', '/create-product', '/create-exercises'],
+    []
+  );
 
   useEffect(() => {
     dispatch(setRoutingRelatedAuthCompleted(authPaths.includes(pathname)));

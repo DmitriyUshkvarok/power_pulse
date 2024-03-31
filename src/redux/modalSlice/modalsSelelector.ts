@@ -11,9 +11,13 @@ const getIsCreatedModalOpen = (state: RootState) =>
 const getIsAddDiaryModalOpen = (state: RootState) =>
   state.modals.isAddDiaryModalOpen;
 
+const getIsCreatedExercisesModalOpen = (state: RootState) =>
+  state.modals.isCreatedExercisesModalOpen;
+
 export const modalsSelectors = {
   getWellDoneDiaryModalOpen,
   getIsModalOpen,
   getIsCreatedModalOpen,
   getIsAddDiaryModalOpen,
+  getIsCreatedExercisesModalOpen,
 };

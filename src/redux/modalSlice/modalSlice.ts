@@ -6,6 +6,7 @@ interface ModalState {
   isWellDoneDiaryModalOpen: boolean;
   isCreatedModalOpen: boolean;
   isAddDiaryModalOpen: boolean;
+  isCreatedExercisesModalOpen: boolean;
   isModalOpen: boolean;
 }
 
@@ -14,6 +15,7 @@ const initialState: ModalState = {
   isCreatedModalOpen: false,
   isAddDiaryModalOpen: false,
   isModalOpen: false,
+  isCreatedExercisesModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -28,6 +30,9 @@ const modalSlice = createSlice({
     },
     openAddDiaryModal: (state) => {
       state.isAddDiaryModalOpen = true;
+    },
+    openCreatedExercisesModal: (state) => {
+      state.isCreatedExercisesModalOpen = true;
     },
     openModal: (state) => {
       state.isModalOpen = true;
@@ -45,6 +50,7 @@ export const {
   openWellDoneDiaryModal,
   openCreatedModal,
   openAddDiaryModal,
+  openCreatedExercisesModal,
   openModal,
   closeModal,
 } = modalSlice.actions;

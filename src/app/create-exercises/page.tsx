@@ -1,5 +1,5 @@
 const CreateExercisesPage = () => {
-  return;
+  return <div>test modal</div>;
 };
 
 export default CreateExercisesPage;

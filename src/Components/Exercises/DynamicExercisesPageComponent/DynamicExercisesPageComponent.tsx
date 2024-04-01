@@ -27,9 +27,9 @@ const DynamicExercisesPageComponent = ({ id }: PageId) => {
       >
         {id}
       </Link>
-      <Modal>
+      {/* <Modal>
         <AddExercisesForm id={id} />
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

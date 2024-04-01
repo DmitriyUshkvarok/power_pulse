@@ -1,4 +1,4 @@
-import CreateExercisesPage from '../../exercises/create-exercises/page';
+import CreateExercisesPage from '../../create-exercises/page';
 
 const AddExercisesPageParallel = () => {
   return <CreateExercisesPage />;

@@ -1,4 +1,5 @@
 'use client';
+import styles from './_exercises_component_wrapper.module.scss';
 import ExercisesList from '../ExercisesList/ExercisesList';
 import Pagination from '../../UI/Pagination/Pagination';
 import useFilteredExercises from '@/src/hooks/useFilteredExercises';
@@ -24,7 +25,7 @@ const ExercisesComponent = () => {
       {exerciseStatus === 'loading' ? (
         <div style={{ textAlign: 'center', color: 'white' }}>Loading...</div>
       ) : (
-        <>
+        <div className={styles.exercises_component_container}>
           <ExercisesList />
           <Pagination
             totalItems={totalItems}
@@ -32,7 +33,7 @@ const ExercisesComponent = () => {
             currentPage={currentPage}
             onPageChange={handlePageChange}
           />
-        </>
+        </div>
       )}
     </div>
   );

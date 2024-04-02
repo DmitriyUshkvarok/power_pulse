@@ -1,0 +1,27 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.add_exercises_sub_list {
+  max-width: 200px;
+  display: flex;
+  color: $white-color;
+  padding: 14px;
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(5px, -50%);
+    display: block;
+    background-image: url('/next.svg');
+    width: 16px;
+    height: 16px;
+    -webkit-transform: translate(5px, -50%);
+    -moz-transform: translate(5px, -50%);
+    -ms-transform: translate(5px, -50%);
+    -o-transform: translate(5px, -50%);
+  }
+}

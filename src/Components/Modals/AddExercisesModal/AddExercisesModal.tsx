@@ -5,12 +5,11 @@ import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
 import useAuthRedirect from '@/src/hooks/useRedirect';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
-import { createExerciseCards } from '@/src/app/actions/exercisesActions';
+import { addExerciseCard } from '@/src/redux/exercisesSubListSlice/exercisesSubListSlice';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addExercisesSchema } from '@/src/formSchemas/addExercisesSchema';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
@@ -37,7 +36,6 @@ const AddExercisesForm = ({ id }: PageId) => {
   const [loading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
-  const router = useRouter();
   const { handleRedirect } = useAuthRedirect();
   const dispatch = useAppDispatch();
 
@@ -47,27 +45,30 @@ const AddExercisesForm = ({ id }: PageId) => {
     modalsSelectors.getIsCreatedExercisesModalOpen
   );
 
+  const handleCloseModal = () => {
+    handleRedirect();
+    dispatch(closeModal());
+  };
+
   const handleSubmit = async (values: FormValues) => {
     try {
-      console.log('data', values);
-      console.log('user id', userId);
-      console.log('exercises id', exercisesId);
       setIsLoading(true);
+      const exercisesSubListData = {
+        name: values.name,
+        burnedCalories: values.burnedCalories,
+        bodyPart: values.bodyPart,
+        target: values.target,
+        exercisesId: exercisesId,
+      };
 
-      const response = await createExerciseCards(values, userId, exercisesId);
-      if (response) {
-        router.back();
-      }
+      dispatch(addExerciseCard({ data: exercisesSubListData, userId }));
+
+      handleCloseModal();
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
   };
 
   return (
@@ -88,73 +89,71 @@ const AddExercisesForm = ({ id }: PageId) => {
               validationSchema={addExercisesSchema}
               onSubmit={handleSubmit}
             >
-              {({ values }) => (
-                <Form className={styles.form_create_product}>
-                  <div className={styles.form_group}>
-                    <Field
-                      className={styles.form_input}
-                      type="text"
-                      name="name"
-                      placeholder="name"
-                    />
-                    <ErrorMessage name="name">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
-                  </div>
-                  <div className={styles.form_group}>
-                    <Field
-                      className={styles.form_input}
-                      type="text"
-                      name="burnedCalories"
-                      placeholder="burned calories"
-                    />
-                    <ErrorMessage name="burnedCalories">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
-                  </div>
-                  <div className={styles.form_group}>
-                    <Field
-                      className={styles.form_input}
-                      type="text"
-                      name="bodyPart"
-                      placeholder="body part"
-                    />
-                    <ErrorMessage name="bodyPart">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
-                  </div>
-                  <div className={styles.form_group}>
-                    <Field
-                      className={styles.form_input}
-                      type="text"
-                      name="target"
-                      placeholder="target"
-                    />
-                    <ErrorMessage name="target">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
-                  </div>
-                  <button className={styles.create_product_btn} type="submit">
-                    {loading ? 'Loading...' : 'Create Exercise'}
-                  </button>
-                </Form>
-              )}
+              <Form className={styles.form_create_product}>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="name"
+                    placeholder="name"
+                  />
+                  <ErrorMessage name="name">
+                    {(msg) => (
+                      <div className={styles.validation_error}>
+                        <span>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="burnedCalories"
+                    placeholder="burned calories"
+                  />
+                  <ErrorMessage name="burnedCalories">
+                    {(msg) => (
+                      <div className={styles.validation_error}>
+                        <span>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="bodyPart"
+                    placeholder="body part"
+                  />
+                  <ErrorMessage name="bodyPart">
+                    {(msg) => (
+                      <div className={styles.validation_error}>
+                        <span>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="target"
+                    placeholder="target"
+                  />
+                  <ErrorMessage name="target">
+                    {(msg) => (
+                      <div className={styles.validation_error}>
+                        <span>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <button className={styles.create_product_btn} type="submit">
+                  {loading ? 'Loading...' : 'Create Exercise'}
+                </button>
+              </Form>
             </Formik>
           </div>
         </Container>

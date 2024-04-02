@@ -9,6 +9,7 @@ export interface UserDocument extends Document {
   provider: string;
   products: Array<Schema.Types.ObjectId>;
   diarys: Array<Schema.Types.ObjectId>;
+  exerciseCards: Array<Schema.Types.ObjectId>;
 }
 
 const userSchema = new Schema(
@@ -46,6 +47,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'diary',
+      },
+    ],
+    exerciseCards: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'ExerciseCard',
       },
     ],
   },

@@ -41,6 +41,7 @@ const modalSlice = createSlice({
       state.isWellDoneDiaryModalOpen = false;
       state.isCreatedModalOpen = false;
       state.isAddDiaryModalOpen = false;
+      state.isCreatedExercisesModalOpen = false;
       state.isModalOpen = false;
     },
   },

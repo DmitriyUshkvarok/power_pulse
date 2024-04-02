@@ -11,11 +11,20 @@ interface ExerciseList {
   category: string;
 }
 
-interface ExerciseData {
+export interface ExerciseData {
   name: string;
   burnedCalories: number;
   bodyPart: string;
   target: string;
+}
+
+export interface ExerciseCardData {
+  _id: string;
+  name: string;
+  burnedCalories: number;
+  bodyPart: string;
+  target: string;
+  exercisesId: string;
 }
 
 export const getExerciseSubCategory = async (): Promise<ExerciseList[]> => {
@@ -37,19 +46,12 @@ export const getExerciseSubCategory = async (): Promise<ExerciseList[]> => {
 
 export const createExerciseCards = async (
   data: ExerciseData,
-  userId: string,
-  exerciseId: string | number
+  userId: string
 ) => {
   connectToDatabase();
   try {
-    const { name, burnedCalories, bodyPart, target } = data;
-
     const newExerciseCard = new ExerciseCard({
-      exercise: exerciseId,
-      name,
-      burnedCalories,
-      bodyPart,
-      target,
+      ...data,
       createdBy: userId,
     });
 
@@ -65,9 +67,38 @@ export const createExerciseCards = async (
       }
     );
 
-    return savedExerciseCard;
+    return { ...savedExerciseCard._doc, _id: savedExerciseCard._id.toString() };
   } catch (error) {
     console.error('Error creating exercise cards:', error);
     throw new Error('Error creating exercise cards');
+  }
+};
+
+export const getExerciseCardsByUserId = async (
+  userId: string
+): Promise<ExerciseCardData[]> => {
+  connectToDatabase();
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return [];
+    }
+
+    const exerciseCardIds = user.exerciseCards;
+
+    const exerciseCards = await ExerciseCard.find({
+      _id: { $in: exerciseCardIds },
+    });
+
+    const formattedExerciseCards = exerciseCards.map((card) => ({
+      ...card._doc,
+      _id: card._doc._id.toString(),
+    }));
+
+    return formattedExerciseCards;
+  } catch (error) {
+    console.error('Произошла ошибка при получении карточек упражнений:', error);
+    return [];
   }
 };

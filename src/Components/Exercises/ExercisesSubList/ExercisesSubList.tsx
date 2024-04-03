@@ -1,62 +1,50 @@
 'use client';
-import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './_exercises_sub_list.module.scss';
-import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../Profile/ProfileForm';
-import { fetchExerciseCards } from '@/src/redux/exercisesSubListSlice/exercisesSubListSlice';
+import { ExerciseCardData } from '@/src/app/actions/exercisesActions';
 
-interface PageId {
+interface ExercisesSubListProps {
   id?: string | number;
+  exercisesSubListData: ExerciseCardData[];
 }
 
-const ExercisesSubList = ({ id }: PageId) => {
-  const dispatch = useAppDispatch();
-  const { data: session } = useSession();
-  const userId = (session?.user as UserSession)?._id;
-
-  const exercisesSubListData = useAppSelector(
-    (state) => state.exercisesSubList.exerciseCards
-  );
-
-  useEffect(() => {
-    dispatch(fetchExerciseCards(userId));
-  }, [dispatch, userId]);
-
+const ExercisesSubList = ({
+  id,
+  exercisesSubListData,
+}: ExercisesSubListProps) => {
   const filteredExerciseCards = exercisesSubListData.filter(
     (card) => card.exercisesId === id
   );
 
   return (
-    <section className={styles.product_section}>
-      <ul className={styles.product_list}>
+    <section className={styles.exercise_section}>
+      <ul className={styles.exercise_sub_list}>
         {filteredExerciseCards.map((card) => (
-          <li key={card._id} className={styles.product_list_item}>
-            <div className={styles.product_list_item_header}>
-              <div className={styles.product_list_pin}>Exercise</div>
-              <Link href="/add-diary">
-                <div className={styles.product_list_add_btn}>Add</div>
-              </Link>
+          <li key={card._id} className={styles.exercise_sub_list_item}>
+            <div className={styles.exercise_sub_item_header}>
+              <div className={styles.exercise_sub_list}>Workout</div>
+              <div className={styles.exercise_sub_list_add_btn}>
+                <Link href="/add-diary">Start</Link>
+              </div>
             </div>
-            <div className={styles.product_list_item_middle}>{card.name}</div>
-            <div className={styles.product_list_item_footer}>
-              <div className={styles.product_list_item_calories}>
+            <div className={styles.exercise_sub_list_middle}>{card.name}</div>
+            <div className={styles.exercise_sub_list_item_footer}>
+              <div className={styles.exercise_sub_list_item_calories}>
                 Burned Calories:
-                <span className={styles.product_list_item_span}>
+                <span className={styles.exercise_sub_list_item_span}>
                   {card.burnedCalories}
                 </span>
               </div>
-              <div className={styles.product_list_item_category}>
+              <div className={styles.exercise_sub_list_item_body_part}>
                 Body Part:
-                <span className={styles.product_list_item_span}>
+                <span className={styles.exercise_sub_list_item_span}>
                   {card.bodyPart}
                 </span>
               </div>
-              <div className={styles.product_list_item_weight}>
+              <div className={styles.exercise_sub_list_item_target}>
                 Target:
-                <span className={styles.product_list_item_span}>
+                <span className={styles.exercise_sub_list_item_span}>
                   {card.target}
                 </span>
               </div>

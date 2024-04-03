@@ -1,7 +1,7 @@
 @import '../../../sass/utils/variables.module';
 @import '../../../sass/utils/mixins.module';
 
-.product_section {
+.exercise_section {
   padding-top: 40px;
   padding-bottom: 80px;
 
@@ -32,12 +32,13 @@
   color: $orange-color;
 }
 
-.product_list {
+.exercise_sub_list {
+  width: 100%;
+  max-height: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-height: 100%;
 
   @media (min-width: 768px) {
     max-width: 700px;
@@ -70,12 +71,12 @@
   }
 
   @media (min-width: 1200px) {
-    min-width: 850px;
+    max-width: 850px;
     max-height: 487px;
   }
 }
 
-.product_list_item {
+.exercise_sub_list_item {
   position: relative;
   padding: 16px;
   background-color: $item-block-color;
@@ -87,84 +88,24 @@
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   border: 1px solid $borde-color;
-  height: 141px;
 
   @media (min-width: 768px) {
     width: 335px;
   }
 
   @media (min-width: 1200px) {
-    min-width: 405px;
+    width: 405px;
   }
 }
 
-.product_list_item_header {
+.exercise_sub_item_header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 35px;
 }
 
-.product_list_pin {
-  padding: 5px 8px;
-  border-radius: 4px;
-  background-color: $item-block-color;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  -o-border-radius: 4px;
-  text-transform: uppercase;
-  color: $white-color;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.product_list_tracker {
-  margin-left: auto;
-  margin-right: 16px;
-  color: $white-color;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -12px;
-    transform: translate(-12px, -50%);
-    display: block;
-    background-image: url('/recommended.svg');
-    width: 14px;
-    height: 14px;
-    -webkit-transform: translate(-12px, -50%);
-    -moz-transform: translate(-12px, -50%);
-    -ms-transform: translate(-12px, -50%);
-    -o-transform: translate(-12px, -50%);
-  }
-}
-
-.product_list_tracker_not_recommended {
-  margin-left: auto;
-  margin-right: 16px;
-  color: $white-color;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -12px;
-    transform: translate(-12px, -50%);
-    display: block;
-    background-image: url('/no-recommended.svg');
-    width: 14px;
-    height: 14px;
-    -webkit-transform: translate(-12px, -50%);
-    -moz-transform: translate(-12px, -50%);
-    -ms-transform: translate(-12px, -50%);
-    -o-transform: translate(-12px, -50%);
-  }
-}
-
-.product_list_add_btn {
+.exercise_sub_list_add_btn {
   position: relative;
   cursor: pointer;
   color: $orange-color;
@@ -183,7 +124,7 @@
   }
 }
 
-.product_list_item_middle {
+.exercise_sub_list_middle {
   position: relative;
   margin-bottom: 8px;
   margin-left: 40px;
@@ -215,17 +156,16 @@
   }
 }
 
-.product_list_item_footer {
+.exercise_sub_list_item_footer {
+  max-width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
   color: $borde-color;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 18px;
+  @include fontSizeAuto(12px, 18px);
 }
 
-.product_list_item_span {
+.exercise_sub_list_item_span {
   margin-left: 4px;
   color: $white-color;
   @include fontSizeAuto(12px, 18px);
@@ -233,7 +173,7 @@
 
 .deleted_product_icon {
   position: absolute;
-  bottom: 10px;
+  bottom: 15px;
   right: 10px;
   cursor: pointer;
 }

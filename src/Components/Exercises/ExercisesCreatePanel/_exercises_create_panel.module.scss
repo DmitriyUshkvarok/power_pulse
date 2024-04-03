@@ -1,0 +1,40 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.panel_container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dynamic_page_title {
+  font-weight: 700;
+  @include fontSizeAuto(24px, 28px);
+  color: $white-color;
+}
+
+.add_exercises_sub_list {
+  @include fontSizeAuto(20px, 24px);
+  display: flex;
+  color: $white-color;
+  padding: 14px;
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translate(5px, -50%);
+    display: block;
+    background-image: url('/next.svg');
+    width: 16px;
+    height: 16px;
+    -webkit-transform: translate(5px, -50%);
+    -moz-transform: translate(5px, -50%);
+    -ms-transform: translate(5px, -50%);
+    -o-transform: translate(5px, -50%);
+  }
+}

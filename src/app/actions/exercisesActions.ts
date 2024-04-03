@@ -3,8 +3,9 @@ import connectToDatabase from '@/src/utils/db';
 import Exercise from '@/src/models/exerciseModel';
 import ExerciseCard from '@/src/models/exerciseCard.model';
 import User from '@/src/models/users';
+import { revalidatePath } from 'next/cache';
 
-interface ExerciseList {
+export interface ExerciseList {
   _id: string;
   title: string;
   imageURL: string;
@@ -67,6 +68,7 @@ export const createExerciseCards = async (
       }
     );
 
+    revalidatePath('/');
     return { ...savedExerciseCard._doc, _id: savedExerciseCard._id.toString() };
   } catch (error) {
     console.error('Error creating exercise cards:', error);

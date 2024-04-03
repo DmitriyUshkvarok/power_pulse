@@ -5,7 +5,6 @@ import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
 import useAuthRedirect from '@/src/hooks/useRedirect';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
-import { addExerciseCard } from '@/src/redux/exercisesSubListSlice/exercisesSubListSlice';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -13,6 +12,7 @@ import { addExercisesSchema } from '@/src/formSchemas/addExercisesSchema';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import { createExerciseCards } from '@/src/app/actions/exercisesActions';
 
 interface FormValues {
   name: string;
@@ -60,10 +60,11 @@ const AddExercisesForm = ({ id }: PageId) => {
         target: values.target,
         exercisesId: exercisesId,
       };
+      const response = await createExerciseCards(exercisesSubListData, userId);
 
-      dispatch(addExerciseCard({ data: exercisesSubListData, userId }));
-
-      handleCloseModal();
+      if (response) {
+        handleCloseModal();
+      }
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

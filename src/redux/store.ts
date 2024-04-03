@@ -5,7 +5,6 @@ import persistedModalReducer from './modalSlice/modalSlice';
 import persistedPaginationReducer from './paginationSlice/paginationSlice';
 import exerciseSlice from './exerciseSlice/exerciseSlice';
 import diarySlice from './diarySlice/diarySlice';
-import exercisesSubListSlice from './exercisesSubListSlice/exercisesSubListSlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import {
   persistStore,
@@ -24,7 +23,6 @@ const store = configureStore({
     modals: persistedModalReducer,
     diary: diarySlice,
     exercises: exerciseSlice,
-    exercisesSubList: exercisesSubListSlice,
     pagination: persistedPaginationReducer,
     globalLocalSession: persistedGlobalLocalSessionStoreReducer,
   },

@@ -9,10 +9,8 @@ interface RootLayoutProps {
 const ExercisesLayout = ({ children }: RootLayoutProps) => {
   return (
     <section className={styles.exercises_section}>
-      <Container>
-        <ExercisesPanel />
-        <div>{children}</div>
-      </Container>
+      <ExercisesPanel />
+      <div>{children}</div>
     </section>
   );
 };

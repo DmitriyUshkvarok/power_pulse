@@ -62,7 +62,7 @@ const DayDashboard = () => {
               </div>
             </div>
             <div className={styles.dashboard_value}>
-              {remainingCalories.toFixed()}
+              {remainingCalories ? remainingCalories.toFixed() : 0}
             </div>
           </div>
         </li>

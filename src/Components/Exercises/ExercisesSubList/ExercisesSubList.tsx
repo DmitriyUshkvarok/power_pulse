@@ -23,7 +23,7 @@ const ExercisesSubList = ({
         {filteredExerciseCards.map((card) => (
           <li key={card._id} className={styles.exercise_sub_list_item}>
             <div className={styles.exercise_sub_item_header}>
-              <div className={styles.exercise_sub_list}>Workout</div>
+              <div className={styles.exercise_sub_list_pin}>Workout</div>
               <div className={styles.exercise_sub_list_add_btn}>
                 <Link href="/add-diary">Start</Link>
               </div>

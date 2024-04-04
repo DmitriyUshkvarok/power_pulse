@@ -1,0 +1,25 @@
+@import '../../../../sass/utils/variables.module';
+@import '../../../../sass/utils/mixins.module';
+
+.btnBack {
+  position: relative;
+  color: $borde-color;
+  @include fontSizeAuto(14px, 18px);
+  background-color: transparent;
+  border: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-image: url('/back-arrow-gray.svg');
+    background-repeat: no-repeat;
+  }
+
+  @media (min-width: 768px) {
+    @include fontSizeAuto(16px, 24px);
+  }
+}

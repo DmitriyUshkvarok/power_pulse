@@ -3,21 +3,22 @@ import styles from './_navigation.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import Notiflix from 'notiflix';
-import MobileMenu from '../MobileMenu/MobileMenu';
 import useIsActive from '@/src/hooks/useIsActive';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
+import { setShowMobileMenu } from '@/src/redux/modalSlice/modalSlice';
+import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 
 const Navigation = () => {
   const pathname = usePathname();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { data: session } = useSession();
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const isActive = useIsActive();
+  const showMobileMenu = useAppSelector(modalsSelectors.getShowMobileMenu);
 
   useEffect(() => {
     if (showMobileMenu) {
@@ -50,18 +51,11 @@ const Navigation = () => {
   };
 
   const handleOpenMobileMenu = () => {
-    setShowMobileMenu(true);
-  };
-
-  const handleClosedMobileMenu = () => {
-    setShowMobileMenu(false);
+    dispatch(setShowMobileMenu());
   };
 
   return (
     <>
-      {showMobileMenu && (
-        <MobileMenu handleClosedMobileMenu={handleClosedMobileMenu} />
-      )}
       <div className={styles.nav_wrapper}>
         <Link href={session ? '/diary' : '/'} className={styles.header_logo}>
           <Image

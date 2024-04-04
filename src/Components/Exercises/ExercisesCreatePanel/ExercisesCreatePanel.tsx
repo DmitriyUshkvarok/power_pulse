@@ -1,7 +1,5 @@
 'use client';
 import styles from './_exercises_create_panel.module.scss';
-import AddExercisesForm from '../../Modals/AddExercisesModal/AddExercisesModal';
-import Modal from '../../Modals/Modal/Modal';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 import {
   openCreatedExercisesModal,
@@ -33,9 +31,6 @@ const ExercisesCreatePanel = ({ id, exerciseList }: ExercisesListProps) => {
       <div onClick={openModalCreate} className={styles.add_exercises_sub_list}>
         Add a exercises cards
       </div>
-      <Modal>
-        <AddExercisesForm id={id} />
-      </Modal>
     </div>
   );
 };

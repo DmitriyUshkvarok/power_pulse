@@ -1,21 +1,6 @@
 @import '../../../sass/utils/variables.module';
 @import '../../../sass/utils/mixins.module';
 
-.exercise_section {
-  padding-top: 40px;
-  padding-bottom: 80px;
-
-  @media (min-width: 768px) {
-    padding-top: 32px;
-    padding-bottom: 48px;
-  }
-
-  @media (min-width: 1200px) {
-    padding-top: 28px;
-    padding-bottom: 81px;
-  }
-}
-
 .not_found_product {
   max-width: 580px;
   @include fontSizeAuto(16px, 24px);
@@ -103,6 +88,16 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 35px;
+}
+
+.exercise_sub_list_pin {
+  padding: 6px 7px;
+  background-color: $item-block-color;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 .exercise_sub_list_add_btn {

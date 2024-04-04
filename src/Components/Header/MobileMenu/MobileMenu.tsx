@@ -6,14 +6,12 @@ import Notiflix from 'notiflix';
 import useIsActive from '@/src/hooks/useIsActive';
 import { usePathname } from 'next/navigation';
 import { signOut } from 'next-auth/react';
+import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import { useAppDispatch } from '@/src/hooks/redux-hook';
 
-interface MobileMenuProps {
-  handleClosedMobileMenu: () => void;
-}
-
-const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
+const MobileMenu = () => {
   const pathname = usePathname();
-
+  const dispatch = useAppDispatch();
   const isActive = useIsActive();
 
   const handleClickLogOut = () => {
@@ -31,6 +29,10 @@ const MobileMenu = ({ handleClosedMobileMenu }: MobileMenuProps) => {
       },
       () => {}
     );
+  };
+
+  const handleClosedMobileMenu = () => {
+    dispatch(closeModal());
   };
   return (
     <div className={styles.mobile_menu_section}>

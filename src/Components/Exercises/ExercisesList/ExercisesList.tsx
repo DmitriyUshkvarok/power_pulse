@@ -2,6 +2,7 @@
 import styles from './_exercises_list.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
+import Container from '../../Container/Container';
 import useFilteredExercises from '@/src/hooks/useFilteredExercises';
 import useTabletItemsPerPage from '@/src/hooks/useTabletItemsPerPage';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
@@ -19,27 +20,29 @@ const ExercisesList = () => {
   const displayedExercises = exercisesToShow.slice(startIndex, endIndex);
 
   return (
-    <ul className={styles.exercise_card_list}>
-      {displayedExercises.map((exercise) => (
-        <li className={styles.exercise_card_item} key={exercise._id}>
-          <Link href={`/exercises${dynamicPath}${exercise._id}`}>
-            <div className={styles.exercise_card_item_overlay}></div>
-            <div className={styles.exercise_card_info_wrapper}>
-              <h2 className={styles.exercise_card_title}>{exercise.title}</h2>
-              <div className={styles.exercise_card_category}>
-                {exercise.category}
+    <Container>
+      <ul className={styles.exercise_card_list}>
+        {displayedExercises.map((exercise) => (
+          <li className={styles.exercise_card_item} key={exercise._id}>
+            <Link href={`/exercises${dynamicPath}${exercise._id}`}>
+              <div className={styles.exercise_card_item_overlay}></div>
+              <div className={styles.exercise_card_info_wrapper}>
+                <h2 className={styles.exercise_card_title}>{exercise.title}</h2>
+                <div className={styles.exercise_card_category}>
+                  {exercise.category}
+                </div>
               </div>
-            </div>
-            <Image
-              className={styles.exercise_card_img}
-              src={exercise.imageURL}
-              alt={exercise.title}
-              fill
-            />
-          </Link>
-        </li>
-      ))}
-    </ul>
+              <Image
+                className={styles.exercise_card_img}
+                src={exercise.imageURL}
+                alt={exercise.title}
+                fill
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Container>
   );
 };
 

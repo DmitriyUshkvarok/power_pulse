@@ -1,1 +1,12 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
 
+.back_button_container {
+  position: absolute;
+  top: -135px;
+  left: 25px;
+
+  @include mediaQuery(768px) {
+    top: -120px;
+  }
+}

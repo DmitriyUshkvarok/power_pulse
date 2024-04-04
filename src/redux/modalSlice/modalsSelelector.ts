@@ -14,10 +14,13 @@ const getIsAddDiaryModalOpen = (state: RootState) =>
 const getIsCreatedExercisesModalOpen = (state: RootState) =>
   state.modals.isCreatedExercisesModalOpen;
 
+const getShowMobileMenu = (state: RootState) => state.modals.showMobileMenu;
+
 export const modalsSelectors = {
   getWellDoneDiaryModalOpen,
   getIsModalOpen,
   getIsCreatedModalOpen,
   getIsAddDiaryModalOpen,
   getIsCreatedExercisesModalOpen,
+  getShowMobileMenu,
 };

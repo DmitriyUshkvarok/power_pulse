@@ -3,6 +3,11 @@
 
 .header {
   background-color: $black-color;
-  padding-top: 34px;
-  padding-bottom: 34px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+
+  @include mediaQuery(768px) {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
 }

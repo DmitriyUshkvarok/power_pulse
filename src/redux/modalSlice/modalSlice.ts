@@ -8,6 +8,7 @@ interface ModalState {
   isAddDiaryModalOpen: boolean;
   isCreatedExercisesModalOpen: boolean;
   isModalOpen: boolean;
+  showMobileMenu: boolean;
 }
 
 const initialState: ModalState = {
@@ -16,6 +17,7 @@ const initialState: ModalState = {
   isAddDiaryModalOpen: false,
   isModalOpen: false,
   isCreatedExercisesModalOpen: false,
+  showMobileMenu: false,
 };
 
 const modalSlice = createSlice({
@@ -37,12 +39,16 @@ const modalSlice = createSlice({
     openModal: (state) => {
       state.isModalOpen = true;
     },
+    setShowMobileMenu: (state) => {
+      state.showMobileMenu = true;
+    },
     closeModal: (state) => {
       state.isWellDoneDiaryModalOpen = false;
       state.isCreatedModalOpen = false;
       state.isAddDiaryModalOpen = false;
       state.isCreatedExercisesModalOpen = false;
       state.isModalOpen = false;
+      state.showMobileMenu = false;
     },
   },
 });
@@ -54,6 +60,7 @@ export const {
   openCreatedExercisesModal,
   openModal,
   closeModal,
+  setShowMobileMenu,
 } = modalSlice.actions;
 
 const persistConfig = {

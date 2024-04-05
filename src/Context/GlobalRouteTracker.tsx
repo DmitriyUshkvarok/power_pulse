@@ -16,7 +16,12 @@ const GlobalRouteTracker = ({ children }: RootLayoutProps) => {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
   const authPaths = useMemo(
-    () => ['/add-diary', '/create-product', '/create-exercises'],
+    () => [
+      '/add-diary',
+      '/create-product',
+      '/create-exercises',
+      '/add-diary-exercises',
+    ],
     []
   );
 

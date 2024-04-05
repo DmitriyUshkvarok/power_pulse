@@ -1,12 +1,12 @@
 'use client';
 import styles from './_exercises_create_panel.module.scss';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
+import { useRouter } from 'next/navigation';
+import { ExerciseList } from '@/src/app/actions/exercisesActions';
 import {
   openCreatedExercisesModal,
   openModal,
 } from '@/src/redux/modalSlice/modalSlice';
-import { useRouter } from 'next/navigation';
-import { ExerciseList } from '@/src/app/actions/exercisesActions';
 
 interface ExercisesListProps {
   id?: string | number;

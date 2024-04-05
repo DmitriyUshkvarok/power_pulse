@@ -104,3 +104,19 @@ export const getExerciseCardsByUserId = async (
     return [];
   }
 };
+
+export const deletedSubExerciseCard = async (cardId: string) => {
+  connectToDatabase();
+  try {
+    const subExerciseCard = await ExerciseCard.findByIdAndDelete(cardId, {
+      new: true,
+    });
+
+    revalidatePath('/');
+
+    return { ...subExerciseCard._doc, _id: subExerciseCard._id.toString() };
+  } catch (error) {
+    console.error('An error occurred while fetching Exercises:', error);
+    return { error: 'Internal Server Error', statusCode: 500 };
+  }
+};

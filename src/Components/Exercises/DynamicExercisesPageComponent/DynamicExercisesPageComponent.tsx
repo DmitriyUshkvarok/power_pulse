@@ -3,12 +3,15 @@ import ExercisesSubList from '../ExercisesSubList/ExercisesSubList';
 import ExercisesCreatePanel from '../ExercisesCreatePanel/ExercisesCreatePanel';
 import Container from '../../Container/Container';
 import ButtonBack from '../../UI/Buttons/ButtonBack/ButtonBack';
+import Modal from '@/src/Components/Modals/Modal/Modal';
+import AddExercisesForm from '@/src/Components/Modals/AddExercisesModal/AddExercisesModal';
 import { getServerSession } from 'next-auth';
 import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
 import {
   getExerciseCardsByUserId,
   getExerciseSubCategory,
 } from '@/src/app/actions/exercisesActions';
+
 export interface ParamsId {
   id: string;
 }
@@ -32,6 +35,9 @@ const DynamicExercisesPageComponent = async ({ id }: ParamsId) => {
           />
         </>
       </Container>
+      <Modal>
+        <AddExercisesForm id={id} />
+      </Modal>
     </section>
   );
 };

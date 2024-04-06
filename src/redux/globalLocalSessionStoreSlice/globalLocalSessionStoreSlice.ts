@@ -16,6 +16,7 @@ interface LocalSessionState {
   previousRouteForRedirect: string | null;
   routingRelatedAuthCompleted: boolean;
   date: string;
+  dynamicExercisesPageId: string | number;
 }
 
 const initialState: LocalSessionState = {
@@ -28,6 +29,7 @@ const initialState: LocalSessionState = {
   previousRouteForRedirect: null,
   routingRelatedAuthCompleted: false,
   date: new Date().toISOString(),
+  dynamicExercisesPageId: '',
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -104,6 +106,12 @@ const globalLocalSessionStoreSlice = createSlice({
     setDate: (state, action: PayloadAction<string>) => {
       state.date = action.payload;
     },
+    setDynamicExercisesPageId: (
+      state,
+      action: PayloadAction<string | number>
+    ) => {
+      state.dynamicExercisesPageId = action.payload;
+    },
   },
 });
 
@@ -117,6 +125,7 @@ export const {
   addPreviousRouteForRedirect,
   setRoutingRelatedAuthCompleted,
   setDate,
+  setDynamicExercisesPageId,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

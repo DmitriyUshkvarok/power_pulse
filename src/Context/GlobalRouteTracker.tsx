@@ -1,7 +1,8 @@
 'use client';
+import { sessionSelectors } from '../redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { useEffect, useRef, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
-import { useAppDispatch } from '@/src/hooks/redux-hook';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import {
   addPreviousRouteForRedirect,
   setRoutingRelatedAuthCompleted,
@@ -13,6 +14,7 @@ interface RootLayoutProps {
 
 const GlobalRouteTracker = ({ children }: RootLayoutProps) => {
   const dispatch = useAppDispatch();
+  const id = useAppSelector(sessionSelectors.getDynamicExercisesPageId);
   const pathname = usePathname();
   const isFirstRender = useRef(true);
   const authPaths = useMemo(
@@ -20,9 +22,11 @@ const GlobalRouteTracker = ({ children }: RootLayoutProps) => {
       '/add-diary',
       '/create-product',
       '/create-exercises',
-      '/add-diary-exercises',
+      `/exercises/body-parts/${id}/add-diary-exercises`,
+      `/exercises/muscles/${id}/add-diary-exercises`,
+      `/exercises/equipment/${id}/add-diary-exercises`,
     ],
-    []
+    [id]
   );
 
   useEffect(() => {

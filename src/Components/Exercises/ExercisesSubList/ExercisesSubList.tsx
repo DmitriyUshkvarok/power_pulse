@@ -6,13 +6,14 @@ import {
   ExerciseCardData,
   deletedSubExerciseCard,
 } from '@/src/app/actions/exercisesActions';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 import {
   openAddDiaryExercisesModal,
   openModal,
 } from '@/src/redux/modalSlice/modalSlice';
+import { setDynamicExercisesPageId } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
+import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 
 interface ExercisesSubListProps {
   id?: string | number;
@@ -26,31 +27,18 @@ const ExercisesSubList = ({
   const [loadingSubExerciseCrdId, setLoadingSubExerciseCrdId] = useState<
     string | null
   >(null);
-
   const dispatch = useAppDispatch();
+  const dynamicPath = useDynamicPath(id);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(setDynamicExercisesPageId(id));
+    }
+  }, [dispatch, id]);
 
   const filteredExerciseCards = exercisesSubListData.filter(
     (card) => card.exercisesId === id
   );
-
-  const pathname = usePathname();
-
-  let dynamicPath;
-
-  switch (pathname) {
-    case `/exercises/body-parts/${id}`:
-      dynamicPath = `/body-parts/${id}`;
-      break;
-    case `/exercises/muscles/${id}`:
-      dynamicPath = `/muscles/${id}`;
-      break;
-    case `/exercises/equipment/${id}`:
-      dynamicPath = `/equipment/${id}`;
-      break;
-    default:
-      dynamicPath = '/';
-      break;
-  }
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -96,7 +84,10 @@ const ExercisesSubList = ({
             <div className={styles.exercise_sub_item_header}>
               <div className={styles.exercise_sub_list_pin}>Workout</div>
               <div className={styles.exercise_sub_list_add_btn}>
-                <Link onClick={handleOpenModal} href={`/add-diary-exercises`}>
+                <Link
+                  onClick={handleOpenModal}
+                  href={`/exercises${dynamicPath}/add-diary-exercises`}
+                >
                   Start
                 </Link>
               </div>

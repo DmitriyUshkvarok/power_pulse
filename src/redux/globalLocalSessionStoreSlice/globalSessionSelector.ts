@@ -16,6 +16,9 @@ const getdynamicCalories = (state: RootState) =>
 
 const getDate = (state: RootState) => state.globalLocalSession.date;
 
+const getDynamicExercisesPageId = (state: RootState) =>
+  state.globalLocalSession.dynamicExercisesPageId;
+
 export const sessionSelectors = {
   getSelectedCategory,
   getRecommendation,
@@ -23,4 +26,5 @@ export const sessionSelectors = {
   getSearchText,
   getdynamicCalories,
   getDate,
+  getDynamicExercisesPageId,
 };

@@ -101,6 +101,7 @@
 }
 
 .exercise_sub_list_add_btn {
+  padding: 5px;
   position: relative;
   cursor: pointer;
   color: $orange-color;
@@ -110,7 +111,7 @@
   &::before {
     content: '';
     position: absolute;
-    top: -2px;
+    top: 3px;
     right: -16px;
     display: block;
     background-image: url('/next.svg');

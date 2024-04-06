@@ -11,7 +11,6 @@ import {
   getExerciseCardsByUserId,
   getExerciseSubCategory,
 } from '@/src/app/actions/exercisesActions';
-
 export interface ParamsId {
   id: string;
 }

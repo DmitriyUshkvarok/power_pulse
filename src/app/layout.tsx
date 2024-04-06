@@ -27,12 +27,10 @@ export default async function RootLayout({
   children,
   add_diary,
   create_product,
-  add_diary_exersises,
 }: {
   children: React.ReactNode;
   add_diary: React.ReactNode;
   create_product: React.ReactNode;
-  add_diary_exersises: React.ReactNode;
 }) {
   const session = await getServerSession(authOption);
   return (
@@ -63,7 +61,6 @@ export default async function RootLayout({
                 {children}
                 {add_diary}
                 {create_product}
-                {add_diary_exersises}
               </main>
             </GlobalRouteTracker>
           </NextAuthProvider>

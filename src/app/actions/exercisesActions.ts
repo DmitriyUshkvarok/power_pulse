@@ -17,6 +17,7 @@ export interface ExerciseData {
   burnedCalories: number;
   bodyPart: string;
   target: string;
+  equipment: string;
 }
 
 export interface ExerciseCardData {
@@ -26,6 +27,7 @@ export interface ExerciseCardData {
   bodyPart: string;
   target: string;
   exercisesId: string;
+  equipment: string;
 }
 
 export const getExerciseSubCategory = async (): Promise<ExerciseList[]> => {

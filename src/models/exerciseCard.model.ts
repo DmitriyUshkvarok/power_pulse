@@ -24,6 +24,10 @@ const exerciseCardSchema = new Schema(
       type: String,
       required: true,
     },
+    equipment: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false }
 );

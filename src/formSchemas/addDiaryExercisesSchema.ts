@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-export const addExercisesSchema = yup.object().shape({
+export const addDiaryExercisesSchema = yup.object().shape({
   name: yup.string().min(3, 'Name must be at least 3 characters').required(),
   burnedCalories: yup
     .number()
@@ -20,4 +20,5 @@ export const addExercisesSchema = yup.object().shape({
     .string()
     .min(3, 'equipment must be at least 3 characters')
     .required(),
+  time: yup.string().required(),
 });

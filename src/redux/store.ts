@@ -3,6 +3,7 @@ import persistedProductReducer from './addDiaryProductSlice/addDiaryProductSlice
 import persistedGlobalLocalSessionStoreReducer from './globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import persistedModalReducer from './modalSlice/modalSlice';
 import persistedPaginationReducer from './paginationSlice/paginationSlice';
+import persistedExercisesDiaryReducer from './addDiaryExercisesSlice/addDiaryExercisesSlice';
 import exerciseSlice from './exerciseSlice/exerciseSlice';
 import diarySlice from './diarySlice/diarySlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
@@ -21,6 +22,7 @@ const store = configureStore({
     userData: persistUserDataReducer,
     products: persistedProductReducer,
     modals: persistedModalReducer,
+    exercisesDiary: persistedExercisesDiaryReducer,
     diary: diarySlice,
     exercises: exerciseSlice,
     pagination: persistedPaginationReducer,

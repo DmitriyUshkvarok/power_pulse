@@ -19,6 +19,7 @@ interface FormValues {
   burnedCalories: number;
   bodyPart: string;
   target: string;
+  equipment: string;
 }
 
 const initialValues = {
@@ -26,6 +27,7 @@ const initialValues = {
   burnedCalories: 0,
   bodyPart: '',
   target: '',
+  equipment: '',
 };
 
 interface PageId {
@@ -58,6 +60,7 @@ const AddExercisesForm = ({ id }: PageId) => {
         burnedCalories: values.burnedCalories,
         bodyPart: values.bodyPart,
         target: values.target,
+        equipment: values.equipment,
         exercisesId: exercisesId,
       };
       const response = await createExerciseCards(exercisesSubListData, userId);
@@ -144,6 +147,21 @@ const AddExercisesForm = ({ id }: PageId) => {
                     placeholder="target"
                   />
                   <ErrorMessage name="target">
+                    {(msg) => (
+                      <div className={styles.validation_error}>
+                        <span>{msg}</span>
+                      </div>
+                    )}
+                  </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="equipment"
+                    placeholder="equipment"
+                  />
+                  <ErrorMessage name="equipment">
                     {(msg) => (
                       <div className={styles.validation_error}>
                         <span>{msg}</span>

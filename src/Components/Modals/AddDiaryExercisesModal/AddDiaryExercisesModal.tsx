@@ -4,12 +4,12 @@ import Modal from '../Modal/Modal';
 import Container from '../../Container/Container';
 import Image from 'next/image';
 import useAuthRedirect from '@/src/hooks/useRedirect';
+import Timer from '../../UI/Timer/Timer';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { useState } from 'react';
-import { addDiaryExercisesSchema } from '@/src/formSchemas/addDiaryExercisesSchema';
 
 interface FormValues {
   name: string;
@@ -35,7 +35,7 @@ const AddDiaryExercisesModal = () => {
     bodyPart: exerciseDiaryValue.bodyPart || '',
     equipment: exerciseDiaryValue.equipment || '',
     burnedCalories: exerciseDiaryValue.burnedCalories || 0,
-    time: '',
+    time: '3 minutes',
   };
 
   const handleCloseModal = () => {
@@ -73,91 +73,67 @@ const AddDiaryExercisesModal = () => {
                 fill
               />
             </div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={addDiaryExercisesSchema}
-              onSubmit={handleSubmit}
-            >
+            <div className={styles.timer_wrapper}>
+              <div className={styles.time_title}>Time</div>
+              <Timer />
+            </div>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit}>
               <Form className={styles.form_create_exercise_diary}>
+                <div className={styles.form_calories}>
+                  <span className={styles.form_calories_span}>
+                    Burned calories:
+                  </span>
+                  <Field
+                    className={styles.form_calorie_input}
+                    type="text"
+                    name="burnedCalories"
+                    readOnly
+                  />
+                </div>
                 <div className={styles.form_group}>
+                  <span className={styles.form_group_span}>Name</span>
                   <Field
                     className={styles.form_input}
                     type="text"
                     name="name"
-                    placeholder="name"
                     readOnly
                   />
-                  <ErrorMessage name="name">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
-                    type="text"
-                    name="burnedCalories"
-                    placeholder="burned calories"
-                    readOnly
-                  />
-                  <ErrorMessage name="burnedCalories">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
-                </div>
-                <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
-                    type="text"
-                    name="bodyPart"
-                    placeholder="body part"
-                    readOnly
-                  />
-                  <ErrorMessage name="bodyPart">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
-                </div>
-                <div className={styles.form_group}>
+                  <span className={styles.form_group_span}>Target</span>
                   <Field
                     className={styles.form_input}
                     type="text"
                     name="target"
-                    placeholder="target"
                     readOnly
                   />
-                  <ErrorMessage name="target">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
+                  <span className={styles.form_group_span}>Body part</span>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="bodyPart"
+                    readOnly
+                  />
+                </div>
+                <div className={styles.form_group}>
+                  <span className={styles.form_group_span}>Equipment</span>
                   <Field
                     className={styles.form_input}
                     type="text"
                     name="equipment"
-                    placeholder="equipment"
                     readOnly
                   />
-                  <ErrorMessage name="equipment">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <span className={styles.form_group_span}>Time</span>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="time"
+                    readOnly
+                  />
                 </div>
                 <button
                   className={styles.create_exercises_diary_btn}

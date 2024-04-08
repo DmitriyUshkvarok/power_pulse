@@ -8,7 +8,7 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 48px 32px;
+  padding: 48px 17px;
   background-color: $fon-modal;
   border: 1px solid $borde-color;
   border-radius: $border-radius-btn;
@@ -27,66 +27,103 @@
 
 .modal_img_wrapper {
   position: relative;
-  min-width: 270px;
+  width: 270px;
   height: 226px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: $border-radius-btn;
   -webkit-border-radius: $border-radius-btn;
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 14px;
 }
 
 .modal_img {
   object-fit: cover;
 }
 
-.form_create_exercise_diary {
+.timer_wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.time_title {
+  margin-bottom: 8px;
+  @include fontSizeAuto(10px, 14px);
+  color: $borde-color;
+}
+
+.form_calories {
+  width: 100%;
+  @include flexCenter();
+  margin-bottom: 40px;
+}
+
+.form_calories_span {
+  @include fontSizeAuto(14px, 18px);
+  color: $borde-color;
+  margin-right: 8px;
+}
+
+.form_calorie_input {
+  background-color: transparent;
+  border: none;
+  color: $orange-color;
+  width: 50px;
+}
+
+.form_create_exercise_diary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .form_group {
-  width: 100%;
-  @include flexCenter();
+  display: flex;
   flex-direction: column;
-}
-
-.form_input {
-  width: 100%;
-  max-width: 250px;
-  padding: 14px;
+  gap: 8px;
+  width: 150px;
+  padding: 12px 18px;
   border-radius: $border-radius-btn;
   -webkit-border-radius: $border-radius-btn;
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   border: 1px solid $borde-color;
-  background-color: transparent;
+  background-color: $item-block-color;
+
+  &:last-of-type {
+    margin-bottom: 72px;
+  }
+}
+
+.form_group_span {
+  @include fontSizeAuto(14px, 18px);
+  color: $borde-color;
+}
+
+.form_input {
+  width: 100%;
   color: $white-color;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  @include fontSizeAuto(14px, 18px);
 
   &:focus {
     outline: 1px solid $orange-color;
   }
 }
 
-.validation_error {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  color: $error-color;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3px;
-  text-align: center;
-}
-
 .create_exercises_diary_btn {
+  position: absolute;
+  bottom: 48px;
+  left: 17px;
   @include flexCenter();
   @include fontSizeAuto(16px, 24px);
   margin-left: auto;

@@ -17,6 +17,7 @@ interface LocalSessionState {
   routingRelatedAuthCompleted: boolean;
   date: string;
   dynamicExercisesPageId: string | number;
+  caloriesBurned: number;
 }
 
 const initialState: LocalSessionState = {
@@ -30,6 +31,7 @@ const initialState: LocalSessionState = {
   routingRelatedAuthCompleted: false,
   date: new Date().toISOString(),
   dynamicExercisesPageId: '',
+  caloriesBurned: 0,
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -112,6 +114,9 @@ const globalLocalSessionStoreSlice = createSlice({
     ) => {
       state.dynamicExercisesPageId = action.payload;
     },
+    setCaloriesBurned: (state, action: PayloadAction<number>) => {
+      state.caloriesBurned = action.payload;
+    },
   },
 });
 
@@ -126,6 +131,7 @@ export const {
   setRoutingRelatedAuthCompleted,
   setDate,
   setDynamicExercisesPageId,
+  setCaloriesBurned,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

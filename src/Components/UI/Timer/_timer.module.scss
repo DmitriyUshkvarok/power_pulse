@@ -1,0 +1,20 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.timer_count_text {
+  @include fontSizeAuto(16px, 24px);
+  color: $white-color;
+}
+
+.timer_btn_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.timer_btn_pause,
+.timer_btn_start {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -62,12 +62,13 @@
   width: 100%;
   @include flexCenter();
   margin-bottom: 40px;
+  color: $borde-color;
+  @include fontSizeAuto(14px, 18px);
 }
 
 .form_calories_span {
-  @include fontSizeAuto(14px, 18px);
-  color: $borde-color;
-  margin-right: 8px;
+  margin-left: 8px;
+  color: $orange-color;
 }
 
 .form_calorie_input {

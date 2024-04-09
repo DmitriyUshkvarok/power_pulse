@@ -1,15 +1,23 @@
 'use client';
 import styles from './_timer.module.scss';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { setCaloriesBurned } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { CountdownCircleTimer } from 'react-countdown-circle-timer';
+import {
+  CountdownCircleTimer,
+  useCountdown,
+} from 'react-countdown-circle-timer';
 
 const Timer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [key, setKey] = useState(0);
   const dispatch = useAppDispatch();
+  const { remainingTime } = useCountdown({
+    isPlaying: isRunning,
+    duration: 180,
+    colors: '#e6533c',
+  });
 
   const initialCalorieCount = useAppSelector(
     (state) => state.exercisesDiary.burnedCalories
@@ -17,11 +25,20 @@ const Timer = () => {
 
   const caloriesPerThreeMinutes = initialCalorieCount / 20;
 
-  const burnedCalorieCount = useAppSelector(
-    (state) => state.globalLocalSession.caloriesBurned
+  const handleRemainingTime = useCallback(
+    (remainingTime: number) => {
+      const timeInMinutes = (180 - remainingTime) / 60;
+      const burnedCalories = (timeInMinutes * caloriesPerThreeMinutes) / 3;
+      dispatch(setCaloriesBurned(Number(burnedCalories.toFixed(2))));
+    },
+    [caloriesPerThreeMinutes, dispatch]
   );
 
-  console.log(burnedCalorieCount);
+  useEffect(() => {
+    if (isRunning) {
+      handleRemainingTime(remainingTime);
+    }
+  }, [remainingTime, isRunning, handleRemainingTime]);
 
   const startTimer = () => {
     setIsRunning(true);
@@ -29,12 +46,6 @@ const Timer = () => {
 
   const pauseTimer = () => {
     setIsRunning(false);
-  };
-
-  const handleRemainingTime = (remainingTime: number) => {
-    const timeInMinutes = (180 - remainingTime) / 60;
-    const burnedCalories = (timeInMinutes * caloriesPerThreeMinutes) / 3;
-    dispatch(setCaloriesBurned(Number(burnedCalories.toFixed(2))));
   };
 
   const handleTimerComplete = () => {
@@ -54,19 +65,16 @@ const Timer = () => {
         strokeLinecap="square"
         onComplete={handleTimerComplete}
       >
-        {({ remainingTime }) => {
-          handleRemainingTime(remainingTime);
-          return (
-            <div>
-              <div className={styles.timer_count_text}>
-                {Math.floor(remainingTime / 60)}:
-                {remainingTime % 60 < 10
-                  ? `0${remainingTime % 60}`
-                  : remainingTime % 60}
-              </div>
+        {({ remainingTime }) => (
+          <div>
+            <div className={styles.timer_count_text}>
+              {Math.floor(remainingTime / 60)}:
+              {remainingTime % 60 < 10
+                ? `0${remainingTime % 60}`
+                : remainingTime % 60}
             </div>
-          );
-        }}
+          </div>
+        )}
       </CountdownCircleTimer>
       <div className={styles.timer_btn_wrapper}>
         {isRunning ? (
@@ -79,7 +87,6 @@ const Timer = () => {
           </button>
         )}
       </div>
-      <div style={{ color: 'white' }}>{burnedCalorieCount}</div>
     </div>
   );
 };

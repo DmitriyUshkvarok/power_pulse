@@ -16,7 +16,6 @@ interface FormValues {
   target: string;
   bodyPart: string;
   equipment: string;
-  burnedCalories: number;
   time: string;
 }
 
@@ -28,13 +27,16 @@ const AddDiaryExercisesModal = () => {
     modalsSelectors.getIsAddDiaryExercisesModalOpen
   );
 
+  const burnedCalorieCount = useAppSelector(
+    (state) => state.globalLocalSession.caloriesBurned
+  );
+
   const exerciseDiaryValue = useAppSelector((state) => state.exercisesDiary);
   const initialValues = {
     name: exerciseDiaryValue.name || '',
     target: exerciseDiaryValue.target || '',
     bodyPart: exerciseDiaryValue.bodyPart || '',
     equipment: exerciseDiaryValue.equipment || '',
-    burnedCalories: exerciseDiaryValue.burnedCalories || 0,
     time: '3 minutes',
   };
 
@@ -80,15 +82,10 @@ const AddDiaryExercisesModal = () => {
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
               <Form className={styles.form_create_exercise_diary}>
                 <div className={styles.form_calories}>
+                  Burned calories:
                   <span className={styles.form_calories_span}>
-                    Burned calories:
+                    {burnedCalorieCount}
                   </span>
-                  <Field
-                    className={styles.form_calorie_input}
-                    type="text"
-                    name="burnedCalories"
-                    readOnly
-                  />
                 </div>
                 <div className={styles.form_group}>
                   <span className={styles.form_group_span}>Name</span>

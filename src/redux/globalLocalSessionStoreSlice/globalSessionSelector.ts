@@ -19,6 +19,12 @@ const getDate = (state: RootState) => state.globalLocalSession.date;
 const getDynamicExercisesPageId = (state: RootState) =>
   state.globalLocalSession.dynamicExercisesPageId;
 
+const getCaloriesBurned = (state: RootState) =>
+  state.globalLocalSession.caloriesBurned;
+
+const getRemainingTime = (state: RootState) =>
+  state.globalLocalSession.remainingTime;
+
 export const sessionSelectors = {
   getSelectedCategory,
   getRecommendation,
@@ -27,4 +33,6 @@ export const sessionSelectors = {
   getdynamicCalories,
   getDate,
   getDynamicExercisesPageId,
+  getCaloriesBurned,
+  getRemainingTime,
 };

@@ -2,7 +2,10 @@
 import styles from './_timer.module.scss';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import { setCaloriesBurned } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
+import {
+  setCaloriesBurned,
+  setRemainingTime,
+} from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import {
   CountdownCircleTimer,
@@ -30,6 +33,7 @@ const Timer = () => {
       const timeInMinutes = (180 - remainingTime) / 60;
       const burnedCalories = (timeInMinutes * caloriesPerThreeMinutes) / 3;
       dispatch(setCaloriesBurned(Number(burnedCalories.toFixed(2))));
+      dispatch(setRemainingTime(remainingTime));
     },
     [caloriesPerThreeMinutes, dispatch]
   );

@@ -18,6 +18,7 @@ interface LocalSessionState {
   date: string;
   dynamicExercisesPageId: string | number;
   caloriesBurned: number;
+  remainingTime: number;
 }
 
 const initialState: LocalSessionState = {
@@ -32,6 +33,7 @@ const initialState: LocalSessionState = {
   date: new Date().toISOString(),
   dynamicExercisesPageId: '',
   caloriesBurned: 0,
+  remainingTime: 0,
 };
 
 const globalLocalSessionStoreSlice = createSlice({
@@ -117,6 +119,9 @@ const globalLocalSessionStoreSlice = createSlice({
     setCaloriesBurned: (state, action: PayloadAction<number>) => {
       state.caloriesBurned = action.payload;
     },
+    setRemainingTime: (state, action: PayloadAction<number>) => {
+      state.remainingTime = action.payload;
+    },
   },
 });
 
@@ -132,6 +137,7 @@ export const {
   setDate,
   setDynamicExercisesPageId,
   setCaloriesBurned,
+  setRemainingTime,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

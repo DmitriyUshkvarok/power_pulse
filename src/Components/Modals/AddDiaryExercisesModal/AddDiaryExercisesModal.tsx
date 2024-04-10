@@ -10,34 +10,33 @@ import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { Formik, Form, Field } from 'formik';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { useState } from 'react';
+import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
+import { convertSeconds } from '@/src/utils/convertSeconds';
 
 interface FormValues {
   name: string;
   target: string;
   bodyPart: string;
   equipment: string;
-  time: string;
 }
 
 const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
   const { handleRedirect } = useAuthRedirect();
   const dispatch = useAppDispatch();
+
   const isAddDiaryExercisesModalOpen = useAppSelector(
     modalsSelectors.getIsAddDiaryExercisesModalOpen
   );
-
-  const burnedCalorieCount = useAppSelector(
-    (state) => state.globalLocalSession.caloriesBurned
-  );
-
+  const burnedCalorieCount = useAppSelector(sessionSelectors.getCaloriesBurned);
+  const remainingTime = useAppSelector(sessionSelectors.getRemainingTime);
   const exerciseDiaryValue = useAppSelector((state) => state.exercisesDiary);
+
   const initialValues = {
     name: exerciseDiaryValue.name || '',
     target: exerciseDiaryValue.target || '',
     bodyPart: exerciseDiaryValue.bodyPart || '',
     equipment: exerciseDiaryValue.equipment || '',
-    time: '3 minutes',
   };
 
   const handleCloseModal = () => {
@@ -125,12 +124,11 @@ const AddDiaryExercisesModal = () => {
                 </div>
                 <div className={styles.form_group}>
                   <span className={styles.form_group_span}>Time</span>
-                  <Field
-                    className={styles.form_input}
-                    type="text"
-                    name="time"
-                    readOnly
-                  />
+                  <div className={styles.form_input}>
+                    {remainingTime
+                      ? convertSeconds(remainingTime) + '  minutes'
+                      : '3 minutes'}
+                  </div>
                 </div>
                 <button
                   className={styles.create_exercises_diary_btn}

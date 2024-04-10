@@ -35,7 +35,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOption);
   return (
     <html lang="en" className={roboto.className}>
-      <link rel="apple-touch-icon" href="/logo-icon.svg"></link>
+      <link rel="apple-touch-icon" href="/logo-for-mobile.png"></link>
       <body suppressHydrationWarning={true}>
         <ReduxProvider>
           <NextAuthProvider>

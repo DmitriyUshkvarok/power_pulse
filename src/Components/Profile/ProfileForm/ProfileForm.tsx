@@ -97,7 +97,7 @@ const ProfileForm = () => {
         innerRef={formikRef}
         enableReinitialize={true}
       >
-        {({ isValid, setFieldValue }) => (
+        {({ isValid, setFieldValue, values }) => (
           <Form className={styles.form_profile}>
             <div className={styles.form_block_one}>
               <div className={styles.profile_form_group_one}>
@@ -153,15 +153,11 @@ const ProfileForm = () => {
                   name="height"
                   aria-label="height"
                 />
-                <span
-                  className={
-                    userData?.height
-                      ? styles.form_placeholder_hidden
-                      : styles.span_one_form_placeholder
-                  }
-                >
-                  Height
-                </span>
+                {!values.height && (
+                  <span className={styles.span_one_form_placeholder}>
+                    Height
+                  </span>
+                )}
                 <ErrorMessage name="height">
                   {(msg) => (
                     <div className={styles.validation_error_two}>{msg}</div>
@@ -175,15 +171,11 @@ const ProfileForm = () => {
                   name="currentWeight"
                   aria-label="Current Weight"
                 />
-                <span
-                  className={
-                    userData?.currentWeight
-                      ? styles.form_placeholder_hidden
-                      : styles.span_one_form_placeholder
-                  }
-                >
-                  Current Weight
-                </span>
+                {!values.currentWeight && (
+                  <span className={styles.span_one_form_placeholder}>
+                    Current Weight
+                  </span>
+                )}
                 <ErrorMessage name="currentWeight">
                   {(msg) => (
                     <div className={styles.validation_error_two}>{msg}</div>
@@ -197,15 +189,11 @@ const ProfileForm = () => {
                   name="desiredWeight"
                   aria-label="Desired Weight"
                 />
-                <span
-                  className={
-                    userData?.desiredWeight
-                      ? styles.form_placeholder_hidden
-                      : styles.span_one_form_placeholder
-                  }
-                >
-                  Desired Weight
-                </span>
+                {!values.desiredWeight && (
+                  <span className={styles.span_one_form_placeholder}>
+                    Desired Weight
+                  </span>
+                )}
                 <ErrorMessage name="desiredWeight">
                   {(msg) => (
                     <div className={styles.validation_error_two}>{msg}</div>
@@ -219,15 +207,11 @@ const ProfileForm = () => {
                   name="birthday"
                   aria-label="birthday"
                 />
-                <span
-                  className={
-                    userData?.birthday
-                      ? styles.form_placeholder_hidden
-                      : styles.span_one_form_placeholder
-                  }
-                >
-                  Birthday
-                </span>
+                {!values.birthday && (
+                  <span className={styles.span_one_form_placeholder}>
+                    Birthday
+                  </span>
+                )}
                 <Image
                   src="/calendar.svg"
                   alt="calendar icon"

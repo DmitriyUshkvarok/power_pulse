@@ -10,6 +10,7 @@ export interface UserDocument extends Document {
   products: Array<Schema.Types.ObjectId>;
   diarys: Array<Schema.Types.ObjectId>;
   exerciseCards: Array<Schema.Types.ObjectId>;
+  diaryExercises: Array<Schema.Types.ObjectId>;
 }
 
 const userSchema = new Schema(
@@ -53,6 +54,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'ExerciseCard',
+      },
+    ],
+    diaryExercises: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'DiaryExercises',
       },
     ],
   },

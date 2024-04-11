@@ -2,10 +2,10 @@
 @import '../../../sass/utils/mixins.module';
 
 .form_container {
-  margin-top: 60px;
+  margin-top: 500px;
+  margin-bottom: 100px;
   position: relative;
   max-width: 480px;
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding: 48px 17px;
@@ -16,6 +16,14 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
+  overflow-y: auto;
+
+  @media (min-width: 768px) {
+    min-width: 694px;
+    height: 650px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .closed_icon {
@@ -26,7 +34,6 @@
 }
 
 .modal_img_wrapper {
-  position: relative;
   width: 270px;
   height: 226px;
   margin-left: auto;
@@ -38,6 +45,13 @@
   -o-border-radius: $border-radius-btn;
   overflow: hidden;
   margin-bottom: 14px;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 48px;
+    left: 17px;
+    margin-bottom: 0;
+  }
 }
 
 .modal_img {
@@ -50,6 +64,12 @@
   align-items: center;
   flex-direction: column;
   margin-bottom: 15px;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 306px;
+    left: 104px;
+  }
 }
 
 .time_title {
@@ -64,6 +84,14 @@
   margin-bottom: 40px;
   color: $borde-color;
   @include fontSizeAuto(14px, 18px);
+
+  @media (min-width: 768px) {
+    position: absolute;
+    bottom: -250px;
+    left: -230px;
+    margin-bottom: 0;
+    width: 200px;
+  }
 }
 
 .form_calories_span {
@@ -82,6 +110,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 48px;
+    left: 318px;
+  }
 }
 
 .form_group {
@@ -100,6 +134,10 @@
 
   &:last-of-type {
     margin-bottom: 72px;
+  }
+
+  @media (min-width: 768px) {
+    width: 169px;
   }
 }
 
@@ -147,5 +185,12 @@
     -moz-transition: $transition;
     -ms-transition: $transition;
     -o-transition: $transition;
+  }
+
+  @media (min-width: 768px) {
+    bottom: -250px;
+    margin-bottom: 0;
+    right: -146px;
+    width: 150px;
   }
 }

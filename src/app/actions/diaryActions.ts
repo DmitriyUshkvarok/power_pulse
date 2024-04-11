@@ -2,7 +2,7 @@
 import connectToDatabase from '@/src/utils/db';
 import Diary from '@/src/models/diaryModel';
 import User from '@/src/models/users';
-
+import DiaryExercises from '@/src/models/diaryExercisesModel';
 export interface CreateDiarySuccessResponse {
   title: string;
   category: string;
@@ -10,6 +10,15 @@ export interface CreateDiarySuccessResponse {
   weight: string;
   recommended: boolean | undefined;
   date: string;
+}
+
+export interface CreateDiaryExercisesResponse {
+  name: string;
+  target: string;
+  bodyPart: string;
+  equipment: string;
+  time: number;
+  burnedCalories: number;
 }
 
 export interface DiaryProduct {
@@ -45,6 +54,38 @@ export const createDiary = async (
     return { ...saveDiary._doc, _id: saveDiary._id.toString() };
   } catch (error) {
     console.error('An error occurred while creating product:', error);
+  }
+};
+
+export const createDiaryExercises = async (
+  data: CreateDiaryExercisesResponse,
+  userId: string
+) => {
+  connectToDatabase();
+  try {
+    const newDiatyExercises = new DiaryExercises({
+      ...data,
+      createdBy: userId,
+    });
+
+    const saveDiaryExercises = await newDiatyExercises.save();
+
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        $push: { diaryExercises: saveDiaryExercises._id },
+      },
+      {
+        new: true,
+      }
+    );
+
+    return {
+      ...saveDiaryExercises._doc,
+      _id: saveDiaryExercises._id.toString(),
+    };
+  } catch (error) {
+    console.error('An error occurred while creating exercises diart:', error);
   }
 };
 

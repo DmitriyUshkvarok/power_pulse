@@ -12,6 +12,9 @@ import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
+import { createDiaryExercises } from '@/src/app/actions/diaryActions';
+import { useSession } from 'next-auth/react';
+import { UserSession } from '../../Profile/ProfileForm';
 
 interface FormValues {
   name: string;
@@ -24,6 +27,8 @@ const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
   const { handleRedirect } = useAuthRedirect();
   const dispatch = useAppDispatch();
+  const { data: session } = useSession();
+  const userId = (session?.user as UserSession)?._id;
 
   const isAddDiaryExercisesModalOpen = useAppSelector(
     modalsSelectors.getIsAddDiaryExercisesModalOpen
@@ -47,6 +52,16 @@ const AddDiaryExercisesModal = () => {
   const handleSubmit = async (values: FormValues) => {
     try {
       setIsLoading(true);
+      const data = {
+        name: values.name,
+        target: values.target,
+        bodyPart: values.bodyPart,
+        equipment: values.equipment,
+        burnedCalories: burnedCalorieCount,
+        time: remainingTime,
+      };
+
+      const response = await createDiaryExercises(data, userId);
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {
@@ -71,7 +86,8 @@ const AddDiaryExercisesModal = () => {
                 className={styles.modal_img}
                 src="/exercise-modal-img.jpg"
                 alt="exercise-modal-img"
-                fill
+                width={270}
+                height={226}
               />
             </div>
             <div className={styles.timer_wrapper}>

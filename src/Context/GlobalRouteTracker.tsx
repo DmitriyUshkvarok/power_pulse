@@ -25,6 +25,9 @@ const GlobalRouteTracker = ({ children }: RootLayoutProps) => {
       `/exercises/body-parts/${id}/add-diary-exercises`,
       `/exercises/muscles/${id}/add-diary-exercises`,
       `/exercises/equipment/${id}/add-diary-exercises`,
+      `/exercises/body-parts/${id}/well-done-exercises`,
+      `/exercises/muscles/${id}/well-done-exercises`,
+      `/exercises/equipment/${id}/well-done-exercises`,
     ],
     [id]
   );

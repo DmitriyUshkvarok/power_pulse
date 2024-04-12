@@ -19,6 +19,9 @@ const getShowMobileMenu = (state: RootState) => state.modals.showMobileMenu;
 const getIsAddDiaryExercisesModalOpen = (state: RootState) =>
   state.modals.isAddDiaryExercisesModalOpen;
 
+const getIsWellDoneExercisesDiaryModal = (state: RootState) =>
+  state.modals.isWellDoneExercisesDiaryModal;
+
 export const modalsSelectors = {
   getWellDoneDiaryModalOpen,
   getIsModalOpen,
@@ -27,4 +30,5 @@ export const modalsSelectors = {
   getIsCreatedExercisesModalOpen,
   getShowMobileMenu,
   getIsAddDiaryExercisesModalOpen,
+  getIsWellDoneExercisesDiaryModal,
 };

@@ -8,13 +8,19 @@ import Timer from '../../UI/Timer/Timer';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { Formik, Form, Field } from 'formik';
-import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import {
+  closedAddDiaryExercisesModal,
+  closeModal,
+} from '@/src/redux/modalSlice/modalSlice';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
 import { createDiaryExercises } from '@/src/app/actions/diaryActions';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
+import { useRouter } from 'next/navigation';
+import { useDynamicPath } from '@/src/hooks/useDynamicPath';
+import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 
 interface FormValues {
   name: string;
@@ -27,6 +33,7 @@ const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
   const { handleRedirect } = useAuthRedirect();
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
 
@@ -35,7 +42,10 @@ const AddDiaryExercisesModal = () => {
   );
   const burnedCalorieCount = useAppSelector(sessionSelectors.getCaloriesBurned);
   const remainingTime = useAppSelector(sessionSelectors.getRemainingTime);
+  const id = useAppSelector(sessionSelectors.getDynamicExercisesPageId);
   const exerciseDiaryValue = useAppSelector((state) => state.exercisesDiary);
+
+  const dynamicPath = useDynamicPath(id);
 
   const initialValues = {
     name: exerciseDiaryValue.name || '',
@@ -62,6 +72,12 @@ const AddDiaryExercisesModal = () => {
       };
 
       const response = await createDiaryExercises(data, userId);
+
+      if (response) {
+        router.push(`/exercises${dynamicPath}/well-done-exercises`);
+        dispatch(closedAddDiaryExercisesModal());
+        dispatch(openWellDoneExercisesDiaryModal());
+      }
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

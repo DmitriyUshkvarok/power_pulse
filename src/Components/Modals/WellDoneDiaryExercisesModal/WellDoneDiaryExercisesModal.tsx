@@ -18,7 +18,7 @@ const WellDoneDiaryExercisesModal = () => {
 
   const { handleRedirect } = useAuthRedirect();
 
-  const isAddDiaryExercisesModalOpen = useAppSelector(
+  const isWellDoneDiaryExercisesModalOpen = useAppSelector(
     modalsSelectors.getIsWellDoneExercisesDiaryModal
   );
 
@@ -37,7 +37,7 @@ const WellDoneDiaryExercisesModal = () => {
 
   return (
     <Modal>
-      {isAddDiaryExercisesModalOpen && (
+      {isWellDoneDiaryExercisesModalOpen && (
         <Container>
           <div className={styles.well_done_modal_container}>
             <Image

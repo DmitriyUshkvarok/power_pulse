@@ -37,7 +37,7 @@ const WellDoneDiaryModal = () => {
       />
       <div className={styles.icon_wrapper}>
         <Image
-          src="/icon_well_done_diary.svg"
+          src="/icon_well_done_diary.png"
           alt="well done icon diary"
           width={123}
           height={97}

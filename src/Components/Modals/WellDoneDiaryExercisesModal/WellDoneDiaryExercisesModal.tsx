@@ -50,7 +50,7 @@ const WellDoneDiaryExercisesModal = () => {
             />
             <div className={styles.icon_wrapper}>
               <Image
-                src="/well-done-icon.svg"
+                src="/well-done-icon.png"
                 alt="well done icon diary exercises"
                 width={123}
                 height={97}

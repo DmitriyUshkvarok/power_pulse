@@ -43,6 +43,9 @@ const modalSlice = createSlice({
     openAddDiaryExercisesModal: (state) => {
       state.isAddDiaryExercisesModalOpen = true;
     },
+    closedAddDiaryExercisesModal: (state) => {
+      state.isAddDiaryExercisesModalOpen = false;
+    },
     openWellDoneExercisesDiaryModal: (state) => {
       state.isWellDoneExercisesDiaryModal = true;
     },
@@ -75,6 +78,7 @@ export const {
   setShowMobileMenu,
   openAddDiaryExercisesModal,
   openWellDoneExercisesDiaryModal,
+  closedAddDiaryExercisesModal,
 } = modalSlice.actions;
 
 const persistConfig = {

@@ -75,6 +75,7 @@ const AddDiaryExercisesModal = () => {
 
       if (response) {
         router.push(`/exercises${dynamicPath}/well-done-exercises`);
+
         dispatch(closedAddDiaryExercisesModal());
         dispatch(openWellDoneExercisesDiaryModal());
       }

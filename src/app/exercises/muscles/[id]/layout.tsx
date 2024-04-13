@@ -4,7 +4,7 @@ interface RootLayoutProps {
   well_done_exercises: React.ReactNode;
 }
 
-const ExercisesLayoutId = ({
+const ExercisesLayoutMuscles = ({
   children,
   add_diary_exersises,
   well_done_exercises,
@@ -20,4 +20,4 @@ const ExercisesLayoutId = ({
   );
 };
 
-export default ExercisesLayoutId;
+export default ExercisesLayoutMuscles;

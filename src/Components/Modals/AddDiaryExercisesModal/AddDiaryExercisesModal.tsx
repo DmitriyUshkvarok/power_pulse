@@ -19,7 +19,7 @@ import { UserSession } from '../../Profile/ProfileForm';
 import { useRouter } from 'next/navigation';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
-
+import { formatDate } from '@/src/utils/formatDate';
 interface FormValues {
   name: string;
   target: string;
@@ -61,6 +61,8 @@ const AddDiaryExercisesModal = () => {
   };
 
   const handleSubmit = async (values: FormValues) => {
+    const currentDate = new Date();
+    const formattedDate = formatDate(currentDate);
     try {
       setIsLoading(true);
       const data = {
@@ -70,6 +72,7 @@ const AddDiaryExercisesModal = () => {
         equipment: values.equipment,
         burnedCalories: burnedCalorieCount,
         time: remainingTime,
+        date: formattedDate,
       };
 
       const response = await createDiaryExercises(data, userId);

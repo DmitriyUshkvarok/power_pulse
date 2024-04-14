@@ -2,8 +2,7 @@ import styles from './_diary_component.module.scss';
 import DaySwitch from '../../UI/DaySwitch/DaySwitch';
 import ProductComponent from '../ProductComponent/ProductComponent';
 import DayDashboard from '../DayDashboard/DayDashboard';
-import ExercisesDiaryList from '../ExercisesComponent/ExercisesDiaryList';
-
+import ExercisesComponent from '../ExercisesComponent/ExercisesComonent/ExercisesComponent';
 export interface ProductDiary {
   _id: string;
   title: string;
@@ -34,7 +33,7 @@ const DiaryComponent = () => {
             <ProductComponent />
           </div>
           <div>
-            <ExercisesDiaryList />
+            <ExercisesComponent />
           </div>
         </div>
       </div>

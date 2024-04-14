@@ -5,37 +5,31 @@ import Image from 'next/image';
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import {
-  fetchDiaryProducts,
-  deleteDiaryProduct,
-} from '@/src/redux/diarySlice/diarySlice';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../DataUsers/DataUserStepThree';
+import { deleteDiaryProduct } from '@/src/redux/diarySlice/diarySlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { formatDateString } from '@/src/utils/formatDate';
+import { getDiaryExercisesResponse } from '@/src/app/actions/diaryActions';
+interface ExercisesDiaryProps {
+  exercisesDiaryData: getDiaryExercisesResponse[];
+}
 
-const ExercisesDiaryList = () => {
+const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
   const isTabletDevice = useMediaQuery({ minWidth: '768px' });
   const dispatch = useAppDispatch();
-  const { data: session } = useSession();
-
-  const userId = (session?.user as UserSession)?._id;
-
-  const productDiaryData = useAppSelector((state) => state.diary.diaryProducts);
 
   const selectedDate = useAppSelector(sessionSelectors.getDate);
 
   const formattedDate = formatDateString(selectedDate);
 
-  const filteredProducts = productDiaryData?.filter((product) => {
-    return product.date === formattedDate;
-  });
+  const filteredExercisesDiaryData = exercisesDiaryData?.filter(
+    (exercisesDiaryData) => {
+      return exercisesDiaryData.date === formattedDate;
+    }
+  );
 
-  useEffect(() => {
-    dispatch(fetchDiaryProducts(userId));
-  }, [dispatch, userId]);
+  useEffect(() => {}, [exercisesDiaryData]);
 
-  const handleDeletedDiaryProduct = async (productId: string) => {
+  const handleDeletedDiaryExercises = async (productId: string) => {
     try {
       dispatch(deleteDiaryProduct(productId));
     } catch (error) {
@@ -51,10 +45,10 @@ const ExercisesDiaryList = () => {
         </Link>
       </div>
       <ul className={styles.product_diary_list}>
-        {!filteredProducts.length && (
+        {!filteredExercisesDiaryData.length && (
           <p className={styles.not_found_products}>Not found products</p>
         )}
-        {isTabletDevice && filteredProducts.length > 0 && (
+        {isTabletDevice && filteredExercisesDiaryData.length > 0 && (
           <ul className={styles.title_list}>
             <li className={`${styles.title_item} ${styles.title_one}`}>
               Body Part
@@ -76,52 +70,56 @@ const ExercisesDiaryList = () => {
             </li>
           </ul>
         )}
-        {filteredProducts?.map((product) => (
-          <li className={styles.product_diary_item} key={product._id}>
+        {filteredExercisesDiaryData?.map((data) => (
+          <li className={styles.product_diary_item} key={data._id}>
             <div className={styles.field_group}>
-              <div className={styles.field_title}>Title</div>
+              <div className={styles.field_title}>Body Part</div>
               <div className={`${styles.field_values} ${styles.first_value}`}>
-                {product.title}
+                {data.bodyPart}
               </div>
             </div>
             <div className={styles.field_group}>
-              <div className={styles.field_title}>Category</div>
+              <div className={styles.field_title}>Equipment</div>
               <div className={`${styles.field_values} ${styles.second_value}`}>
-                {product.category}
+                {data.equipment}
               </div>
             </div>
             <div className={styles.field_group}>
               <div className={styles.sub_field_group}>
                 <div className={styles.sub_field_group_box}>
-                  <div className={styles.field_title}>Calories</div>
+                  <div className={styles.field_title}>Name</div>
                   <div
                     className={`${styles.field_values} ${styles.third_value}`}
                   >
-                    {product.calories}
+                    {data.name}
                   </div>
                 </div>
                 <div className={styles.sub_field_group_box}>
-                  <div className={styles.field_title}>Weight</div>
+                  <div className={styles.field_title}>Target</div>
                   <div
                     className={`${styles.field_values} ${styles.third_value}`}
                   >
-                    {product.weight}
+                    {data.target}
                   </div>
                 </div>
                 <div className={styles.sub_field_group_box}>
-                  <div className={styles.field_title}>Recommended</div>
+                  <div className={styles.field_title}>Burned Calori</div>
                   <div
-                    className={`${styles.field_values} ${styles.fourth_value}`}
+                    className={`${styles.field_values} ${styles.third_value}`}
                   >
-                    {product.recommended ? (
-                      <span className={styles.field_values_span_true}>Yes</span>
-                    ) : (
-                      <span className={styles.field_values_span_false}>No</span>
-                    )}
+                    {data.burnedCalories}
+                  </div>
+                </div>
+                <div className={styles.sub_field_group_box}>
+                  <div className={styles.field_title}>Time</div>
+                  <div
+                    className={`${styles.field_values} ${styles.third_value}`}
+                  >
+                    {data.time}
                   </div>
                 </div>
                 <Image
-                  onClick={() => handleDeletedDiaryProduct(product._id)}
+                  onClick={() => handleDeletedDiaryExercises(data._id)}
                   className={styles.deleted_diary_product_icon}
                   src="/deleted_product.svg"
                   alt="deleted product diart icon"

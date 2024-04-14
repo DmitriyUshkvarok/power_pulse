@@ -9,6 +9,7 @@ export interface DiaryExercisesDocument {
   equipment: string;
   time: number;
   burnedCalories: number;
+  date: string;
 }
 
 const diaryExercisesSchema = new Schema<DiaryExercisesDocument>(
@@ -35,6 +36,10 @@ const diaryExercisesSchema = new Schema<DiaryExercisesDocument>(
     },
     burnedCalories: {
       type: Number,
+      required: true,
+    },
+    date: {
+      type: String,
       required: true,
     },
   },

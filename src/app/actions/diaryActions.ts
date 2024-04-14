@@ -3,6 +3,7 @@ import connectToDatabase from '@/src/utils/db';
 import Diary from '@/src/models/diaryModel';
 import User from '@/src/models/users';
 import DiaryExercises from '@/src/models/diaryExercisesModel';
+import { revalidatePath } from 'next/cache';
 export interface CreateDiarySuccessResponse {
   title: string;
   category: string;
@@ -19,6 +20,18 @@ export interface CreateDiaryExercisesResponse {
   equipment: string;
   time: number;
   burnedCalories: number;
+  date: string;
+}
+
+export interface getDiaryExercisesResponse {
+  _id: string;
+  name: string;
+  target: string;
+  bodyPart: string;
+  equipment: string;
+  time: number;
+  burnedCalories: number;
+  date: string;
 }
 
 export interface DiaryProduct {
@@ -112,6 +125,35 @@ export const getDiaryProducts = async (
     return newDiaryProducts;
   } catch (error) {
     console.error('An error occurred while creating product:', error);
+    throw new Error('Internal Server Error');
+  }
+};
+
+export const getDiaryExercises = async (
+  userId: string
+): Promise<getDiaryExercisesResponse[]> => {
+  connectToDatabase();
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return [];
+    }
+
+    const exercisestDiaryIds = user.diaryExercises;
+
+    const diaryExercises = await DiaryExercises.find({
+      _id: { $in: exercisestDiaryIds },
+    });
+
+    const newDiaryExercises = diaryExercises.map((item) => ({
+      ...item._doc,
+      _id: item._doc._id.toString(),
+    }));
+
+    return newDiaryExercises;
+  } catch (error) {
+    console.error('An error occurred while get exercises diary:', error);
     throw new Error('Internal Server Error');
   }
 };

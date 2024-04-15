@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
-import { loginSchema } from '@/src/formSchemas/loginSchema';
+import { loginSchema } from '@/src/validation/loginSchema';
 
 interface FormValues {
   email: string;

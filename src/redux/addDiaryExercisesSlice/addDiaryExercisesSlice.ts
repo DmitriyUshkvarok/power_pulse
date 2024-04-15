@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getDiaryExercisesResponse } from '@/src/app/actions/diaryActions';
 import persistReducer from 'redux-persist/es/persistReducer';
 import storageSession from 'redux-persist/lib/storage/session';
 
@@ -12,12 +13,16 @@ export interface ExerciseDiaryTypeRedux {
   equipment: string;
 }
 
+export interface ExerciseDiaryState {
+  exercisesDiaryData: getDiaryExercisesResponse[];
+}
+
 const exercisesDiaryPersistConfig = {
   key: 'exercisesDiary',
   storage: storageSession,
 };
 
-const initialState: ExerciseDiaryTypeRedux = {
+const initialState: ExerciseDiaryState & ExerciseDiaryTypeRedux = {
   _id: '',
   exercisesId: '',
   name: '',
@@ -25,6 +30,7 @@ const initialState: ExerciseDiaryTypeRedux = {
   bodyPart: '',
   target: '',
   equipment: '',
+  exercisesDiaryData: [],
 };
 
 const exerciseDiarySlice = createSlice({
@@ -37,10 +43,14 @@ const exerciseDiarySlice = createSlice({
     ) => {
       return { ...state, ...action.payload };
     },
+    setExercisesDiaryData: (state, action) => {
+      state.exercisesDiaryData = action.payload;
+    },
   },
 });
 
-export const { setSelectExercisesDiary } = exerciseDiarySlice.actions;
+export const { setSelectExercisesDiary, setExercisesDiaryData } =
+  exerciseDiarySlice.actions;
 
 const persistedExercisesDiaryReducer = persistReducer(
   exercisesDiaryPersistConfig,

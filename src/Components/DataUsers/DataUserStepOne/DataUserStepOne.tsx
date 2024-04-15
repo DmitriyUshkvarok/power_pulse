@@ -5,13 +5,14 @@ import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import Calendar from 'react-calendar';
+import useRouterPush from '@/src/hooks/useRouter';
 import { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useRouter } from 'next/navigation';
-import { dataStepOneSchema } from '@/src/formSchemas/dataStepOneSchema';
+import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
+
+import { useAppDispatch } from '@/src/hooks/redux-hook';
 
 interface FormData {
   height: string;
@@ -30,8 +31,8 @@ const initialValues = {
 const DataUserStepOne = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { pushRoute } = useRouterPush();
   const formikRef = useRef(null);
 
   const handleCalendarToggle = () => {
@@ -48,7 +49,7 @@ const DataUserStepOne = () => {
     const formatDateToString = formatDate(date);
     const updatedValues = { ...values, birthday: formatDateToString };
     dispatch(updateUserData(updatedValues));
-    router.push('/user-data/step-two');
+    pushRoute('/user-data/step-two');
   };
 
   return (

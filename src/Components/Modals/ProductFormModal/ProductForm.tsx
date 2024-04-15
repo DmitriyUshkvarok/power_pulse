@@ -2,14 +2,14 @@
 import styles from './_product_form.module.scss';
 import Image from 'next/image';
 import Container from '../../Container/Container';
-import Modal from '../../Modals/Modal/Modal';
+import Modal from '../Modal/Modal';
 import useAuthRedirect from '@/src/hooks/useRedirect';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { createProduct } from '@/src/app/actions/productActions';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addProductSchema } from '@/src/formSchemas/addProductSchema';
+import { addProductSchema } from '@/src/validation/addProductSchema';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';

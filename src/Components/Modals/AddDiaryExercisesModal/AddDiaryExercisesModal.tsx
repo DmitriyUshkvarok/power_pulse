@@ -6,6 +6,7 @@ import Image from 'next/image';
 import useAuthRedirect from '@/src/hooks/useRedirect';
 import WellDoneDiaryExercisesModal from '../WellDoneDiaryExercisesModal/WellDoneDiaryExercisesModal';
 import Timer from '../../UI/Timer/Timer';
+import useRouterPush from '@/src/hooks/useRouter';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { Formik, Form, Field } from 'formik';
@@ -16,7 +17,6 @@ import { convertSeconds } from '@/src/utils/convertSeconds';
 import { createDiaryExercises } from '@/src/app/actions/diaryActions';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
-import { useRouter } from 'next/navigation';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 import { formatDate } from '@/src/utils/formatDate';
@@ -30,8 +30,8 @@ interface FormValues {
 const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
   const { handleRedirect } = useAuthRedirect();
+  const { pushRoute } = useRouterPush();
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
 
@@ -78,7 +78,7 @@ const AddDiaryExercisesModal = () => {
       const response = await createDiaryExercises(data, userId);
 
       if (response) {
-        router.push(
+        pushRoute(
           `/exercises${dynamicPath}/add-diary-exercises?well-done-exercises`
         );
         dispatch(openWellDoneExercisesDiaryModal());

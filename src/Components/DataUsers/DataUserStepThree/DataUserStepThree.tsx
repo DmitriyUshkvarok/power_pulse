@@ -3,9 +3,9 @@ import styles from './_DataUserStepThree.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import Container from '../../Container/Container';
+import useRouterPush from '@/src/hooks/useRouter';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import {
   createDataAsync,
   fetchUserData,
@@ -16,8 +16,8 @@ import { UserSession } from './index';
 const DataUserStepThree = () => {
   const { data: session } = useSession();
   const [isLoading, setIsloading] = useState(false);
-  const router = useRouter();
   const dispatch = useAppDispatch();
+  const { pushRoute } = useRouterPush();
 
   const userData = useAppSelector((state) => state.userData.data);
 
@@ -33,7 +33,7 @@ const DataUserStepThree = () => {
         setIsloading(true);
         await dispatch(createDataAsync({ id: userId, data: userData }));
         await dispatch(fetchUserData(userDataId));
-        router.push('/diary');
+        pushRoute('/diary');
       } else {
         alert('User not authenticated');
       }

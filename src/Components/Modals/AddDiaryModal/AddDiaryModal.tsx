@@ -4,12 +4,12 @@ import Image from 'next/image';
 import Container from '../../Container/Container';
 import WellDoneDiaryModal from '../WellDoneDiaryModal/WellDoneDiaryModal';
 import useAuthRedirect from '@/src/hooks/useRedirect';
+import useRouterPush from '@/src/hooks/useRouter';
 import Modal from '../Modal/Modal';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addDiaryProductSchema } from '@/src/formSchemas/addDiaryProductSchema';
+import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
 import { useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '@/src/hooks/redux-hook';
-import { useRouter } from 'next/navigation';
 import { createDiary } from '@/src/app/actions/diaryActions';
 import { UserSession } from '../../Profile/ProfileForm';
 import { useSession } from 'next-auth/react';
@@ -30,10 +30,10 @@ const AddDiaryModal = () => {
   const { data: session } = useSession();
   const [loading, setIsLoading] = useState(false);
   const formRef = useRef<any>(null);
-  const router = useRouter();
   const userId = (session?.user as UserSession)?._id;
   const dispatch = useAppDispatch();
   const { handleRedirect } = useAuthRedirect();
+  const { pushRoute } = useRouterPush();
 
   const selectSelectedProduct = useAppSelector(
     (state) => state.products.selectedProduct
@@ -73,7 +73,7 @@ const AddDiaryModal = () => {
 
       if (response) {
         dispatch(setDynamicCalories(values.calories));
-        router.push('/add-diary?well-done');
+        pushRoute('/add-diary?well-done');
         dispatch(openWellDoneDiaryModal());
       }
     } catch (error) {

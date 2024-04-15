@@ -130,6 +130,7 @@
 
   @include mediaQuery(768px) {
     height: 234px;
+    gap: 8px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(239, 237, 232, 0.1) transparent;
@@ -210,6 +211,10 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);

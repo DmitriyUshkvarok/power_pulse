@@ -3,11 +3,11 @@ import styles from './_DataUserStepTwo.module.scss';
 import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDispatch } from 'react-redux';
+import useRouterPush from '@/src/hooks/useRouter';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useRouter } from 'next/navigation';
 import { UserData } from './index';
-import { dataStepTwoSchema } from '@/src/formSchemas/dataStepTwoSchema';
+import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
+import { useAppDispatch } from '@/src/hooks/redux-hook';
 import {
   updateUserData,
   resetUserData,
@@ -20,12 +20,12 @@ const initialValues = {
 };
 
 const DataUserStepTwo = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { pushRoute } = useRouterPush();
 
   const handleSaveValuesToGlobalState = (values: UserData) => {
     dispatch(updateUserData(values));
-    router.push('/user-data/step-three');
+    pushRoute('/user-data/step-three');
   };
 
   const handleRemoveState = () => {

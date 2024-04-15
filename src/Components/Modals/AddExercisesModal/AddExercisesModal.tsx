@@ -8,7 +8,7 @@ import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { addExercisesSchema } from '@/src/formSchemas/addExercisesSchema';
+import { addExercisesSchema } from '@/src/validation/addExercisesSchema';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';

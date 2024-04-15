@@ -1,5 +1,5 @@
-@import '../../../sass/utils/variables.module';
-@import '../../../sass/utils/mixins.module';
+@import '../../../../sass/utils/variables.module';
+@import '../../../../sass/utils/mixins.module';
 
 .products_diary_box {
   height: 844px;
@@ -90,32 +90,72 @@
 .title_item.title_one {
   width: 204px;
 
+  @include mediaQuery(768px) {
+    width: 90px;
+  }
+
   @include mediaQuery(1200px) {
-    width: 212px;
+    width: 115px;
   }
 }
 
 .title_item.title_two {
   width: 128px;
 
+  @include mediaQuery(768px) {
+    width: 132px;
+  }
+
   @include mediaQuery(1200px) {
-    width: 166px;
+    width: 157px;
   }
 }
 
 .title_item.title_three {
   width: 90px;
 
+  @include mediaQuery(768px) {
+    width: 128px;
+  }
+
   @include mediaQuery(1200px) {
-    width: 105px;
+    width: 131px;
   }
 }
 
 .title_item.title_four {
   width: 80px;
 
+  @include mediaQuery(768px) {
+    width: 84px;
+  }
+
   @include mediaQuery(1200px) {
-    width: 110px;
+    width: 108px;
+  }
+}
+
+.title_item.title_five {
+  width: 80px;
+
+  @include mediaQuery(768px) {
+    width: 78px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 91px;
+  }
+}
+
+.title_item.title_six {
+  width: 80px;
+
+  @include mediaQuery(768px) {
+    width: 78px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 82px;
   }
 }
 
@@ -130,6 +170,7 @@
 
   @include mediaQuery(768px) {
     height: 234px;
+    gap: 8px;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(239, 237, 232, 0.1) transparent;
@@ -210,6 +251,10 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);
@@ -218,41 +263,61 @@
 
 .field_values.first_value {
   @include mediaQuery(768px) {
-    width: 204px;
+    width: 90px;
   }
 
   @include mediaQuery(1200px) {
-    width: 212px;
+    width: 115px;
   }
 }
 
 .field_values.second_value {
   @include mediaQuery(768px) {
-    width: 128px;
+    width: 132px;
   }
 
   @include mediaQuery(1200px) {
-    width: 166px;
+    width: 157px;
   }
 }
 
 .field_values.third_value {
   @include mediaQuery(768px) {
-    width: 90px;
+    width: 128px;
   }
 
   @include mediaQuery(1200px) {
-    width: 105px;
+    width: 131px;
   }
 }
 
 .field_values.fourth_value {
   @include mediaQuery(768px) {
-    width: 80px;
+    width: 84px;
   }
 
   @include mediaQuery(1200px) {
-    width: 110px;
+    width: 108px;
+  }
+}
+
+.field_values.five_value {
+  @include mediaQuery(768px) {
+    width: 78px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 91px;
+  }
+}
+
+.field_values.six_value {
+  @include mediaQuery(768px) {
+    width: 72px;
+  }
+
+  @include mediaQuery(1200px) {
+    width: 82px;
   }
 }
 
@@ -325,5 +390,20 @@
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);
+  }
+}
+
+.deleted_exercise_diary_loader {
+  font-size: 10px;
+  color: $white-color;
+  margin-top: auto;
+  margin-bottom: 10px;
+
+  @include mediaQuery(768px) {
+    margin-left: 4px;
+  }
+
+  @include mediaQuery(1200px) {
+    margin-left: 12px;
   }
 }

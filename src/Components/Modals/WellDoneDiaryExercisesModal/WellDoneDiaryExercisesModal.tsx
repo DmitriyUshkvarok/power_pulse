@@ -3,17 +3,17 @@ import styles from './_well_done_diary_exercises_modal.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import useAuthRedirect from '@/src/hooks/useRedirect';
+import useRouterPush from '@/src/hooks/useRouter';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
-import { useRouter } from 'next/navigation';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
 
 const WellDoneDiaryExercisesModal = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const { handleRedirect } = useAuthRedirect();
+  const { pushRoute } = useRouterPush();
 
   const burnedCalories = useAppSelector(sessionSelectors.getCaloriesBurned);
   const remainingTime = useAppSelector(sessionSelectors.getRemainingTime);
@@ -25,7 +25,7 @@ const WellDoneDiaryExercisesModal = () => {
 
   const handleRedirectOnDiary = () => {
     dispatch(closeModal());
-    router.push('/diary');
+    pushRoute('/diary');
   };
 
   return (

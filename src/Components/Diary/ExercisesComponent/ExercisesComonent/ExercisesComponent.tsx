@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import ExercisesDiaryList from '../ExercisesDiaryList';
+import ExercisesDiaryList from '../ExercisesDiaryList/ExercisesDiaryList';
 import { getDiaryExercises } from '@/src/app/actions/diaryActions';
 import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
 

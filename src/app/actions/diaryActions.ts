@@ -167,7 +167,23 @@ export const deletedDiaryProduct = async (productId: string) => {
 
     return { ...productDiary._doc, _id: productDiary._id.toString() };
   } catch (error) {
-    console.error('An error occurred while fetching products:', error);
+    console.error('An error occurred while deleting products:', error);
+    return { error: 'Internal Server Error', statusCode: 500 };
+  }
+};
+
+export const deletedDiaryExercises = async (productId: string) => {
+  connectToDatabase();
+  try {
+    const exercisesDiary = await DiaryExercises.findByIdAndDelete(productId, {
+      new: true,
+    });
+
+    revalidatePath('/');
+
+    return { ...exercisesDiary._doc, _id: exercisesDiary._id.toString() };
+  } catch (error) {
+    console.error('An error occurred while deleting diary exercises:', error);
     return { error: 'Internal Server Error', statusCode: 500 };
   }
 };

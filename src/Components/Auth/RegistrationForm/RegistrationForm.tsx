@@ -9,7 +9,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { FormValues } from './index';
-import { registrationSchema } from '@/src/formSchemas/registrationSchema';
+import { registrationSchema } from '@/src/validation/registrationSchema';
 import { signUpWithCredential } from '@/src/app/actions/authActions';
 import { verifyWithCredentials } from '@/src/app/actions/authActions';
 

@@ -3,10 +3,12 @@ import styles from './_day_dashsboard.module.scss';
 import Image from 'next/image';
 import useCalculateDailyRecommendation from '@/src/hooks/useCalculateDailyCalories';
 import useRemainingCalories from '@/src/hooks/useRemainingCalories';
+import useTimeAndCalories from '@/src/hooks/useTimeAndCalories';
+import { fullConvertSeconds } from '@/src/utils/convertSeconds';
 
 const DayDashboard = () => {
   const { calculateCalories } = useCalculateDailyRecommendation();
-
+  const { totalTrainingTime, totalBurnedCalories } = useTimeAndCalories();
   const { consumedCalories, remainingCalories } = useRemainingCalories();
 
   const borderClass =
@@ -93,7 +95,9 @@ const DayDashboard = () => {
               />
               <div className={styles.dashboard_info}>Сalories burned</div>
             </div>
-            <div className={styles.dashboard_value}>855</div>
+            <div className={styles.dashboard_value}>
+              {totalBurnedCalories.toFixed(2)}
+            </div>
           </div>
           <div className={styles.dashboard_sub_item}>
             <div className={styles.dashboard_header}>
@@ -106,7 +110,9 @@ const DayDashboard = () => {
               />
               <div className={styles.dashboard_info}>The rest of sports</div>
             </div>
-            <div className={styles.dashboard_value}>85 min</div>
+            <div className={styles.dashboard_value}>
+              {fullConvertSeconds(totalTrainingTime)} min
+            </div>
           </div>
         </li>
       </ul>

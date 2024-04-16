@@ -3,15 +3,14 @@ import styles from './_add_exercises_modal.module.scss';
 import Image from 'next/image';
 import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
-import useAuthRedirect from '@/src/hooks/useRedirect';
+import useModalClose from '@/src/hooks/useModalClose';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addExercisesSchema } from '@/src/validation/addExercisesSchema';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import { useAppSelector } from '@/src/hooks/redux-hook';
 import { createExerciseCards } from '@/src/app/actions/exercisesActions';
 
 interface FormValues {
@@ -38,19 +37,13 @@ const AddExercisesForm = ({ id }: PageId) => {
   const [loading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
-  const { handleRedirect } = useAuthRedirect();
-  const dispatch = useAppDispatch();
+  const handleCloseModal = useModalClose();
 
   const exercisesId = id !== undefined ? id : '';
 
   const isCreatedExercisesModalOpen = useAppSelector(
     modalsSelectors.getIsCreatedExercisesModalOpen
   );
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
-  };
 
   const handleSubmit = async (values: FormValues) => {
     try {

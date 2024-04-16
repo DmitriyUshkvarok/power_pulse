@@ -3,14 +3,13 @@ import styles from './_add_diary_exercises_modal.module.scss';
 import Modal from '../Modal/Modal';
 import Container from '../../Container/Container';
 import Image from 'next/image';
-import useAuthRedirect from '@/src/hooks/useRedirect';
 import WellDoneDiaryExercisesModal from '../WellDoneDiaryExercisesModal/WellDoneDiaryExercisesModal';
 import Timer from '../../UI/Timer/Timer';
 import useRouterPush from '@/src/hooks/useRouter';
+import useModalClose from '@/src/hooks/useModalClose';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { Formik, Form, Field } from 'formik';
-import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
@@ -29,11 +28,11 @@ interface FormValues {
 
 const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
-  const { handleRedirect } = useAuthRedirect();
   const { pushRoute } = useRouterPush();
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
+  const handleCloseModal = useModalClose();
 
   const isAddDiaryExercisesModalOpen = useAppSelector(
     modalsSelectors.getIsAddDiaryExercisesModalOpen
@@ -53,11 +52,6 @@ const AddDiaryExercisesModal = () => {
     target: exerciseDiaryValue.target || '',
     bodyPart: exerciseDiaryValue.bodyPart || '',
     equipment: exerciseDiaryValue.equipment || '',
-  };
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
   };
 
   const handleSubmit = async (values: FormValues) => {

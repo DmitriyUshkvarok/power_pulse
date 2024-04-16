@@ -20,9 +20,7 @@ const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
   const isTabletDevice = useMediaQuery({ minWidth: '768px' });
   const [loading, setLoading] = useState<string | null>(null);
   const dispatch = useAppDispatch();
-
   const selectedDate = useAppSelector(sessionSelectors.getDate);
-
   const formattedDate = formatDateString(selectedDate);
 
   const filteredExercisesDiaryData = exercisesDiaryData?.filter(
@@ -96,15 +94,13 @@ const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
               </div>
             </div>
             <div className={styles.field_group}>
+              <div className={styles.field_title}>Name</div>
+              <div className={`${styles.field_values} ${styles.third_value}`}>
+                {data.name}
+              </div>
+            </div>
+            <div className={styles.field_group}>
               <div className={styles.sub_field_group}>
-                <div className={styles.sub_field_group_box}>
-                  <div className={styles.field_title}>Name</div>
-                  <div
-                    className={`${styles.field_values} ${styles.third_value}`}
-                  >
-                    {data.name}
-                  </div>
-                </div>
                 <div className={styles.sub_field_group_box}>
                   <div className={styles.field_title}>Target</div>
                   <div
@@ -127,20 +123,24 @@ const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
                     {convertSeconds(data.time)}
                   </div>
                 </div>
-                {loading === data._id ? (
-                  <p className={styles.deleted_exercise_diary_loader}>
-                    Loading...
-                  </p>
-                ) : (
-                  <Image
-                    onClick={() => handleDeletedDiaryExercises(data._id)}
-                    className={styles.deleted_diary_product_icon}
-                    src="/deleted_product.svg"
-                    alt="deleted product diart icon"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                <div
+                  className={`${styles.sub_field_group_box} ${styles.delete}`}
+                >
+                  {loading === data._id ? (
+                    <p className={styles.deleted_exercise_diary_loader}>
+                      Loading...
+                    </p>
+                  ) : (
+                    <Image
+                      onClick={() => handleDeletedDiaryExercises(data._id)}
+                      className={styles.deleted_diary_product_icon}
+                      src="/deleted_product.svg"
+                      alt="deleted product diart icon"
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </li>

@@ -33,7 +33,7 @@ const Timer = () => {
       const timeInMinutes = (180 - remainingTime) / 60;
       const burnedCalories = (timeInMinutes * caloriesPerThreeMinutes) / 3;
       dispatch(setCaloriesBurned(Number(burnedCalories.toFixed(2))));
-      dispatch(setRemainingTime(remainingTime));
+      dispatch(setRemainingTime(180 - remainingTime));
     },
     [caloriesPerThreeMinutes, dispatch]
   );

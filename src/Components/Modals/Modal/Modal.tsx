@@ -1,24 +1,18 @@
 'use client';
 import styles from './_modal.module.scss';
-import useAuthRedirect from '@/src/hooks/useRedirect';
+import useModalClose from '@/src/hooks/useModalClose';
 import { useEscapeKey } from '@/src/hooks/useEscapeKey';
-import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { closeModal } from '@/src/redux/modalSlice/modalSlice';
+import { useAppSelector } from '@/src/hooks/redux-hook';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
+
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 const Modal = ({ children }: RootLayoutProps) => {
-  const dispatch = useAppDispatch();
-  const { handleRedirect } = useAuthRedirect();
+  const handleCloseModal = useModalClose();
 
   const isModalOpen = useAppSelector(modalsSelectors.getIsModalOpen);
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
-  };
 
   useEscapeKey(handleCloseModal);
 

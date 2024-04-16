@@ -3,9 +3,9 @@ import styles from './_add_diary_modal.module.scss';
 import Image from 'next/image';
 import Container from '../../Container/Container';
 import WellDoneDiaryModal from '../WellDoneDiaryModal/WellDoneDiaryModal';
-import useAuthRedirect from '@/src/hooks/useRedirect';
 import useRouterPush from '@/src/hooks/useRouter';
 import Modal from '../Modal/Modal';
+import useModalClose from '@/src/hooks/useModalClose';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
 import { useState, useRef } from 'react';
@@ -16,10 +16,7 @@ import { useSession } from 'next-auth/react';
 import { formatDate } from '@/src/utils/formatDate';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { setDynamicCalories } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
-import {
-  closeModal,
-  openWellDoneDiaryModal,
-} from '@/src/redux/modalSlice/modalSlice';
+import { openWellDoneDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 interface FormValues {
   productName: string;
   weight: string;
@@ -32,8 +29,8 @@ const AddDiaryModal = () => {
   const formRef = useRef<any>(null);
   const userId = (session?.user as UserSession)?._id;
   const dispatch = useAppDispatch();
-  const { handleRedirect } = useAuthRedirect();
   const { pushRoute } = useRouterPush();
+  const handleCloseModal = useModalClose();
 
   const selectSelectedProduct = useAppSelector(
     (state) => state.products.selectedProduct
@@ -94,11 +91,6 @@ const AddDiaryModal = () => {
 
     setFieldValue('weight', e.target.value);
     setFieldValue('calories', calculatedCalories.toFixed(2));
-  };
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
   };
 
   return (

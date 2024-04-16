@@ -3,7 +3,7 @@ import styles from './_product_form.module.scss';
 import Image from 'next/image';
 import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
-import useAuthRedirect from '@/src/hooks/useRedirect';
+import useModalClose from '@/src/hooks/useModalClose';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { createProduct } from '@/src/app/actions/productActions';
 import { useSession } from 'next-auth/react';
@@ -12,9 +12,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addProductSchema } from '@/src/validation/addProductSchema';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { closeModal } from '@/src/redux/modalSlice/modalSlice';
-
+import { useAppSelector } from '@/src/hooks/redux-hook';
 interface FormValues {
   name: string;
   calories: string;
@@ -36,8 +34,7 @@ const ProductForm = () => {
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
   const router = useRouter();
-  const { handleRedirect } = useAuthRedirect();
-  const dispatch = useAppDispatch();
+  const handleCloseModal = useModalClose();
 
   const isCreatedModalOpen = useAppSelector(
     modalsSelectors.getIsCreatedModalOpen
@@ -55,11 +52,6 @@ const ProductForm = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleCloseModal = () => {
-    handleRedirect();
-    dispatch(closeModal());
   };
 
   return (

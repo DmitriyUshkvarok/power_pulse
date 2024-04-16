@@ -220,14 +220,20 @@
 .sub_field_group {
   display: flex;
   gap: 16px;
+  margin-top: 16px;
 
   @include mediaQuery(768px) {
     gap: 8px;
+    margin-top: 0px;
   }
 }
 
 .sub_field_group_box {
-  min-width: 80px;
+  width: 100%;
+}
+
+.sub_field_group_box.delete {
+  align-self: flex-end;
 }
 
 .field_title {
@@ -251,10 +257,6 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);
@@ -264,6 +266,9 @@
 .field_values.first_value {
   @include mediaQuery(768px) {
     width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @include mediaQuery(1200px) {
@@ -274,6 +279,9 @@
 .field_values.second_value {
   @include mediaQuery(768px) {
     width: 132px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @include mediaQuery(1200px) {
@@ -284,6 +292,9 @@
 .field_values.third_value {
   @include mediaQuery(768px) {
     width: 128px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   @include mediaQuery(1200px) {
@@ -292,6 +303,11 @@
 }
 
 .field_values.fourth_value {
+  width: 84px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   @include mediaQuery(768px) {
     width: 84px;
   }
@@ -302,6 +318,11 @@
 }
 
 .field_values.five_value {
+  width: 78px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   @include mediaQuery(768px) {
     width: 78px;
   }
@@ -312,6 +333,11 @@
 }
 
 .field_values.six_value {
+  width: 72px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   @include mediaQuery(768px) {
     width: 72px;
   }
@@ -364,7 +390,7 @@
 }
 
 .deleted_diary_product_icon {
-  display: block;
+  display: flex;
   cursor: pointer;
   width: 20px;
   height: 20px;

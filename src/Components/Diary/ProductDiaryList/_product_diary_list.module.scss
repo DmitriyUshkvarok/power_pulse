@@ -211,10 +211,6 @@
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   @include mediaQuery(768px) {
     @include fontSizeAuto(16px, 24px);

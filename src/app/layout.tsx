@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import { getServerSession } from 'next-auth';
-import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import Header from '../Components/Header/Header';
 import NextAuthProvider from '../providers/nextAuthProvider';
 import ReduxProvider from '../providers/reduxProvider';

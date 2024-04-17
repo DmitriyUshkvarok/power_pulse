@@ -1,6 +1,6 @@
 import DataUserStepThree from '@/src/Components/DataUsers/DataUserStepThree/DataUserStepThree';
 import { getServerSession } from 'next-auth';
-import { authOption } from '../../api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import { redirect } from 'next/navigation';
 
 const StepThreePage = async () => {

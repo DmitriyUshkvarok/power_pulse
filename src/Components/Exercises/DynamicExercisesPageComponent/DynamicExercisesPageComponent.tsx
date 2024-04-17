@@ -6,7 +6,7 @@ import ButtonBack from '../../UI/Buttons/ButtonBack/ButtonBack';
 import Modal from '@/src/Components/Modals/Modal/Modal';
 import AddExercisesForm from '@/src/Components/Modals/AddExercisesModal/AddExercisesModal';
 import { getServerSession } from 'next-auth';
-import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import {
   getExerciseCardsByUserId,
   getExerciseSubCategory,

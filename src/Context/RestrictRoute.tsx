@@ -1,6 +1,6 @@
 'use server';
 import { getServerSession } from 'next-auth';
-import { authOption } from '../app/api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import { redirect } from 'next/navigation';
 
 export interface RootLayoutProps {

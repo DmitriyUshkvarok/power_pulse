@@ -2,7 +2,6 @@
 import styles from './RegistrationForm.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import SuccessRegistrationModal from '../../Modals/SuccessRegistrationModal/SuccessRegistrationModal';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -23,8 +22,6 @@ function FormRegistration() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalValues, setModalValues] = useState<FormValues | null>(null);
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -32,8 +29,11 @@ function FormRegistration() {
       const res = await signUpWithCredential({ ...values });
 
       if (res && res.token) {
-        setModalValues({ ...values, token: res.token });
-        setIsModalOpen(true);
+        await verifyWithCredentials(res.token);
+        await signIn('credentials', {
+          ...values,
+          callbackUrl: '/user-data',
+        });
       } else {
         setError('Error during registration');
       }
@@ -50,15 +50,6 @@ function FormRegistration() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
-  const closeModal = async (values: FormValues, token: string) => {
-    setIsModalOpen(false);
-    await verifyWithCredentials(token);
-    await signIn('credentials', {
-      ...values,
-      callbackUrl: '/user-data',
-    });
-  };
-
   return (
     <div>
       <h1 className={styles.auth_title}>Sign Up</h1>
@@ -71,12 +62,6 @@ function FormRegistration() {
           <p>{error}</p>
         </div>
       )}
-      <SuccessRegistrationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={(values) => closeModal(values, values.token)}
-        values={modalValues}
-      />
       <Formik
         initialValues={initialValues}
         validationSchema={registrationSchema}
@@ -214,7 +199,11 @@ function FormRegistration() {
               </ErrorMessage>
             </div>
             <div>
-              <button className={styles.registr_form_button} type="submit">
+              <button
+                disabled={isLoading}
+                className={styles.registr_form_button}
+                type="submit"
+              >
                 {isLoading ? <p>Loading...</p> : <span>Sign Up</span>}
               </button>
             </div>

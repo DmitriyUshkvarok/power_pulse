@@ -5,7 +5,7 @@ import User from '@/src/models/users';
 import connectToDatabase from '@/src/utils/db';
 import { revalidatePath } from 'next/cache';
 import { getServerSession } from 'next-auth';
-import { authOption } from '../api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 
 connectToDatabase();
 

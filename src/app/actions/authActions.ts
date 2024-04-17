@@ -4,8 +4,27 @@ import User from '@/src/models/users';
 import bcrypt from 'bcrypt';
 import { generateToken, veryfyToken } from '@/src/utils/token';
 import { FormValues } from '@/src/Components/Auth/RegistrationForm';
-import { authOption } from '@/src/app/api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import { getServerSession } from 'next-auth/next';
+import { Account, Profile } from 'next-auth';
+
+export interface ExtendedProfile extends Profile {
+  picture: string;
+}
+
+export interface OAuthSignInArgs {
+  account: Account;
+  profile: ExtendedProfile;
+}
+
+export interface UserByEmailArgs {
+  email: string;
+}
+
+export interface CredentialsSignInArgs {
+  email: string;
+  password: string;
+}
 
 connectToDatabase();
 
@@ -92,4 +111,42 @@ export async function verifyWithCredentials(token: string) {
       return { error: error.message };
     } else throw new Error('Something went wrong');
   }
+}
+
+// @@@@@@@@@@@@@@@@@@@@@@DmitriyUshkvarok
+
+export async function signInWithOAuth({ account, profile }: OAuthSignInArgs) {
+  const user = await User.findOne({ email: profile.email });
+  if (user) return true;
+
+  const newUser = new User({
+    name: profile.name,
+    email: profile.email,
+    image: profile.picture,
+    provider: account.provider,
+  });
+
+  await newUser.save();
+
+  return true;
+}
+
+export async function getUserByEmail({ email }: UserByEmailArgs) {
+  const user = await User.findOne({ email }).select('-passsword');
+
+  if (!user) throw new Error('Email does not exist!');
+
+  return { ...user._doc, _id: user._id.toString() };
+}
+
+export async function signInWithCredentials({
+  email,
+  password,
+}: CredentialsSignInArgs) {
+  const user = await User.findOne({ email });
+  if (!user) throw new Error('Email does not exist!');
+
+  const compare = await bcrypt.compare(password, user.password);
+  if (!compare) throw new Error('password does not match!');
+  return { ...user._doc, _id: user._id.toString() };
 }

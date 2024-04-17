@@ -1,6 +1,6 @@
 import DataUserStepTwo from '@/src/Components/DataUsers/DataUserStepTwo/DataUserStepTwo';
 import { getServerSession } from 'next-auth';
-import { authOption } from '../../api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 import { redirect } from 'next/navigation';
 
 const StepTwoPage = async () => {

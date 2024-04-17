@@ -148,7 +148,11 @@ function FormLogin() {
               </ErrorMessage>
             </div>
             <div>
-              <button className={styles.registr_form_button} type="submit">
+              <button
+                disabled={isLoading}
+                className={styles.registr_form_button}
+                type="submit"
+              >
                 {isLoading ? <p>Loading...</p> : <span>Sign In</span>}
               </button>
             </div>

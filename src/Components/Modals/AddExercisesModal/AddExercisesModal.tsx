@@ -56,11 +56,7 @@ const AddExercisesForm = ({ id }: PageId) => {
         equipment: values.equipment,
         exercisesId: exercisesId,
       };
-      const response = await createExerciseCards(exercisesSubListData, userId);
-
-      if (response) {
-        handleCloseModal();
-      }
+      await createExerciseCards(exercisesSubListData, userId);
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

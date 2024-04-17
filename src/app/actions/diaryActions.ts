@@ -93,6 +93,7 @@ export const createDiaryExercises = async (
       }
     );
 
+    revalidatePath('/');
     return {
       ...saveDiaryExercises._doc,
       _id: saveDiaryExercises._id.toString(),

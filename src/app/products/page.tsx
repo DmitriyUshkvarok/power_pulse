@@ -3,7 +3,7 @@ import Container from '@/src/Components/Container/Container';
 import ProductPageComponent from '@/src/Components/Product/ProductPageComponent/ProductPageComponent';
 import { getProductsByUserId } from '@/src/app/actions/productActions';
 import { getServerSession } from 'next-auth';
-import { authOption } from '../api/auth/[...nextauth]/route';
+import { authOption } from '@/src/utils/authOptions';
 
 const Products = async () => {
   const session = await getServerSession(authOption);

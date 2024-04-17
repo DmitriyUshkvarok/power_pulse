@@ -10,7 +10,6 @@ import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { addProductSchema } from '@/src/validation/addProductSchema';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
 interface FormValues {
@@ -33,7 +32,6 @@ const ProductForm = () => {
   const [loading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const userId = (session?.user as UserSession)?._id;
-  const router = useRouter();
   const handleCloseModal = useModalClose();
 
   const isCreatedModalOpen = useAppSelector(
@@ -43,10 +41,7 @@ const ProductForm = () => {
   const handleSubmit = async (values: FormValues) => {
     try {
       setIsLoading(true);
-      const response = await createProduct(values, userId);
-      if (response) {
-        router.back();
-      }
+      await createProduct(values, userId);
     } catch (error) {
       console.log('Error in product form submission', error);
     } finally {

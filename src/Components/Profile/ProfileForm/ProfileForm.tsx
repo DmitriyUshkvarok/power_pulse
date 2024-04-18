@@ -2,7 +2,7 @@
 import 'react-calendar/dist/Calendar.css';
 import styles from './_ProfileForm.module.scss';
 import Image from 'next/image';
-import Calendar from 'react-calendar';
+import CalendarComponent from '../../UI/Calendar/Calendar';
 import { useState, useRef, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ import { formatDate } from '@/src/utils/formatDate';
 
 const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
-  const [date, setDate] = useState<Date | null>(new Date());
+  const [date, setDate] = useState(new Date());
   const formikRef = useRef(null);
   const userData = useSelector((state: RootState) => state.userData.data);
   const [loading, setLoading] = useState(false);
@@ -57,12 +57,6 @@ const ProfileForm = () => {
 
   const handleCalendarToggle = () => {
     setCalendarOpen(!isCalendarOpen);
-  };
-
-  const clickBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget === e.target) {
-      setCalendarOpen(false);
-    }
   };
 
   const handleSave = async (values: ProfileFormValues) => {
@@ -213,32 +207,13 @@ const ProfileForm = () => {
                 className={styles.calendar_icon}
                 onClick={handleCalendarToggle}
               />
-              {isCalendarOpen && (
-                <div
-                  className={styles.calendar_backdrop}
-                  onClick={clickBackdrop}
-                >
-                  <div className={styles.calendarContainer}>
-                    <Calendar
-                      className={styles.customCalendar}
-                      onChange={(selectedDate) => {
-                        if (selectedDate instanceof Date) {
-                          setFieldValue(
-                            'birthday',
-                            selectedDate.toLocaleDateString('en-GB', {
-                              day: 'numeric',
-                              month: 'numeric',
-                              year: 'numeric',
-                            })
-                          );
-                          setDate(selectedDate);
-                        }
-                      }}
-                      value={date}
-                    />
-                  </div>
-                </div>
-              )}
+              <CalendarComponent
+                isCalendarOpen={isCalendarOpen}
+                date={date}
+                setDate={setDate}
+                handleCalendarToggle={handleCalendarToggle}
+                setFieldValue={setFieldValue}
+              />
               <ErrorMessage name="birthday">
                 {(msg) => (
                   <div className={styles.validation_error_two}>{msg}</div>

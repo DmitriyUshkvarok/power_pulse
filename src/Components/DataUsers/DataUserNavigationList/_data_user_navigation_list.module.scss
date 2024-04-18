@@ -1,0 +1,39 @@
+@import '../../../sass/utils/variables.module';
+@import '../../../sass/utils/mixins.module';
+
+.nav_pagination {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+
+  @include mediaQuery(1440px) {
+    margin-top: 135px;
+  }
+}
+
+.nav_pagination_link {
+  display: flex;
+  width: 50px;
+  height: 7px;
+  border-radius: 2px;
+  background-color: #303030;
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+    width: 80px;
+  }
+}
+
+.active_link {
+  display: flex;
+  width: 50px;
+  height: 7px;
+  border-radius: 2px;
+  background: #ef8964;
+  box-shadow: 0px 1px 10px 0px rgba(230, 83, 60, 0.8);
+
+  @include mediaQuery(768px) {
+    @include fontSizeAuto(16px, 24px);
+    width: 80px;
+  }
+}

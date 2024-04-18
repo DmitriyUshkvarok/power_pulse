@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
+import { resetCaloriesBurned } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 
 const WellDoneDiaryExercisesModal = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,7 @@ const WellDoneDiaryExercisesModal = () => {
 
   const handleRedirectOnDiary = () => {
     dispatch(closeModal());
+    dispatch(resetCaloriesBurned());
     pushRoute('/diary');
   };
 

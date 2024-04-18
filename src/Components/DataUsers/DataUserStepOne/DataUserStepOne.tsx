@@ -1,17 +1,16 @@
 'use client';
-import 'react-calendar/dist/Calendar.css';
 import styles from './_DataUserStepOne.module.scss';
 import Container from '../../Container/Container';
-import Link from 'next/link';
 import Image from 'next/image';
-import Calendar from 'react-calendar';
+import CalendarComponent from '../../UI/Calendar/Calendar';
+import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
+import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import useRouterPush from '@/src/hooks/useRouter';
 import { useState, useRef } from 'react';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
-
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 
 interface FormData {
@@ -37,12 +36,6 @@ const DataUserStepOne = () => {
 
   const handleCalendarToggle = () => {
     setCalendarOpen(!isCalendarOpen);
-  };
-
-  const clickBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget === e.target) {
-      setCalendarOpen(false);
-    }
   };
 
   const handleSaveValuesToGlobalState = (values: FormData) => {
@@ -212,32 +205,6 @@ const DataUserStepOne = () => {
                   className={styles.calendar_icon}
                   onClick={handleCalendarToggle}
                 />
-                {isCalendarOpen && (
-                  <div
-                    className={styles.calendar_backdrop}
-                    onClick={clickBackdrop}
-                  >
-                    <div className={styles.calendarContainer}>
-                      <Calendar
-                        className={styles.customCalendar}
-                        onChange={(selectedDate) => {
-                          if (selectedDate instanceof Date) {
-                            setFieldValue(
-                              'birthday',
-                              selectedDate.toLocaleDateString('en-GB', {
-                                day: 'numeric',
-                                month: 'numeric',
-                                year: 'numeric',
-                              })
-                            );
-                            setDate(selectedDate);
-                          }
-                        }}
-                        value={date}
-                      />
-                    </div>
-                  </div>
-                )}
                 {touched.birthday && !errors.birthday && (
                   <div className={styles.success_text}>
                     <div>
@@ -280,48 +247,18 @@ const DataUserStepOne = () => {
                   </p>
                 )}
               </button>
+              <CalendarComponent
+                isCalendarOpen={isCalendarOpen}
+                date={date}
+                setDate={setDate}
+                handleCalendarToggle={handleCalendarToggle}
+                setFieldValue={setFieldValue}
+              />
             </Form>
           )}
         </Formik>
-        <div className={styles.video_tutorial_banner}>
-          <div className={styles.video_tutorial_banner_icon}>
-            <Image
-              src={'/video-icon.svg'}
-              alt="header logo"
-              width={9}
-              height={9}
-            />
-          </div>
-          <div className={styles.video_tutorial_text_wrapper}>
-            <div className={styles.video_tutorial_title}>350+</div>
-            <div className={styles.video_description}>Video tutorial</div>
-          </div>
-        </div>
-        <div className={styles.cal_banner}>
-          <div className={styles.cal_banner_icon}>
-            <Image
-              src={'/cal-man-icon.svg'}
-              alt="header logo"
-              width={12}
-              height={12}
-            />
-          </div>
-          <div className={styles.cal_banner_text_wrapper}>
-            <div className={styles.cal_banner_title}>500</div>
-            <div className={styles.cal_banner_description}>cal</div>
-          </div>
-        </div>
-        <div className={styles.nav_pagination}>
-          <Link href="/user-data" className={styles.nav_pagination_link}></Link>
-          <Link
-            href="/user-data/step-two"
-            className={styles.nav_pagination_link}
-          ></Link>
-          <Link
-            href="/user-data/step-three"
-            className={styles.nav_pagination_link}
-          ></Link>
-        </div>
+        <DataUserBanner />
+        <DataUserNavigationList />
       </Container>
     </section>
   );

@@ -119,6 +119,9 @@ const globalLocalSessionStoreSlice = createSlice({
     setCaloriesBurned: (state, action: PayloadAction<number>) => {
       state.caloriesBurned = action.payload;
     },
+    resetCaloriesBurned: (state) => {
+      state.caloriesBurned = 0;
+    },
     setRemainingTime: (state, action: PayloadAction<number>) => {
       state.remainingTime = action.payload;
     },
@@ -138,6 +141,7 @@ export const {
   setDynamicExercisesPageId,
   setCaloriesBurned,
   setRemainingTime,
+  resetCaloriesBurned,
 } = globalLocalSessionStoreSlice.actions;
 
 const persistConfig = {

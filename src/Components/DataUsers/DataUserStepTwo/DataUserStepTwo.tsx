@@ -4,6 +4,8 @@ import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
 import useRouterPush from '@/src/hooks/useRouter';
+import DataUserBanner from '../DataUserBanner/DataUserBanner';
+import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { UserData } from './index';
 import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
@@ -216,45 +218,8 @@ const DataUserStepTwo = () => {
             </Form>
           )}
         </Formik>
-        <div className={styles.video_tutorial_banner}>
-          <div className={styles.video_tutorial_banner_icon}>
-            <Image
-              src={'/video-icon.svg'}
-              alt="header logo"
-              width={9}
-              height={9}
-            />
-          </div>
-          <div className={styles.video_tutorial_text_wrapper}>
-            <div className={styles.video_tutorial_title}>350+</div>
-            <div className={styles.video_description}>Video tutorial</div>
-          </div>
-        </div>
-        <div className={styles.cal_banner}>
-          <div className={styles.cal_banner_icon}>
-            <Image
-              src={'/cal-man-icon.svg'}
-              alt="header logo"
-              width={12}
-              height={12}
-            />
-          </div>
-          <div className={styles.cal_banner_text_wrapper}>
-            <div className={styles.cal_banner_title}>500</div>
-            <div className={styles.cal_banner_description}>cal</div>
-          </div>
-        </div>
-        <div className={styles.nav_pagination}>
-          <Link href="/user-data" className={styles.nav_pagination_link}></Link>
-          <Link
-            href="/user-data/step-two"
-            className={styles.nav_pagination_link}
-          ></Link>
-          <Link
-            href="/user-data/step-three"
-            className={styles.nav_pagination_link}
-          ></Link>
-        </div>
+        <DataUserBanner />
+        <DataUserNavigationList />
       </Container>
     </section>
   );

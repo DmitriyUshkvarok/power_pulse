@@ -3,6 +3,7 @@ import styles from './_add_diary_exercises_modal.module.scss';
 import Modal from '../Modal/Modal';
 import Container from '../../Container/Container';
 import Image from 'next/image';
+import VideoPlayer from '../../UI/VideoPlayer/VideoPlayer';
 import WellDoneDiaryExercisesModal from '../WellDoneDiaryExercisesModal/WellDoneDiaryExercisesModal';
 import Timer from '../../UI/Timer/Timer';
 import useRouterPush from '@/src/hooks/useRouter';
@@ -19,6 +20,8 @@ import { UserSession } from '../../Profile/ProfileForm';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 import { formatDate } from '@/src/utils/formatDate';
+import dynamic from 'next/dynamic';
+
 interface FormValues {
   name: string;
   target: string;
@@ -92,6 +95,7 @@ const AddDiaryExercisesModal = () => {
               <WellDoneDiaryExercisesModal />
             ) : (
               <div className={styles.form_container}>
+                <div className={styles.video_player_wrapper}></div>
                 <Image
                   onClick={handleCloseModal}
                   className={styles.closed_icon}
@@ -101,13 +105,17 @@ const AddDiaryExercisesModal = () => {
                   height={11}
                 />
                 <div className={styles.modal_img_wrapper}>
-                  <Image
-                    className={styles.modal_img}
-                    src="/exercise-modal-img.jpg"
-                    alt="exercise-modal-img"
-                    width={270}
-                    height={226}
-                  />
+                  {exerciseDiaryValue.video ? (
+                    <VideoPlayer />
+                  ) : (
+                    <Image
+                      className={styles.modal_img}
+                      src="/exercise-modal-img.jpg"
+                      alt="exercise-modal-img"
+                      width={270}
+                      height={226}
+                    />
+                  )}
                 </div>
                 <div className={styles.timer_wrapper}>
                   <div className={styles.time_title}>Time</div>

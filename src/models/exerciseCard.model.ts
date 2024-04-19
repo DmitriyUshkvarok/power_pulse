@@ -28,6 +28,9 @@ const exerciseCardSchema = new Schema(
       type: String,
       required: true,
     },
+    video: {
+      type: String,
+    },
   },
   { versionKey: false }
 );

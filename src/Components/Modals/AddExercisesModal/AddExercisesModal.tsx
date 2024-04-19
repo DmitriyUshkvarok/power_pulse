@@ -19,6 +19,7 @@ interface FormValues {
   bodyPart: string;
   target: string;
   equipment: string;
+  video: string;
 }
 
 const initialValues = {
@@ -27,6 +28,7 @@ const initialValues = {
   bodyPart: '',
   target: '',
   equipment: '',
+  video: '',
 };
 
 interface PageId {
@@ -54,6 +56,7 @@ const AddExercisesForm = ({ id }: PageId) => {
         bodyPart: values.bodyPart,
         target: values.target,
         equipment: values.equipment,
+        video: values.video,
         exercisesId: exercisesId,
       };
       await createExerciseCards(exercisesSubListData, userId);
@@ -157,6 +160,14 @@ const AddExercisesForm = ({ id }: PageId) => {
                       </div>
                     )}
                   </ErrorMessage>
+                </div>
+                <div className={styles.form_group}>
+                  <Field
+                    className={styles.form_input}
+                    type="text"
+                    name="video"
+                    placeholder="video link"
+                  />
                 </div>
                 <button className={styles.create_product_btn} type="submit">
                   {loading ? 'Loading...' : 'Create Exercise'}

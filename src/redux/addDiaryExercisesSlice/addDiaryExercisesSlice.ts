@@ -11,6 +11,7 @@ export interface ExerciseDiaryTypeRedux {
   bodyPart: string;
   target: string;
   equipment: string;
+  video: string;
 }
 
 export interface ExerciseDiaryState {
@@ -30,6 +31,7 @@ const initialState: ExerciseDiaryState & ExerciseDiaryTypeRedux = {
   bodyPart: '',
   target: '',
   equipment: '',
+  video: '',
   exercisesDiaryData: [],
 };
 

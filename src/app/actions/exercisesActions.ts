@@ -28,6 +28,7 @@ export interface ExerciseCardData {
   target: string;
   exercisesId: string;
   equipment: string;
+  video: string;
 }
 
 export const getExerciseSubCategory = async (): Promise<ExerciseList[]> => {

@@ -20,4 +20,5 @@ export const addExercisesSchema = yup.object().shape({
     .string()
     .min(3, 'equipment must be at least 3 characters')
     .required(),
+  video: yup.string(),
 });

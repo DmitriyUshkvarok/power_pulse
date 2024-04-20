@@ -33,16 +33,21 @@
 }
 
 .modal_img_wrapper {
-  width: 270px;
-  height: 226px;
+  width: 280px;
+  height: 236px;
   margin-left: auto;
   margin-right: auto;
+  background-color: $black-color;
+  border: 1px solid $borde-color;
   border-radius: $border-radius-btn;
   -webkit-border-radius: $border-radius-btn;
   -moz-border-radius: $border-radius-btn;
   -ms-border-radius: $border-radius-btn;
   -o-border-radius: $border-radius-btn;
   margin-bottom: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (min-width: 768px) {
     position: absolute;
@@ -54,6 +59,11 @@
 
 .modal_img {
   object-fit: cover;
+  border-radius: $border-radius-btn;
+  -webkit-border-radius: $border-radius-btn;
+  -moz-border-radius: $border-radius-btn;
+  -ms-border-radius: $border-radius-btn;
+  -o-border-radius: $border-radius-btn;
 }
 
 .timer_wrapper {
@@ -66,7 +76,7 @@
   @media (min-width: 768px) {
     position: absolute;
     top: 306px;
-    left: 104px;
+    left: 64px;
   }
 }
 
@@ -86,7 +96,7 @@
   @media (min-width: 768px) {
     position: absolute;
     bottom: -250px;
-    left: -230px;
+    left: -260px;
     margin-bottom: 0;
     width: 200px;
   }

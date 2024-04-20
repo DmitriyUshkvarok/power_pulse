@@ -1,7 +1,7 @@
 import LoaderApp from '@/src/Components/UI/Loaders/LoaderApp/LoaderApp';
 
-const LoadingProfilePage = () => {
+const LoadingBodyPartsPage = () => {
   return <LoaderApp />;
 };
 
-export default LoadingProfilePage;
+export default LoadingBodyPartsPage;

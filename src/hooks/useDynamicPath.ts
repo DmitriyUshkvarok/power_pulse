@@ -22,6 +22,12 @@ export const useDynamicPath = (id?: string | number) => {
       return `/muscles/${id}`;
     case `/exercises/equipment/${id}/add-diary-exercises`:
       return `/equipment/${id}`;
+    case `/exercises/body-parts/${id}`:
+      return `/body-parts`;
+    case `/exercises/muscles/${id}`:
+      return `/muscles`;
+    case `/exercises/equipment/${id}`:
+      return `/equipment`;
     default:
       return '/';
   }

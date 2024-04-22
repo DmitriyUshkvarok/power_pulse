@@ -3,33 +3,31 @@ import 'react-calendar/dist/Calendar.css';
 import styles from './_ProfileForm.module.scss';
 import Image from 'next/image';
 import CalendarComponent from '../../UI/Calendar/Calendar';
-import { useState, useRef, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/src/redux/store';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import { useState, useEffect } from 'react';
+import { Field, ErrorMessage } from 'formik';
 import { useSession } from 'next-auth/react';
 import { ProfileFormValues, UserSession } from './index';
 import { profilesShema } from '@/src/validation/profileFormSchema';
 import { fetchUserData } from '@/src/redux/userData/userDataSlice';
-import { AppDispatch } from '@/src/redux/store';
 import { updateUserNameAndEmail } from '@/src/app/actions/authActions';
 import { updateUserData } from '@/src/app/actions/userDataActions';
 import { useRouter } from 'next/navigation';
 import { createDataAsync } from '@/src/redux/userData/userDataSlice';
 import { formatDate } from '@/src/utils/formatDate';
+import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 
 const ProfileForm = () => {
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  const formikRef = useRef(null);
-  const userData = useSelector((state: RootState) => state.userData.data);
+  const userData = useAppSelector((state) => state.userData.data);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const userDataId = (session?.user as UserSession)?.userData;
   const userId = (session?.user as UserSession)?._id;
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getUserDataByIdClient = async () => {
@@ -68,6 +66,7 @@ const ProfileForm = () => {
         setLoading(true);
         const { name, email } = updatedValues;
         await updateUserNameAndEmail({ name, email });
+        update({ name: name });
         await updateUserData(userDataId, updatedValues);
         await dispatch(createDataAsync({ id: userId, data: values }));
         if (email !== session?.user?.email) {
@@ -83,15 +82,14 @@ const ProfileForm = () => {
   };
 
   return (
-    <Formik
+    <DynamicForm
       initialValues={initialValues}
       validationSchema={profilesShema}
       onSubmit={handleSave}
-      innerRef={formikRef}
       enableReinitialize={true}
     >
-      {({ isValid, setFieldValue, values }) => (
-        <Form className={styles.form_profile}>
+      {(formikProps) => (
+        <div className={styles.form_profile}>
           <div className={styles.form_block_one}>
             <div className={styles.profile_form_group_one}>
               <Field
@@ -142,7 +140,7 @@ const ProfileForm = () => {
                 name="height"
                 aria-label="height"
               />
-              {!values.height && (
+              {!formikProps.values.height && (
                 <span className={styles.span_one_form_placeholder}>Height</span>
               )}
               <ErrorMessage name="height">
@@ -158,7 +156,7 @@ const ProfileForm = () => {
                 name="currentWeight"
                 aria-label="Current Weight"
               />
-              {!values.currentWeight && (
+              {!formikProps.values.currentWeight && (
                 <span className={styles.span_one_form_placeholder}>
                   Current Weight
                 </span>
@@ -176,7 +174,7 @@ const ProfileForm = () => {
                 name="desiredWeight"
                 aria-label="Desired Weight"
               />
-              {!values.desiredWeight && (
+              {!formikProps.values.desiredWeight && (
                 <span className={styles.span_one_form_placeholder}>
                   Desired Weight
                 </span>
@@ -194,7 +192,7 @@ const ProfileForm = () => {
                 name="birthday"
                 aria-label="birthday"
               />
-              {!values.birthday && (
+              {!formikProps.values.birthday && (
                 <span className={styles.span_one_form_placeholder}>
                   Birthday
                 </span>
@@ -212,7 +210,7 @@ const ProfileForm = () => {
                 date={date}
                 setDate={setDate}
                 handleCalendarToggle={handleCalendarToggle}
-                setFieldValue={setFieldValue}
+                setFieldValue={formikProps.setFieldValue}
               />
               <ErrorMessage name="birthday">
                 {(msg) => (
@@ -341,17 +339,21 @@ const ProfileForm = () => {
               </span>
             </div>
           </div>
-          <button className={styles.btn_save} type="submit" disabled={!isValid}>
+          <button
+            className={styles.btn_save}
+            type="submit"
+            disabled={!formikProps.isValid}
+          >
             <span>{loading ? 'Loading...' : 'Save'} </span>
           </button>
-          {!isValid && (
+          {!formikProps.isValid && (
             <p className={styles.errorText}>
               Please fill in all the required fields.
             </p>
           )}
-        </Form>
+        </div>
       )}
-    </Formik>
+    </DynamicForm>
   );
 };
 

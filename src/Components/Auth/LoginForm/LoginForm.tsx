@@ -2,9 +2,10 @@
 import styles from './_LoginForm.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { loginSchema } from '@/src/validation/loginSchema';
@@ -23,10 +24,7 @@ function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (
-    values: FormValues,
-    { resetForm }: FormikHelpers<FormValues>
-  ) => {
+  const handleSubmit = async (values: FormValues) => {
     setIsLoading(true);
     try {
       await signIn('credentials', { ...values, callbackUrl: '/profile' });
@@ -35,7 +33,6 @@ function FormLogin() {
     } finally {
       setIsLoading(false);
     }
-    resetForm();
   };
 
   const togglePasswordVisibility = () => {
@@ -48,13 +45,13 @@ function FormLogin() {
       <p className={styles.auth_description}>
         Welcome! Please enter your credentials to login to the platform:
       </p>
-      <Formik
+      <DynamicForm
         initialValues={initialValues}
         validationSchema={loginSchema}
         onSubmit={handleSubmit}
       >
-        {({ touched, errors }) => (
-          <Form className={styles.form_registration}>
+        {(formikProps) => (
+          <div className={styles.form_registration}>
             <div className={styles.regisrt_form_group}>
               <Field
                 className={styles.form_login_input}
@@ -63,7 +60,7 @@ function FormLogin() {
                 placeholder="Enter your email"
                 aria-label="email"
               />
-              {touched.email && !errors.email && (
+              {formikProps.touched.email && !formikProps.errors.email && (
                 <div className={styles.success_text}>
                   <div>
                     <Image
@@ -118,7 +115,7 @@ function FormLogin() {
                   )}
                 </div>
               </div>
-              {touched.password && !errors.password && (
+              {formikProps.touched.password && !formikProps.errors.password && (
                 <div className={styles.success_text}>
                   <div>
                     <Image
@@ -160,9 +157,9 @@ function FormLogin() {
               Don’t have an account?
               <span className={styles.link_registr_span}> Sign Up</span>
             </Link>
-          </Form>
+          </div>
         )}
-      </Formik>
+      </DynamicForm>
       <button
         className={styles.registr_form_button_google}
         type="submit"

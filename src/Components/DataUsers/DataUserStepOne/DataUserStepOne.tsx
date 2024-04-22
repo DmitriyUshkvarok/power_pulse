@@ -5,10 +5,11 @@ import Image from 'next/image';
 import CalendarComponent from '../../UI/Calendar/Calendar';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import useRouterPush from '@/src/hooks/useRouter';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
@@ -32,7 +33,6 @@ const DataUserStepOne = () => {
   const [date, setDate] = useState(new Date());
   const dispatch = useAppDispatch();
   const { pushRoute } = useRouterPush();
-  const formikRef = useRef(null);
 
   const handleCalendarToggle = () => {
     setCalendarOpen(!isCalendarOpen);
@@ -54,14 +54,13 @@ const DataUserStepOne = () => {
           our platform, we ask you to provide the following information about
           your weight, height and other relevant data:
         </p>
-        <Formik
+        <DynamicForm
           initialValues={initialValues}
           validationSchema={dataStepOneSchema}
           onSubmit={handleSaveValuesToGlobalState}
-          innerRef={formikRef}
         >
-          {({ isValid, touched, errors, setFieldValue, values }) => (
-            <Form className={styles.form_step_one}>
+          {(formikProps) => (
+            <div className={styles.form_step_one}>
               <div className={styles.step_one_form_group}>
                 <Field
                   className={styles.form_step_one_input}
@@ -69,12 +68,12 @@ const DataUserStepOne = () => {
                   name="height"
                   aria-label="height"
                 />
-                {!values.height && (
+                {!formikProps.values.height && (
                   <span className={styles.step_one_form_placeholder}>
                     Height
                   </span>
                 )}
-                {touched.height && !errors.height && (
+                {formikProps.touched.height && !formikProps.errors.height && (
                   <div className={styles.success_text}>
                     <div>
                       <Image
@@ -110,24 +109,25 @@ const DataUserStepOne = () => {
                   name="currentWeight"
                   aria-label="Current Weight"
                 />
-                {!values.currentWeight && (
+                {!formikProps.values.currentWeight && (
                   <span className={styles.step_one_form_placeholder}>
                     Current Weight
                   </span>
                 )}
-                {touched.currentWeight && !errors.currentWeight && (
-                  <div className={styles.success_text}>
-                    <div>
-                      <Image
-                        src="/success.svg"
-                        alt="success icon"
-                        width={16}
-                        height={16}
-                      />
+                {formikProps.touched.currentWeight &&
+                  !formikProps.errors.currentWeight && (
+                    <div className={styles.success_text}>
+                      <div>
+                        <Image
+                          src="/success.svg"
+                          alt="success icon"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+                      <span>success current weight</span>
                     </div>
-                    <span>success current weight</span>
-                  </div>
-                )}
+                  )}
                 <ErrorMessage name="currentWeight">
                   {(msg) => (
                     <>
@@ -151,24 +151,25 @@ const DataUserStepOne = () => {
                   name="desiredWeight"
                   aria-label="Desired Weight"
                 />
-                {!values.desiredWeight && (
+                {!formikProps.values.desiredWeight && (
                   <span className={styles.step_one_form_placeholder}>
                     Desired Weight
                   </span>
                 )}
-                {touched.desiredWeight && !errors.desiredWeight && (
-                  <div className={styles.success_text}>
-                    <div>
-                      <Image
-                        src="/success.svg"
-                        alt="success icon"
-                        width={16}
-                        height={16}
-                      />
+                {formikProps.touched.desiredWeight &&
+                  !formikProps.errors.desiredWeight && (
+                    <div className={styles.success_text}>
+                      <div>
+                        <Image
+                          src="/success.svg"
+                          alt="success icon"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+                      <span>success desired weight</span>
                     </div>
-                    <span>success desired weight</span>
-                  </div>
-                )}
+                  )}
                 <ErrorMessage name="desiredWeight">
                   {(msg) => (
                     <>
@@ -192,7 +193,7 @@ const DataUserStepOne = () => {
                   name="birthday"
                   aria-label="birthday"
                 />
-                {!values.birthday && (
+                {!formikProps.values.birthday && (
                   <span className={styles.step_one_form_placeholder}>
                     Birthday
                   </span>
@@ -205,19 +206,20 @@ const DataUserStepOne = () => {
                   className={styles.calendar_icon}
                   onClick={handleCalendarToggle}
                 />
-                {touched.birthday && !errors.birthday && (
-                  <div className={styles.success_text}>
-                    <div>
-                      <Image
-                        src="/success.svg"
-                        alt="success icon"
-                        width={16}
-                        height={16}
-                      />
+                {formikProps.touched.birthday &&
+                  !formikProps.errors.birthday && (
+                    <div className={styles.success_text}>
+                      <div>
+                        <Image
+                          src="/success.svg"
+                          alt="success icon"
+                          width={16}
+                          height={16}
+                        />
+                      </div>
+                      <span>success birthday</span>
                     </div>
-                    <span>success birthday</span>
-                  </div>
-                )}
+                  )}
                 <ErrorMessage name="birthday">
                   {(msg) => (
                     <>
@@ -237,11 +239,11 @@ const DataUserStepOne = () => {
               <button
                 className={styles.link_next}
                 type="submit"
-                disabled={!isValid}
+                disabled={!formikProps.isValid}
               >
                 <span>Next </span>
                 <Image src="/next.svg" alt="" width={20} height={20} />
-                {!isValid && (
+                {!formikProps.isValid && (
                   <p className={styles.errorText}>
                     Please fill in all the required fields.
                   </p>
@@ -252,11 +254,11 @@ const DataUserStepOne = () => {
                 date={date}
                 setDate={setDate}
                 handleCalendarToggle={handleCalendarToggle}
-                setFieldValue={setFieldValue}
+                setFieldValue={formikProps.setFieldValue}
               />
-            </Form>
+            </div>
           )}
-        </Formik>
+        </DynamicForm>
         <DataUserBanner />
         <DataUserNavigationList />
       </Container>

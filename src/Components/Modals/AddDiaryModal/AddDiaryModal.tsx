@@ -6,9 +6,10 @@ import WellDoneDiaryModal from '../WellDoneDiaryModal/WellDoneDiaryModal';
 import useRouterPush from '@/src/hooks/useRouter';
 import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import { Field, ErrorMessage, FormikProps } from 'formik';
 import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/src/hooks/redux-hook';
 import { createDiary } from '@/src/app/actions/diaryActions';
 import { UserSession } from '../../Profile/ProfileForm';
@@ -26,7 +27,6 @@ interface FormValues {
 const AddDiaryModal = () => {
   const { data: session } = useSession();
   const [loading, setIsLoading] = useState(false);
-  const formRef = useRef<any>(null);
   const userId = (session?.user as UserSession)?._id;
   const dispatch = useAppDispatch();
   const { pushRoute } = useRouterPush();
@@ -49,8 +49,8 @@ const AddDiaryModal = () => {
     calories: selectSelectedProduct?.calories || '',
   };
 
-  const handleCancel = () => {
-    formRef.current?.resetForm();
+  const handleCancel = (formikProps: FormikProps<any>) => {
+    formikProps.resetForm();
   };
 
   const handleSubmit = async (values: FormValues) => {
@@ -109,14 +109,13 @@ const AddDiaryModal = () => {
                 width={11}
                 height={11}
               />
-              <Formik
+              <DynamicForm
                 initialValues={initialValues}
                 validationSchema={addDiaryProductSchema}
                 onSubmit={handleSubmit}
-                innerRef={formRef}
               >
-                {({ setFieldValue }) => (
-                  <Form className={styles.form_add_diary_product}>
+                {(formikProps) => (
+                  <div className={styles.form_add_diary_product}>
                     <div className={styles.inputs_group}>
                       <div className={styles.form_group}>
                         <Field
@@ -140,7 +139,7 @@ const AddDiaryModal = () => {
                           name="weight"
                           placeholder="weight"
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            handleWeightChange(e, setFieldValue)
+                            handleWeightChange(e, formikProps.setFieldValue)
                           }
                         />
                         <ErrorMessage name="weight">
@@ -173,14 +172,14 @@ const AddDiaryModal = () => {
                       <button
                         className={styles.cancel_diary_product_btn}
                         type="button"
-                        onClick={handleCancel}
+                        onClick={() => handleCancel(formikProps)}
                       >
                         Cancel
                       </button>
                     </div>
-                  </Form>
+                  </div>
                 )}
-              </Formik>
+              </DynamicForm>
             </div>
           )}
         </Container>

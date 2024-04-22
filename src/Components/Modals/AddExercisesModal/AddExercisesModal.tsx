@@ -4,10 +4,11 @@ import Image from 'next/image';
 import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { addExercisesSchema } from '@/src/validation/addExercisesSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
@@ -80,12 +81,12 @@ const AddExercisesForm = ({ id }: PageId) => {
               width={11}
               height={11}
             />
-            <Formik
+            <DynamicForm
               initialValues={initialValues}
               validationSchema={addExercisesSchema}
               onSubmit={handleSubmit}
             >
-              <Form className={styles.form_create_product}>
+              <div className={styles.form_create_product}>
                 <div className={styles.form_group}>
                   <Field
                     className={styles.form_input}
@@ -172,8 +173,8 @@ const AddExercisesForm = ({ id }: PageId) => {
                 <button className={styles.create_product_btn} type="submit">
                   {loading ? 'Loading...' : 'Create Exercise'}
                 </button>
-              </Form>
-            </Formik>
+              </div>
+            </DynamicForm>
           </div>
         </Container>
       )}

@@ -8,9 +8,10 @@ import WellDoneDiaryExercisesModal from '../WellDoneDiaryExercisesModal/WellDone
 import Timer from '../../UI/Timer/Timer';
 import useRouterPush from '@/src/hooks/useRouter';
 import useModalClose from '@/src/hooks/useModalClose';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { Formik, Form, Field } from 'formik';
+import { Field } from 'formik';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
@@ -20,7 +21,6 @@ import { UserSession } from '../../Profile/ProfileForm';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 import { formatDate } from '@/src/utils/formatDate';
-import dynamic from 'next/dynamic';
 
 interface FormValues {
   name: string;
@@ -121,8 +121,11 @@ const AddDiaryExercisesModal = () => {
                   <div className={styles.time_title}>Time</div>
                   <Timer />
                 </div>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                  <Form className={styles.form_create_exercise_diary}>
+                <DynamicForm
+                  initialValues={initialValues}
+                  onSubmit={handleSubmit}
+                >
+                  <div className={styles.form_create_exercise_diary}>
                     <div className={styles.form_calories}>
                       Burned calories:
                       <span className={styles.form_calories_span}>
@@ -179,8 +182,8 @@ const AddDiaryExercisesModal = () => {
                     >
                       {loading ? 'Loading...' : 'Add to diary'}
                     </button>
-                  </Form>
-                </Formik>
+                  </div>
+                </DynamicForm>
               </div>
             )}
           </Container>

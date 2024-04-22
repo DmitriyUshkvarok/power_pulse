@@ -4,11 +4,12 @@ import Image from 'next/image';
 import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { createProduct } from '@/src/app/actions/productActions';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { addProductSchema } from '@/src/validation/addProductSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
@@ -62,13 +63,13 @@ const ProductForm = () => {
               width={11}
               height={11}
             />
-            <Formik
+            <DynamicForm
               initialValues={initialValues}
               validationSchema={addProductSchema}
               onSubmit={handleSubmit}
             >
-              {({ values }) => (
-                <Form className={styles.form_create_product}>
+              {(formikProps) => (
+                <div className={styles.form_create_product}>
                   <div className={styles.form_group}>
                     <Field
                       className={styles.form_input}
@@ -133,7 +134,7 @@ const ProductForm = () => {
                     <Field
                       type="checkbox"
                       name="recommended"
-                      checked={values.recommended}
+                      checked={formikProps.values.recommended}
                       className={styles.product_recommend_check}
                     />
                     <a
@@ -157,9 +158,9 @@ const ProductForm = () => {
                   <button className={styles.create_product_btn} type="submit">
                     {loading ? 'Loading...' : 'Create Product'}
                   </button>
-                </Form>
+                </div>
               )}
-            </Formik>
+            </DynamicForm>
           </div>
         </Container>
       )}

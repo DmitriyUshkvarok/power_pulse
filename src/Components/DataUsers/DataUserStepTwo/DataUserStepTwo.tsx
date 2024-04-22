@@ -3,10 +3,11 @@ import styles from './_DataUserStepTwo.module.scss';
 import Container from '../../Container/Container';
 import Link from 'next/link';
 import Image from 'next/image';
+import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import useRouterPush from '@/src/hooks/useRouter';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { UserData } from './index';
 import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
@@ -37,13 +38,13 @@ const DataUserStepTwo = () => {
     <section className={styles.step_two_section}>
       <Container>
         <h1 className={styles.step_two_title}>Get closer to your goals!</h1>
-        <Formik
+        <DynamicForm
           initialValues={initialValues}
           validationSchema={dataStepTwoSchema}
           onSubmit={handleSaveValuesToGlobalState}
         >
-          {({ isValid }) => (
-            <Form className={styles.form_step_two}>
+          {(formikProps) => (
+            <div className={styles.form_step_two}>
               <div className={styles.top_group_wrapper}>
                 <div className={styles.form_group}>
                   <label className={styles.label_radio}>Blood:</label>
@@ -204,20 +205,20 @@ const DataUserStepTwo = () => {
                 <button
                   className={styles.link_next}
                   type="submit"
-                  disabled={!isValid}
+                  disabled={!formikProps.isValid}
                 >
                   <span>Next </span>
                   <Image src="/next.svg" alt="" width={20} height={20} />
-                  {!isValid && (
+                  {!formikProps.isValid && (
                     <p className={styles.errorText}>
                       Please fill in all the required fields.
                     </p>
                   )}
                 </button>
               </div>
-            </Form>
+            </div>
           )}
-        </Formik>
+        </DynamicForm>
         <DataUserBanner />
         <DataUserNavigationList />
       </Container>

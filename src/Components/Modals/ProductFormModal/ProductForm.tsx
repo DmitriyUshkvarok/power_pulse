@@ -6,11 +6,11 @@ import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { createProduct } from '@/src/app/actions/productActions';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
-import { Field, ErrorMessage } from 'formik';
 import { addProductSchema } from '@/src/validation/addProductSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
@@ -72,67 +72,44 @@ const ProductForm = () => {
               {(formikProps) => (
                 <div className={styles.form_create_product}>
                   <div className={styles.form_group}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.form_input}
                       type="text"
                       name="name"
                       placeholder="name"
                     />
-                    <ErrorMessage name="name">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
                   </div>
                   <div className={styles.form_group}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.form_input}
                       type="text"
                       name="calories"
                       placeholder="calories"
                     />
-                    <ErrorMessage name="calories">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
                   </div>
                   <div className={styles.form_group}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.form_input}
                       type="text"
                       name="category"
                       placeholder="category"
                     />
-                    <ErrorMessage name="category">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
                   </div>
                   <div className={styles.form_group}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.form_input}
                       type="text"
                       name="weight"
                       placeholder="weight"
                     />
-                    <ErrorMessage name="weight">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
                   </div>
                   <div className={styles.form_group}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       type="checkbox"
                       name="recommended"
                       checked={formikProps.values.recommended}
@@ -148,13 +125,6 @@ const ProductForm = () => {
                       product is recommended for your blood type, please follow
                       the link and check the information.
                     </a>
-                    <ErrorMessage name="recommended">
-                      {(msg) => (
-                        <div className={styles.validation_error}>
-                          <span>{msg}</span>
-                        </div>
-                      )}
-                    </ErrorMessage>
                   </div>
                   <Button
                     className={styles.create_product_btn}

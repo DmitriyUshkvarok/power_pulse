@@ -10,9 +10,9 @@ import useRouterPush from '@/src/hooks/useRouter';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { Field } from 'formik';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
@@ -135,7 +135,7 @@ const AddDiaryExercisesModal = () => {
                     </div>
                     <div className={styles.form_group}>
                       <span className={styles.form_group_span}>Name</span>
-                      <Field
+                      <InputField
                         className={styles.form_input}
                         type="text"
                         name="name"
@@ -144,7 +144,7 @@ const AddDiaryExercisesModal = () => {
                     </div>
                     <div className={styles.form_group}>
                       <span className={styles.form_group_span}>Target</span>
-                      <Field
+                      <InputField
                         className={styles.form_input}
                         type="text"
                         name="target"
@@ -153,7 +153,7 @@ const AddDiaryExercisesModal = () => {
                     </div>
                     <div className={styles.form_group}>
                       <span className={styles.form_group_span}>Body part</span>
-                      <Field
+                      <InputField
                         className={styles.form_input}
                         type="text"
                         name="bodyPart"
@@ -162,7 +162,7 @@ const AddDiaryExercisesModal = () => {
                     </div>
                     <div className={styles.form_group}>
                       <span className={styles.form_group_span}>Equipment</span>
-                      <Field
+                      <InputField
                         className={styles.form_input}
                         type="text"
                         name="equipment"

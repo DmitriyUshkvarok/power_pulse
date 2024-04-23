@@ -8,7 +8,8 @@ import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
-import { Field, ErrorMessage, FormikProps } from 'formik';
+import InputField from '../../UI/InputField/InputField';
+import { FormikProps } from 'formik';
 import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/src/hooks/redux-hook';
@@ -119,22 +120,17 @@ const AddDiaryModal = () => {
                   <div className={styles.form_add_diary_product}>
                     <div className={styles.inputs_group}>
                       <div className={styles.form_group}>
-                        <Field
+                        <InputField
+                          errorClassName={styles.validation_error}
                           className={styles.form_input}
                           type="text"
                           name="productName"
                           placeholder="product name"
                         />
-                        <ErrorMessage name="productName">
-                          {(msg) => (
-                            <div className={styles.validation_error}>
-                              <span>{msg}</span>
-                            </div>
-                          )}
-                        </ErrorMessage>
                       </div>
                       <div className={styles.form_group}>
-                        <Field
+                        <InputField
+                          errorClassName={styles.validation_error}
                           className={styles.form_input}
                           type="text"
                           name="weight"
@@ -143,20 +139,14 @@ const AddDiaryModal = () => {
                             handleWeightChange(e, formikProps.setFieldValue)
                           }
                         />
-                        <ErrorMessage name="weight">
-                          {(msg) => (
-                            <div className={styles.validation_error}>
-                              <span>{msg}</span>
-                            </div>
-                          )}
-                        </ErrorMessage>
                       </div>
                     </div>
                     <div className={styles.calories_count_wrapper}>
                       <div className={styles.calories_count_span}>
                         Calories:
                       </div>
-                      <Field
+                      <InputField
+                        errorClassName={styles.validation_error}
                         type="text"
                         name="calories"
                         className={styles.calories_count}

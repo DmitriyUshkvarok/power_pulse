@@ -8,7 +8,7 @@ import useRouterPush from '@/src/hooks/useRouter';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
-import { Field, ErrorMessage } from 'formik';
+import InputField from '../../UI/InputField/InputField';
 import { UserData } from './index';
 import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
@@ -50,7 +50,8 @@ const DataUserStepTwo = () => {
                 <div className={styles.form_group}>
                   <label className={styles.label_radio}>Blood:</label>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
@@ -59,7 +60,8 @@ const DataUserStepTwo = () => {
                     <span className={styles.radio_text}>1</span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
@@ -68,7 +70,8 @@ const DataUserStepTwo = () => {
                     <span className={styles.radio_text}>2</span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
@@ -77,7 +80,8 @@ const DataUserStepTwo = () => {
                     <span className={styles.radio_text}>3</span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="bloodGroup"
@@ -85,17 +89,13 @@ const DataUserStepTwo = () => {
                     />
                     <span className={styles.radio_text}>4</span>
                   </div>
-                  <ErrorMessage name="bloodGroup">
-                    {(msg) => (
-                      <div className={styles.validation_error}>{msg}</div>
-                    )}
-                  </ErrorMessage>
                 </div>
 
                 <div className={styles.form_group}>
                   <label className={styles.label_radio}>Sex:</label>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="sex"
@@ -104,7 +104,8 @@ const DataUserStepTwo = () => {
                     <span className={styles.radio_text}>Male</span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="sex"
@@ -113,11 +114,6 @@ const DataUserStepTwo = () => {
                     <span className={styles.radio_text}>Female</span>
                   </div>
                 </div>
-                <ErrorMessage name="sex">
-                  {(msg) => (
-                    <div className={styles.validation_error}>{msg}</div>
-                  )}
-                </ErrorMessage>
               </div>
 
               <div className={styles.bottom_group_wrapper}>
@@ -126,7 +122,8 @@ const DataUserStepTwo = () => {
                     Level of Activity:
                   </label>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="levelActivity"
@@ -137,7 +134,8 @@ const DataUserStepTwo = () => {
                     </span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="levelActivity"
@@ -148,7 +146,8 @@ const DataUserStepTwo = () => {
                     </span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="levelActivity"
@@ -160,7 +159,8 @@ const DataUserStepTwo = () => {
                     </span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="levelActivity"
@@ -171,7 +171,8 @@ const DataUserStepTwo = () => {
                     </span>
                   </div>
                   <div className={styles.form_group_text_and_btn}>
-                    <Field
+                    <InputField
+                      errorClassName={styles.validation_error}
                       className={styles.radio_btn}
                       type="radio"
                       name="levelActivity"
@@ -182,11 +183,6 @@ const DataUserStepTwo = () => {
                       physical work)
                     </span>
                   </div>
-                  <ErrorMessage name="levelActivity">
-                    {(msg) => (
-                      <div className={styles.validation_error}>{msg}</div>
-                    )}
-                  </ErrorMessage>
                 </div>
               </div>
               <div className={styles.nav_btn_wrapper}>

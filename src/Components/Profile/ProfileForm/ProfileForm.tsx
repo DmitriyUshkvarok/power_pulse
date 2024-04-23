@@ -5,8 +5,8 @@ import Image from 'next/image';
 import CalendarComponent from '../../UI/Calendar/Calendar';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { useState, useEffect } from 'react';
-import { Field, ErrorMessage } from 'formik';
 import { useSession } from 'next-auth/react';
 import { ProfileFormValues, UserSession } from './index';
 import { profilesShema } from '@/src/validation/profileFormSchema';
@@ -93,8 +93,10 @@ const ProfileForm = () => {
         <div className={styles.form_profile}>
           <div className={styles.form_block_one}>
             <div className={styles.profile_form_group_one}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.form_profile_input_one}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 type="text"
                 name="name"
                 aria-label="name"
@@ -108,12 +110,11 @@ const ProfileForm = () => {
               >
                 Name
               </span>
-              <ErrorMessage name="name">
-                {(msg) => <div className={styles.validation_error}>{msg}</div>}
-              </ErrorMessage>
             </div>
             <div className={styles.profile_form_group_one}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 className={styles.form_profile_input_one}
                 type="email"
                 name="email"
@@ -128,15 +129,14 @@ const ProfileForm = () => {
               >
                 Email
               </span>
-              <ErrorMessage name="email">
-                {(msg) => <div className={styles.validation_error}>{msg}</div>}
-              </ErrorMessage>
             </div>
           </div>
           <div className={styles.form_block_two}>
             <div className={styles.profile_form_group_two}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error_two}
                 className={styles.form_profile_input_two}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 type="text"
                 name="height"
                 aria-label="height"
@@ -144,14 +144,11 @@ const ProfileForm = () => {
               {!formikProps.values.height && (
                 <span className={styles.span_one_form_placeholder}>Height</span>
               )}
-              <ErrorMessage name="height">
-                {(msg) => (
-                  <div className={styles.validation_error_two}>{msg}</div>
-                )}
-              </ErrorMessage>
             </div>
             <div className={styles.profile_form_group_two}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error_two}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 className={styles.form_profile_input_two}
                 type="text"
                 name="currentWeight"
@@ -162,14 +159,11 @@ const ProfileForm = () => {
                   Current Weight
                 </span>
               )}
-              <ErrorMessage name="currentWeight">
-                {(msg) => (
-                  <div className={styles.validation_error_two}>{msg}</div>
-                )}
-              </ErrorMessage>
             </div>
             <div className={styles.profile_form_group_two}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error_two}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 className={styles.form_profile_input_two}
                 type="text"
                 name="desiredWeight"
@@ -180,14 +174,11 @@ const ProfileForm = () => {
                   Desired Weight
                 </span>
               )}
-              <ErrorMessage name="desiredWeight">
-                {(msg) => (
-                  <div className={styles.validation_error_two}>{msg}</div>
-                )}
-              </ErrorMessage>
             </div>
             <div className={styles.profile_form_group_two}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error_two}
+                classNameErrorIcon={styles.form_profile_input_error_icon}
                 className={styles.form_profile_input_two}
                 type="text"
                 name="birthday"
@@ -213,18 +204,14 @@ const ProfileForm = () => {
                 handleCalendarToggle={handleCalendarToggle}
                 setFieldValue={formikProps.setFieldValue}
               />
-              <ErrorMessage name="birthday">
-                {(msg) => (
-                  <div className={styles.validation_error_two}>{msg}</div>
-                )}
-              </ErrorMessage>
             </div>
           </div>
           <label className={styles.label_radio}>Blood:</label>
           <div className={styles.profile_form_group_sex_and_blood_group}>
             <div className={styles.form_block_three}>
               <div className={styles.profile_form_group_three}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="bloodGroup"
@@ -234,7 +221,8 @@ const ProfileForm = () => {
               </div>
 
               <div className={styles.profile_form_group_three}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="bloodGroup"
@@ -243,7 +231,8 @@ const ProfileForm = () => {
                 <span className={styles.radio_text}>2</span>
               </div>
               <div className={styles.profile_form_group_three}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="bloodGroup"
@@ -252,7 +241,8 @@ const ProfileForm = () => {
                 <span className={styles.radio_text}>3</span>
               </div>
               <div className={styles.profile_form_group_three}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="bloodGroup"
@@ -263,7 +253,8 @@ const ProfileForm = () => {
             </div>
             <div className={styles.form_block_four}>
               <div className={styles.profile_form_group_four}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="sex"
@@ -272,7 +263,8 @@ const ProfileForm = () => {
                 <span className={styles.radio_text}>Male</span>
               </div>
               <div className={styles.profile_form_group_four}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.radio_btn}
                   type="radio"
                   name="sex"
@@ -284,7 +276,8 @@ const ProfileForm = () => {
           </div>
           <div className={styles.form_group_five}>
             <div className={styles.profile_form_group_five}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.radio_btn_five}
                 type="radio"
                 name="levelActivity"
@@ -295,7 +288,8 @@ const ProfileForm = () => {
               </span>
             </div>
             <div className={styles.profile_form_group_five}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.radio_btn_five}
                 type="radio"
                 name="levelActivity"
@@ -306,7 +300,8 @@ const ProfileForm = () => {
               </span>
             </div>
             <div className={styles.profile_form_group_five}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.radio_btn_five}
                 type="radio"
                 name="levelActivity"
@@ -317,7 +312,8 @@ const ProfileForm = () => {
               </span>
             </div>
             <div className={styles.profile_form_group_five}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.radio_btn_five}
                 type="radio"
                 name="levelActivity"
@@ -328,7 +324,8 @@ const ProfileForm = () => {
               </span>
             </div>
             <div className={styles.profile_form_group_five}>
-              <Field
+              <InputField
+                errorClassName={styles.validation_error}
                 className={styles.radio_btn_five}
                 type="radio"
                 name="levelActivity"
@@ -347,13 +344,6 @@ const ProfileForm = () => {
           >
             {loading ? 'Loading...' : 'Save'}
           </Button>
-          {/* <button
-            className={styles.btn_save}
-            type="submit"
-            disabled={!formikProps.isValid}
-          >
-            <span>{loading ? 'Loading...' : 'Save'} </span>
-          </button> */}
           {!formikProps.isValid && (
             <p className={styles.errorText}>
               Please fill in all the required fields.

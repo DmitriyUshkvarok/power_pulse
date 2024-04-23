@@ -219,6 +219,8 @@
 }
 
 .validation_error {
+  display: flex;
+  gap: 5px;
   position: absolute;
   bottom: -10px;
   left: 50%;
@@ -235,6 +237,10 @@
   font-size: 12px;
   left: 10%;
   color: red;
+}
+
+.form_profile_input_error_icon {
+  display: none;
 }
 
 .errorText {

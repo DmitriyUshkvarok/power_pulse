@@ -6,10 +6,10 @@ import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
-import { Field, ErrorMessage } from 'formik';
 import { addExercisesSchema } from '@/src/validation/addExercisesSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
@@ -89,83 +89,54 @@ const AddExercisesForm = ({ id }: PageId) => {
             >
               <div className={styles.form_create_product}>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="name"
                     placeholder="name"
                   />
-                  <ErrorMessage name="name">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="burnedCalories"
                     placeholder="burned calories"
                   />
-                  <ErrorMessage name="burnedCalories">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="bodyPart"
                     placeholder="body part"
                   />
-                  <ErrorMessage name="bodyPart">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="target"
                     placeholder="target"
                   />
-                  <ErrorMessage name="target">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="equipment"
                     placeholder="equipment"
                   />
-                  <ErrorMessage name="equipment">
-                    {(msg) => (
-                      <div className={styles.validation_error}>
-                        <span>{msg}</span>
-                      </div>
-                    )}
-                  </ErrorMessage>
                 </div>
                 <div className={styles.form_group}>
-                  <Field
-                    className={styles.form_input}
+                  <InputField
+                    errorClassName={styles.validation_error}
+                    className={styles.form_input_exercises}
                     type="text"
                     name="video"
                     placeholder="video link"

@@ -8,9 +8,9 @@ import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import useRouterPush from '@/src/hooks/useRouter';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { useState } from 'react';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
-import { Field, ErrorMessage } from 'formik';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
@@ -62,7 +62,8 @@ const DataUserStepOne = () => {
           {(formikProps) => (
             <div className={styles.form_step_one}>
               <div className={styles.step_one_form_group}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.form_step_one_input}
                   type="text"
                   name="height"
@@ -86,24 +87,10 @@ const DataUserStepOne = () => {
                     <span>success height</span>
                   </div>
                 )}
-                <ErrorMessage name="height">
-                  {(msg) => (
-                    <>
-                      <div className={styles.validation_error}>
-                        <Image
-                          src="/error.svg"
-                          alt="error icon"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{msg}</span>
-                      </div>
-                    </>
-                  )}
-                </ErrorMessage>
               </div>
               <div className={styles.step_one_form_group}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.form_step_one_input}
                   type="text"
                   name="currentWeight"
@@ -128,24 +115,10 @@ const DataUserStepOne = () => {
                       <span>success current weight</span>
                     </div>
                   )}
-                <ErrorMessage name="currentWeight">
-                  {(msg) => (
-                    <>
-                      <div className={styles.validation_error}>
-                        <Image
-                          src="/error.svg"
-                          alt="error icon"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{msg}</span>
-                      </div>
-                    </>
-                  )}
-                </ErrorMessage>
               </div>
               <div className={styles.step_one_form_group}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.form_step_one_input}
                   type="text"
                   name="desiredWeight"
@@ -170,24 +143,10 @@ const DataUserStepOne = () => {
                       <span>success desired weight</span>
                     </div>
                   )}
-                <ErrorMessage name="desiredWeight">
-                  {(msg) => (
-                    <>
-                      <div className={styles.validation_error}>
-                        <Image
-                          src="/error.svg"
-                          alt="error icon"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{msg}</span>
-                      </div>
-                    </>
-                  )}
-                </ErrorMessage>
               </div>
               <div className={styles.step_one_form_group}>
-                <Field
+                <InputField
+                  errorClassName={styles.validation_error}
                   className={styles.form_step_one_input}
                   type="text"
                   name="birthday"
@@ -220,21 +179,6 @@ const DataUserStepOne = () => {
                       <span>success birthday</span>
                     </div>
                   )}
-                <ErrorMessage name="birthday">
-                  {(msg) => (
-                    <>
-                      <div className={styles.validation_error}>
-                        <Image
-                          src="/error.svg"
-                          alt="error icon"
-                          width={16}
-                          height={16}
-                        />
-                        <span>{msg}</span>
-                      </div>
-                    </>
-                  )}
-                </ErrorMessage>
               </div>
               <Button
                 className={styles.link_next}

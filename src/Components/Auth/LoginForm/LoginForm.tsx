@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
+import InputField from '../../UI/InputField/InputField';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
-import { Field, ErrorMessage } from 'formik';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { loginSchema } from '@/src/validation/loginSchema';
@@ -54,10 +54,11 @@ function FormLogin() {
         {(formikProps) => (
           <div className={styles.form_registration}>
             <div className={styles.regisrt_form_group}>
-              <Field
-                className={styles.form_login_input}
-                type="email"
+              <InputField
+                label="Email"
                 name="email"
+                inputClassName={styles.form_login_input}
+                errorClassName={styles.validation_error}
                 placeholder="Enter your email"
                 aria-label="email"
               />
@@ -74,26 +75,12 @@ function FormLogin() {
                   <span>success email</span>
                 </div>
               )}
-              <ErrorMessage name="email">
-                {(msg) => (
-                  <>
-                    <div className={styles.validation_error}>
-                      <Image
-                        src="/error.svg"
-                        alt="error icon"
-                        width={16}
-                        height={16}
-                      />
-                      <span>{msg}</span>
-                    </div>
-                  </>
-                )}
-              </ErrorMessage>
             </div>
             <div className={styles.regisrt_form_group}>
               <div className={styles.show_password_wrapper}>
-                <Field
+                <InputField
                   className={styles.form_login_input}
+                  errorClassName={styles.validation_error}
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   placeholder="Confirm a password"
@@ -106,12 +93,12 @@ function FormLogin() {
                   {showPassword ? (
                     <BsEyeSlash
                       color="#ffffff4d"
-                      style={{ width: 18, height: 18 }}
+                      style={{ width: 18, height: 18, cursor: 'pointer' }}
                     />
                   ) : (
                     <BsEye
                       color="#ffffff4d"
-                      style={{ width: 18, height: 18 }}
+                      style={{ width: 18, height: 18, cursor: 'pointer' }}
                     />
                   )}
                 </div>
@@ -129,21 +116,6 @@ function FormLogin() {
                   <span>success password</span>
                 </div>
               )}
-              <ErrorMessage name="password">
-                {(msg) => (
-                  <>
-                    <div className={styles.validation_error}>
-                      <Image
-                        src="/error.svg"
-                        alt="error icon"
-                        width={16}
-                        height={16}
-                      />
-                      <span>{msg}</span>
-                    </div>
-                  </>
-                )}
-              </ErrorMessage>
             </div>
             <div>
               <Button

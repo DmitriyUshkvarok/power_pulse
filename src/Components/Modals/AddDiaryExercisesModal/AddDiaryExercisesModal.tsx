@@ -9,6 +9,7 @@ import Timer from '../../UI/Timer/Timer';
 import useRouterPush from '@/src/hooks/useRouter';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { Field } from 'formik';
@@ -176,12 +177,13 @@ const AddDiaryExercisesModal = () => {
                           : '3 minutes'}
                       </div>
                     </div>
-                    <button
+                    <Button
                       className={styles.create_exercises_diary_btn}
                       type="submit"
+                      disabled={loading}
                     >
                       {loading ? 'Loading...' : 'Add to diary'}
-                    </button>
+                    </Button>
                   </div>
                 </DynamicForm>
               </div>

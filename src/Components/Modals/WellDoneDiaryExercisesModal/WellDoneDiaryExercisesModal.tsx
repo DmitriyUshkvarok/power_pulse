@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import useModalClose from '@/src/hooks/useModalClose';
 import useRouterPush from '@/src/hooks/useRouter';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
@@ -54,13 +55,13 @@ const WellDoneDiaryExercisesModal = () => {
         Burned calories:
         <span className={styles.well_done_calories_span}>{burnedCalories}</span>
       </div>
-      <button
+      <Button
         onClick={handleCloseModal}
         className={styles.next_product_btn}
         type="button"
       >
         Next exercise
-      </button>
+      </Button>
       <Link
         onClick={handleRedirectOnDiary}
         className={styles.diary_link}

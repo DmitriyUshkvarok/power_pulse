@@ -7,13 +7,13 @@ import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigation
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import useRouterPush from '@/src/hooks/useRouter';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { useState } from 'react';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { Field, ErrorMessage } from 'formik';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
-
 interface FormData {
   height: string;
   currentWeight: string;
@@ -236,7 +236,7 @@ const DataUserStepOne = () => {
                   )}
                 </ErrorMessage>
               </div>
-              <button
+              <Button
                 className={styles.link_next}
                 type="submit"
                 disabled={!formikProps.isValid}
@@ -248,7 +248,7 @@ const DataUserStepOne = () => {
                     Please fill in all the required fields.
                   </p>
                 )}
-              </button>
+              </Button>
               <CalendarComponent
                 isCalendarOpen={isCalendarOpen}
                 date={date}

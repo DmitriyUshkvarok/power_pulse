@@ -7,6 +7,7 @@ import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import useRouterPush from '@/src/hooks/useRouter';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { Field, ErrorMessage } from 'formik';
 import { UserData } from './index';
 import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
@@ -202,7 +203,7 @@ const DataUserStepTwo = () => {
                   />
                   <span>Back</span>
                 </Link>
-                <button
+                <Button
                   className={styles.link_next}
                   type="submit"
                   disabled={!formikProps.isValid}
@@ -214,7 +215,7 @@ const DataUserStepTwo = () => {
                       Please fill in all the required fields.
                     </p>
                   )}
-                </button>
+                </Button>
               </div>
             </div>
           )}

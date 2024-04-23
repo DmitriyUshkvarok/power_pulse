@@ -7,6 +7,7 @@ import useRouterPush from '@/src/hooks/useRouter';
 import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { Field, ErrorMessage, FormikProps } from 'formik';
 import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
 import { useState } from 'react';
@@ -163,19 +164,20 @@ const AddDiaryModal = () => {
                       />
                     </div>
                     <div className={styles.btn_group}>
-                      <button
+                      <Button
                         className={styles.add_diary_product_btn}
                         type="submit"
+                        disabled={loading}
                       >
                         {loading ? 'Loading...' : 'Add to diary'}
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         className={styles.cancel_diary_product_btn}
                         type="button"
                         onClick={() => handleCancel(formikProps)}
                       >
                         Cancel
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )}

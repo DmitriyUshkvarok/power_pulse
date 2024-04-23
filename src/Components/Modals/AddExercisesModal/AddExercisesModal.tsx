@@ -5,6 +5,7 @@ import Container from '../../Container/Container';
 import Modal from '../Modal/Modal';
 import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useSession } from 'next-auth/react';
 import { UserSession } from '../../Profile/ProfileForm';
@@ -170,9 +171,13 @@ const AddExercisesForm = ({ id }: PageId) => {
                     placeholder="video link"
                   />
                 </div>
-                <button className={styles.create_product_btn} type="submit">
+                <Button
+                  className={styles.create_product_btn}
+                  type="submit"
+                  disabled={loading}
+                >
                   {loading ? 'Loading...' : 'Create Exercise'}
-                </button>
+                </Button>
               </div>
             </DynamicForm>
           </div>

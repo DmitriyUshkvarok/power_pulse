@@ -4,6 +4,7 @@ import styles from './_ProfileForm.module.scss';
 import Image from 'next/image';
 import CalendarComponent from '../../UI/Calendar/Calendar';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { useState, useEffect } from 'react';
 import { Field, ErrorMessage } from 'formik';
 import { useSession } from 'next-auth/react';
@@ -66,7 +67,7 @@ const ProfileForm = () => {
         setLoading(true);
         const { name, email } = updatedValues;
         await updateUserNameAndEmail({ name, email });
-        update({ name: name });
+        update({ name: name, image: session?.user?.image });
         await updateUserData(userDataId, updatedValues);
         await dispatch(createDataAsync({ id: userId, data: values }));
         if (email !== session?.user?.email) {
@@ -339,13 +340,20 @@ const ProfileForm = () => {
               </span>
             </div>
           </div>
-          <button
+          <Button
+            className={styles.btn_save}
+            type="submit"
+            disabled={!formikProps.isValid}
+          >
+            {loading ? 'Loading...' : 'Save'}
+          </Button>
+          {/* <button
             className={styles.btn_save}
             type="submit"
             disabled={!formikProps.isValid}
           >
             <span>{loading ? 'Loading...' : 'Save'} </span>
-          </button>
+          </button> */}
           {!formikProps.isValid && (
             <p className={styles.errorText}>
               Please fill in all the required fields.

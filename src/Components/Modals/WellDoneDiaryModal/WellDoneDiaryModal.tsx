@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useRouterPush from '@/src/hooks/useRouter';
 import useModalClose from '@/src/hooks/useModalClose';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { closeModal } from '@/src/redux/modalSlice/modalSlice';
@@ -45,13 +46,13 @@ const WellDoneDiaryModal = () => {
           {dynamicCalories}
         </span>
       </div>
-      <button
+      <Button
         onClick={handleCloseModal}
         className={styles.next_product_btn}
         type="button"
       >
         Next product
-      </button>
+      </Button>
       <Link
         onClick={handleRedirectOnDiary}
         className={styles.diary_link}

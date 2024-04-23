@@ -6,6 +6,7 @@ import Container from '../../Container/Container';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import useRouterPush from '@/src/hooks/useRouter';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
@@ -57,14 +58,14 @@ const DataUserStepThree = () => {
           personalized approach.
         </p>
         <div className={styles.btn_panel}>
-          <button
+          <Button
             className={styles.btn_go}
             type="submit"
             onClick={handleGoButtonClick}
             disabled={isLoading}
           >
             {isLoading ? 'Loading...' : 'Go'}
-          </button>
+          </Button>
           <Link href="/user-data/step-two" className={styles.nav_btn_back}>
             <Image
               src={'/back.svg'}

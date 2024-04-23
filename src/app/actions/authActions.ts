@@ -7,6 +7,7 @@ import { FormValues } from '@/src/Components/Auth/RegistrationForm';
 import { authOption } from '@/src/utils/authOptions';
 import { getServerSession } from 'next-auth/next';
 import { Account, Profile } from 'next-auth';
+import { revalidatePath } from 'next/cache';
 
 export interface ExtendedProfile extends Profile {
   picture: string;
@@ -70,6 +71,7 @@ export const updateUserNameAndEmail = async (data: {
       }
     ).select('-password');
     if (!user) throw new Error('Email does not exist!');
+
     return { msg: 'Update Profile Seccesfully!' };
   } catch (error) {
     if (error instanceof Error) {
@@ -113,7 +115,6 @@ export async function verifyWithCredentials(token: string) {
   }
 }
 
-// @@@@@@@@@@@@@@@@@@@@@@DmitriyUshkvarok
 
 export async function signInWithOAuth({ account, profile }: OAuthSignInArgs) {
   const user = await User.findOne({ email: profile.email });

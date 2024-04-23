@@ -3,6 +3,7 @@ import styles from './RegistrationForm.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
+import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { Field, ErrorMessage } from 'formik';
@@ -200,13 +201,13 @@ function FormRegistration() {
               </ErrorMessage>
             </div>
             <div>
-              <button
+              <Button
                 disabled={isLoading}
                 className={styles.registr_form_button}
                 type="submit"
               >
-                {isLoading ? <p>Loading...</p> : <span>Sign Up</span>}
-              </button>
+                {isLoading ? 'Loading...' : 'Sign Up'}
+              </Button>
             </div>
             <Link className={styles.link_registr} href="/signin">
               Already have account?
@@ -215,14 +216,14 @@ function FormRegistration() {
           </div>
         )}
       </DynamicForm>
-      <button
+      <Button
         className={styles.registr_form_button_google}
         type="submit"
         onClick={() => signIn('google', { callbackUrl: '/user-data' })}
       >
         <FcGoogle size={20} />
         <span> to continue with google</span>
-      </button>
+      </Button>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import jwt, { Secret } from 'jsonwebtoken';
-import { FormValues } from '../Components/Auth/RegistrationForm';
+import { FormValues } from '../Components/Auth/RegistrationForm/types';
 
 interface TokenPayload {
   user: FormValues;

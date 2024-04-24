@@ -5,18 +5,15 @@ import Container from '../../Container/Container';
 import ButtonBack from '../../UI/Buttons/ButtonBack/ButtonBack';
 import Modal from '@/src/Components/Modals/Modal/Modal';
 import AddExercisesForm from '@/src/Components/Modals/AddExercisesModal/AddExercisesModal';
-import { getServerSession } from 'next-auth';
-import { authOption } from '@/src/utils/authOptions';
+import { ParamsId } from './types';
 import {
   getExerciseCardsByUserId,
   getExerciseSubCategory,
 } from '@/src/app/actions/exercisesActions';
-export interface ParamsId {
-  id: string;
-}
+import { getSessionWithAuthOptions } from '@/src/utils/serverSession';
 
 const DynamicExercisesPageComponent = async ({ id }: ParamsId) => {
-  const session = await getServerSession(authOption);
+  const session = await getSessionWithAuthOptions();
   const userId = session?.user?._id;
   const exercisesSubListData = await getExerciseCardsByUserId(userId);
   const exerciseList = await getExerciseSubCategory();

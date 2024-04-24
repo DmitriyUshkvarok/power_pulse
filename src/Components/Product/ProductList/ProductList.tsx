@@ -2,32 +2,17 @@
 import styles from './_product_list.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  CreateProductSuccessResponse,
-  deletedProduct,
-  ServerError,
-} from '@/src/app/actions/productActions';
+import { deletedProduct } from '@/src/app/actions/productActions';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { setSelectedProduct } from '@/src/redux/addDiaryProductSlice/addDiaryProductSlice';
 import { useEffect, useState } from 'react';
 import { setFilteredProductData } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
+import { ProductPageComponentProps, ProductType } from './types';
 import {
   openModal,
   openAddDiaryModal,
 } from '@/src/redux/modalSlice/modalSlice';
-interface ProductPageComponentProps {
-  productData: CreateProductSuccessResponse[] | ServerError;
-}
-
-export interface ProductType {
-  name: string;
-  calories: string;
-  category: string;
-  weight: string;
-  _id: string;
-  recommended: boolean;
-}
 
 const ProductList = ({ productData }: ProductPageComponentProps) => {
   const [loadingProductId, setLoadingProductId] = useState<string | null>(null);

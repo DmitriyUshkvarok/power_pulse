@@ -9,7 +9,7 @@ import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
-import { UserData } from './index';
+import { UserData } from './types';
 import { dataStepTwoSchema } from '@/src/validation/dataStepTwoSchema';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 import {

@@ -9,7 +9,7 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
-import { FormValues } from './index';
+import { FormValues } from './types';
 import { registrationSchema } from '@/src/validation/registrationSchema';
 import { signUpWithCredential } from '@/src/app/actions/authActions';
 import { verifyWithCredentials } from '@/src/app/actions/authActions';

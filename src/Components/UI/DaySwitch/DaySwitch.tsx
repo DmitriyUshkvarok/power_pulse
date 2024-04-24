@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { setDate } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
-import { UserSession } from '../../DataUsers/DataUserStepThree';
+import { UserSession } from '../../DataUsers/DataUserStepThree/types';
 import { useSession } from 'next-auth/react';
 
 const DaySwitch = () => {

@@ -9,27 +9,21 @@ import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
+import useUserSession from '@/src/hooks/useUserSession';
 import { FormikProps } from 'formik';
 import { addDiaryProductSchema } from '@/src/validation/addDiaryProductSchema';
 import { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/src/hooks/redux-hook';
 import { createDiary } from '@/src/app/actions/diaryActions';
-import { UserSession } from '../../Profile/ProfileForm';
-import { useSession } from 'next-auth/react';
 import { formatDate } from '@/src/utils/formatDate';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { setDynamicCalories } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { openWellDoneDiaryModal } from '@/src/redux/modalSlice/modalSlice';
-interface FormValues {
-  productName: string;
-  weight: string;
-  calories: string;
-}
+import { FormValues } from './types';
 
 const AddDiaryModal = () => {
-  const { data: session } = useSession();
+  const { userId } = useUserSession();
   const [loading, setIsLoading] = useState(false);
-  const userId = (session?.user as UserSession)?._id;
   const dispatch = useAppDispatch();
   const { pushRoute } = useRouterPush();
   const handleCloseModal = useModalClose();

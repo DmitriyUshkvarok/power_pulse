@@ -7,14 +7,10 @@ import { useEffect, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/src/hooks/redux-hook';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { formatDateString } from '@/src/utils/formatDate';
-import { getDiaryExercisesResponse } from '@/src/app/actions/diaryActions';
 import { convertSeconds } from '@/src/utils/convertSeconds';
 import { deletedDiaryExercises } from '@/src/app/actions/diaryActions';
 import { setExercisesDiaryData } from '@/src/redux/addDiaryExercisesSlice/addDiaryExercisesSlice';
-
-interface ExercisesDiaryProps {
-  exercisesDiaryData: getDiaryExercisesResponse[];
-}
+import { ExercisesDiaryProps } from './types';
 
 const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
   const isTabletDevice = useMediaQuery({ minWidth: '768px' });

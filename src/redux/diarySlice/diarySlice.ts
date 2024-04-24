@@ -1,15 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { DiaryState } from './types';
+import { DiaryProduct } from '@/src/app/actions/types/diaryActionsTypes';
 import {
-  DiaryProduct,
   getDiaryProducts,
   deletedDiaryProduct,
 } from '@/src/app/actions/diaryActions';
-
-export interface DiaryState {
-  diaryProducts: DiaryProduct[];
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
-}
 
 const initialState: DiaryState = {
   diaryProducts: [],

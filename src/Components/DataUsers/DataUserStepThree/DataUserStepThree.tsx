@@ -6,26 +6,22 @@ import Container from '../../Container/Container';
 import DataUserBanner from '../DataUserBanner/DataUserBanner';
 import DataUserNavigationList from '../DataUserNavigationList/DataUserNavigationList';
 import useRouterPush from '@/src/hooks/useRouter';
+import useUserSession from '@/src/hooks/useUserSession';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   createDataAsync,
   fetchUserData,
 } from '@/src/redux/userData/userDataSlice';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
-import { UserSession } from './index';
 
 const DataUserStepThree = () => {
-  const { data: session } = useSession();
+  const { session, userId, userDataId } = useUserSession();
   const [isLoading, setIsloading] = useState(false);
   const dispatch = useAppDispatch();
   const { pushRoute } = useRouterPush();
 
   const userData = useAppSelector((state) => state.userData.data);
-
-  const userId = (session?.user as UserSession)?._id;
-  const userDataId = (session?.user as UserSession)?.userData;
 
   const handleGoButtonClick = async (
     e: React.MouseEvent<HTMLButtonElement>

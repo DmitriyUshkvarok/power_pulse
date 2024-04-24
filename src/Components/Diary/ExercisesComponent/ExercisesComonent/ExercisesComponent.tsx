@@ -1,10 +1,9 @@
-import { getServerSession } from 'next-auth';
 import ExercisesDiaryList from '../ExercisesDiaryList/ExercisesDiaryList';
 import { getDiaryExercises } from '@/src/app/actions/diaryActions';
-import { authOption } from '@/src/utils/authOptions';
+import { getSessionWithAuthOptions } from '@/src/utils/serverSession';
 
 const ExercisesComponent = async () => {
-  const session = await getServerSession(authOption);
+  const session = await getSessionWithAuthOptions();
 
   const userId = session?.user?._id;
   const exercisesDiaryData = await getDiaryExercises(userId);

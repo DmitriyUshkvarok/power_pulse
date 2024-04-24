@@ -6,9 +6,9 @@ import CalendarComponent from '../../UI/Calendar/Calendar';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
+import useUserSession from '@/src/hooks/useUserSession';
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
-import { ProfileFormValues, UserSession } from './index';
+import { ProfileFormValues } from './types';
 import { profilesShema } from '@/src/validation/profileFormSchema';
 import { fetchUserData } from '@/src/redux/userData/userDataSlice';
 import { updateUserNameAndEmail } from '@/src/app/actions/authActions';
@@ -24,10 +24,7 @@ const ProfileForm = () => {
   const userData = useAppSelector((state) => state.userData.data);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const { data: session, update } = useSession();
-  const userDataId = (session?.user as UserSession)?.userData;
-  const userId = (session?.user as UserSession)?._id;
+  const { userDataId, userId, update, session } = useUserSession();
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -10,11 +10,7 @@ import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { signIn } from 'next-auth/react';
 import { loginSchema } from '@/src/validation/loginSchema';
-
-interface FormValues {
-  email: string;
-  password: string;
-}
+import { FormValues } from './types';
 
 const initialValues: FormValues = {
   email: '',

@@ -1,15 +1,6 @@
 'use client';
-import { Formik, Form, FormikProps } from 'formik';
-
-interface DynamicFormProps {
-  initialValues: any;
-  validationSchema?: any;
-  onSubmit: (values: any) => void;
-  children:
-    | React.ReactNode
-    | ((formikProps: FormikProps<any>) => React.ReactNode);
-  enableReinitialize?: boolean;
-}
+import { Formik, Form } from 'formik';
+import { DynamicFormProps } from './types';
 
 const DynamicForm = ({
   initialValues,

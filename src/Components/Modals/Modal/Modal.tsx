@@ -4,10 +4,7 @@ import useModalClose from '@/src/hooks/useModalClose';
 import { useEscapeKey } from '@/src/hooks/useEscapeKey';
 import { useAppSelector } from '@/src/hooks/redux-hook';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
-
-interface RootLayoutProps {
-  children: React.ReactNode;
-}
+import { RootLayoutProps } from './types';
 
 const Modal = ({ children }: RootLayoutProps) => {
   const handleCloseModal = useModalClose();

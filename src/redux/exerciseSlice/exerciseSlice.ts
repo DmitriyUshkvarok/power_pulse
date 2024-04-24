@@ -1,18 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getExerciseSubCategory } from '@/src/app/actions/exercisesActions';
-
-export interface Exercise {
-  _id: string;
-  title: string;
-  imageURL: string;
-  category: string;
-}
-
-export interface ExerciseState {
-  exercises: Exercise[];
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
-}
+import { ExerciseState, Exercise } from './types';
 
 const initialState: ExerciseState = {
   exercises: [],

@@ -3,29 +3,14 @@ import connectToDatabase from '@/src/utils/db';
 import User from '@/src/models/users';
 import bcrypt from 'bcrypt';
 import { generateToken, veryfyToken } from '@/src/utils/token';
-import { FormValues } from '@/src/Components/Auth/RegistrationForm';
+import { FormValues } from '@/src/Components/Auth/RegistrationForm/types';
 import { authOption } from '@/src/utils/authOptions';
 import { getServerSession } from 'next-auth/next';
-import { Account, Profile } from 'next-auth';
-import { revalidatePath } from 'next/cache';
-
-export interface ExtendedProfile extends Profile {
-  picture: string;
-}
-
-export interface OAuthSignInArgs {
-  account: Account;
-  profile: ExtendedProfile;
-}
-
-export interface UserByEmailArgs {
-  email: string;
-}
-
-export interface CredentialsSignInArgs {
-  email: string;
-  password: string;
-}
+import {
+  OAuthSignInArgs,
+  UserByEmailArgs,
+  CredentialsSignInArgs,
+} from './types/authActionsTypes';
 
 connectToDatabase();
 
@@ -114,7 +99,6 @@ export async function verifyWithCredentials(token: string) {
     } else throw new Error('Something went wrong');
   }
 }
-
 
 export async function signInWithOAuth({ account, profile }: OAuthSignInArgs) {
   const user = await User.findOne({ email: profile.email });

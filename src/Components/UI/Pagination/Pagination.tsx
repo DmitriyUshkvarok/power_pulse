@@ -1,13 +1,7 @@
 'use client';
 import styles from './_pagination.module.scss';
 import { useRouter, usePathname } from 'next/navigation';
-
-interface PaginationProps {
-  totalItems: number;
-  itemsPerPage: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
-}
+import { PaginationProps } from './types';
 
 const Pagination = ({
   totalItems,

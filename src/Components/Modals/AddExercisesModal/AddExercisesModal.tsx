@@ -8,21 +8,12 @@ import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../Profile/ProfileForm';
 import { addExercisesSchema } from '@/src/validation/addExercisesSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
 import { createExerciseCards } from '@/src/app/actions/exercisesActions';
-
-interface FormValues {
-  name: string;
-  burnedCalories: number;
-  bodyPart: string;
-  target: string;
-  equipment: string;
-  video: string;
-}
+import { FormValues, PageId } from './types';
+import useUserSession from '@/src/hooks/useUserSession';
 
 const initialValues = {
   name: '',
@@ -33,14 +24,9 @@ const initialValues = {
   video: '',
 };
 
-interface PageId {
-  id?: string | number;
-}
-
 const AddExercisesForm = ({ id }: PageId) => {
   const [loading, setIsLoading] = useState(false);
-  const { data: session } = useSession();
-  const userId = (session?.user as UserSession)?._id;
+  const { userId } = useUserSession();
   const handleCloseModal = useModalClose();
 
   const exercisesId = id !== undefined ? id : '';

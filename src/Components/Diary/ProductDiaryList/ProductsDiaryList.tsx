@@ -2,6 +2,7 @@
 import styles from './_product_diary_list.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
+import useUserSession from '@/src/hooks/useUserSession';
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
@@ -9,17 +10,13 @@ import {
   fetchDiaryProducts,
   deleteDiaryProduct,
 } from '@/src/redux/diarySlice/diarySlice';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../DataUsers/DataUserStepThree';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { formatDateString } from '@/src/utils/formatDate';
 
 const ProductsDiaryList = () => {
   const isTabletDevice = useMediaQuery({ minWidth: '768px' });
   const dispatch = useAppDispatch();
-  const { data: session } = useSession();
-
-  const userId = (session?.user as UserSession)?._id;
+  const { userId } = useUserSession();
 
   const productDiaryData = useAppSelector((state) => state.diary.diaryProducts);
 

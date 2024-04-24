@@ -1,4 +1,4 @@
-import { UserData } from '../redux/userData/userDataSlice';
+import { UserData } from '../redux/userData/types';
 
 export interface DailyRecommendation {
   recommendedCalories: number;
@@ -29,9 +29,7 @@ export const calculateDailyRecommendation = (
   }
 
   // Обчислення рекомендованих калорій
-  const recommendedCalories = calculateRecommendedCalories(
-    bmr
-  );
+  const recommendedCalories = calculateRecommendedCalories(bmr);
 
   // Обчислення рекомендованого часу спорту
   const recommendedSportTime = 110;

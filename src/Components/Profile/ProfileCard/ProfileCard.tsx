@@ -2,11 +2,11 @@
 import styles from './_ProfileCard.module.scss';
 import Image from 'next/image';
 import Notiflix from 'notiflix';
+import useUserSession from '@/src/hooks/useUserSession';
 import useCalculateDailyRecommendation from '@/src/hooks/useCalculateDailyCalories';
 import { signOut } from 'next-auth/react';
 import { resetUserData } from '@/src/redux/userData/userDataSlice';
 import { useDispatch } from 'react-redux';
-import { useSession } from 'next-auth/react';
 import { useState, useRef, FormEvent } from 'react';
 import { revalidate } from '@/src/app/actions/uploadAvatarActions';
 import { uploadPhoto } from '@/src/app/actions/uploadAvatarActions';
@@ -18,7 +18,7 @@ const ProfileCard = () => {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
   const dispatch = useDispatch();
-  const { data: session, update } = useSession();
+  const { session, update } = useUserSession();
   const { calculateCalories } = useCalculateDailyRecommendation();
 
   const handleInputChange = async (

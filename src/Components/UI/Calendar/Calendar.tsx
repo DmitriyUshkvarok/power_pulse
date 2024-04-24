@@ -1,26 +1,15 @@
 import 'react-calendar/dist/Calendar.css';
 import styles from './_calendar.module.scss';
 import Calendar from 'react-calendar';
+import { CalendarComponentProps } from './types';
 
-interface CalendarComponentProps {
-  isCalendarOpen: boolean;
-  date: Date;
-  setDate: React.Dispatch<React.SetStateAction<Date>>;
-  handleCalendarToggle: () => void;
-  setFieldValue: (
-    field: string,
-    value: any,
-    shouldValidate?: boolean | undefined
-  ) => void;
-}
-
-const CalendarComponent: React.FC<CalendarComponentProps> = ({
+const CalendarComponent = ({
   isCalendarOpen,
   date,
   setDate,
   handleCalendarToggle,
   setFieldValue,
-}) => {
+}: CalendarComponentProps) => {
   const clickBackdrop = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) {
       handleCalendarToggle();

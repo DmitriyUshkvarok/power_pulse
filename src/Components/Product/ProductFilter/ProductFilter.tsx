@@ -5,16 +5,13 @@ import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { openModal, openCreatedModal } from '@/src/redux/modalSlice/modalSlice';
+import { ProductFilterProps } from './types';
 import {
   setSelectedCategory,
   setRecommendation,
   setSearchText,
   searchFilterProductData,
 } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
-
-interface ProductFilterProps {
-  categories: string[];
-}
 
 const ProductFilter = ({ categories }: ProductFilterProps) => {
   const dispatch = useAppDispatch();

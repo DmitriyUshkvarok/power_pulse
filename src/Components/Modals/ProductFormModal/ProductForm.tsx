@@ -9,18 +9,11 @@ import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { createProduct } from '@/src/app/actions/productActions';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../Profile/ProfileForm';
 import { addProductSchema } from '@/src/validation/addProductSchema';
 import { useState } from 'react';
 import { useAppSelector } from '@/src/hooks/redux-hook';
-interface FormValues {
-  name: string;
-  calories: string;
-  category: string;
-  weight: string;
-  recommended: boolean;
-}
+import { FormValues } from './types';
+import useUserSession from '@/src/hooks/useUserSession';
 
 const initialValues = {
   name: '',
@@ -32,8 +25,7 @@ const initialValues = {
 
 const ProductForm = () => {
   const [loading, setIsLoading] = useState(false);
-  const { data: session } = useSession();
-  const userId = (session?.user as UserSession)?._id;
+  const { userId } = useUserSession();
   const handleCloseModal = useModalClose();
 
   const isCreatedModalOpen = useAppSelector(

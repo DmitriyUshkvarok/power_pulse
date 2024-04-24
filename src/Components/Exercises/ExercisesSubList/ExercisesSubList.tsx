@@ -2,10 +2,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './_exercises_sub_list.module.scss';
-import {
-  ExerciseCardData,
-  deletedSubExerciseCard,
-} from '@/src/app/actions/exercisesActions';
+import { deletedSubExerciseCard } from '@/src/app/actions/exercisesActions';
+import { ExerciseCardData } from '@/src/app/actions/types/exercisesActionsTypes';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 import {
@@ -15,10 +13,7 @@ import {
 import { setDynamicExercisesPageId } from '@/src/redux/globalLocalSessionStoreSlice/globalLocalSessionStoreSlice';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { setSelectExercisesDiary } from '@/src/redux/addDiaryExercisesSlice/addDiaryExercisesSlice';
-interface ExercisesSubListProps {
-  id?: string | number;
-  exercisesSubListData: ExerciseCardData[];
-}
+import { ExercisesSubListProps } from './types';
 
 const ExercisesSubList = ({
   id,

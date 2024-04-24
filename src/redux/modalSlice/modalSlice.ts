@@ -1,17 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storageSession from 'redux-persist/lib/storage/session';
-
-interface ModalState {
-  isWellDoneDiaryModalOpen: boolean;
-  isCreatedModalOpen: boolean;
-  isAddDiaryModalOpen: boolean;
-  isCreatedExercisesModalOpen: boolean;
-  isModalOpen: boolean;
-  showMobileMenu: boolean;
-  isAddDiaryExercisesModalOpen: boolean;
-  isWellDoneExercisesDiaryModal: boolean;
-}
+import { ModalState } from './types';
 
 const initialState: ModalState = {
   isWellDoneDiaryModalOpen: false,

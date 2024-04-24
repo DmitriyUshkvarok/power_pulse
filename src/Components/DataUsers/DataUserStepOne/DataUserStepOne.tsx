@@ -14,12 +14,7 @@ import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
 import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
-interface FormData {
-  height: string;
-  currentWeight: string;
-  desiredWeight: string;
-  birthday: string;
-}
+import { FormData } from './types';
 
 const initialValues = {
   height: '',

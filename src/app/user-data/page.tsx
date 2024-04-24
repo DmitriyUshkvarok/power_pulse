@@ -1,10 +1,9 @@
 import DataUserStepOne from '@/src/Components/DataUsers/DataUserStepOne/DataUserStepOne';
-import { getServerSession } from 'next-auth';
-import { authOption } from '@/src/utils/authOptions';
 import { redirect } from 'next/navigation';
+import { getSessionWithAuthOptions } from '@/src/utils/serverSession';
 
 const UserDataPage = async () => {
-  const session = await getServerSession(authOption);
+  const session = await getSessionWithAuthOptions();
 
   return (
     <>{session?.user?.userData ? redirect('/profile') : <DataUserStepOne />}</>

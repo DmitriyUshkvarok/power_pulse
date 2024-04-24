@@ -1,13 +1,6 @@
 import Image from 'next/image';
 import { Field, ErrorMessage } from 'formik';
-
-interface InputFieldProps {
-  label?: string;
-  inputClassName?: string;
-  errorClassName?: string;
-  classNameErrorIcon?: string;
-  [key: string]: any;
-}
+import { InputFieldProps } from './types';
 
 const InputField = ({
   label,

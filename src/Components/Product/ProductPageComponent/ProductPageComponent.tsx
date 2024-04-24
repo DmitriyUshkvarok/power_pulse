@@ -1,14 +1,7 @@
 'use client';
 import ProductFilter from '../ProductFilter/ProductFilter';
 import ProductList from '../ProductList/ProductList';
-import {
-  CreateProductSuccessResponse,
-  ServerError,
-} from '@/src/app/actions/productActions';
-
-interface ProductPageComponentProps {
-  productData: CreateProductSuccessResponse[] | ServerError;
-}
+import { ProductPageComponentProps } from './types';
 
 const ProductPageComponent = ({ productData }: ProductPageComponentProps) => {
   if (!Array.isArray(productData)) {

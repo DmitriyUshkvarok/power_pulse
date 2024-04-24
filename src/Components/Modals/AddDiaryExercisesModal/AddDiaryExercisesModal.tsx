@@ -11,31 +11,23 @@ import useModalClose from '@/src/hooks/useModalClose';
 import DynamicForm from '../../UI/DynamicForm/DynamicForm';
 import Button from '../../UI/Buttons/ButtonSubmit/Button';
 import InputField from '../../UI/InputField/InputField';
+import useUserSession from '@/src/hooks/useUserSession';
 import { modalsSelectors } from '@/src/redux/modalSlice/modalsSelelector';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
 import { useState } from 'react';
 import { sessionSelectors } from '@/src/redux/globalLocalSessionStoreSlice/globalSessionSelector';
 import { convertSeconds } from '@/src/utils/convertSeconds';
 import { createDiaryExercises } from '@/src/app/actions/diaryActions';
-import { useSession } from 'next-auth/react';
-import { UserSession } from '../../Profile/ProfileForm';
 import { useDynamicPath } from '@/src/hooks/useDynamicPath';
 import { openWellDoneExercisesDiaryModal } from '@/src/redux/modalSlice/modalSlice';
 import { formatDate } from '@/src/utils/formatDate';
-
-interface FormValues {
-  name: string;
-  target: string;
-  bodyPart: string;
-  equipment: string;
-}
+import { FormValues } from './types';
 
 const AddDiaryExercisesModal = () => {
   const [loading, setIsLoading] = useState(false);
   const { pushRoute } = useRouterPush();
   const dispatch = useAppDispatch();
-  const { data: session } = useSession();
-  const userId = (session?.user as UserSession)?._id;
+  const { userId } = useUserSession();
   const handleCloseModal = useModalClose();
 
   const isAddDiaryExercisesModalOpen = useAppSelector(

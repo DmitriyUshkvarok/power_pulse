@@ -16,7 +16,6 @@ const config: Config = {
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
   transform: {
     '^.+\\.ts?$': 'ts-jest',
-    '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
   moduleNameMapper: {
     '^.+\\.svg$': 'jest-svg-transformer',

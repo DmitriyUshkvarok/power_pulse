@@ -20,13 +20,12 @@ export const updateUser = async (data: { image: string }) => {
     if (!session) throw new Error('Unauthorization');
     const userId = session?.user?._id;
 
-    const user = await User.findByIdAndUpdate(
-      userId,
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
       { image: data.image },
-      {
-        new: true,
-      }
-    ).select('-password');
+      { new: true, select: '-password' }
+    );
+
     if (!user) throw new Error('Email does not exist!');
     return { msg: 'Update Profile Seccesfully!' };
   } catch (error) {
@@ -45,16 +44,12 @@ export const updateUserNameAndEmail = async (data: {
     if (!session) throw new Error('Unauthorization');
     const userId = session?.user?._id;
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      {
-        name: data.name,
-        email: data.email,
-      },
-      {
-        new: true,
-      }
-    ).select('-password');
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { name: data.name, email: data.email },
+      { new: true, select: '-password' }
+    );
+
     if (!user) throw new Error('Email does not exist!');
 
     return { msg: 'Update Profile Seccesfully!' };

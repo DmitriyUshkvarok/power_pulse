@@ -39,4 +39,20 @@ describe(useAuthRedirect, () => {
 
     expect(mockPush).toHaveBeenCalledWith(mockPreviousRoute);
   });
+
+  it('should redirect to home route if previous route does not exist', () => {
+    const useRouter = jest.spyOn(require('next/navigation'), 'useRouter');
+    const useAppSelector = jest.spyOn(
+      require('../redux-hook.ts'),
+      'useAppSelector'
+    );
+    const mockPush = jest.fn();
+    useRouter.mockReturnValueOnce({ push: mockPush });
+    useAppSelector.mockReturnValueOnce(null);
+
+    const { result } = renderHook(() => useAuthRedirect());
+    result.current.handleRedirect();
+
+    expect(mockPush).toHaveBeenCalledWith('/');
+  });
 });

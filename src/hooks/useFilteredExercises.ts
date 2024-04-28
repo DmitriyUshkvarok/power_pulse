@@ -18,6 +18,10 @@ const useFilteredExercises = () => {
   }, [dispatch, exerciseStatus]);
 
   const filterExercisesByCategory = () => {
+    if (!filteredExercises) {
+      return [];
+    }
+
     switch (pathname) {
       case '/exercises/body-parts':
         return filteredExercises.filter(

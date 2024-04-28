@@ -1,6 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import useCalculateDailyRecommendation from '../useCalculateDailyCalories';
-import { calculateDailyRecommendationAsync } from '@/src/redux/userData/userDataSlice';
 
 jest.mock('../redux-hook', () => ({
   useAppDispatch: jest.fn(),
@@ -59,5 +58,20 @@ describe('useCalculateDailyRecommendation', () => {
     });
 
     expect(result.current.calculateCalories).toEqual(mockCalculateCalories);
+  });
+
+  it('should not dispatch calculateDailyRecommendationAsync action', () => {
+    const mockDispatch = jest.fn();
+
+    const useDispatch = jest.spyOn(require('../redux-hook'), 'useAppDispatch');
+    const useSelector = jest.spyOn(require('../redux-hook'), 'useAppSelector');
+
+    useDispatch.mockReturnValue(mockDispatch);
+
+    useSelector.mockReturnValue(null);
+
+    renderHook(useCalculateDailyRecommendation);
+
+    expect(mockDispatch).not.toHaveBeenCalled();
   });
 });

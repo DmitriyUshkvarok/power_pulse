@@ -1,5 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react';
 import useFilteredExercises from '../useFilteredExercises';
+import { fetchExercises } from '@/src/redux/exerciseSlice/exerciseSlice';
 
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
@@ -40,16 +41,18 @@ jest.mock('../../models/users.ts', () => ({
   },
 }));
 
+jest.mock('../../app/actions/exercisesActions.ts', () => ({
+  getExerciseSubCategory: jest.fn(),
+}));
+
 describe('useFilteredExercises', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  it('should return an empty array if the input array is empty', async () => {
+  it('should return an empty array if the input array is empty', () => {
     const { result } = renderHook(useFilteredExercises);
 
-    await waitFor(() => {
-      expect(result.current).toEqual([]);
-    });
+    expect(result.current).toEqual([]);
   });
 
   it('should return the same array if the input array does not contain any exercises that match the filter', () => {
@@ -126,5 +129,20 @@ describe('useFilteredExercises', () => {
     expect(result.current).toEqual(expectedFilteredExercises);
   });
 
-  it.todo('should dispatch fetchExercises if exerciseStatus is idle');
+  it('should dispatch fetchExercises if exerciseStatus is idle', async () => {
+    const useDispatch = jest.spyOn(require('../redux-hook'), 'useAppDispatch');
+    const useSelector = jest.spyOn(require('../redux-hook'), 'useAppSelector');
+    useSelector.mockReturnValue('idle');
+
+    const dispatch = jest.fn();
+    useDispatch.mockReturnValue(dispatch);
+
+    const thunk = fetchExercises();
+
+    await thunk(dispatch, () => ({}), undefined);
+
+    renderHook(useFilteredExercises);
+
+    expect(dispatch).toHaveBeenCalledWith(expect.any(Function));
+  });
 });

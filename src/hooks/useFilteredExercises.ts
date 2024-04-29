@@ -18,7 +18,7 @@ const useFilteredExercises = () => {
   }, [dispatch, exerciseStatus]);
 
   const filterExercisesByCategory = () => {
-    if (!filteredExercises) {
+    if (!filteredExercises || !Array.isArray(filteredExercises)) {
       return [];
     }
 

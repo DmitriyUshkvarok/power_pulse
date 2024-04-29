@@ -15,14 +15,3 @@ export const useRouterBackForDynamicPageExercises = (id?: string | number) => {
 
   return '/';
 };
-//   switch (pathname) {
-//     case `/exercises/body-parts/${id}`:
-//       return `/exercises/body-parts`;
-//     case `/exercises/muscles/${id}`:
-//       return `/exercises/muscles`;
-//     case `/exercises/equipment/${id}`:
-//       return `/exercises/equipment`;
-//     default:
-//       return '/';
-//   }
-// };

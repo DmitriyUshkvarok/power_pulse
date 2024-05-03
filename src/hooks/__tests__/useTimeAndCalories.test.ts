@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import useTimeAndCalories from '../useTimeAndCalories';
 jest.mock('../redux-hook', () => ({
   useAppSelector: jest.fn(),

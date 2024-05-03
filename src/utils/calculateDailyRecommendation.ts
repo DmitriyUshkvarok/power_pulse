@@ -38,7 +38,7 @@ export const calculateDailyRecommendation = (
 };
 
 // Функція для обчислення віку
-const calculateAge = (birthday: string): number => {
+export const calculateAge = (birthday: string): number => {
   const today = new Date();
   const birthDateParts = birthday.split('/').map((part) => parseInt(part));
   const birthDate = new Date(

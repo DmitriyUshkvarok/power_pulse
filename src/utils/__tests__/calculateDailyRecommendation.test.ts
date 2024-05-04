@@ -70,34 +70,22 @@ describe('calculateDailyRecommendation', () => {
     expect(age).toBe(expectedAge);
   });
 
-  //   it('correctly decrements age if month is negative', () => {
-  //     const today = new Date('1990-09-10');
-  //     const mockGetFullYear = jest.spyOn(Date.prototype, 'getFullYear');
-  //     mockGetFullYear.mockReturnValueOnce(today.getFullYear());
-  //     const mockGetMonth = jest.spyOn(Date.prototype, 'getMonth');
-  //     mockGetMonth.mockReturnValueOnce(today.getMonth());
-  //     const mockGetDate = jest.spyOn(Date.prototype, 'getDate');
-  //     mockGetDate.mockReturnValueOnce(today.getDate());
+  it('does not decrement age if birthday month and day are later in the year', () => {
+    const birthday = '30/09/1990';
+    const age = calculateAge(birthday);
+    const expectedAge = 33;
 
-  //     const birthday = '30/09/1990';
-  //     const age = calculateAge(birthday);
-  //     const expectedAge = 33;
+    expect(age).toBe(expectedAge);
+  });
 
-  //     expect(age).toBe(expectedAge);
+  it('decrements age if birthday is today', () => {
+    const today = new Date();
+    const birthday = `${today.getDate()}/${today.getMonth() + 1}/${
+      today.getFullYear() - 33
+    }`;
+    const age = calculateAge(birthday);
+    const expectedAge = 33;
 
-  //     mockGetFullYear.mockRestore();
-  //     mockGetMonth.mockRestore();
-  //     mockGetDate.mockRestore();
-  //   });
-
-  //   it('correctly decrements age if month is zero and day is negative', () => {
-  //     const today = new Date('1990-09-10');
-  //     jest.spyOn(global, 'Date').mockImplementationOnce(() => today);
-
-  //     const birthday = '30/09/1990';
-  //     const age = calculateAge(birthday);
-  //     const expectedAge = 33;
-
-  //     expect(age).toBe(expectedAge);
-  //   });
+    expect(age).toBe(expectedAge);
+  });
 });

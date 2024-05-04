@@ -1,8 +1,6 @@
 import './globals.scss';
-import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-import { ToastContainer } from 'react-toastify';
 import { getServerSession } from 'next-auth';
 import { authOption } from '@/src/utils/authOptions';
 import Header from '../Components/Header/Header';
@@ -40,7 +38,6 @@ export default async function RootLayout({
         <ReduxProvider>
           <NextAuthProvider>
             <GlobalRouteTracker>
-              <ToastContainer />
               {session ? (
                 <Header />
               ) : (

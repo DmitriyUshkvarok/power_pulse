@@ -19,8 +19,15 @@ const CalendarComponent = ({
   return (
     <>
       {isCalendarOpen && (
-        <div className={styles.calendar_backdrop} onClick={clickBackdrop}>
-          <div className={styles.calendarContainer}>
+        <div
+          className={styles.calendar_backdrop}
+          onClick={clickBackdrop}
+          data-testid="calendar-backdrop"
+        >
+          <div
+            className={styles.calendarContainer}
+            data-testid="calendar-container"
+          >
             <Calendar
               className={styles.customCalendar}
               onChange={(selectedDate) => {

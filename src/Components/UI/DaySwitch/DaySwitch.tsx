@@ -46,6 +46,7 @@ const DaySwitch = () => {
           className={`${styles.prev_date} ${!canGoBack ? styles.disabled : ''}`}
           onClick={handlePrevDay}
           disabled={!canGoBack}
+          data-testid="back-button"
         >
           <Image
             src={canGoBack ? '/prev-day.svg' : '/prev-day-gray.svg'}
@@ -58,6 +59,7 @@ const DaySwitch = () => {
           className={`${styles.next_date} ${!canGoForward && styles.disabled}`}
           onClick={handleNextDay}
           disabled={!canGoForward}
+          data-testid="next-button"
         >
           <Image
             src={canGoForward ? '/next-day.svg' : '/next-day-gray.svg'}

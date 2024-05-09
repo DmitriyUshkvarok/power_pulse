@@ -34,7 +34,9 @@ const DaySwitch = () => {
   return (
     <div>
       <div className={styles.day_switch_wrapper}>
-        <div className={styles.date_text}>{formatDate(date)}</div>
+        <div className={styles.date_text} data-testid="date-text">
+          {formatDate(date)}
+        </div>
         <Image
           className={styles.calendar_icon}
           src="/calendar-orange.svg"

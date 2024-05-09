@@ -69,4 +69,45 @@ describe('DaySwitch', () => {
 
     expect(nextButton).toBeDisabled();
   });
+
+  it('back button is disabled when current date is before user registration date', () => {
+    jest
+      .spyOn(require('../../../hooks/redux-hook'), 'useAppSelector')
+      .mockReturnValue(mockSession.data.user.createdAt);
+
+    render(<DaySwitch />);
+
+    const backButton = screen.getByTestId('back-button');
+
+    expect(backButton).toBeDisabled();
+  });
+
+  it('clicking back button decrements date', () => {
+    const handlePrevDay = jest.fn();
+
+    const useDispatch = jest.spyOn(
+      require('../../../hooks/redux-hook'),
+      'useAppDispatch'
+    );
+    useDispatch.mockReturnValue(handlePrevDay);
+
+    render(<DaySwitch />);
+
+    const backButton = screen.getByTestId('back-button');
+    fireEvent.click(backButton);
+
+    expect(useDispatch).toHaveBeenCalledTimes(1);
+
+    const initialDateString = screen.getByTestId('date-text').textContent;
+    const updatedDateString = screen.getByTestId('date-text').textContent;
+
+    if (initialDateString && updatedDateString) {
+      const initialDate = new Date(initialDateString);
+      const updatedDate = new Date(updatedDateString);
+      const oneDay = 24 * 60 * 60 * 1000;
+      expect(updatedDate.getTime()).toBe(initialDate.getTime() - oneDay);
+    } else {
+      fail('Initial date string or updated date string is null');
+    }
+  });
 });

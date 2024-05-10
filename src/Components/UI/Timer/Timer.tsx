@@ -68,10 +68,11 @@ const Timer = () => {
         trailColor="rgba(239, 237, 232, 0.1)"
         strokeLinecap="square"
         onComplete={handleTimerComplete}
+        data-testid="timer-circle"
       >
         {({ remainingTime }) => (
           <div>
-            <div className={styles.timer_count_text}>
+            <div className={styles.timer_count_text} data-testid="timer-text">
               {Math.floor(remainingTime / 60)}:
               {remainingTime % 60 < 10
                 ? `0${remainingTime % 60}`
@@ -83,7 +84,13 @@ const Timer = () => {
       <div className={styles.timer_btn_wrapper}>
         {isRunning ? (
           <button className={styles.timer_btn_pause} onClick={pauseTimer}>
-            <Image src="/pause.svg" alt="icon pause" width={32} height={32} />
+            <Image
+              src="/pause.svg"
+              alt="icon pause"
+              width={32}
+              height={32}
+              data-testid="icon pause"
+            />
           </button>
         ) : (
           <button className={styles.timer_btn_start} onClick={startTimer}>

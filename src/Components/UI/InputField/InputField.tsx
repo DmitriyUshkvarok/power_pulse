@@ -9,10 +9,11 @@ const InputField = ({
   classNameErrorIcon,
   ...props
 }: InputFieldProps) => {
+  const inputId = props.id || props.name;
   return (
     <>
-      {label && <label>{label}</label>}
-      <Field className={inputClassName} {...props} />
+      {label && <label htmlFor={inputId}>{label}</label>}
+      <Field id={inputId} className={inputClassName} {...props} />
       <ErrorMessage name={props.name}>
         {(msg) => (
           <div className={errorClassName}>
@@ -23,7 +24,7 @@ const InputField = ({
               width={16}
               height={16}
             />
-            <span>{msg}</span>
+            <span data-testid="error-message">{msg}</span>
           </div>
         )}
       </ErrorMessage>

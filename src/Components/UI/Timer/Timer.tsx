@@ -68,7 +68,6 @@ const Timer = () => {
         trailColor="rgba(239, 237, 232, 0.1)"
         strokeLinecap="square"
         onComplete={handleTimerComplete}
-        data-testid="timer-circle"
       >
         {({ remainingTime }) => (
           <div>

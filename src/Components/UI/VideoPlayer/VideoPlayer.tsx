@@ -12,6 +12,7 @@ const VideoPlayer = () => {
         height={226}
         controls={true}
         pip={true}
+        data-testid="video-player"
       />
       <source src={exerciseDiaryValue.video} type="video/mp4" />
     </>

@@ -7,70 +7,42 @@ jest.mock('../../../hooks/redux-hook', () => ({
   useAppSelector: jest.fn(),
 }));
 
-jest.useFakeTimers();
+const dispatchMock = jest.fn();
+jest
+  .spyOn(require('../../../hooks/redux-hook'), 'useAppDispatch')
+  .mockReturnValue(dispatchMock);
 
-const useStateMock = jest.spyOn(React, 'useState');
 describe('Timer', () => {
-  it('updates remaining time when started and paused', async () => {
-    const dispatchMock = jest.fn();
-    jest
-      .spyOn(require('../../../hooks/redux-hook'), 'useAppDispatch')
-      .mockReturnValue(dispatchMock);
-
-    render(<Timer />);
-
-    fireEvent.click(screen.getByAltText('icon start'));
-
-    expect(screen.getByTestId('timer-text')).toHaveTextContent('3:00');
-
-    fireEvent.click(screen.getByAltText('icon pause'));
-
-    jest.advanceTimersByTime(5000);
-
-    expect(screen.getByTestId('timer-text')).toHaveTextContent('3:00');
+  beforeEach(() => {
+    jest.useFakeTimers();
   });
 
-  it('pauses timer and updates key', () => {
+  afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
+  });
+  it('renders without crashing', () => {
     render(<Timer />);
+    const timerElement = screen.getByTestId('timer');
+    expect(timerElement).toBeInTheDocument();
+  });
 
+  it('updates remaining time when started and paused', async () => {
+    render(<Timer />);
     fireEvent.click(screen.getByAltText('icon start'));
-
     expect(screen.getByTestId('timer-text')).toHaveTextContent('3:00');
-
     fireEvent.click(screen.getByAltText('icon pause'));
-
-    expect(screen.getByAltText('icon start')).toBeInTheDocument();
-
-    setTimeout(() => {
-      jest.advanceTimersByTime(1000);
-
-      const initialKey = screen.getByTestId('timer-circle').getAttribute('key');
-      fireEvent.click(screen.getByAltText('icon start'));
-      expect(
-        screen.getByTestId('timer-circle').getAttribute('key')
-      ).not.toEqual(initialKey);
-    }, 1000);
+    jest.advanceTimersByTime(5000);
+    expect(screen.getByTestId('timer-text')).toHaveTextContent('3:00');
   });
   it('starts, pauses, and completes timer correctly', () => {
-    const dispatchMock = jest.fn();
-    jest
-      .spyOn(require('../../../hooks/redux-hook'), 'useAppDispatch')
-      .mockReturnValue(dispatchMock);
-
     render(<Timer />);
-
     expect(screen.queryByAltText('icon pause')).not.toBeInTheDocument();
-
     fireEvent.click(screen.getByAltText('icon start'));
-
     expect(screen.getByAltText('icon pause')).toBeInTheDocument();
-
     expect(screen.getByAltText('icon pause')).toBeInTheDocument();
-
     fireEvent.click(screen.getByAltText('icon pause'));
-
     expect(screen.queryByAltText('icon pause')).not.toBeInTheDocument();
-
     setTimeout(() => {
       expect(screen.queryByAltText('icon pause')).not.toBeInTheDocument();
       expect(screen.getByAltText('icon start')).toBeInTheDocument();
@@ -78,52 +50,17 @@ describe('Timer', () => {
   });
   it('displays remaining time correctly', () => {
     render(<Timer />);
-
     expect(screen.getByText('3:00')).toBeInTheDocument();
-
     const timerText = screen.getByTestId('timer-text').textContent;
-
     expect(timerText).toMatch('3:00');
   });
   it('completes timer correctly - stops timer', async () => {
     render(<Timer />);
-
     fireEvent.click(screen.getByAltText('icon start'));
-
     expect(screen.getByAltText('icon pause')).toBeInTheDocument();
-
     fireEvent.click(screen.getByAltText('icon pause'));
-
     await waitFor(() => {
       expect(screen.getByAltText('icon start')).toBeInTheDocument();
     });
-  });
-
-  it('updates key after timer completes', async () => {
-    render(<Timer />);
-
-    fireEvent.click(screen.getByAltText('icon start'));
-
-    fireEvent.click(screen.getByAltText('icon pause'));
-
-    setTimeout(() => {
-      jest.advanceTimersByTime(1000);
-      expect(screen.getByTestId('timer-circle')).toHaveAttribute('key', '1');
-    }, 1000);
-  });
-
-  it('calls handleTimerComplete function when timer completes', () => {
-    const setIsRunningMock = jest.fn();
-    const setKeyMock = jest.fn();
-    useStateMock.mockImplementation(() => [false, setIsRunningMock]);
-    useStateMock.mockImplementation(() => [0, setKeyMock]);
-
-    render(<Timer />);
-
-    setTimeout(() => {
-      jest.advanceTimersByTime(1000);
-      expect(screen.getByTestId('timer-circle')).toHaveAttribute('key', '1');
-      expect(setIsRunningMock).toHaveBeenCalledWith(false);
-    }, 1000);
   });
 });

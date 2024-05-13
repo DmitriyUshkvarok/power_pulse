@@ -58,7 +58,7 @@ const Timer = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center' }} data-testid="timer">
       <CountdownCircleTimer
         key={key}
         isPlaying={isRunning}
@@ -70,7 +70,7 @@ const Timer = () => {
         onComplete={handleTimerComplete}
       >
         {({ remainingTime }) => (
-          <div>
+          <div data-testid="timer-circle">
             <div className={styles.timer_count_text} data-testid="timer-text">
               {Math.floor(remainingTime / 60)}:
               {remainingTime % 60 < 10

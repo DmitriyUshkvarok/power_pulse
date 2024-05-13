@@ -12,9 +12,8 @@ import {
   CredentialsSignInArgs,
 } from './types/authActionsTypes';
 
-connectToDatabase();
-
 export const updateUser = async (data: { image: string }) => {
+  connectToDatabase();
   try {
     const session = await getServerSession(authOption);
     if (!session) throw new Error('Unauthorization');
@@ -39,6 +38,7 @@ export const updateUserNameAndEmail = async (data: {
   name: string;
   email: string;
 }) => {
+  connectToDatabase();
   try {
     const session = await getServerSession(authOption);
     if (!session) throw new Error('Unauthorization');
@@ -61,6 +61,7 @@ export const updateUserNameAndEmail = async (data: {
 };
 
 export const signUpWithCredential = async (data: FormValues) => {
+  connectToDatabase();
   try {
     const user = await User.findOne({ email: data.email });
 
@@ -81,6 +82,7 @@ export const signUpWithCredential = async (data: FormValues) => {
 };
 
 export async function verifyWithCredentials(token: string) {
+  connectToDatabase();
   try {
     const { user } = veryfyToken(token);
     const userExist = await User.findOne({ email: user.email });
@@ -96,6 +98,7 @@ export async function verifyWithCredentials(token: string) {
 }
 
 export async function signInWithOAuth({ account, profile }: OAuthSignInArgs) {
+  connectToDatabase();
   const user = await User.findOne({ email: profile.email });
   if (user) return true;
 
@@ -112,6 +115,7 @@ export async function signInWithOAuth({ account, profile }: OAuthSignInArgs) {
 }
 
 export async function getUserByEmail({ email }: UserByEmailArgs) {
+  connectToDatabase();
   const user = await User.findOne({ email }).select('-passsword');
 
   if (!user) throw new Error('Email does not exist!');
@@ -123,6 +127,7 @@ export async function signInWithCredentials({
   email,
   password,
 }: CredentialsSignInArgs) {
+  connectToDatabase();
   const user = await User.findOne({ email });
   if (!user) throw new Error('Email does not exist!');
 

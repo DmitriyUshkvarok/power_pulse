@@ -17,6 +17,11 @@
   filter: invert(63%) sepia(99%) saturate(4584%) hue-rotate(346deg)
     brightness(97%) contrast(107%);
   animation: pulse 2s infinite;
+
+  @media (min-width: 768px) {
+    width: 250px;
+    height: 240px;
+  }
 }
 
 @keyframes pulse {

@@ -7,8 +7,8 @@ const LoaderApp = () => {
       <Image
         src="/sport_loader.svg"
         alt="sport icon loader"
-        width={250}
-        height={250}
+        width={150}
+        height={150}
         className={styles.orangeIcon}
       />
     </div>

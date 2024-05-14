@@ -43,7 +43,7 @@ const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
   return (
     <div className={styles.products_diary_box}>
       <div className={styles.products_diary_box_header}>
-        <h3 className={styles.products_diary_box_title}>Exercises</h3>
+        <h2 className={styles.products_diary_box_title}>Exercises</h2>
         <Link
           className={styles.products_diary_box_link}
           href="/exercises/body-parts"
@@ -53,27 +53,29 @@ const ExercisesDiaryList = ({ exercisesDiaryData }: ExercisesDiaryProps) => {
       </div>
       <ul className={styles.product_diary_list}>
         {!filteredExercisesDiaryData.length && (
-          <p className={styles.not_found_products}>Not found products</p>
+          <li className={styles.not_found_products}>Not found products</li>
         )}
         {isTabletDevice && filteredExercisesDiaryData.length > 0 && (
-          <ul className={styles.title_list}>
-            <li className={`${styles.title_item} ${styles.title_one}`}>
+          <li className={styles.title_list}>
+            <div className={`${styles.title_item} ${styles.title_one}`}>
               Body Part
-            </li>
-            <li className={`${styles.title_item} ${styles.title_two}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_two}`}>
               Equipment
-            </li>
-            <li className={`${styles.title_item} ${styles.title_three}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_three}`}>
               Name
-            </li>
-            <li className={`${styles.title_item} ${styles.title_four}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_four}`}>
               Target
-            </li>
-            <li className={`${styles.title_item} ${styles.title_five}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_five}`}>
               Burned Calori
-            </li>
-            <li className={`${styles.title_item} ${styles.title_six}`}>Time</li>
-          </ul>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_six}`}>
+              Time
+            </div>
+          </li>
         )}
         {filteredExercisesDiaryData?.map((data) => (
           <li className={styles.product_diary_item} key={data._id}>

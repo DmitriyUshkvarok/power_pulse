@@ -97,6 +97,7 @@ const ProfileForm = () => {
                 type="text"
                 name="name"
                 aria-label="name"
+                id="name"
               />
               <span
                 className={
@@ -116,6 +117,7 @@ const ProfileForm = () => {
                 type="email"
                 name="email"
                 aria-label="email"
+                id="email"
               />
               <span
                 className={
@@ -137,6 +139,7 @@ const ProfileForm = () => {
                 type="text"
                 name="height"
                 aria-label="height"
+                id="height"
               />
               {!formikProps.values.height && (
                 <span className={styles.span_one_form_placeholder}>Height</span>
@@ -150,6 +153,7 @@ const ProfileForm = () => {
                 type="text"
                 name="currentWeight"
                 aria-label="Current Weight"
+                id="Current Weight"
               />
               {!formikProps.values.currentWeight && (
                 <span className={styles.span_one_form_placeholder}>
@@ -165,6 +169,7 @@ const ProfileForm = () => {
                 type="text"
                 name="desiredWeight"
                 aria-label="Desired Weight"
+                id="Desired Weight"
               />
               {!formikProps.values.desiredWeight && (
                 <span className={styles.span_one_form_placeholder}>
@@ -180,6 +185,7 @@ const ProfileForm = () => {
                 type="text"
                 name="birthday"
                 aria-label="birthday"
+                id="birthday"
               />
               {!formikProps.values.birthday && (
                 <span className={styles.span_one_form_placeholder}>
@@ -213,6 +219,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="bloodGroup"
                   value="1"
+                  id="bloodGroup1"
                 />
                 <span className={styles.radio_text}>1</span>
               </div>
@@ -224,6 +231,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="bloodGroup"
                   value="2"
+                  id="bloodGroup2"
                 />
                 <span className={styles.radio_text}>2</span>
               </div>
@@ -234,6 +242,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="bloodGroup"
                   value="3"
+                  id="bloodGroup3"
                 />
                 <span className={styles.radio_text}>3</span>
               </div>
@@ -244,6 +253,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="bloodGroup"
                   value="4"
+                  id="bloodGroup4"
                 />
                 <span className={styles.radio_text}>4</span>
               </div>
@@ -256,6 +266,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="sex"
                   value="Male"
+                  id="Male"
                 />
                 <span className={styles.radio_text}>Male</span>
               </div>
@@ -266,6 +277,7 @@ const ProfileForm = () => {
                   type="radio"
                   name="sex"
                   value="Female"
+                  id="Female"
                 />
                 <span className={styles.radio_text}>Female</span>
               </div>
@@ -279,6 +291,7 @@ const ProfileForm = () => {
                 type="radio"
                 name="levelActivity"
                 value="Sedentary lifestyle"
+                id="levelActivity"
               />
               <span className={styles.radio_text}>
                 Sedentary lifestyle (little or no physical activity)
@@ -291,6 +304,7 @@ const ProfileForm = () => {
                 type="radio"
                 name="levelActivity"
                 value="Light activity"
+                id="levelActivity2"
               />
               <span className={styles.radio_text}>
                 Light activity (light exercises/sports 1-3 days per week)
@@ -303,6 +317,7 @@ const ProfileForm = () => {
                 type="radio"
                 name="levelActivity"
                 value="Moderately active"
+                id="levelActivity3"
               />
               <span className={styles.radio_text}>
                 Moderately active (moderate exercises/sports 3-5 days per week)
@@ -315,6 +330,7 @@ const ProfileForm = () => {
                 type="radio"
                 name="levelActivity"
                 value="Very active"
+                id="levelActivity4"
               />
               <span className={styles.radio_text}>
                 Very active (intense exercises/sports 6-7 days per week)
@@ -327,6 +343,7 @@ const ProfileForm = () => {
                 type="radio"
                 name="levelActivity"
                 value="Extremely active"
+                id="levelActivity5"
               />
               <span className={styles.radio_text}>
                 Extremely active (very strenuous exercises/sports and physical

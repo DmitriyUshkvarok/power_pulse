@@ -124,6 +124,14 @@
   gap: 16px;
 }
 
+.product_page_filter_group_label,
+.product_page_filter_group_label_recommendation {
+  position: absolute;
+  color: transparent;
+  top: 0;
+  left: 0;
+}
+
 .product_page_filter_categories_select,
 .product_page_filter_recommended_select {
   width: 100%;

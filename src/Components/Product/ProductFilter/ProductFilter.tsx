@@ -103,7 +103,14 @@ const ProductFilter = ({ categories }: ProductFilterProps) => {
         </div>
         <div className={styles.product_page_select_group}>
           <div className={styles.product_page_filter_group}>
+            <label
+              className={styles.product_page_filter_group_label}
+              htmlFor="category-select"
+            >
+              Category:
+            </label>
             <select
+              id="category-select"
               className={styles.product_page_filter_categories_select}
               value={selectedCategory}
               onChange={handleChange}
@@ -124,7 +131,14 @@ const ProductFilter = ({ categories }: ProductFilterProps) => {
             />
           </div>
           <div className={styles.product_page_filter_group}>
+            <label
+              className={styles.product_page_filter_group_label_recommendation}
+              htmlFor="recommended-select"
+            >
+              Recommendation:
+            </label>
             <select
+              id="recommended-select"
               className={styles.product_page_filter_recommended_select}
               value={recommendation}
               onChange={handleRecommendationChangeInternal}

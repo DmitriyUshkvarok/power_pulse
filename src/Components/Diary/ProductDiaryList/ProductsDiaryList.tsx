@@ -43,33 +43,33 @@ const ProductsDiaryList = () => {
   return (
     <div className={styles.products_diary_box}>
       <div className={styles.products_diary_box_header}>
-        <h3 className={styles.products_diary_box_title}>Products</h3>
+        <h2 className={styles.products_diary_box_title}>Products</h2>
         <Link className={styles.products_diary_box_link} href="/products">
           Add product
         </Link>
       </div>
       <ul className={styles.product_diary_list}>
         {!filteredProducts.length && (
-          <p className={styles.not_found_products}>Not found products</p>
+          <li className={styles.not_found_products}>Not found products</li>
         )}
         {isTabletDevice && filteredProducts.length > 0 && (
-          <ul className={styles.title_list}>
-            <li className={`${styles.title_item} ${styles.title_one}`}>
+          <li className={styles.title_list}>
+            <div className={`${styles.title_item} ${styles.title_one}`}>
               Title
-            </li>
-            <li className={`${styles.title_item} ${styles.title_two}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_two}`}>
               Category
-            </li>
-            <li className={`${styles.title_item} ${styles.title_three}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_three}`}>
               Calories
-            </li>
-            <li className={`${styles.title_item} ${styles.title_three}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_three}`}>
               Weight
-            </li>
-            <li className={`${styles.title_item} ${styles.title_four}`}>
+            </div>
+            <div className={`${styles.title_item} ${styles.title_four}`}>
               Recommended
-            </li>
-          </ul>
+            </div>
+          </li>
         )}
         {filteredProducts?.map((product) => (
           <li className={styles.product_diary_item} key={product._id}>

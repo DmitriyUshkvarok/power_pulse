@@ -83,6 +83,7 @@ function FormLogin() {
                   aria-label="password"
                 />
                 <div
+                  data-testid="toggle-password-button"
                   className={styles.form_login_input_btn_show_password}
                   onClick={togglePasswordVisibility}
                 >

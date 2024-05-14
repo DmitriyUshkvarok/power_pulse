@@ -37,6 +37,8 @@ const ExercisesList = () => {
                 src={exercise.imageURL}
                 alt={exercise.title}
                 fill
+                priority
+                sizes="50vw"
               />
             </Link>
           </li>

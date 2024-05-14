@@ -13,14 +13,6 @@ jest
   .mockReturnValue(dispatchMock);
 
 describe('Timer', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
-  });
   it('renders without crashing', () => {
     render(<Timer />);
     const timerElement = screen.getByTestId('timer');

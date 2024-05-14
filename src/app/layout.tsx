@@ -34,6 +34,7 @@ export default async function RootLayout({
   return (
     <html lang="en" className={roboto.className}>
       <link rel="apple-touch-icon" href="/logo-for-mobile.png"></link>
+      <link rel="manifest" href="/manifest.json"></link>
       <body suppressHydrationWarning={true}>
         <ReduxProvider>
           <NextAuthProvider>

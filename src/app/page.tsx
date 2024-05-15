@@ -4,6 +4,33 @@ import Container from '../Components/Container/Container';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
+export async function generateMetadata() {
+  return {
+    title: 'Home Page',
+    description: 'Home Page',
+    alternates: {
+      canonical: `/`,
+      languages: {
+        'en-US': `/en-US/`,
+        'de-DE': `/de-DE/`,
+      },
+    },
+    openGraph: {
+      title: `Power Pulse Home | Dmitriy Ushkvarok`,
+      description: 'Welcome to my App Power Pulse',
+      images: [
+        {
+          url: '/openGraphImg.png',
+          width: 400,
+          height: 300,
+        },
+      ],
+      type: 'website',
+      siteName: 'Dmitriy Ushkvarok Power Pulse App',
+    },
+  };
+}
+
 export default async function Home() {
   const session = await getServerSession();
   return (

@@ -16,7 +16,7 @@ const roboto = Roboto({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://www.dmitriy-ushkvarok.website/'),
+  metadataBase: new URL('https://power-pulse-umber.vercel.app'),
   title: {
     default: 'Power Pulse | Dmitriy Ushkvarok',
     template: `%s | My Site Power Pulse| Dmitriy Ushkvarok`,

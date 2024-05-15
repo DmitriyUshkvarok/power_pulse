@@ -4,18 +4,6 @@ import Container from '../Components/Container/Container';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 
-export const metadata = {
-  title: 'Home Page | Power Pulse',
-  description: 'App Power Pulse',
-  alternates: {
-    canonical: '/',
-    languages: {
-      'en-US': '/en-US',
-      'de-DE': '/de-DE',
-    },
-  },
-};
-
 export default async function Home() {
   const session = await getServerSession();
   return (

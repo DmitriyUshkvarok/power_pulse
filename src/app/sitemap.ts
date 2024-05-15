@@ -1,7 +1,17 @@
-import type { MetadataRoute } from 'next';
+import Product from '../models/userProductsModel';
+import connectToDatabase from '../utils/db';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap() {
+  await connectToDatabase();
   const baseUrl = 'https://power-pulse-umber.vercel.app';
+  const products = await Product.find({});
+
+  const productsUrl = products?.map((product) => {
+    return {
+      url: `${baseUrl}/products/${product._id}`,
+      lastModified: product.updatedAt,
+    };
+  });
   return [
     {
       url: `${baseUrl}/diary`,
@@ -33,5 +43,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.5,
     },
+    ...productsUrl,
   ];
 }

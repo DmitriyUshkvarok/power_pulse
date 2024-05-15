@@ -1,5 +1,4 @@
 import './globals.scss';
-import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import { getServerSession } from 'next-auth';
 import { authOption } from '@/src/utils/authOptions';

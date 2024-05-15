@@ -5,9 +5,24 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+export const metadata = {
+  title: 'Excercises | Power Pulse',
+  description: 'App Power Pulse',
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'de-DE': '/de-DE',
+    },
+  },
+};
+
 const ExercisesLayout = ({ children }: RootLayoutProps) => {
   return (
     <section className={styles.exercises_section}>
+      <h1 className="hiddenTitle">
+        Power Pulse Dmitriy Ushkvarok Exercises Page
+      </h1>
       <ExercisesPanel />
       <div>{children}</div>
     </section>

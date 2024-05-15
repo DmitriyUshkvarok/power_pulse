@@ -2,6 +2,40 @@ import styles from './_muscles_dynamic_page.module.scss';
 import Image from 'next/image';
 import DynamicExercisesPageComponent from '@/src/Components/Exercises/DynamicExercisesPageComponent/DynamicExercisesPageComponent';
 import { ParamsId } from '../../body-parts/[id]/page';
+import { getExerciseSubCategory } from '@/src/app/actions/exercisesActions';
+
+export async function generateMetadata({ params }: ParamsId) {
+  const id = params.id;
+
+  const exercises = await getExerciseSubCategory();
+
+  const exercisesItem = exercises.find((item) => item._id === id);
+
+  return {
+    title: exercisesItem?.title,
+    description: 'Dynamic Page Exercises',
+    alternates: {
+      canonical: `/exercises/muscles/${id}`,
+      languages: {
+        'en-US': `/en-US/exercises/muscles/${id}`,
+        'de-DE': `/de-DE/exercises/muscles/${id}`,
+      },
+    },
+    openGraph: {
+      title: `Power Pulse ${exercisesItem?.title} | Dmitriy Ushkvarok`,
+      description: 'Welcome to my App Power Pulse',
+      images: [
+        {
+          url: exercisesItem?.imageURL,
+          width: 400,
+          height: 300,
+        },
+      ],
+      type: 'website',
+      siteName: 'Dmitriy Ushkvarok Power Pulse App',
+    },
+  };
+}
 
 const MusclesDynamicPage = ({ params }: ParamsId) => {
   const { id } = params;

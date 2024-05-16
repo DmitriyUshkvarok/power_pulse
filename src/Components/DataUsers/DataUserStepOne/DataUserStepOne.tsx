@@ -12,7 +12,6 @@ import InputField from '../../UI/InputField/InputField';
 import { useState } from 'react';
 import { updateUserData } from '@/src/redux/userData/userDataSlice';
 import { dataStepOneSchema } from '@/src/validation/dataStepOneSchema';
-import { formatDate } from '@/src/utils/formatDate';
 import { useAppDispatch } from '@/src/hooks/redux-hook';
 import { FormData } from './types';
 
@@ -34,9 +33,7 @@ const DataUserStepOne = () => {
   };
 
   const handleSaveValuesToGlobalState = (values: FormData) => {
-    const formatDateToString = formatDate(date);
-    const updatedValues = { ...values, birthday: formatDateToString };
-    dispatch(updateUserData(updatedValues));
+    dispatch(updateUserData(values));
     pushRoute('/user-data/step-two');
   };
 

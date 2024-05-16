@@ -2,6 +2,7 @@
 import styles from './_exercises_component_wrapper.module.scss';
 import ExercisesList from '../ExercisesList/ExercisesList';
 import Pagination from '../../UI/Pagination/Pagination';
+import LoaderApp from '../../UI/Loaders/LoaderApp/LoaderApp';
 import useFilteredExercises from '@/src/hooks/useFilteredExercises';
 import useTabletItemsPerPage from '@/src/hooks/useTabletItemsPerPage';
 import { useAppDispatch, useAppSelector } from '@/src/hooks/redux-hook';
@@ -23,7 +24,7 @@ const ExercisesComponent = () => {
   return (
     <div>
       {exerciseStatus === 'loading' ? (
-        <div style={{ textAlign: 'center', color: 'white' }}>Loading...</div>
+        <LoaderApp />
       ) : (
         <div className={styles.exercises_component_container}>
           <ExercisesList />

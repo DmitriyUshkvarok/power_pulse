@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { isAdult } from '../utils/isAdult';
 
 export const dataStepOneSchema = yup.object().shape({
   height: yup
@@ -18,9 +19,16 @@ export const dataStepOneSchema = yup.object().shape({
     .required('Desired Weight is required'),
   birthday: yup
     .string()
-    .matches(
-      /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/,
-      'Invalid date format, please use DD/MM/YYYY'
-    )
-    .required('Birthday is required'),
+    .required('Birthday is required')
+    .matches(/^\d{2}\/\d{2}\/\d{4}$/, {
+      message: 'Invalid date format. Please use DD/MM/YYYY format.',
+      excludeEmptyString: true,
+    })
+    .test(
+      'is-adult',
+      'You must be 18 years or older',
+      (value: string | undefined) => {
+        return isAdult(value || '');
+      }
+    ),
 });

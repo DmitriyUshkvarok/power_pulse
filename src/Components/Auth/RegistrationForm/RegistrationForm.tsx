@@ -128,6 +128,7 @@ function FormRegistration() {
                   aria-label="password"
                 />
                 <div
+                  data-testid="toggle-password-button-registration"
                   className={styles.form_login_input_btn_show_password}
                   onClick={togglePasswordVisibility}
                 >

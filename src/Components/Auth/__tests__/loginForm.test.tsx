@@ -98,4 +98,35 @@ describe('FormLogin component', () => {
 
     expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
   });
+
+  it('handles sign-in error correctly', async () => {
+    render(<FormLogin />);
+
+    const emailInput = screen.getByLabelText('email');
+    const passwordInput = screen.getByLabelText('password');
+    const signInButton = screen.getByRole('button', { name: 'Sign In' });
+
+    fireEvent.change(emailInput, { target: { value: 'test@example.com' } });
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });
+
+    const errorMessage = 'An error occurred during sign-in';
+
+    jest.spyOn(require('next-auth/react'), 'signIn').mockImplementation(() => {
+      throw new Error(errorMessage);
+    });
+
+    fireEvent.click(signInButton);
+
+    await waitFor(() => {
+      expect(signIn).toHaveBeenCalledWith('credentials', {
+        email: 'test@example.com',
+        password: 'password123',
+        callbackUrl: '/profile',
+      });
+    });
+
+    await waitFor(() => {
+      expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+    });
+  });
 });

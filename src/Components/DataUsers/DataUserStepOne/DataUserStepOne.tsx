@@ -60,6 +60,7 @@ const DataUserStepOne = () => {
                   type="text"
                   name="height"
                   aria-label="height"
+                  data-testid="height"
                 />
                 {!formikProps.values.height && (
                   <span className={styles.step_one_form_placeholder}>
@@ -87,6 +88,7 @@ const DataUserStepOne = () => {
                   type="text"
                   name="currentWeight"
                   aria-label="Current Weight"
+                  data-testid="current-weight"
                 />
                 {!formikProps.values.currentWeight && (
                   <span className={styles.step_one_form_placeholder}>
@@ -115,6 +117,7 @@ const DataUserStepOne = () => {
                   type="text"
                   name="desiredWeight"
                   aria-label="Desired Weight"
+                  data-testid="desired weight"
                 />
                 {!formikProps.values.desiredWeight && (
                   <span className={styles.step_one_form_placeholder}>
@@ -143,6 +146,7 @@ const DataUserStepOne = () => {
                   type="text"
                   name="birthday"
                   aria-label="birthday"
+                  data-testid="birthday"
                 />
                 {!formikProps.values.birthday && (
                   <span className={styles.step_one_form_placeholder}>
@@ -177,7 +181,7 @@ const DataUserStepOne = () => {
                 type="submit"
                 disabled={!formikProps.isValid}
               >
-                <span>Next </span>
+                <span>Next</span>
                 <Image src="/next.svg" alt="" width={20} height={20} />
                 {!formikProps.isValid && (
                   <p className={styles.errorText}>

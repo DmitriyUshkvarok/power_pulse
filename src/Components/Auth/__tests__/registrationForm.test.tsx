@@ -142,7 +142,6 @@ describe('Form registration component', () => {
   });
 
   it('displays error message on failed registration (not token)', async () => {
-    // Мокируем функцию signUpWithCredential, чтобы она возвращала объект без токена
     jest
       .spyOn(
         require('../../../app/actions/authActions'),

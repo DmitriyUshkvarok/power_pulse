@@ -35,7 +35,7 @@ export async function uploadPhoto(formData: FormData) {
   try {
     const file = formData.get('file');
 
-    if (!file || !(file instanceof File)) {
+    if (!file || !(file instanceof Blob)) {
       throw new Error('No valid image file found.');
     }
 

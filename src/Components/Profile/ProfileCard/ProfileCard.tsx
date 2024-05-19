@@ -58,8 +58,7 @@ const ProfileCard = () => {
 
       if (typeof res === 'string') {
         await updateUser({ image: res });
-        update({ image: res });
-        // update({ image: res, name: session?.user?.name });
+        update({ image: res, name: session?.user?.name });
       } else if (res && res.erMsg) {
         alert(`Error: ${res.erMsg}`);
       } else {

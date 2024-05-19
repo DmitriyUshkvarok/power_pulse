@@ -64,7 +64,7 @@ const ProfileForm = () => {
         setLoading(true);
         const { name, email } = updatedValues;
         await updateUserNameAndEmail({ name, email });
-        update({ name: name, image: session?.user?.image });
+        // update({ name: name, image: session?.user?.image });
         await updateUserData(userDataId, updatedValues);
         await dispatch(createDataAsync({ id: userId, data: values }));
         if (email !== session?.user?.email) {

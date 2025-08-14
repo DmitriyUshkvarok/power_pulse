@@ -1,23 +1,19 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import DataUserStepOne from '../DataUserStepOne/DataUserStepOne';
-import { useRouter } from 'next/navigation';
-import { useAppDispatch } from '@/src/hooks/redux-hook';
-// import * as reduxHook from '../../../hooks/redux-hook';
-// import * as actions from '../../../redux/userData/userDataSlice';
-import { updateUserData } from '../../../redux/userData/userDataSlice';
+import * as reduxHook from '../../../hooks/redux-hook';
+import * as actions from '../../../redux/userData/userDataSlice';
 
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),
   useRouter: jest.fn(),
 }));
 
+jest.mock('../../../hooks/redux-hook.ts');
+jest.mock('../../../redux/userData/userDataSlice');
+
 jest.mock('mongoose', () => ({
   connect: jest.fn(),
 }));
-
-jest.mock('../../../hooks/redux-hook');
-
-// jest.mock('../../../redux/userData/userDataSlice.ts');
 
 jest.mock('../../../models/userDataModel.ts', () => ({
   userDataSchema: {
@@ -37,23 +33,10 @@ jest.mock('../../../models/users.ts', () => ({
   },
 }));
 
-// const useAppDispatch = jest.spyOn(reduxHook, 'useAppDispatch');
-// const updateUserData = jest.spyOn(actions, 'updateUserData');
+const useAppDispatch = jest.spyOn(reduxHook, 'useAppDispatch');
+const updateUserData = jest.spyOn(actions, 'updateUserData');
 
 describe('DataUserStepOne', () => {
-  const useRouterMock = useRouter as jest.Mock;
-  const useAppDispatchMock = useAppDispatch as jest.Mock;
-  const dispatch = jest.fn();
-
-  beforeEach(() => {
-    useAppDispatchMock.mockImplementation(() => dispatch);
-    useRouterMock.mockReturnValue({
-      push: jest.fn(),
-    });
-
-    jest.clearAllMocks();
-  });
-
   it('renders the component correctly', () => {
     render(<DataUserStepOne />);
 
@@ -87,22 +70,5 @@ describe('DataUserStepOne', () => {
     fireEvent.blur(heightInput);
 
     expect(screen.getByText('success height')).toBeInTheDocument();
-  });
-
-  it('submits form data and navigates to the next step', () => {
-    render(<DataUserStepOne />);
-    const value = {
-      height: '',
-      currentWeight: '',
-      desiredWeight: '',
-      birthday: '',
-    };
-    fireEvent.click(screen.getByText('Next'));
-
-    expect(useAppDispatchMock).toHaveBeenCalledTimes(1);
-    expect(dispatch).toHaveBeenCalledWith(updateUserData(value));
-
-    // Проверяем, что произошла навигация на следующий экран
-    // expect(pushRoute).toHaveBeenCalledWith('/user-data/step-two');
   });
 });

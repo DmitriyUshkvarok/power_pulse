@@ -52,7 +52,7 @@ const DataUserStepOne = () => {
           onSubmit={handleSaveValuesToGlobalState}
         >
           {(formikProps) => (
-            <div className={styles.form_step_one}>
+            <div className={styles.form_step_one} data-testid="form">
               <div className={styles.step_one_form_group}>
                 <InputField
                   errorClassName={styles.validation_error}
